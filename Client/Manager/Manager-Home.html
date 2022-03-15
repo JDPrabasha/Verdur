@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager-Home</title>
+    <link rel="stylesheet" href="/Client/styles.css">
+    <link rel="stylesheet" href="/Client/styles/pastures.css">
+    <link rel="stylesheet" href="/Client/styles/manager_dash.css">
+    <link rel="stylesheet" href="/Client/styles/notification.css">
+    <link rel="stylesheet" href="/Client/styles/employee.css">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="/Client/Manager/JS/functionalities/loading_screen.js"></script>
+    <script src="/Client/Manager/JS/side_menu.js"></script>
+    <script type="module" src="/Client/Manager/JS/home/manager_home_controller.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="stylesheet" href="/Client/styles/notification.css">
+    <link rel="stylesheet" href="/Client/styles/new_layout.css">
+
+    <script>
+        $(document).ready(function () {
+            // $("#notificationbox").load("/Client/header.html #notification")
+            $("#notificationbox").load("/Client/Manager/Manager-Header.html #notification")
+            $("#fotter").load("/Client/fotterKM.html #KMfotter")
+        })
+    </script>
+    <script type="module"
+        src="/Client/Manager/JS/functionalities/notification/Manager_Notification_Controller.js"></script>
+
+</head>
+
+<body>
+    <div id="loading"></div>
+    <div class="sidenav" id="sidenav"></div>
+    <div class="main">
+        <h3 class="mb-6">Home</h3>
+        <div class="row" style="transform:scale(0.75);transform-origin: 0% 0% 0px;">
+            <div class="col-3 pl-12">
+                <div class="manager_cards wrapper py-6 pl-6 mr-12">
+                    <div class="card dash_card">
+                        <div class="row py-3 pl-2 pr-12">
+                            <div class="circle flex-space-evenly col-4">
+                                <i class="material-icons">assessment</i>
+                            </div>
+                            <div class="col-7 flex-col pl-3">
+                                <h1>Total Sales</h1>
+                                <h2 id="totalSalesOut">Rs.400,000</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card dash_card">
+                        <div class="row py-3 pl-2 pr-12">
+                            <div class="circle flex-space-evenly col-4">
+                                <i class="material-icons">assessment</i>
+                            </div>
+                            <div class="col-7 flex-col pl-3">
+                                <h1>Total Expenses</h1>
+                                <h2 id="totalExpensesOut">Rs.250,000</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card dash_card">
+                        <div class="row py-3 pl-2 pr-12">
+                            <div class="circle flex-space-evenly col-4">
+                                <i class="material-icons">assessment</i>
+                            </div>
+                            <div class="col-7 flex-col pl-3">
+                                <h1>Total Profit</h1>
+                                <h2 id="totalProfitOut">Rs.150,000</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card dash_card">
+                        <div class="row py-3 pl-2 pr-12">
+                            <div class="circle flex-space-evenly col-4">
+                                <i class="material-icons">assessment</i>
+                            </div>
+                            <div class="col-7 flex-col pl-3">
+                                <h1>Today's Revenue</h1>
+                                <h2 id="todaysRevenueOut">Rs.10,000</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="p-6 px-12 wrapper">
+                    <div class="card graph">
+                        <div id="curve_chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="position: absolute;right: 20px;top:150px;padding:0px;padding-top: 10px;padding-bottom: 20px;"
+            class="wrapper">
+            <h2 class="mb-3 ml-3">Top Customers</h2>
+            <div class="cus_list_wrapper round-2">
+                <table class="cus_list" id="cusList">
+                    <tr>
+                        <td rowspan="2"><img src="https://pbs.twimg.com/media/EbNX_erVcAUlwIx.jpg:large" alt=""></td>
+                        <!-- <td rowspan="2"><img src="/Client/images/employee-icon.jpg" alt=""></td> -->
+                        <!-- <td rowspan="2"><img src="https://thumbs.dreamstime.com/b/vector-gold-medal-red-ribbons-isolated-white-background-126377937.jpg" alt=""></td> -->
+                        <td>Customer 1</td>
+                    </tr>
+                    <tr>
+                        <td class="text-info">cus1@gmail.com</td>
+                    </tr>
+                    <tr>
+                        <!-- <td rowspan="2"><img src="/Client/images/employee-icon.jpg" alt=""></td> -->
+                        <td rowspan="2"><img
+                                src="https://cdn.dribbble.com/users/3020080/screenshots/15085975/media/25530f071f257c7c94ee33d75441fa62.png?compress=1&resize=400x300"
+                                alt=""></td>
+
+                        <td>Customer 2</td>
+                    </tr>
+                    <tr>
+                        <td class="text-info">cus2@gmail.com</td>
+                    </tr>
+                    <tr>
+                        <!-- <td rowspan="2"><img src="/Client/images/employee-icon.jpg" alt=""></td> -->
+                        <td rowspan="2"><img
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTfc39wmucvuUJe3e6G2wevuXeqlEtAoIuTZt1NWsODVzxtvechfG4Hh-sbAb5a5UgvOo&usqp=CAU"
+                                alt=""></td>
+                        <td>Customer 3</td>
+                    </tr>
+                    <tr>
+                        <td class="text-info">cus3@gmail.com</td>
+                    </tr>
+
+
+                </table>
+            </div>
+        </div>
+
+        <!-- 2nd row -->
+        <div>
+
+
+            <!-- table 2 -->
+            <div class="row" style="margin-top:-100px;">
+                <div class="ml-12 col-6">
+                    <h2 class="mb-6">Top Dishes</h1>
+                        <table class="dish_list"
+                            style="transform: scale(0.85);transform-origin: 0% 0% 0px;margin-bottom: -200px;">
+                            <!-- <thead>
+                            <th></th>
+                            <th>Dish Name</th>
+                            <th>Total Sales</th>
+                            <th>Amount</th>
+                            <th>Dish Status</th>
+                        </thead> -->
+                            <tbody id="dishlist">
+                                <tr>
+                                    <td><img class="icon-1" src="/Client/images/569-5698995_fruit-salad.png" alt="">
+                                    </td>
+                                    <td>Fruit Salad</td>
+                                    <td>200 units</td>
+                                    <td>Rs. 250</td>
+                                    <td>
+                                        <div class="status_enabled">Enabled</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="icon-1"
+                                            src="https://soufflebombay.com/wp-content/uploads/2019/02/Homemade-Blueberry-Swirl-for-Yogurt.jpg"
+                                            alt=""></td>
+                                    <td>BlueBerry Yoghurt</td>
+                                    <td>150 units</td>
+                                    <td>Rs. 550</td>
+                                    <td>
+                                        <div class="status_disabled">Disabled</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="icon-1"
+                                            src="https://soufflebombay.com/wp-content/uploads/2019/02/Homemade-Blueberry-Swirl-for-Yogurt.jpg"
+                                            alt=""></td>
+                                    <td>BlueBerry Yoghurt</td>
+                                    <td>150 units</td>
+                                    <td>Rs. 550</td>
+                                    <td>
+                                        <div class="status_disabled">Disabled</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="icon-1"
+                                            src="https://soufflebombay.com/wp-content/uploads/2019/02/Homemade-Blueberry-Swirl-for-Yogurt.jpg"
+                                            alt=""></td>
+                                    <td>BlueBerry Yoghurt</td>
+                                    <td>150 units</td>
+                                    <td>Rs. 550</td>
+                                    <td>
+                                        <div class="status_disabled">Disabled</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img class="icon-1"
+                                            src="https://soufflebombay.com/wp-content/uploads/2019/02/Homemade-Blueberry-Swirl-for-Yogurt.jpg"
+                                            alt=""></td>
+                                    <td>BlueBerry Yoghurt</td>
+                                    <td>150 units</td>
+                                    <td>Rs. 550</td>
+                                    <td>
+                                        <div class="status_disabled">Disabled</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+                <div class="col-6 mt-5" style="margin-left: -100px;">
+                    <div class="p-6 px-12 wrapper"
+                        style="height: fit-content;width: fit-content;transform: scale(0.7);transform-origin: 0% 0% 0px;margin-bottom: -200px;;">
+                        <div class="card graph">
+                            <div id="curve_chart2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="notificationbox"></div>
+    <div id="fotter" style="position: relative;left: -80px;"></div>
+</body>
+
+</html>

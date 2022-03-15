@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+   <link rel="stylesheet" href="/Client/styles/pastures.css">
+   <link rel="stylesheet" href="/Client/styles/notification.css">
+   <link rel="stylesheet" href="/Client/styles/employee.css">
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   <!-- <link rel="stylesheet" href="test.css"> -->
+   <!-- <link rel="stylesheet" href="./styles//pastures.css"> -->
+   <!-- <link rel="stylesheet" href="/styles/ongoing.css"> -->
+   <link rel="stylesheet" href="/Client/styles/myedition.css">
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+   <script src="/Client/Manager/JS/functionalities/loading_screen.js"></script>
+   <script src="/Client/Manager/JS/side_menu.js"></script>
+   <script type="module" src="/Client/Manager/JS/restock requests/restock_request_controller.js"></script>
+   <link rel="stylesheet" href="/Client/styles/notification.css">
+    <link rel="stylesheet" href="/Client/styles/new_layout.css">
+    
+    <script>
+        $(document).ready(function(){
+            // $("#notificationbox").load("/Client/header.html #notification")
+            $("#notificationbox").load("/Client/Manager/Manager-Header.html #notification")
+            $("#fotter").load("/Client/fotterKM.html #KMfotter")
+        })
+    </script>
+    <script type = "module" src="/Client/Manager/JS/functionalities/notification/Manager_Notification_Controller.js"></script>
+
+</head>
+
+<body>
+   <div id="loading"></div>
+   <div class="sidenav" id="sidenav"></div>
+
+   <div class="main">
+
+      <h3>Restock Request Details</h3>
+      <!-- <div class="dropdown">
+    <span><h2>All Orders</h2></span>
+        <div class="dropdown-content text-center">
+            <a href="/Client/kitchenmanager/restockrequestordersmanagerpending.html">Manager Pending</a><br>
+            <a href="/Client/kitchenmanager/restockrequestorderssupplierpending.html">Supplier Pending</a><br>
+            <a href="/Client/kitchenmanager/restockrequestorderssupplierconfiremed.html">Supplier Confiremed</a><br>
+            <a href="/Client/kitchenmanager/restockrequestordersrejected.html">Rejected</a><br>
+            <a href="/Client/kitchenmanager/restockrequestcompleted.html">Completed</a><br>
+        </div>
+</div> -->
+
+
+      <!-- <table class="restocktable" id="restocktable"> -->
+      <link rel="stylesheet" href="/Client/styles/employee.css">
+      <h2 class="mt-3">Approval Pending</h2>
+      <table class="table_restock_m" id="restocktable">
+         <thead>
+            <th>Restock ID</th>
+            <th>Item</th>
+            <th>Supplier</th>
+            <th>Issued Date</th>
+            <th>Status</th>
+            <th>Time Remaining</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Action</th>
+         </thead>
+         <tbody id="approvalList">
+         </tbody>
+      </table>
+      <h2 class="mt-4">Delivery Pending</h2>
+      <table class="table_restock_m">
+         <thead>
+            <th>Restock ID</th>
+            <th>Item</th>
+            <th>Supplier</th>
+            <th>Issued Date</th>
+            <th>Status</th>
+            <th>Time Remaining</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Action</th>
+         </thead>
+         <tbody id="deliveryPendingList">
+            <tr>
+               <td>Rzd001</td>
+               <td>Carrot</td>
+               <td>Supplier-Name</td>
+               <td>2021/08/22</td>
+               <td>Pending</td>
+               <td>12:00</td>
+               <td></td>
+               <td></td>
+               <td><button class="btn-confirm">Confirm</button> <button class="btn-reject ml-6">Reject</button></td>
+            </tr>
+            <tr>
+               <td>Rzd002</td>
+               <td>Milk</td>
+               <td>Supplier-Name</td>
+               <td>2021/08/22</td>
+               <td>Pending</td>
+               <td>12:00</td>
+               <td></td>
+               <td></td>
+               <td><button class="btn-confirm">Confirm</button> <button class="btn-reject ml-6">Reject</button></td>
+            </tr>
+            <tr>
+               <td>Rzd003</td>
+               <td>Cabbage</td>
+               <td>Supplier-Name</td>
+               <td>2021/08/22</td>
+               <td>Completed</td>
+               <td>12:00</td>
+               <td></td>
+               <td></td>
+               <td></td>
+            </tr>
+            <tr>
+               <td>Rzd004</td>
+               <td>Apple</td>
+               <td>Supplier-Name</td>
+               <td>2021/08/22</td>
+               <td>Completed</td>
+               <td></td>
+               <td></td>
+               <td>-</td>
+               <td></td>
+            </tr>
+            <tr>
+               <td>Rzd005</td>
+               <td>Orange</td>
+               <td>Supplier-Name</td>
+               <td>2021/08/22</td>
+               <td>Completed</td>
+               <td>-</td>
+               <td></td>
+               <td></td>
+               <td></td>
+            </tr>
+         </tbody>
+      </table>
+
+   </div>
+
+  
+   <div id="notificationbox"></div>
+   <div id="fotter"></div>
+
+
+</body>
+
+</html>

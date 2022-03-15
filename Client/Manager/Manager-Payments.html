@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link rel="stylesheet" href="/Client/styles/pastures.css">
+    <link rel="stylesheet" href="/Client/styles/notification.css">
+    <link rel="stylesheet" href="/Client/styles/employee.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="test.css"> -->
+    <!-- <link rel="stylesheet" href="./styles//pastures.css"> -->
+    <!-- <link rel="stylesheet" href="/styles/ongoing.css"> -->
+    <link rel="stylesheet" href="/Client/styles/myedition.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="/Client/Manager/JS/functionalities/loading_screen.js"></script>
+    <script src="/Client/Manager/JS/side_menu.js"></script>
+    <script type="module" src="/Client/Manager/JS/payments/payments_controller.js"></script>
+    <link rel="stylesheet" href="/Client/styles/notification.css">
+    <link rel="stylesheet" href="/Client/styles/new_layout.css">
+
+    <script>
+        $(document).ready(function () {
+            // $("#notificationbox").load("/Client/header.html #notification")
+            $("#notificationbox").load("/Client/Manager/Manager-Header.html #notification")
+            $("#fotter").load("/Client/fotterKM.html #KMfotter")
+        })
+    </script>
+    <script type="module"
+        src="/Client/Manager/JS/functionalities/notification/Manager_Notification_Controller.js"></script>
+
+</head>
+
+<body>
+    <div id="loading"></div>
+    <div class="sidenav" id="sidenav"></div>
+
+    <div class="main">
+
+        <h3>Restock Order Details</h3>
+        <!-- <div class="dropdown">
+    <span><h2>All Orders</h2></span>
+        <div class="dropdown-content text-center">
+            <a href="/Client/kitchenmanager/restockrequestordersmanagerpending.html">Manager Pending</a><br>
+            <a href="/Client/kitchenmanager/restockrequestorderssupplierpending.html">Supplier Pending</a><br>
+            <a href="/Client/kitchenmanager/restockrequestorderssupplierconfiremed.html">Supplier Confiremed</a><br>
+            <a href="/Client/kitchenmanager/restockrequestordersrejected.html">Rejected</a><br>
+            <a href="/Client/kitchenmanager/restockrequestcompleted.html">Completed</a><br>
+        </div>
+</div> -->
+
+
+        <!-- <table class="restocktable" id="restocktable"> -->
+        <link rel="stylesheet" href="/Client/styles/employee.css">
+        <table class="table_restock_m">
+            <thead>
+                <th>Restock ID</th>
+                <th>Item</th>
+                <th>Supplier</th>
+                <th>Restock Date</th>
+                <th>Status</th>
+                <th>Amount<br>(Rs)</th>
+                <th>Action</th>
+            </thead>
+            <tbody id="paymentList">
+                <tr>
+                    <td>Rzd001</td>
+                    <td>Carrot</td>
+                    <td>S.R.Company</td>
+                    <td>Pending</td>
+                    <td>12000</td>
+                    <td><button class="btn-confirm">Confirm Payment</button> </td>
+                </tr>
+                <tr>
+                    <td>Rzd002</td>
+                    <td>Milk</td>
+                    <td>D.R.Distributers</td>
+                    <td>Pending</td>
+                    <td>6000</td>
+                    <td><button class="btn-confirm">Confirm Payment</button></td>
+                </tr>
+                <tr>
+                    <td>Rzd003</td>
+                    <td>Cabbage</td>
+                    <td>S & R Company</td>
+                    <td>
+                        <div class="status_pending"></div>
+                        <div class="status_pending_text"> Pending</div>
+                    </td>
+                    <td>8000</td>
+                    <td><button class="btn-confirm">Confirm Payment</button></td>
+                </tr>
+                <tr>
+                    <td>Rzd004</td>
+                    <td>Apple</td>
+                    <td>S & R Company</td>
+                    <td>Completed</td>
+                    <td>5000</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Rzd005</td>
+                    <td>Orange</td>
+                    <td>S & R Company</td>
+                    <td>
+                        <div class="status_completed"></div>
+                        <div class="status_completed_text">Completed</div>
+                    </td>
+                    <td>4000</td>
+                    <td></td>
+                </tr>
+            </tbody>
+
+        </table>
+
+
+    </div>
+
+    <div id="notificationbox"></div>
+    <div id="fotter" style="position: absolute;bottom: -100px;"></div>
+
+
+</body>
+
+</html>

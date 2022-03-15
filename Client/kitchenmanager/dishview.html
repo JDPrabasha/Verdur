@@ -1,0 +1,156 @@
+                 
+<!DOCTYPE html>                                    
+</html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+
+    <!--    <title>Title</title>-->
+
+</head> 
+<body>
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="home.html">Home</a><br>
+    <a href="inventory.html">Inventory</a><br>
+    <a href="ongoingorders.html">Orders</a><br>
+    <a href="dish.html">Dishes</a>
+
+</div>
+
+
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;Verdur</span>
+
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "18%";
+        document.getElementById("sectionfull").style.width = "82%";
+        document.getElementById("sectionfull").style.paddingLeft = "18%";
+       
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("sectionfull").style.width = "100%";
+        document.getElementById("sectionfull").style.paddingLeft = "2%";
+       
+    }
+</script>
+<div class="sectionfull" id="sectinfull">
+    <div class="topic"> <h2>View Dish </h2></div>
+    <table class="table1">
+   
+        <tr>
+            <td><input type="image" src="burger.png"  width="50" height="50"></td>
+            
+           
+        </tr>
+        <tr>
+            <td>Dish Name</td>
+            <td id="dishname"></td>
+            
+        </tr>
+       
+    
+        <tr>
+            <td>Approximate Time</td>
+            <td id="approximatetime"> Mins</td>
+            
+        </tr>
+        <tr>
+            <td>Default Price(Rs)</td>
+            <td id="defaultprice"> Mins</td>
+            
+        </tr>
+    
+       
+       
+    
+        <tr>
+            <td>Ingredient 1</td>
+            <td>2g</td>
+            <td> <input type="range" min="1" max="100" value="50" ></td>
+           
+        </tr>
+        
+        <tr>
+            <td>Ingredient 2</td>
+            <td>2g</td>
+            <td> <input type="range" min="1" max="100" value="50" ></td>
+           
+        </tr>
+        
+        <tr>
+            <td>Ingredient 3</td>
+            <td>2g</td>
+            <td> <input type="range" min="1" max="100" value="50" ></td>
+           
+        </tr>
+        
+        <tr>
+            <td>Ingredient 4</td>
+            <td>2g</td>
+            <td> <input type="range" min="1" max="100" value="50" ></td>
+           
+        </tr>
+       
+      
+    </table>
+    <!-- <div class="topic"> <h2>Create Dish </h2></div>
+        <label >Dish Name:</label>
+        <input type="text"><br><br>
+        <label >Approximate Time:</label>
+        <input type="text"><br><br>
+        <label >Image:</label><br>
+        <input type="image" src="img_submit.gif"  width="50" height="50"><button>Add Image</button>
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        Add Item
+                    </td>
+                    <td>
+                        <a href="addingredient"><button>Add Item</button></a>
+                    </td>
+                    <tr>
+                    <td>
+                        <input type="text"><br>
+                        <input type="text"><br>
+                        <input type="text"><br>
+
+                    </td>
+                    </tr>
+                </tr>
+            </table>
+        </div>
+
+</div> -->
+
+<script>
+    window.$_GET = new URLSearchParams(location.search);
+    var value1 = $_GET.get('id');
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://localhost:8080/kitchenmanager_war_exploded/dish?id="+value1);
+    xhr.onload = function(){
+        let
+            dishname = document.getElementById("dishname"),
+            approximatetime = document.getElementById("approximatetime"),
+            defaultprice = document.getElementById("defaultprice"),
+            search = JSON.parse(this.response);
+
+        if (search !== null) { for (let s of search) {
+            dishname.innerHTML = `${s.dishname}`;
+            approximatetime.innerHTML = `${s.approximatetime}`;
+            defaultprice.innerHTML = `${s.defaultprice}`;
+           
+            
+        }
+        }
+    };
+    xhr.send();
+</script>
+
+</body>
+</html>
+            

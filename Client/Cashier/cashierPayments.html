@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/Client/styles/pastures.css">
+    <link rel="stylesheet" href="/Client/styles/cashier.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/Client/styles.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="/Client/Cashier/sidenevcashier.js"></script>
+    <script src="/Client/Cashier/header.js"></script>
+    <script src="/Client/Cashier/fotterCashier.js"></script>
+    <script>
+        function hiderow(rc){
+            let ric="#"+rc;
+           
+            $(ric).css("display","none")
+           
+        }
+    </script>
+    <link rel="stylesheet" href="/Client/styles/model.css">
+    <link rel="stylesheet" href="/Client/styles/colors.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<body>
+
+    <div id="notification"></div>
+    <div class="sidenav " id="sidenav"></div>
+
+<div class="main">
+
+    <div class="row" id="date">
+        <!-- <div class="col-3 mt-25 "><h4>Payments</h4></div>
+        <div id="date"></div>
+        <div id="cash"></div>
+        <div id="card"></div>
+        <div id="total"></div> -->
+
+        <!-- <div class="col-2  mt-27 mb-4 status-green "><label class= "  text-center mt-10 text-2  fw-b ">Cash Amount<br><div class="text-1" style="font-size: 20px;"> Rs. 12,300 </div> </lable> </div>
+          
+        <div class="col-2  mt-27 mb-4 status-purple"><lable class= "text-2  text-center fw-b tag-purple " > Card Amount<br> <div class="text-1" style="font-size: 20px;">Rs.14,500 </div> </lable></div>
+          
+        <div class="col-2  mt-27 mb-4 status-blue "><lable class= " text-2  fw-b text-center" > Total Amount<br> <div class="text-1" style="font-size: 20px;"> Rs.26,800 </div> </lable></div> -->
+            
+       
+    </div>
+    <div class="col-3  "><h2>Cash</h2></div>
+    
+    <div class="row">
+        <div class="col-12  mt-4">
+            
+        <table style="width: 98%;">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Rider ID</th>
+                    <th>Due Amount (Rs.)</th>
+                    <th>Delivery Assigned Time</th>
+                    <th>Delivered</th>
+                    
+                    
+                </tr>
+            </thead>
+            <tbody id="output"></tbody>
+            <!-- <tbody>
+            <tr id="1">
+                
+                <td>A001</td>
+                <td>R001</td>
+                <td>1000</td>
+                <td>14:32:45</td>
+                <td>Yes</td>
+                <td><button class="btn  bg-clr-paid fw-b text-center"  onclick="hiderow(1)">Confirm</button> </td>
+            </tr>
+            <tr id="2">
+                
+                <td>A002</td>
+                <td>R002</td>
+                <td>1500</td>
+                <td>13:10:34</td>
+                <td>Yes</td>
+                <td><button class="btn  bg-clr-paid fw-b text-center" onclick="hiderow(2)">Confirm</button> </td>
+            </tr>
+            <tr>
+                
+                <td>A003</td>
+                <td>R003</td>
+                <td>2000</td>
+                <td>12:32:23</td>
+                <td>Yes</td>
+                <td><button class="btn  bg-clr-paid fw-b text-center">Confirm</button> </td>
+            </tr>
+            <tr>
+                
+                <td>A004</td>
+                <td>R004</td>
+                <td>2500</td>
+                <td>12:15:45</td>
+                <td>Yes</td>
+                <td><button class="btn  bg-clr-paid fw-b text-center">Confirm</button> </td>
+            </tr>
+            <tr>
+                
+                <td>A005</td>
+                <td>R005</td>
+                <td>1900</td>
+                <td>11:43:17</td>
+                <td>No</td>
+                
+            </tr>
+            <tr>
+                
+                <td>A006</td>
+                <td>R006</td>
+                <td>5000</td>
+                <td>10:29:48</td>
+                <td>No</td>
+                <td></td>
+               
+            </tr>
+            <tr>
+                
+                <td>A007</td>
+                <td>R007</td>
+                <td>4900</td>
+                <td>10:43:01</td>
+                <td>No</td>
+                <td></td>
+               
+            </tr>
+          
+         
+    
+        </tbody> -->
+        </table>
+    
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ </div>   
+ <div id="Cashierfotter"></div> 
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="cashier_payments_controller.js"></script>
+<script src="cashier_payments.js"></script>
+<script src="cashier_payments_serializer.js"></script>
+</html>

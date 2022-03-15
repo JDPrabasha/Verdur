@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Manager-Suppliers</title>
+
+    <link rel="stylesheet" href="/Client/styles/pastures.css">
+    <link rel="stylesheet" href="/Client/styles/notification.css">
+    <link rel="stylesheet" href="/Client/styles/employee.css">
+    <link rel="stylesheet" href="/Client/styles/add-employee.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="test.css"> -->
+    <!-- <link rel="stylesheet" href="./styles//pastures.css"> -->
+    <!-- <link rel="stylesheet" href="/styles/ongoing.css"> -->
+    <!-- <link rel="stylesheet" href="/Client/styles/myedition.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/Client/styles/ongoing.css"> -->
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="/Client/Manager/JS/functionalities/loading_screen.js"></script>
+    <script src="/Client/Manager/JS/side_menu.js"></script>
+    <link rel="stylesheet" href="/Client/styles/notification.css">
+    <link rel="stylesheet" href="/Client/styles/new_layout.css">
+    <script type="module" src="/Client/Manager/JS/supplier/supplier_controller.js"></script>
+    <script>
+        $(document).ready(function () {
+            // $("#notificationbox").load("/Client/header.html #notification")
+            $("#notificationbox").load("/Client/Manager/Manager-Header.html #notification")
+            $("#fotter").load("/Client/fotterKM.html #KMfotter")
+        })
+    </script>
+    <script type = "module" src="/Client/Manager/JS/functionalities/notification/Manager_Notification_Controller.js"></script>
+
+</head>
+
+<body>
+    <div id="loading"></div>
+    <div class="sidenav" id="sidenav">
+
+    </div>
+    <div class="main" id="main">
+        <div class="row">
+            <h3 class="col-8">Suppliers</h3>
+            <div class="search col-4 pl-12">
+                <div class="searchBar ml-6">
+                    <input id="searchQueryInput" type="text" name="searchQueryInput" placeholder="Search" value="" />
+                    <button id="searchQuerySubmit" type="submit" name="searchQuerySubmit">
+                        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                            <path fill="#666666"
+                                d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <table class="table_employee mt-5 ml-12">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Supplier</th>
+                    <th>Orders Due</th>
+                    <th>Orders Done</th>
+                    <th>Contact</th>
+                    <th>Location</th>
+                    <th><button class="material-icons" onclick="displaypop()"
+                            style="border-radius: 10px;border: 0;cursor: pointer;">person_add</button></th>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="supplier-tbody">
+                <tr id="emp-1">
+                    <td>
+                        <img class="emp-icon"
+                            src="https://oxford.emory.edu/_includes/images/sections/academics/farm_opener.jpg">
+                    </td>
+                    <td>
+                        <p class="emp_table_name">S.D.Gamage</p>
+                        <p class="emp_table_designation">M.D.Distributers</p>
+                    </td>
+                    <td>
+                        <p class="status_online">45</p>
+                    </td>
+                    <td>
+                        <div class="">08</div>
+                    </td>
+                    <td>
+                        <p class="emp_table_email">md@gmail.com</p>
+                        <p class="emp_table_contact">0711072705</p>
+                    </td>
+                    <td>
+                        <p class="emp_table_address">No.8, Main Road, Rathnapura</p>
+                    </td>
+                    <td>
+                        <!-- <button class="dropdown" onclick="expand(1)">...</button> -->
+                        <div class="dropdown" onclick="expand(1)" style="padding:0;padding-right:4px;"><i
+                                class="material-icons" style="height:20px;width:20px">arrow_drop_down</i></div>
+                    </td>
+                </tr>
+                <tr id="emp-e-1" class="hidden">
+                    <td width="100%-20px" colspan="6">
+                        <form class="form_reset emp_form">
+                            <div class="row">
+                                <!-- 1st set -->
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <label>Name</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <input type="text" value="S.D.Gamage" id="name" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <label>Joining Date</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <input type="text" value="05.02.2019" id="hire_date" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <label>Pending Payment</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <input type="text" value="RS.15000.00" id="pending_payment" disabled>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <!-- 2nd set -->
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <label>Email</label>
+                                        </div>
+                                        <div class="col-7">
+                                            <input type="text" value="md@gmail.com" id="email" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <label>Contact_no</label>
+                                        </div>
+                                        <div class="col-7">
+                                            <input type="text" value="0123456789" id="contact_no" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <label>Address</label>
+                                        </div>
+                                        <div class="col-7">
+                                            <input type="text" value="No.8, Main Road," id="address" disabled>
+                                            <input type="text" value="Rathnapura" id="address-2" disabled>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </td>
+                    <td>
+                        <div class="dropdown" onclick="hide(1)" style="padding:0;padding-right:4px;"><i
+                                class="material-icons" style="height:20px;width:20px">arrow_drop_up</i></div>
+                    </td>
+                </tr>
+                <tr id="emp-2">
+                    <td>
+                        <img class="emp-icon"
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkvAk7SUiXR0ff3S5jKkeKxBAYtQ48q5cZMQ&usqp=CAU">
+                    </td>
+                    <td>
+                        <p class="emp_table_name">R.P.Perera</p>
+                        <p class="emp_table_designation">T.S.Farmers</p>
+                    </td>
+                    <td>
+                        <p class="status_online">27</p>
+                    </td>
+                    <td>
+                        <div class="">1</div>
+                    </td>
+                    <td>
+                        <p class="emp_table_email">ts@gmail.com</p>
+                        <p class="emp_table_contact">0711072705</p>
+                    </td>
+                    <td>
+                        <p class="emp_table_address">No 7, Temple Road, Badulla</p>
+                    </td>
+                    <td>
+                        <div class="dropdown" onclick="expand(2)" style="padding:0;padding-right:4px;"><i
+                                class="material-icons" style="height:20px;width:20px">arrow_drop_down</i></div>
+                    </td>
+                </tr>
+                <tr id="emp-e-2" class="hidden">
+                    <td colspan="6">
+                        <form class="form_reset emp_form">
+                            <div class="row">
+                                <!-- 1st set -->
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <label>Name</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <input type="text" value="R.P.Perera" id="name" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <label>Joining Date</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <input type="text" value="05.02.2019" id="hire_date" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <label>Pending Payment</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <input type="text" value="RS.2000.00" id="pending_payment" disabled>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <!-- 2nd set -->
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <label>Email</label>
+                                        </div>
+                                        <div class="col-7">
+                                            <input type="text" value="ts@gmail.com" id="email" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <label>Contact_no</label>
+                                        </div>
+                                        <div class="col-7">
+                                            <input type="text" value="0123456789" id="contact_no" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <label>Address</label>
+                                        </div>
+                                        <div class="col-7">
+                                            <input type="text" value="No 7, Temple Road," id="address" disabled>
+                                            <input type="text" value="Badulla" id="address-2" disabled>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </td>
+                    <td>
+                        <div class="dropdown" onclick="hide(2)" style="padding:0;padding-right:4px;"><i
+                                class="material-icons" style="height:20px;width:20px">arrow_drop_up</i></div>
+                    </td>
+                </tr>
+
+                <tr id="emp-3">
+                    <td>
+                        <img class="emp-icon"
+                            src="https://i.ikman-st.com/u/h2o-marketing-distributors/6976d715-b020-4e89-97a0-5855b2984523/176/132/fitted.webp">
+                    </td>
+                    <td>
+                        <p class="emp_table_name">L.K.Silva</p>
+                        <p class="emp_table_designation">R & B Company</p>
+                    </td>
+                    <td>
+                        <p class="status_online">36</p>
+                    </td>
+                    <td>
+                        <div class="">3</div>
+                    </td>
+                    <td>
+                        <p class="emp_table_email">rb@gmail.com</p>
+                        <p class="emp_table_contact">0711072705</p>
+                    </td>
+                    <td>
+                        <p class="emp_table_address">No 45,Main Road, Matara</p>
+                    </td>
+                    <td>
+                        <div class="dropdown" onclick="expand(3)" style="padding:0;padding-right:4px;"><i
+                                class="material-icons" style="height:20px;width:20px">arrow_drop_down</i></div>
+                    </td>
+                </tr>
+                <tr id="emp-e-3" class="hidden">
+                    <td colspan="6">
+                        <form class="form_reset emp_form">
+                            <div class="row">
+                                <!-- 1st set -->
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <label>Name</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <input type="text" value="L.K.Silva" id="name" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <label>Joining Date</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <input type="text" value="05.02.2019" id="hire_date" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <label>Pending Payment</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <input type="text" value="RS.40000.00" id="pending_payment" disabled>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <!-- 2nd set -->
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <label>Email</label>
+                                        </div>
+                                        <div class="col-7">
+                                            <input type="text" value="rb@gmail.com" id="email" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <label>Contact_no</label>
+                                        </div>
+                                        <div class="col-7">
+                                            <input type="text" value="0123456789" id="contact_no" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <label>Address</label>
+                                        </div>
+                                        <div class="col-7">
+                                            <input type="text" value="No 45,Main Road," id="address" disabled>
+                                            <input type="text" value="Matara" id="address-2" disabled>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </td>
+                    <td>
+                        <div class="dropdown" onclick="hide(3)" style="padding:0;padding-right:4px;"><i
+                                class="material-icons" style="height:20px;width:20px">arrow_drop_up</i></div>
+                    </td>
+                </tr>
+
+                <tr id="emp-4">
+                    <td>
+                        <img class="emp-icon"
+                            src="https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGFkZHklMjBmaWVsZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80">
+                    </td>
+                    <td>
+                        <p class="emp_table_name">Y.D.Samarasinghe</p>
+                        <p class="emp_table_designation">S.R. Company</p>
+                    </td>
+                    <td>
+                        <p class="status_online">12</p>
+                    </td>
+                    <td>
+                        <div class="">2</div>
+                    </td>
+                    <td>
+                        <p class="emp_table_email">sr@gmail.com</p>
+                        <p class="emp_table_contact">0711072705</p>
+                    </td>
+                    <td>
+                        <p class="emp_table_address">No.6,Main Road,Galle</p>
+                    </td>
+                    <td>
+                        <div class="dropdown" onclick="expand(4)" style="padding:0;padding-right:4px;"><i
+                                class="material-icons" style="height:20px;width:20px">arrow_drop_down</i></div>
+                    </td>
+                </tr>
+                <tr id="emp-e-4" class="hidden">
+                    <td colspan="6">
+                        <form class="form_reset emp_form">
+                            <div class="row">
+                                <!-- 1st set -->
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <label>Name</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <input type="text" value="Y.D.Samarasinghe" id="name" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <label>Joining Date</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <input type="text" value="05.02.2019" id="hire_date" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <label>Pending Payment</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <input type="text" value="RS.20000.00" id="pending_payment" disabled>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <!-- 2nd set -->
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <label>Email</label>
+                                        </div>
+                                        <div class="col-7">
+                                            <input type="text" value="sr@gmail.com" id="email" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <label>Contact_no</label>
+                                        </div>
+                                        <div class="col-7">
+                                            <input type="text" value="0123456789" id="contact_no" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <label>Address</label>
+                                        </div>
+                                        <div class="col-7">
+                                            <input type="text" value="No.6,Main Road," id="address" disabled>
+                                            <input type="text" value="Galle" id="address-2" disabled>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </td>
+                    <td>
+                        <div class="dropdown" onclick="hide(4)" style="padding:0;padding-right:4px;"><i
+                                class="material-icons" style="height:20px;width:20px">arrow_drop_up</i></div>
+                    </td>
+                </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+    <div id="add_pop"></div>
+</body>
+<script>
+    function expand(i) {
+        document.getElementById(`emp-${i}`).classList.add("hidden");
+        document.getElementById(`emp-e-${i}`).classList.remove("hidden");
+    }
+    function hide(i) {
+        document.getElementById(`emp-${i}`).classList.remove("hidden");
+        document.getElementById(`emp-e-${i}`).classList.add("hidden");
+    }
+</script>
+
+
+<div id="addarea"></div>
+
+
+<div id="notificationbox"></div>
+<div id="fotter" style="position: absolute; bottom: -100px;"></div>
+
+</html>
