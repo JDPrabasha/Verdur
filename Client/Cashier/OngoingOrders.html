@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="/Client/styles/pastures.css">
+    <link rel="stylesheet" href="/Client/styles/cashier.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="/Client/Cashier/sidenevcashier.js"></script>
+    <script src="/Client/Cashier/header.js"></script>
+    <script src="/Client/Cashier/fotterCashier.js"></script>
+
+    <script src="/Client/Cashier/orders_cashier_ongoing_controller.js" type="module"></script>
+    <link rel="stylesheet" href="/Client/styles/colors.css">
+  
+    <meta charset="UTF-8">
+    
+    <!-- <title>Document</title> -->
+</head>
+<body class="body">
+    <div id="notification"></div>
+    <div class="sidenav " id="sidenav">
+        <!-- <img class="mt-4" src="/Client/images/Asset 304x.png" alt="">
+       
+        <a href="CashierHome.html"><i class="material-icons">home</i></a>
+        <a href="OngoingOrders.html"><i class="material-icons">receipt</i></a>
+       
+      -->
+      </div>
+<div class="main">
+
+       
+<div class=row><div class="col-4 mt-27 "><h4>Ongoing Orders </h4></div>
+        
+        <div class="col-1 mt-27 mb-8 mr-12"><a class= "btn fw-b tag-yellow tag-select" href="/Client/Cashier/Pending.html">Pending</a></div>
+        <div class="col-1 mt-27 mb-8 mr-12 "><a class= "btn fw-b tag-green tag-select" href="/Client/Cashier/Cooked.html">Cooked</a></div>
+        <!-- <div class="col-1  mt-27 mb-8 mr-12"><a class= "btn fw-b tag-purple tag-select " href="/Client/Cashier/Cooking.html">Cooking</a></div> -->
+        <div class="col-1 mt-27 mb-8 "><a class= "btn fw-b tag-blue2 tag-select" href="/Client/Cashier/Delivering.html">Delivering</a></div>
+        
+
+</div>
+
+<div class="row">
+
+    <div  class="col-12  mt-8 ">
+
+
+
+        <table style="width: 97%;">
+            <thead>
+                <tr>
+                    <th>Order Id</th>
+                    <th>Item Quantity</th>
+                    <th>Price (Rs.)</th>
+                    <th>Date time</th>
+                    <th>Status</th>
+                    <th>Payment Method</th>
+                </tr>
+            </thead>
+            <tbody id="ongoing"></tbody>
+            <!-- <tbody>
+            
+            <tr>
+                
+                <td>A100</td>
+                <td>4</td>
+                <td>3200</td>
+                <td>2021.11.08</td>
+                
+                <td><button class="mybutton4">Cooked</button> </td>
+                <td>Cash</td>
+            </tr>
+
+                        
+            <tr>
+                
+                <td>A020</td>
+                <td>5</td>
+                <td>2900</td>
+                <td>2021.11.08</td>
+                
+                <td><button class="mybutton3">Cooking</button> </td>
+                <td>Card</td>
+            </tr>
+
+                        
+            <tr>
+                
+                <td>A080</td>
+                <td>2</td>
+                <td>1200</td>
+                <td>2021.11.08</td>
+                
+                <td><button class="mybutton2">Pending</button> </td>
+                <td>Cash</td>
+            </tr>
+            <tr>
+                
+                <td>A090</td>
+                <td>6</td>
+                <td>5200</td>
+                <td>2021.11.08</td>
+                
+                <td><button class="mybutton4">Cooked</button> </td>
+                <td>Card</td>
+            </tr>
+            <tr>
+                
+                <td>A003</td>
+                <td>2</td>
+                <td>1900</td>
+                <td>2021.11.08</td>
+                
+                <td><button class="mybutton5">Delivering</button> </td>
+                <td>Cash</td>
+            </tr>          
+
+            <tr>
+                
+                <td>A025</td>
+                <td>3</td>
+                <td>1600</td>
+                <td>2021.11.08</td>
+                
+                <td><button class="mybutton3">Cooking</button> </td>
+                <td>Cash</td>
+            </tr>
+
+            <tr>
+                
+                <td>A084</td>
+                <td>2</td>
+                <td>1400</td>
+                <td>2021.11.08</td>
+                
+                <td><button class="mybutton2">Pending</button> </td>
+                <td>Cash</td>
+            </tr>          
+            <tr>
+                
+                <td>A027</td>
+                <td>8</td>
+                <td>5600</td>
+                <td>2021.11.08</td>
+                
+                <td><button class="mybutton3">Cooking</button> </td>
+                <td>Card</td>
+            </tr>
+            <tr>
+                
+                <td>A002</td>
+                <td>2</td>
+                <td>1900</td>
+                <td>2021.11.08</td>
+                
+                <td><button class="mybutton5">Delivering</button> </td>
+                <td>Cash</td>
+            </tr>      
+
+        </tbody>            -->
+         
+        </table>
+
+
+           
+
+    </div>
+</div>
+        
+
+        
+
+
+        
+
+
+
+
+    
+
+    <dic class="footer">
+
+    </dic>
+
+    
+
+
+</div>
+  <div id="Cashierfotter"></div>  
+</body>
+
+
+
+</html>

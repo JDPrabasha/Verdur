@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/Client/styles/supplieredit.css">
+    <link rel="stylesheet" href="/Client/styles/model.css">
+    <link rel="stylesheet" href="/Client/styles/pastures.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="/Client/Supplier/sidenev.js"></script>
+    <script src="/Client/Supplier/supplierheader.js"></script>
+    <script src="/Client/Supplier/fotterSupplier.js"></script>
+
+    <link rel="stylesheet" href="/Client/styles/colors.css">
+
+    <!--    <title>Title</title>-->
+
+</head>
+<body>
+   <div id="notification"></div>
+    <div class="sidenav" id="sidenav">
+        <!-- <img class="mt-4" src="/Client/images/Asset 304x.png" alt="">
+        <a href="RestockRequests.html"><i class="material-icons">free_cancellation</i></a>
+        <a href="SupplierOrders.html"><i class="material-icons">fact_check</i></a>
+        <a href="ViewStock.html"><i class="material-icons">inventory</i></a>
+        <a href="Payments.html"><i class="material-icons">request_page</i></a> -->
+       
+     
+      </div>
+<div class="main">
+
+<div class="row">
+    <div class="col-3 mt-27 "><h4>Inventory</h4></div>
+    <div class="col-2 mt-27">
+      <button id="bt1" class="btn fw-b text-2 tag-green" >+ Add Item</button></div>
+   
+   
+</div>
+<!-- <div class="row">
+   
+    <div class="col-4 mt-8"><button id="bt1" class="mybutton2" >Add Item</button></div>
+   
+   
+</div> -->
+
+
+<div class="row">
+    <div class="col-12 ">
+        
+    <table class="mt-4 " style="width: 100%;" >
+        
+        
+
+        <thead>
+            <tr>
+               
+                <th>ID</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Quantity</th>
+                <th>Unit</th>
+                <th>Price/Unit(Rs.)</th>
+                <th>Date Added</th>
+                
+                
+            </tr>
+        </thead>
+      
+        <tbody id="output"></tbody>
+       
+    </table>
+
+
+    </div>
+</div>
+
+       
+
+
+
+
+</div>
+<div id="myModal" class="modal">
+                   
+                
+    <!-- Modal content -->
+    <div class="modal-content  width-5 height-1">
+
+      <span class="close">&times;</span>
+      <div id="addItemModel"></div>
+      
+    </div>
+  
+  </div>
+
+
+
+
+
+
+
+
+  <div class="fotter mt-25" id="Supplierfotter"></div>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="viewstockcontroller.js"></script>
+<script src="viewstock.js"></script>
+<script src="viewstockserializer.js"></script>
+<script src="/Client/Supplier/supplier_ingredient_list.js"></script>
+<script src="/Client/Supplier/supplier_ingridient_list_controller.js"></script>
+<script src="/Client/Supplier/supplier_ingredient_serializer.js"></script>
+<script src="AddItem.js"></script>
+
+
+<script>
+    // Get the modal
+    // var modal = document.getElementById("myModal");
+    var modal = document.getElementById("myModal");
+    // Get the button that opens the modal
+    var btn = document.getElementById("bt1");
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+
+    $(document).ready(function(){
+
+      $("#addItemModel").load("/Client/Supplier/AddItem.html #add-item")
+    })
+    </script>
+
+</html>
