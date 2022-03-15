@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Client/styles/manager_dash.css">
+    <link rel="stylesheet" href="/Client/styles/pastures.css">
+    <link rel="stylesheet" href="/Client/styles//employee.css">
+    <link rel="stylesheet" href="/Client/styles/add-employee.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/Client/styles/notification.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="/Client/Manager/JS/side_menu.js"></script>
+    <script src="/Client/Manager/JS/manager_dish_controller.js"></script>
+    <script src="/Client/Manager/JS/manager_dish_serializer.js"></script>
+    <script src="/Client/Manager/JS/manager_dish.js"></script>
+    <script src="/Client/Manager/JS/manager_dish_requests.js"></script>
+    <script src="/Client/Manager/JS/manager_dish_requests_controller.js"></script>
+    <title>Manager- Dishes</title>
+    <script>
+        $(document).ready(function () {
+            $("#form").load("/Client/Manager/Manager-Dish-Pop.html #dishpop");
+
+            // $("#form").load("/Client/dishpop.html #dish-pop-content")
+        })
+        function displaypop() {
+            document.getElementById("main").classList.add("blur-back");
+            document.getElementById("sidenav").classList.add("blur-back");
+            document.getElementById("notificationbox").classList.add("blur-back");
+            document.getElementById("form_frame").style.display = "flex";
+            document.getElementById("form").style.display = "flex";
+            disableScrolling();
+        }
+        function hidepop() {
+            document.getElementById("main").classList.remove("blur-back");
+            document.getElementById("sidenav").classList.remove("blur-back");
+            document.getElementById("notificationbox").classList.remove("blur-back");
+            document.getElementById("form_frame").style.display = "none";
+            document.getElementById("form").style.display = "none";
+            enableScrolling();
+        }
+        function disableScrolling() {
+            var x = window.scrollX;
+            var y = window.scrollY;
+            window.onscroll = function () { window.scrollTo(x, y); };
+        }
+
+        function enableScrolling() {
+            window.onscroll = function () { };
+        }
+    </script>
+</head>
+
+<body>
+    <div class="sidenav" id="sidenav">
+
+    </div>
+    <div class="main" id="main">
+        <h3>Dishes</h3>
+        <div class="row">
+            <div class="manager_cards mt-6 col-9" id="cards">
+                <div class="card">
+                    <img class="round-2"
+                        src="https://soufflebombay.com/wp-content/uploads/2019/02/Homemade-Blueberry-Swirl-for-Yogurt.jpg"
+                        alt="">
+                    <h1 class=" m-1">BLUEBERRY YOGHURT</h1>
+                    <hr class="mb-2 mt-2">
+                    <div class="flex-space-evenly">
+                        <h1 class="text-2">Rs. 600</h1>
+                        <a class="btn" style="background: #d9534f;" href="">Remove</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="round-2"
+                        src="https://soufflebombay.com/wp-content/uploads/2019/02/Homemade-Blueberry-Swirl-for-Yogurt.jpg"
+                        alt="">
+                    <h1 class=" m-1">BLUEBERRY YOGHURT</h1>
+                    <hr class="mb-2 mt-2">
+                    <div class="flex-space-evenly">
+                        <h1 class="text-2">Rs. 600</h1>
+                        <a class="btn" style="background: #d9534f;" href="">Remove</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="round-2"
+                        src="https://soufflebombay.com/wp-content/uploads/2019/02/Homemade-Blueberry-Swirl-for-Yogurt.jpg"
+                        alt="">
+                    <h1 class=" m-1">BLUEBERRY YOGHURT</h1>
+                    <hr class="mb-2 mt-2">
+                    <div class="flex-space-evenly">
+                        <h1 class="text-2">Rs. 600</h1>
+                        <a class="btn" style="background: #d9534f;" href="">Remove</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="round-2"
+                        src="https://soufflebombay.com/wp-content/uploads/2019/02/Homemade-Blueberry-Swirl-for-Yogurt.jpg"
+                        alt="">
+                    <h1 class=" m-1">BLUEBERRY YOGHURT</h1>
+                    <hr class="mb-2 mt-2">
+                    <div class="flex-space-evenly">
+                        <h1 class="text-2">Rs. 600</h1>
+                        <a class="btn" style="background: #d9534f;" href="">Remove</a>
+                    </div>
+                </div>
+                <div class="card" onclick="displaypop()">
+                    <img class="round-2"
+                        src="https://soufflebombay.com/wp-content/uploads/2019/02/Homemade-Blueberry-Swirl-for-Yogurt.jpg"
+                        alt="">
+                    <h1 class=" m-1">BLUEBERRY YOGHURT</h1>
+                    <hr class="mb-2 mt-2">
+                    <div class="flex-space-evenly">
+                        <h1 class="text-2">Rs. 600</h1>
+                        <a class="btn" style="background: #d9534f;" href="">Remove</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- km requests -->
+            <div class="col-3 ml-6">
+                <div class="card" style="height: 70vh;width:100%">
+                    <h2>Kitchen Manager Requests</h2>
+                    <div class="m-3 p-6" id="requests"
+                        style=" border:1px solid #bacdd8;border-radius: 1% ;height:90%;overflow-y: scroll;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="add-emp-form reg-frame" id="form_frame" onclick="hidepop()">
+        <div class="reg-pop flex-left ml-12" id="form" style="width: 80vw;left:100px;right:100px">
+
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#notificationbox").load("/Client/header.html #notification")
+        })
+    </script>
+    <div id="notificationbox"></div>
+
+</body>
+
+</html>

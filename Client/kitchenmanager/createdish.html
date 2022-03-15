@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/Client/styles/pastures.css">
+    <link rel="stylesheet" href="/Client/styles/myedition.css">
+    <link rel="stylesheet" href="/Client/styles/modder.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+
+    <!--    <title>Title</title>-->
+
+    <style>
+        .image-upload>input{
+          display: none;
+      }
+      select {
+          display:block;
+          width:100%;
+          margin:10px 0;
+          padding:10px;
+          background-color: rgb(245, 245, 245);
+          border-radius:8px;
+          border: 1px solid #eee;
+          transition: .3s border-color;
+      }
+          select:hover {
+              border: 1px solid #aaa;
+              }
+          
+      .add_border{
+          border: 1px solid #bacdd8;
+      }
+      /* hide number arrows */
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+      }
+      /* in firefox */
+      input[type=number] {
+          -moz-appearance: textfield;
+      }
+      /* until this */
+  </style>
+
+</head>
+<body>
+    <script>
+        function doSubmit(){
+            let dishid = document.getElementById("dishid").value,
+            dishname = document.getElementById("dishname").value,
+            estimatetime =document.getElementById("estimatetime").value;
+    
+            var xhr = new XMLHttpRequest();
+                    var url = "http://localhost:8080/kitchenmanager_war_exploded/dish";
+                    xhr.open("POST", url, true);
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            // var json = JSON.parse(xhr.responseText);
+                            console.log("Success");
+                        }
+                    };
+                    var data = JSON.stringify({
+                        "dishname":dishname,
+                        "defaultprice":"0",
+                        "estimatedtime":estimatetime,
+                       
+                    });
+                     
+                    // console.log(data);
+                    xhr.send();
+                    // xhr.send(data);
+        }
+    </script>
+
+    <div class="sidenav ">
+        <img class="mt-4" src="images/Asset 304x.png" alt="">
+       
+        <a href="home.html"><i class="material-icons">home</i></a>
+        <a href="inventory.html"><i class="material-icons">inventory_2</i></a>
+       
+        <a href="ongoingorders.html"><i class="material-icons">local_dining</i></a>
+        <a href="dish.html"><i class="material-icons">lunch_dining</i></a>
+        <a href="restockrequestorders.html"><i class="material-icons">autorenew</i></a>
+    </div>
+
+
+
+<div class="main" >
+    <div class="row mb-12">
+        <div class="col-8">   <h4>Add New Dish</h4></div>
+        <div class="col-4">
+            <div class="row">
+                <div class="col-6"><a  class="btn " style="width:70%">Done</a></div>
+                <div class="col-6"> <a href="/Client/kitchenmanager/dish.html" class="btn" style="width:70%">Cancle</a></div>
+             </div>
+         </div>
+    </div>
+  
+   
+    <div class="row mt-12">
+        <div class="col-6">
+            <div class="main flex-center">
+                <form style="font-size: 0.9cm;">
+                
+                    <div class="image-upload mt-3 ">
+                        <!-- <label>Image</label><br> -->
+                        <label for="file-input">
+                            <img class="icon-3" src="https://www.spendwithpennies.com/wp-content/uploads/2019/03/Egg-Salad-SpendWithPennies-6.jpg">
+                        </label>
+                        <input id="file-input" type="file" />
+                    </div>
+                    <button class="btn mt-6" style="width:100%">Add Image</button> 
+                </form>
+
+                <form class="m-6 mt-12" style="width: 60% ;font-size:0.7cm;">
+                    
+                    <label>Dish Name</label>
+                    <input type="input" id="dishname">
+                    <label>Dish code</label>
+                    <input type="input" id="dishcode">
+                    <label>Estimated Time</label>
+                    <input type="estimatedtime" id="estimatetime">
+   
+                </form>
+            </div>  
+        </div>
+
+             <div class="col-4">
+               
+                <form class="m-6 mt-12" style="font-size: 0.7cm; width:60%;">
+                    <div class="row mb-12">
+                        <div class="col-6"> <label>Ingredients</label></div>
+                           
+                     </div>
+                     <div class="row mt-12">
+                         <table>
+                             <thead>
+                                 <th>Ingredient</th>
+                                 <th>Type</th>
+                             </thead>
+                             <tr>
+                                 <td></td>
+                                 <td></td>
+                             </tr>
+                             
+                         </table>
+                     </div>
+                     <div class="col-2 "><button id="myBtn" class="btn " style="width:70%">Add Ingredient</button></div>
+                </form>
+                
+                
+            </div>
+            <!-- <div class="col-2 mt-6"><button id="myBtn" class="btn " style="width:70%">Add Ingredient</button></div> -->
+           
+               
+    </div>
+</div>
+
+ <!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+ <div class="modal-content">
+      <span class="close">&times;</span>
+     <div>
+        <h3>Add Ingredient</h3>
+          
+        <div class="row">
+            <div class="col-6">
+                <div>
+                    <form class=" form_reset m-6 mt-12" style="width: 60% ;font-size:0.7cm;">
+                        
+                        <h1>Type:</h1>
+                        <input type="radio" name="type" value="slider" id="slider"> <label for="slider">Slider </label>
+                        <input type="radio" name="type" value="quantity" id="quantity" > <label for="quantity">Quantity </label>
+                        <input type="radio" name="type" value="fixed" id="fixed"> <label for="fixed">Fixed</label>
+                        <br><br>
+                        <br><br>
+                        <br><br>
+                        <br><br>
+                        <div class="col-6 mt-12"><button class="btn mt-6" style="width: 5cm; height: 2cm; font-size: 0.5cm;">Done</button></div>    
+                    </form>
+                </div>
+            </div>
+            <div class="col-6">
+                    <form class="m-6 mt-12" style="font-size: 0.7cm; width:60%;">
+                       
+                        <div class="row">
+                            <!-- <div class="mt-4"> -->
+                            <label">Ingredient:</label><input class=" mt-8 mb-4" style="width:12cm;" type="text" name="itemType" list="items" id="itemType">
+                            <datalist id="items">
+                                <option value="Carrot">
+                            <option value="Tomato">
+                            <option value="Potato">
+                            <option value="Cabbage"></option>    
+        
+                            </datalist>
+                            <br><br>
+                            <label><h1> Set Level</h1> </label><br>
+                             Max <input type="text" style="width: 30%;" value="30Kg">
+                            Default <input type="text" style="width: 30%;" value="20g">
+                            Min <input type="text" style="width: 30%;" value="15Kg"> 
+                        </div>
+                    </form>
+                </div>
+        </div>
+     </div> 
+ </div>
+  
+</div>
+  
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+    </script>
+     
+
+</body>
+</html>

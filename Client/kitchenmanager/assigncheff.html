@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/Client/styles/pastures.css">
+    <link rel="stylesheet" href="/Client/styles/myedition.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/Client/styles/modder.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+
+<!-- Trigger/Open The Modal -->
+<!-- <button id="myBtn">Open Modal</button> -->
+<!-- <div class="cards">
+    <div class="card" id="results" style="height: 380px;">
+        <h2 class="ml-2">Orzd002</h2>
+        <div class="mt-3" style="padding: 10px; border:1px solid #bacdd8;border-radius: 10% ;height:225px;overflow-y: scroll;">
+            <div class="flex-space-evenly">
+                <img class="round-2" src="https://soufflebombay.com/wp-content/uploads/2019/02/Homemade-Blueberry-Swirl-for-Yogurt.jpg"" alt="" style="width:90px;height:90px;">
+                <div style="flex-direction: column;">
+                    
+                        <h1 class=" m-1 text-upper">granola w/ honey</h1>
+                    <div class="ml-12">
+                        <p>Quantity : x2</p>
+                        <a class= "btn" href="">Assign</a>
+                    </div>
+                    
+                </div>
+            </div>
+            <hr class="mb-2 mt-2">
+            <div class="flex-space-evenly">
+                <img class="round-2" src="https://vaya.in/recipes/wp-content/uploads/2019/01/Avocado-Smoothie.jpg" alt="" style="width:90px;height:90px;">
+                <div style="flex-direction: column;">
+                    
+                <h1 class=" m-1 text-upper">Avocado Smoothie</h1>
+            <div class="ml-12">
+                <p>Quantity : x1</p>
+                <a class= "btn" href="">Assign</a>
+            </div>
+            
+        </div>
+            </div>
+            <hr class="mb-2 mt-2">
+            <div class="flex-space-evenly">
+                <img class="round-2" src="https://bestofvegan.com/wp-content/uploads/2017/06/no-bake-protein-chocolate-cookie-sandwiches-by-@eatwithfingers-.-.-makes-20-22-cookies-12-cup-vegan-.jpg" alt="" style="width:90px;height:90px;">
+                <div style="flex-direction: column;">
+                    
+                <h1 class=" m-1 text-upper">PROTEIN COOKIE</h1>
+            <div class="ml-12">
+                <p>Quantity : x2</p>
+                <a class= "btn" href="">Assign</a>
+            </div>
+            
+        </div>
+            </div>
+            <hr class="mb-2 mt-2">
+        </div>
+        <h2>Rs. 2600</h2>
+        <div class="flex-space-evenly mt-2">
+            <a class= "btn"  id="myBtn" href="">Assign</a>
+      
+        </div>
+    </div></div> -->
+
+    <br><br>
+    <button id="myBtn" class="btn">Open Modal</button>
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+   
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    
+    <table  style="width:50%;">
+        <tr>
+            <td><input type="radio">Chef 1</td>
+            <td>  </td>
+            <td>  Available</td>
+        </tr>
+        <tr>
+            <td><input type="radio">Chef 1</td>
+            <td>  </td>
+            <td>  Available</td>
+        </tr>
+        <tr>
+            <td><input type="radio">Chef 1</td>
+            <td>  </td>
+            <td>  Available</td>
+        </tr>
+        <tr>
+            <td><input type="radio">Chef 1</td>
+            <td>  </td>
+            <td>  Available</td>
+        </tr>
+        <tr>
+            <td><input type="radio">Chef 1</td>
+            <td>  </td>
+            <td>  Available</td>
+        </tr>
+        <tr> <td><button>Assign</button></td> </tr>
+    </table>
+  </div>
+
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+</body>
+</html>

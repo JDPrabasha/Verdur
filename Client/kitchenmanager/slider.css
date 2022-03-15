@@ -1,0 +1,74 @@
+input[type="range"] {
+  display: inline-table;
+  outline: 0;
+  border: 0;
+  border-radius: 10px;
+  width: 60%;
+  margin: 24px 0 16px;
+  -webkit-transition: -webkit-box-shadow 0.2s ease-in-out;
+  transition: -webkit-box-shadow 0.2s ease-in-out;
+  transition: box-shadow 0.2s ease-in-out;
+  transition: box-shadow 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  input[type="range"] {
+    overflow: hidden;
+    height: 10px;
+    -webkit-appearance: none;
+    background-color: #ddd;
+  }
+  input[type="range"]::-webkit-slider-runnable-track {
+    height: 40px;
+    -webkit-appearance: none;
+    color: #444;
+    margin-top: -1px;
+    -webkit-transition: -webkit-box-shadow 0.2s ease-in-out;
+    transition: -webkit-box-shadow 0.2s ease-in-out;
+    transition: box-shadow 0.2s ease-in-out;
+    transition: box-shadow 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    width: 1px;
+    -webkit-appearance: none;
+    height: 0px;
+    cursor: ew-resize;
+    background: #fff;
+    -webkit-box-shadow: -100px 0 0 100px #f00, inset 0 0 0 40px #f00;
+            box-shadow: -100px 0 0 100px #f00, inset 0 0 0 40px #f00;
+    border-radius: 50%;
+    -webkit-transition: -webkit-box-shadow 0.2s ease-in-out;
+    transition: -webkit-box-shadow 0.2s ease-in-out;
+    transition: box-shadow 0.2s ease-in-out;
+    transition: box-shadow 0.2s ease-in-out, -webkit-box-shadow 0.2s ease-in-out;
+    position: relative;
+  }
+  input[type="range"]:active::-webkit-slider-thumb {
+    background: #fff;
+    -webkit-box-shadow: -140px 0 0 120px #f00, inset 0 0 0 3px #f00;
+            box-shadow: -140px 0 0 120px #f00, inset 0 0 0 3px #f00;
+  }
+}
+
+input[type="range"]::-moz-range-progress {
+  background-color: #43e5f7;
+}
+
+input[type="range"]::-moz-range-track {
+  background-color: #9a905d;
+}
+
+input[type="range"]::-ms-fill-lower {
+  background-color: #43e5f7;
+}
+
+input[type="range"]::-ms-fill-upper {
+  background-color: #9a905d;
+}
+
+input:not(:active) + #h4-container h4 {
+  opacity: 0;
+  margin-top: -50px;
+  pointer-events: none;
+}
+/*# sourceMappingURL=slider.css.map */
