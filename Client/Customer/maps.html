@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;
+        width: 600px;
+      }
+    </style>
+  </head>
+  <body>
+    <!--The div elements for the map and message -->
+    <div id="map"></div>
+    <div id="msg"></div>
+    <script>
+      // Initialize and add the map
+      var map;
+      console.log("hello");
+      function initMap() {
+        // The map, centered on Central Park
+        const center = { lat: 40.774102, lng: -73.971734 };
+        const options = { zoom: 15, scaleControl: true, center: center };
+        map = new google.maps.Map(document.getElementById("map"), options);
+        // Locations of landmarks
+        const dakota = { lat: 7.132867048686624, lng: 80.07732645397466 };
+        const frick = { lat: 7.156772949430187, lng: 80.11561990662352 };
+        // The markers for The Dakota and The Frick Collection
+        var mk1 = new google.maps.Marker({ position: dakota, map: map });
+        var mk2 = new google.maps.Marker({
+          position: frick,
+          map: map,
+          draggable: true,
+          title: "Drag me!",
+        });
+
+        let directionsService = new google.maps.DirectionsService();
+        let directionsRenderer = new google.maps.DirectionsRenderer();
+        directionsRenderer.setMap(map); // Existing map object displays directions
+        // Create route from existing points used for markers
+        const route = {
+          origin: dakota,
+          destination: mk2.getPosition(),
+          travelMode: "DRIVING",
+        };
+
+        console.log("bhh");
+        directionsService.route(route, f1);
+
+        function f1(response, status) {
+          // anonymous function to capture directions
+          if (status !== "OK") {
+            window.alert("Directions request failed due to " + status);
+            return;
+          } else {
+            directionsRenderer.setDirections(response); // Add route to the map
+            var directionsData = response.routes[0].legs[0]; // Get data about the mapped route
+            if (!directionsData) {
+              window.alert("Directions request failed");
+              return;
+            } else {
+              document.getElementById("distance").innerHTML =
+                directionsData.distance.text;
+              document.getElementById("msg").innerHTML +=
+                " Driving distance is " +
+                directionsData.distance.text +
+                " (" +
+                directionsData.duration.text +
+                ").";
+            }
+          }
+        }
+
+        function getReverseGeocodingData(lat, lng) {
+          var latlng = new google.maps.LatLng(lat, lng);
+          // This is making the Geocode request
+          var geocoder = new google.maps.Geocoder();
+          geocoder.geocode({ latLng: latlng }, function (results, status) {
+            if (status !== google.maps.GeocoderStatus.OK) {
+              alert(status);
+            }
+            // This is checking to see if the Geoeode Status is OK before proceeding
+            if (status == google.maps.GeocoderStatus.OK) {
+              console.log(results);
+              var address = results[0].formatted_address;
+              console.log(address);
+              $("#location").val(address);
+              $("#longitude").val(lat);
+
+              $("#latitude").val(lng);
+              console.log($("#longitude").val());
+              console.log($("#latitude").val());
+            }
+          });
+        }
+        google.maps.event.addListener(mk2, "dragend", function (ev) {
+          //   alert(ll.lat() + " " + ll.lng()); // always the same LatLng-Object...
+          route.destination = mk2.getPosition();
+          console.log($("#distance").html());
+          directionsService.route(route, f1);
+          getReverseGeocodingData(
+            mk2.getPosition().lat(),
+            mk2.getPosition().lng()
+          );
+          // new LatLng-Object after dragend-event...
+        });
+      }
+    </script>
+    <!--Load the API from the specified URL -- remember to replace YOUR_API_KEY-->
+    <script
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCO45MrLYhJoU1hIzZ88DSupwTaT-gItoQ&callback=initMap"
+    ></script>
+  </body>
+</html>

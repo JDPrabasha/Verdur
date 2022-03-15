@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/pastures.css" />
+    <link rel="stylesheet" href="testdishwrap.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="try.js" type="module"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="trigger">Hello</h1>
+    <input
+      type="text"
+      id="myInput"
+      placeholder="Search for names.."
+      class="width-3"
+    />
+    <div id="dishes" class="flex-grid ml-10"></div>
+    <div id="content">
+      <p>This is the content-container</p>
+      <a href="#modal1">Open first modal</a><br />
+      <a href="#modal2">Open second modal</a>
+      <div id="modal1"><a href="#">Close</a>This is the first modal</div>
+      <div id="modal2"><a href="#">Close</a>This is the second modal</div>
+    </div>
+    <div class="flex-space-around mb-40">
+      <div class="blue p-5 flex-1">hello</div>
+      <div class="grey p-5">hello</div>
+      <div class="blue flex-1 p-5">hello</div>
+    </div>
+    <div class="avatars">
+      <span class="avatar">
+        <img src="https://picsum.photos/70" />
+      </span>
+      <span class="avatar">
+        <img src="https://picsum.photos/80" />
+      </span>
+      <span class="avatar">
+        <img src="https://picsum.photos/90" />
+      </span>
+      <span class="avatar">
+        <img src="https://picsum.photos/100" />
+      </span>
+    </div>
+    <form
+      method="post"
+      action="https://sandbox.payhere.lk/pay/checkout"
+      id="target"
+    >
+      <input type="hidden" name="merchant_id" value="1218949" />
+      <!-- Replace your Merchant ID -->
+      <input
+        type="hidden"
+        name="return_url"
+        value="https://stackoverflow.com"
+      />
+      <input
+        type="hidden"
+        name="cancel_url"
+        value="https://stackoverflow.com"
+      />
+      <input type="hidden" name="notify_url" value="https://www.baeldung.com" />
+
+      <input type="hidden" name="order_id" value="ItemNo12345" />
+      <input
+        type="hidden"
+        name="items"
+        value="Door bell wireless, Door"
+      /><br />
+      <input type="hidden" name="currency" value="LKR" />
+      <input type="hidden" name="amount" value="1000" />
+
+      <input type="hidden" name="first_name" value="Saman" />
+      <input type="hidden" name="last_name" value="Perera" /><br />
+      <input type="hidden" name="email" value="samanp@gmail.com" />
+      <input type="hidden" name="phone" value="0771234567" /><br />
+      <input type="hidden" name="address" value="No.1, Galle Road" />
+      <input type="hidden" name="city" value="Colombo" />
+      <input type="hidden" name="country" value="Sri Lanka" /><br /><br />
+    </form>
+  </body>
+</html>

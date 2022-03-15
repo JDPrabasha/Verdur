@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/pastures.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="rider.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="GoalController.js"></script>
+
+    <title>Document</title>
+  </head>
+  <body>
+    <section class="text-center">
+      <h4 class="mt-6 mb-6">My Deliveries</h4>
+      <img
+        src="https://podcastnotes.org/wp-content/uploads/2020/04/Chamath-Palihapitiya.jpg"
+        class="icon-8"
+        alt=""
+        id="photo"
+      />
+      <h2 id="name">Charith Fernando</h2>
+      <p>Total deliveries this month: <span id="totalOrders"></span></p>
+      <div style="height: 300px; width: 300px" class="">
+        <canvas id="myChart"></canvas>
+      </div>
+
+      <h2>Checkpoint <span id="cp">3</span></h2>
+      <p class="fw-b">Deliveries to next goal: <span id="rem">13</span></p>
+      <a href="rider-home.html" class="delivery btn mt-6">
+        <span class="material-icons-outlined icon"> home </span>
+        <p class="fw-b text">Home</p>
+      </a>
+    </section>
+  </body>
+</html>

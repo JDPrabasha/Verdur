@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/pastures.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+ 
+
+  
+ 
+    
+    <script src="ProfileController.js"></script>
+    <script src="Dish.js"></script>
+    <script src="DishSerializer.js"></script>
+    <script src="MealPlanSerializer.js"></script>
+    <script src="MealPlan.js"></script>
+    <script src="try.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    
+    <nav>
+      <div class="flex-space-between m-8">
+        <a href="customer-landing.html" class="width-1"><img src="images/Asset 304x.png" width="100%" alt="" /></a>
+        <ul class="flex" id="nav-items">
+          <li class="pl-5"><a id="menu" href="customer-menu.html">Menu</a></li>
+          <li class="pl-5">
+            <a href="customer-orders.html"><span class="material-icons pr-3">local_mall</span></a>
+    
+          </li>
+     
+        </ul>
+      </div>
+    </nav>
+    <p class="display-3 mb-4 ml-6">Hello, <span id="firstName"></span></p>
+    <div class="row">
+      <div class="profile-section col-3">
+        <div class="flex-column text-center">
+          <img src="images/EbNX_erVcAUlwIx.jpg" id="picture" alt="" class="icon-10" />
+          <h2 id="name">Dulaj Prabasha</h2>
+        </div>
+        <div class="flex-column ml-21 pr-5">
+          <!-- <p class="text-upper mb-6">Gender : (Undisclosed)</p> -->
+          <p class="text-upper mt-6">Contact Information</p>
+          <hr class="mr-20 mb-4" />
+          <p class="fw-b">Address</p>
+          <p id="address">208/A, Elm Street, Colombo 30, Colombo</p>
+          <p class="fw-b mt-4">Phone</p>
+          <p id="contact">+94 772872634</p>
+          <p class="fw-b mt-4">Email</p>
+          <p id="mail">dprabasha@gmail.com</p>
+          <div class="button btn mt-4 ml-6 bg-purple">
+            <i class="material-icons icon">edit</i>
+            <p href="" class="fw-b text " id="editProfile">Edit Profile</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-9">
+        <section class="goals mb-4">
+            <div class="flex flex-end ">
+                <div class="button btn mt-2 mr-8 bg-black" id="editPlan">
+                    <i class="material-icons icon">edit</i>
+                    <p href="" class="fw-b text">Edit Meal Plan</p>
+                  </div>
+            </div>
+            <h2 class="text">Today's Progress <span class="material-icons-outlined icon rotate-center" id="addMeal">
+                add
+                </span>
+                
+                </h2>
+           
+          <div class="flex-space-between mr-7 mt-4">
+            <div class="card ml-4">
+                <p class="fw-b mt-2">Fats</p>
+              <p><span class="display-2" id="fats">0</span>/<span id="fatGoal">0</span>g</p>
+            </div>
+            <div class="card ml-4"">
+                <p class="fw-b mt-2">Protein</p>
+                <p><span class="display-2" id="protein">0</span>/<span id="proteinGoal">0</span>g</p>
+            </div>
+            <div class="card ml-4"">
+                <p class="fw-b mt-2">Calories</p>
+                <p><span class="display-2" id="calories">0</span>/<span id="calorieGoal">0</span>kcal</p>
+            </div>
+            <div class="card ml-4"">
+                <p class="fw-b mt-2">Carbs</p>
+                <p><span class="display-2" id="carbs">0</span>/<span id="carbGoal">0</span>g</p>
+            </div>
+          </div>
+        </section>
+        <section class="recents mr-4">
+            <h2>Recent Meals</h2>
+            <div class="flex-space-evenly mt-4" id="dishes">
+            
+              
+             
+              </div>
+        </section>
+      </div>
+    </div>
+    <div class="footer bg-gray-4 p-12 mt-12">
+      <div class="text-center flex-space-between">
+    <div class="flex-column">
+      
+      <img src="images/Asset 304x.png" width="10%" alt="" />
+      <p class="ml-12">Verdur 2021. All Rights Reserved.</p>
+    </div>
+      </div>
+    </div>
+    <div class="modals">
+      <div class="add-modal">
+        <div class="modal-bg" id="mealModal">
+          <div class="modal-body width-3 height-5 p-5 ml-6 round-1">
+            <p class="fw-b mb-4">Add Intake</p>
+            <label
+            >Carbs
+            <input
+              type="text"
+              class="width-4"
+              placeholder="Enter amount in grams"
+              id="carbintake"
+            />
+            <p
+              class="text-red mb-3 hidden"
+              id="emailerror"
+              style="font-size: smaller"
+            >
+              random text
+            </p>
+            <label
+            >Protein
+            <input
+              type="text"
+              class="width-4"
+              placeholder="Enter amount in grams"
+              id="proteinintake"
+            />
+            <p
+              class="text-red mb-3 hidden"
+              id="emailerror"
+              style="font-size: smaller"
+            >
+              random text
+            </p>
+            <label
+            >Calories
+            <input
+              type="text"
+              class="width-4"
+              placeholder="Enter amount in calories"
+              id="calorieintake"
+            />
+            <p
+              class="text-red mb-3 hidden"
+              id="emailerror"
+              style="font-size: smaller"
+            >
+              random text
+            </p>
+            <label
+            >Fats
+            <input
+              type="text"
+              class="width-4"
+              placeholder="Enter amount in grams"
+              id="fatintake"
+            />
+            <p
+              class="text-red mb-3 hidden"
+              id="emailerror"
+              style="font-size: smaller"
+            >
+              random text
+            </p>
+            <p class="btn ml-40 mt-3 mt-8 mb-8" id="addNewMeal">Add</p>
+            <span class="material-icons modal-close" id="close"> close </span>
+          </div>
+        </div>
+      </div>
+      <div class="plan-modal">
+        <div class="modal-bg" id="planModal">
+          <div class="modal-body width-3 height-5 p-5 ml-6 round-1">
+            <p class="mb-5 fw-b">Set Daily Goals</p>
+            
+            <label
+            >Carbs
+            <input
+              type="text"
+              class="width-4"
+              placeholder="Enter Goal in grams"
+              id="newcarbgoal"
+            />
+            <p
+              class="text-red mb-3 hidden"
+              id="emailerror"
+              style="font-size: smaller"
+            >
+              random text
+            </p>
+            <label
+            >Protein
+            <input
+              type="text"
+              class="width-4"
+              placeholder="Enter Goal in grams"
+              id="newproteingoal"
+            />
+            <p
+              class="text-red mb-3 hidden"
+              id="emailerror"
+              style="font-size: smaller"
+            >
+              random text
+            </p>
+            <label
+            >Calories
+            <input
+              type="text"
+              class="width-4"
+              placeholder="Enter Goal in calories"
+              id="newcaloriegoal"
+            />
+            <p
+              class="text-red mb-3 hidden"
+              id="emailerror"
+              style="font-size: smaller"
+            >
+              random text
+            </p>
+            <label
+            >Fats
+            <input
+              type="text"
+              class="width-4"
+              placeholder="Enter Goal in grams"
+              id="newfatgoal"
+            />
+            <p
+              class="text-red mb-3 hidden"
+              id="emailerror"
+              style="font-size: smaller"
+            >
+              random text
+            </p>
+         
+        
+            <p class="btn ml-40  mt-8 mb-8" id="confirmPlanChange">Confirm</p>
+            <span class="material-icons modal-close" id="close"> close </span>
+          </div>
+        </div>
+      </div>
+      <div class="profile-modal">
+        <div class="modal-bg" id="profileModal">
+          <div class="modal-body width-4 height-5 p-5 ml-6 round-1">
+            <p class="mb-5 fw-b">Update Profile</p>
+
+            <p class="mb-2 ">Select Avatar</p>
+            <div class="flex-grid">
+              <img
+              src="https://pbs.twimg.com/media/EbRZ0YAU8AEY7KJ.jpg"              
+              class="icon-3 avatar"
+              alt=""
+              data-id="1"
+            />
+              <img
+              src="https://pbs.twimg.com/media/ElENQo-U8AA_1jS.jpg"
+              class="icon-3 modal-ingredient avatar"
+              alt=""
+              data-id="2"
+            />
+              <img
+              src="https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/d07bca98931623.5ee79b6a8fa55.jpg"
+              class="icon-3 modal-ingredient avatar"
+              alt=""
+              data-id="3"
+            />
+              <img
+              src="https://cdn.dribbble.com/users/230875/screenshots/12215958/toyfaces_colored_bg_68_4x.jpg"
+              class="icon-3 modal-ingredient avatar"
+              alt=""
+              data-id="4"
+            />
+            </div>
+            <p class="mb-2 mt-4">Set Address</p>
+            
+            <input
+              type="text"
+              class="width-4"
+              placeholder=""
+              id="newaddress"
+            />
+            <p class="mb-2 mt-4">Set Contact Number</p>
+            <input
+            type="text"
+            class="width-4"
+            placeholder=""
+            id="newcontact"
+          />
+          
+            <p class="btn ml-40 mt-3 mt-8 mb-8" id="confirmProfileChange" >Confirm</p>
+            <span class="material-icons modal-close" id="close"> close </span>
+          </div>
+        </div>
+      </div>
+   
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/Client/styles/pastures.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="CustomizationController.js"></script>
+
+    <script src="DishSerializer.js"></script>
+    <script src="Dish.js"></script>
+    <script src="Ingredient.js"></script>
+    <script src="IngredientSerializer.js"></script>
+    <script src="Cart.js"></script>
+    <script src="CartSerailzer.js"></script>
+    <script src="CartController.js"></script>
+  </head>
+  <body>
+    <nav>
+      <div class="flex-space-between ml-8 mr-8 mt-8">
+        <a href="customer-landing.html" class="width-1"><img src="images/Asset 304x.png" width="100%" alt="" /></a>
+
+        <ul class="flex" id="nav-items">
+          <li class="pl-5"><a id="menu" href="customer-menu.html">Menu</a></li>
+          <li class="pl-5">
+            <a href="customer-orders.html"
+              ><span class="material-icons pr-3">local_mall</span></a
+            >
+          </li>
+       
+  
+        </ul>
+      </div>
+    </nav>
+
+    <div>
+      <h6 class="ml-6 mt-4">Customize Dish</h6>
+      <div class="row">
+        <div class="col-5 ml-12 mr-12 text-center flex-column">
+          <img
+            id="image"
+            class="round-1 image-5 mt-6"
+            src="https://www.thedailymeal.com/sites/default/files/recipe/2021/Sweet_sticky_chicken_thigh-min.jpg"
+            alt="Hot air balloons"
+          />
+          <div class="flex text-center ml-34">
+            <h3 id="price"></h3>
+            <p class="ml-4 fw-b text-info">+ Rs. <span id="increase">0</span></p>
+          </div>
+        </div>
+
+        <div class="col-2 flex-column text-center">
+          <img
+            src="images/calories.png"
+            class="icon-3 mt-6"
+            alt=""
+            class="mt-6"
+          />
+          <p class="display-1">Calories</p>
+          <p>
+            <span id="calories">0</span>kcal
+          </p>
+
+          <img
+            src="images/protein-2.png"
+            class="icon-3 mt-6"
+            alt=""
+            class="mt-6"
+          />
+          <p class="display-1">Proteins</p>
+          <p><span id="protein">0</span>g</p>
+
+          <img
+            src="images/low-carb-diet.png"
+            class="icon-3 mt-6"
+            alt=""
+            class="mt-6"
+          />
+          <p class="display-1">Carbs</p>
+          <p>
+            <span id="carbs">0</span>g
+          </p>
+
+          <img
+            src="images/trans-fat.png"
+            class="icon-3 mt-6"
+            alt=""
+            class="mt-6"
+          />
+          <p class="display-1">Fats</p>
+          <p>
+            <span id="fats">0</span>g
+          </p>
+        </div>
+
+        <div class="col-5">
+          <h2 class="mb-6 mt-4 mr-8">Time for some fine-tuning!</h2>
+
+          <div id="ingredients">
+         
+   
+            
+          </div>
+
+     
+
+          <div class="btn mt-6 mr-8 ml-60" id="cartBtn">
+            <i class="material-icons-outlined icon">shopping_bag</i>
+            <p href="" class="fw-b text">Add to Cart</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section modals">
+        <div class="modal hidden">
+          <div class="modal-bg" id="vtf">
+            <div class="modal-body  p-5 round-2">
+              <div class="top mb-2"></div>
+     
+                <div class="flex-column">
+                  <div class="flex-space-around p-6 ">
+                    <p class="fw-b" id="dish">Sesame Chicken w/ Broccoli</p>
+
+            <div class="flex-space-around pl-3 pr-3">
+              <span class="material-icons-outlined icon bg-success round-1 p-1" id="decreaseCount"
+                >remove</span
+              >
+              <p class="text-1 fw-b pl-5 pr-5" id="quantity">01</p>
+              <span class="material-icons-outlined icon bg-success round-1 p-1" id="increaseCount"
+                >add</span
+              >
+            </div>
+            <p class="fw-b" id="totalPrice">Rs. 430</p>
+                  </div>
+                <a class="btn ml-35 mt-4 mb-6 bg-black" href="customer-orders.html" id="addToCart">Add to Cart</a>
+                </div>
+                
+              <span class="material-icons modal-close" id="close"> close </span>
+            </div> 
+     
+        </div> 
+   
+     
+      <div class="footer bg-gray-4 p-12 mt-12 flex-column text-center">
+        <img src="images/Asset 304x.png" width="10%" alt="" />
+        <p class="ml-12">Verdur 2021. All Rights Reserved.</p>
+      </div>
+    </div>
+  </body>
+</html>

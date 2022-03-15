@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/pastures.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="rider.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="DashboardController.js"></script>
+
+    <title>Document</title>
+  </head>
+  <body>
+    <section class="text-center">
+      <h4 class="mt-6 mb-6 p-3">Hello, <span id="firstName"></span></h4>
+      <div id="links">
+        <div class="flex-end ml-50">
+          <span
+            class="material-icons-outlined text-4 md-48 text-info"
+            id="statusToggle"
+          >
+            toggle_on
+          </span>
+          <p class="text-upper" id="status"></p>
+        </div>
+      </div>
+
+      <div class="flex-space-between ml-5 mr-2">
+        <img
+          src="https://podcastnotes.org/wp-content/uploads/2020/04/Chamath-Palihapitiya.jpg"
+          class="icon-8 mr-2 ml-2"
+          alt=""
+          id="photo"
+        />
+
+        <div class="p-3">
+          <h2 id="name">Charith Fernando</h2>
+          <p>Rider ID : <span id="riderId"></span></p>
+        </div>
+      </div>
+      <h1 class="fw-b mt-4">
+        Payments due to Cashier : Rs. <span id="dueAmount"></span>
+      </h1>
+
+      <div class="flex-space-evenly fw-b ml-6 mr-6 mt-6">
+        <a
+          href="rider-goals.html"
+          class="flex-column bg-black pt-3 pb-3 pl-6 pr-6 round-2"
+        >
+          <span class="material-icons-outlined"> flag </span>
+          <p>Monthly Targets</p>
+        </a>
+        <a
+          href="rider-deliveries.html"
+          class="flex-column bg-black p-3 round-2"
+        >
+          <span class="material-icons-outlined"> delivery_dining </span>
+          <p>Ongoing Deliveries</p>
+        </a>
+      </div>
+
+      <a class="delivery btn mt-10 bg-white" href="rider-login.html">
+        <span class="material-icons-outlined icon text-red"> logout </span>
+        <p class="fw-b text">Logout</p>
+      </a>
+    </section>
+  </body>
+</html>

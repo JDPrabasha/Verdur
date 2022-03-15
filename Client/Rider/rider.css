@@ -1,0 +1,13 @@
+body{
+min-height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+section{
+    height: 736px;
+    width: 828px;
+    /* border: 11px solid #ccc; */
+
+}

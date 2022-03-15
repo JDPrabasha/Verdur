@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons-Outlined"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/pastures.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="./MenuController.js"></script>
+    <script src="./MenuSerializer.js"></script>
+    <script src="./Menu.js"></script>
+    <!-- <script src="try.js"></script> -->
+    <title>Document</title>
+  </head>
+  <body>
+    <nav>
+      <div class="flex-space-between m-8">
+        <a href="customer-landing.html" class="width-1"
+          ><img src="images/Asset 304x.png" width="100%" alt=""
+        /></a>
+        <ul class="flex" id="nav-items">
+          <li class="pl-5"><a id="menu" href="customer-menu.html">Menu</a></li>
+          <li class="pl-5">
+            <a href="customer-orders.html"
+              ><span class="material-icons pr-3">local_mall</span></a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="top-row p-8">
+      <div class="row">
+        <div class="col-6">
+          <div class="search-box">
+            <input
+              type="text"
+              placeholder="What are you craving?"
+              id="search-text"
+            />
+            <div class="search-btn">
+              <span class="material-icons icon" id="search">search</span>
+            </div>
+
+            <div class="cancel-btn">
+              <span class="material-icons"> close </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex mt-6 mb-6">
+        <a href="" class="btn mr-8 bg-success fw-b filterFilter">Filters</a>
+        <a href="" class="btn fw-b dietFilter">Diets</a>
+      </div>
+      <h2>Search by Ingredients</h2>
+      <div class="flex-space-around mt-4">
+        <div class="flex-column ingredientFilter">
+          <img
+            src="https://s3.ap-south-1.amazonaws.com/wibrate2019/Live/Menu_Image/wib_1599547575_wib1596872142wib1595763433papdi-fresh-500g.jpg"
+            class="icon-4"
+            alt=""
+          />
+          <h1 class="text-center">Beans</h1>
+        </div>
+        <div class="flex-column ingredientFilter">
+          <img
+            src="images/avocado-square-format-kae-cheatham.jpg"
+            class="icon-4"
+            alt=""
+          />
+          <h1 class="text-center">Avocado</h1>
+        </div>
+        <div class="flex-column ingredientFilter">
+          <img
+            src="images/istockphoto-524387674-612x612.jpg"
+            class="icon-4"
+            alt=""
+          />
+          <h1 class="text-center">Egg</h1>
+        </div>
+        <div class="flex-column ingredientFilter">
+          <img
+            src="https://www.pngitem.com/pimgs/m/22-220647_transparent-transparent-background-strawberry-hd-png-download.png"
+            class="icon-4"
+            alt=""
+          />
+          <h1 class="text-center">Strawberry</h1>
+        </div>
+        <div class="flex-column ingredientFilter">
+          <img
+            src="https://freepngimg.com/thumb/chicken/22045-8-cooked-chicken-clipart-thumb.png"
+            class="icon-4"
+            alt=""
+          />
+          <h1 class="text-center">Chicken</h1>
+        </div>
+        <div class="flex-column ingredientFilter" id="ingredientsBtn">
+          <img src="images/img_79905.png" class="icon-4 modal-btn" alt="" />
+          <h1 class="text-center">More</h1>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div id="dishes"> -->
+    <div class="section mt-3 mb-12">
+      <p class="ml-6 mb-6">
+        <span class="text-1 fw-b display-2 underline" id="trending"
+          >All Dishes</span
+        >
+        <span class="ml-6 fw-b underline" id="current">Breakfast Specials</span>
+        <span class="text-1 ml-6 fw-b underline" id="recent">New Releases</span>
+      </p>
+      <div class="cards flex-grid ml-10" id="dishes"></div>
+    </div>
+    <!-- <div class="section mt-12 mb-12" id="breakfast">
+      <p class="display-2 ml-6 mb-6">Breakfast Specials</p>
+      <div class="flex-space-evenly">
+        <div class="card">
+          <img
+            class="round-2"
+            src="https://soufflebombay.com/wp-content/uploads/2019/02/Homemade-Blueberry-Swirl-for-Yogurt.jpg"
+            alt=""
+          />
+          <h1 class="m-1">BLUEBERRY YOGHURT</h1>
+          <hr class="mb-2 mt-2" />
+          <div class="flex-space-around">
+            <h1 class="text-2">Rs. 200</h1>
+            <a class="btn fw-b" href="">+ Order Now</a>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            class="round-2"
+            src="https://vaya.in/recipes/wp-content/uploads/2019/01/Avocado-Smoothie.jpg"
+            alt=""
+          />
+          <h1 class="m-1 text-upper">avocado smoothie</h1>
+          <hr class="mb-2 mt-2" />
+          <div class="flex-space-evenly">
+            <h1 class="text-2">Rs. 400</h1>
+            <a class="btn fw-b" href="">+ Order Now</a>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            class="round-2"
+            src="https://www.quakeroats.com/images/default-source/QuakerRecipes/quaker_fruitandhoneygranola_750x433.jpg"
+            alt=""
+          />
+          <h1 class="m-1 text-upper">granola w/ honey</h1>
+          <hr class="mb-2 mt-2" />
+          <div class="flex-space-evenly">
+            <h1 class="text-2">Rs. 600</h1>
+            <a class="btn fw-b" href="">+ Order Now</a>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            class="round-2"
+            src="https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/oats-1296x728-feature.jpg?w=1155&h=1528"
+            alt=""
+          />
+          <h1 class="m-1">OATMEAL</h1>
+          <hr class="mb-2 mt-2" />
+          <div class="flex-space-evenly">
+            <h1 class="text-2">Rs. 500</h1>
+            <a class="btn fw-b" href="">+ Order Now</a>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!-- <div class="section mt-12 mb-12" id="new">
+      <p class="display-2 ml-6 mb-6">New Releases</p>
+      <div class="flex-space-evenly">
+        <div class="card">
+          <img
+            class="round-2"
+            src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F44%2F2019%2F08%2F27044817%2F6753427.jpg&q=85"
+            alt=""
+          />
+          <h1 class="m-1 text-upper">Avocado Salsa</h1>
+          <hr class="mb-2 mt-2" />
+          <div class="flex-space-around">
+            <h1 class="text-2">Rs. 400</h1>
+            <a class="btn fw-b" href="">+ Order Now</a>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            class="round-2"
+            src="https://media.healthyfood.com/wp-content/uploads/2021/06/Baked-Salmon-Cauliflower-Rice.gif"
+            alt=""
+          />
+          <h1 class="m-1">ROASTED SALMON W/ CAULIFLOWER</h1>
+          <hr class="mb-2 mt-2" />
+          <div class="flex-space-around">
+            <h1 class="text-2">Rs. 750</h1>
+            <a class="btn fw-b" href="">+ Order Now</a>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            class="round-2"
+            src="https://ourrecipeforunity.org/wp-content/uploads/2019/11/Frenchs_Green_Bean_Casserole_New_2000x1125.jpg"
+            alt=""
+          />
+          <h1 class="m-1">BEAN CASSEROLE</h1>
+          <hr class="mb-2 mt-2" />
+          <div class="flex-space-evenly">
+            <h1 class="text-2">Rs. 800</h1>
+            <a class="btn fw-b" href="">+ Order Now</a>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            class="round-2"
+            src="https://static.onecms.io/wp-content/uploads/sites/9/2019/09/Hot-Cranberry-Juice-Fall-Cocktail-FT-Blog0919.jpg"
+            alt=""
+          />
+          <h1 class="m-1">CRANBERRY JUICE</h1>
+          <hr class="mb-2 mt-2" />
+          <div class="flex flex-space-evenly">
+            <h1 class="text-2">Rs. 600</h1>
+            <a class="btn fw-b" href="">+ Order Now</a>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!-- </div> -->
+
+    <div class="section modals">
+      <div class="diet-modal hidden">
+        <div class="modal-bg" id="dietModal">
+          <div class="modal-body width-3 height-5 p-5 ml-6 round-1">
+            <p class="mb-6 fw-b text-2">Diet</p>
+            <p class="mb-3">Preferences</p>
+
+            <div class="flex-grid">
+              <p
+                id="active-status"
+                class="fw-b tag tag-outline round-3 pt-1 pb-1 pl-3 pr-3 preference"
+              >
+                <span>Vegan</span>
+              </p>
+              <p
+                id="active-status"
+                class="fw-b tag tag-outline round-3 pt-1 pb-1 pl-3 pr-3 preference"
+              >
+                <span>Vegetarian</span>
+              </p>
+              <p
+                id="active-status"
+                class="fw-b tag tag-outline round-3 pt-1 pb-1 pl-3 pr-3 preference"
+              >
+                <span>Pescatarian</span>
+              </p>
+            </div>
+
+            <p class="mb-3 mt-5">Lifestyles</p>
+
+            <div class="flex-grid">
+              <p
+                id="active-status"
+                class="fw-b tag tag-outline round-3 pt-1 pb-1 pl-3 pr-3 lifestyle"
+              >
+                <span>Halal</span>
+              </p>
+              <p
+                id="active-status"
+                class="fw-b tag tag-outline round-3 pt-1 pb-1 pl-3 pr-3 lifestyle"
+              >
+                <span>Paleo</span>
+              </p>
+              <p
+                id="active-status"
+                class="fw-b tag tag-outline round-3 pt-1 pb-1 pl-3 pr-3 lifestyle"
+              >
+                <span>Keto</span>
+              </p>
+              <p
+                id="active-status"
+                class="fw-b tag tag-outline round-3 pt-1 pb-1 pl-3 pr-3 lifestyle"
+              >
+                <span>Low-Calorie</span>
+              </p>
+              <p
+                id="active-status"
+                class="fw-b tag tag-outline round-3 pt-1 pb-1 pl-3 pr-3 lifestyle"
+              >
+                <span>High-Protein</span>
+              </p>
+            </div>
+
+            <p class="mb-3 mt-5">Allergies</p>
+
+            <div class="flex-grid">
+              <p
+                id="active-status"
+                class="fw-b tag tag-outline round-3 pt-1 pb-1 pl-3 pr-3 allergy"
+              >
+                <span>Nut-Free</span>
+              </p>
+              <p
+                id="active-status"
+                class="fw-b tag tag-outline round-3 pt-1 pb-1 pl-3 pr-3 allergy"
+              >
+                <span>Gluten-Free</span>
+              </p>
+              <p
+                id="active-status"
+                class="fw-b tag tag-outline round-3 pt-1 pb-1 pl-3 pr-3 allergy"
+              >
+                <span>Dairy-Free</span>
+              </p>
+            </div>
+
+            <p class="btn ml-40 mt-8 mb-6" id="dietFilterBtn">Filter</p>
+
+            <span class="material-icons modal-close" id="close"> close </span>
+          </div>
+        </div>
+      </div>
+      <div class="filter-modal hidden">
+        <div class="modal-bg" id="filterModal">
+          <div class="modal-body width-3 height-6 round-1 p-5 ml-6">
+            <p class="mb-6 fw-b text-2">Filter</p>
+            <p class="mb-3">Preparation Time</p>
+            <p class="ml-85 fw-b">
+              <span>&#60; </span><span id="maxTime">50</span><span> mins</span>
+            </p>
+
+            <div class="slidecontainer pl-8 pr-8">
+              <input
+                type="range"
+                min="20"
+                max="120"
+                value="50"
+                class="slider"
+                id="timeRange"
+              />
+            </div>
+
+            <p class="mb-3 mt-5">Budget</p>
+            <p class="ml-87 fw-b">
+              <span>&#60; Rs. </span><span id="maxPrice">2000</span>
+            </p>
+
+            <div class="slidecontainer pl-8 pr-8">
+              <input
+                type="range"
+                min="500"
+                max="3000"
+                value="2000"
+                class="slider"
+                id="priceRange"
+              />
+            </div>
+
+            <p class="mb-3 mt-5">Dish Type</p>
+
+            <div class="flex-grid">
+              <p
+                id="active-status"
+                class="fw-b tag tag-outline round-3 pt-1 pb-1 pl-3 pr-3 type"
+              >
+                <span>Breakfast</span>
+              </p>
+              <p
+                id="active-status"
+                class="fw-b tag tag-outline round-3 pt-1 pb-1 pl-3 pr-3 type"
+              >
+                <span>Lunch</span>
+              </p>
+              <p
+                id="active-status"
+                class="fw-b tag tag-outline round-3 pt-1 pb-1 pl-3 pr-3 type"
+              >
+                <span>Dinner</span>
+              </p>
+              <p
+                id="active-status"
+                class="fw-b tag tag-outline round-3 pt-1 pb-1 pl-3 pr-3 type"
+              >
+                <span>Dessert</span>
+              </p>
+              <p
+                id="active-status"
+                class="fw-b tag tag-outline round-3 pt-1 pb-1 pl-3 pr-3 type"
+              >
+                <span>Appetizer</span>
+              </p>
+              <p
+                id="active-status"
+                class="fw-b tag tag-outline round-3 pt-1 pb-1 pl-3 pr-3 type"
+              >
+                <span>Drink</span>
+              </p>
+              <p
+                id="active-status"
+                class="fw-b tag tag-outline round-3 pt-1 pb-1 pl-3 pr-3 type"
+              >
+                <span>Bread</span>
+              </p>
+            </div>
+            <p></p>
+            <p class="btn ml-40 mt-3 mt-8 mb-8" id="filterFilterBtn">Filter</p>
+            <span class="material-icons modal-close" id="close"> close </span>
+          </div>
+        </div>
+      </div>
+      <div class="modal hidden">
+        <div class="modal-bg" id="vtf">
+          <div class="modal-body width-5 height-4 round-1 p-5 ml-6">
+            <div class="top mb-2"></div>
+            <div class="flex-grid text-center ml-6">
+              <div class="flex-column">
+                <img
+                  src="images/avocado-square-format-kae-cheatham.jpg"
+                  class="icon-4 modal-ingredient"
+                  alt=""
+                />
+                <h1 class="text-center">Avocado</h1>
+              </div>
+              <div class="flex-column">
+                <img
+                  src="https://www.pngitem.com/pimgs/m/200-2006964_transparent-yogurt-png-imagenes-de-yogurt-png-png.png"
+                  class="icon-4 modal-ingredient"
+                  alt=""
+                  alt=""
+                />
+                <h1 class="text-center">Yoghurt</h1>
+              </div>
+              <div class="flex-column">
+                <img
+                src="https://www.pngitem.com/pimgs/m/22-220647_transparent-transparent-background-strawberry-hd-png-download.png"
+                class="icon-4 modal-ingredient" alt=""" alt="" />
+                <h1 class="text-center">Strawberry</h1>
+              </div>
+              <div class="flex-column">
+                <img
+                src="https://www.pngitem.com/pimgs/m/156-1564793_sesame-seeds-png-pic-sesame-seeds-png-transparent.png"
+                class="icon-4 modal-ingredient" alt=""" alt="" />
+                <h1 class="text-center">Sesame</h1>
+              </div>
+              <div class="flex-column">
+                <img
+                src="https://www.pngitem.com/pimgs/m/43-436158_broccoli-png-hd-transparent-png.png"
+                class="icon-4 modal-ingredient" alt=""" alt="" />
+                <h1 class="text-center">Broccoli</h1>
+              </div>
+              <div class="flex-column">
+                <img
+                src="https://cdn.shopify.com/s/files/1/0305/2031/1947/products/espinacas_781x.png?v=1585602690"
+                class="icon-4 modal-ingredient" alt=""" alt="" />
+                <h1 class="text-center">Spinach</h1>
+              </div>
+              <div class="flex-column">
+                <img
+                src="https://media.istockphoto.com/photos/tuna-canned-fish-isolated-on-white-picture-id492424644?k=20&m=492424644&s=612x612&w=0&h=1IN9io5vecfmv2NpgDDodWmBSNszlyHVQlJs_LGiROc="
+                class="icon-4 modal-ingredient" alt=""" alt="" />
+                <h1 class="text-center">Tuna</h1>
+              </div>
+              <div class="flex-column">
+                <img
+                src="https://atlas-content-cdn.pixelsquid.com/assets_v2/244/2442895388911343087/jpeg-600/G03.jpg?modifiedAt=1"
+                class="icon-4 modal-ingredient" alt=""" alt="" />
+                <h1 class="text-center">Banana</h1>
+              </div>
+              <div class="flex-column">
+                <img
+                src="https://www.nicepng.com/png/detail/79-795878_overflowing-bowl-of-oats-barley.png"
+                class="icon-4 modal-ingredient" alt=""" alt="" />
+                <h1 class="text-center">Oats</h1>
+              </div>
+              <div class="flex-column">
+                <img
+                src="https://www.seekpng.com/png/detail/12-126323_carrots-png-bunch-clip-art-transparent-library-carrot.png"
+                class="icon-4 modal-ingredient" alt=""" alt="" />
+                <h1 class="text-center">Carrot</h1>
+              </div>
+              <div class="flex-column">
+                <img
+                src="https://s3.ap-south-1.amazonaws.com/wibrate2019/Live/Menu_Image/wib_1599547575_wib1596872142wib1595763433papdi-fresh-500g.jpg"
+                class="icon-4 modal-ingredient" alt=""" alt="" />
+                <h1 class="text-center">Beans</h1>
+              </div>
+              <div class="flex-column">
+                <img src="images/istockphoto-524387674-612x612.jpg"
+                class="icon-4 modal-ingredient" alt=""" alt="" />
+                <h1 class="text-center">Egg</h1>
+              </div>
+              <div class="flex-column">
+                <img
+                src="https://sabjiwabji.com/wp-content/uploads/2019/09/1934_large.jpg"
+                class="icon-4 modal-ingredient" alt=""" alt="" />
+                <h1 class="text-center">Potato</h1>
+              </div>
+              <div class="flex-column">
+                <img
+                  src="https://freepngimg.com/thumb/chicken/22045-8-cooked-chicken-clipart-thumb.png"
+                  class="icon-4 modal-ingredient"
+                  alt=""
+                />
+                <h1 class="text-center">Chicken</h1>
+              </div>
+            </div>
+            <p class="btn ml-80 mt-4 mb-6" id="ingredientFilter">Filter</p>
+            <span class="material-icons modal-close" id="close"> close </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

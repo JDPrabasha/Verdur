@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/pastures.css" />
+    <link rel="stylesheet" href="testdishwrap.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="Order.js"></script>
+    <script src="OrderSerializer.js"></script>
+    <script src="PastOrderController.js"></script>
+
+    <script src="try.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <nav>
+      <div class="flex-space-between m-8">
+        <a href="customer-landing.html" class="width-1"
+          ><img src="images/Asset 304x.png" width="100%" alt=""
+        /></a>
+        <ul class="flex" id="nav-items">
+          <li class="pl-5"><a id="menu" href="customer-menu.html">Menu</a></li>
+          <li class="pl-5">
+            <a href="customer-orders.html"
+              ><span class="material-icons pr-3">local_mall</span></a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <p class="ml-10 mb-5">Cart > <span class="fw-b">Order History</span></p>
+    <h6 class="ml-6 mt-4">Order History</h6>
+    <table class="m-6 ml-12" id="orders">
+      <tr>
+        <th>Order ID</th>
+        <th>Items</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Calories</th>
+        <th>Protein</th>
+        <th>Carbs</th>
+        <th>Fat</th>
+        <th>Price (RS.)</th>
+        <th></th>
+      </tr>
+      <!-- <tr>
+        <td>ORDER 1A01</td>
+        <td>
+          <div class="avatars">
+            <span class="avatar">
+              <img
+                src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F44%2F2019%2F08%2F27044817%2F6753427.jpg&q=85"
+              />
+            </span>
+            <span class="avatar">
+              <img
+                src="https://www.thedailymeal.com/sites/default/files/recipe/2021/Sweet_sticky_chicken_thigh-min.jpg"
+              />
+            </span>
+            <span class="avatar">
+              <img
+                src="https://media.istockphoto.com/photos/vegan-banana-and-oatmeal-smoothie-in-glass-jar-on-the-light-picture-id1194152250?k=20&m=1194152250&s=612x612&w=0&h=5O4mOYgY-zLMeHwf0APnTDZt1ZzLGKDrJz17KrlOb28="
+              />
+            </span>
+          </div>
+        </td>
+        <td>12.09.21</td>
+        <td>05.20 PM</td>
+        <td>1,500 cal</td>
+        <td>20.5 g</td>
+        <td>30 g</td>
+        <td>10 g</td>
+        <td>1,380</td>
+        <td>
+          <div class="btn">
+            <span class="material-icons-outlined"> shopping_bag </span>
+          </div>
+        </td>
+      </tr> -->
+      <!-- <tr>
+        <td>ORDER B201</td>
+        <td>
+          <div class="avatars">
+            <span class="avatar">
+              <img
+                src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2008/11/24/0/IG1C11_Roast-Turkey.jpg.rend.hgtvcom.826.620.suffix/1382538696807.jpeg"
+              />
+            </span>
+            <span class="avatar">
+              <img
+                src="https://ourrecipeforunity.org/wp-content/uploads/2019/11/Frenchs_Green_Bean_Casserole_New_2000x1125.jpg"
+              />
+            </span>
+            <span class="avatar"> </span>
+          </div>
+        </td>
+        <td>10.09.21</td>
+        <td>01.30 PM</td>
+        <td>900 cal</td>
+        <td>10 g</td>
+        <td>40 g</td>
+        <td>20 g</td>
+        <td>800</td>
+        <td>
+          <div class="btn">
+            <span class="material-icons-outlined"> shopping_bag </span>
+          </div>
+        </td>
+      </tr> -->
+      <!-- <tr>
+        <td>ORDER 12C2</td>
+        <td>
+          <div class="avatars">
+            <span class="avatar">
+              <img
+                src="https://images.unsplash.com/photo-1607330289024-1535c6b4e1c1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1064&q=80"
+              />
+            </span>
+            <span class="avatar">
+              <img
+                src="https://vaya.in/recipes/wp-content/uploads/2019/01/Avocado-Smoothie.jpg"
+              />
+            </span>
+            <span class="avatar">
+              <img
+                src="https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/oats-1296x728-feature.jpg?w=1155&h=1528"
+              />
+            </span>
+          </div>
+        </td>
+        <td>10.09.21</td>
+        <td>08.50 AM</td>
+        <td>100 kcal</td>
+        <td>50 g</td>
+        <td>20 g</td>
+        <td>17 g</td>
+        <td>1,450</td>
+        <td>
+          <div class="btn">
+            <span class="material-icons-outlined"> shopping_bag </span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>ORDER 1201</td>
+        <td>
+          <div class="avatars">
+            <span class="avatar">
+              <img
+                src="https://soufflebombay.com/wp-content/uploads/2019/02/Homemade-Blueberry-Swirl-for-Yogurt.jpg"
+              />
+            </span>
+            <span class="avatar">
+              <img
+                src="https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/oats-1296x728-feature.jpg?w=1155&h=1528"
+              />
+            </span>
+            <span class="avatar"> </span>
+          </div>
+        </td>
+        <td>11.08.21</td>
+        <td>05.50 PM</td>
+        <td>500 cal</td>
+        <td>30 g</td>
+        <td>15 g</td>
+        <td>20 g</td>
+        <td>830</td>
+        <td>
+          <div class="btn">
+            <span class="material-icons-outlined"> shopping_bag </span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>ORDER 82Y1</td>
+        <td>
+          <div class="avatars">
+            <span class="avatar">
+              <img src="https://picsum.photos/70" />
+            </span>
+            <span class="avatar">
+              <img
+                src="https://vaya.in/recipes/wp-content/uploads/2019/01/Avocado-Smoothie.jpg"
+              />
+            </span>
+            <span class="avatar">
+              <img
+                src="https://soufflebombay.com/wp-content/uploads/2019/02/Homemade-Blueberry-Swirl-for-Yogurt.jpg"
+              />
+            </span>
+          </div>
+        </td>
+        <td>12.09.21</td>
+        <td>05.20 PM</td>
+        <td>100 kcal</td>
+        <td>10 g</td>
+        <td>10 g</td>
+        <td>10 g</td>
+        <td>700</td>
+        <td>
+          <div class="btn">
+            <span class="material-icons-outlined"> shopping_bag </span>
+          </div>
+        </td>
+      </tr> -->
+      <!-- <tr>
+        <td>ORDER 2206</td>
+        <td>
+          <div class="avatars">
+            <span class="avatar">
+              <img
+                src="https://media.healthyfood.com/wp-content/uploads/2021/06/Baked-Salmon-Cauliflower-Rice.gif"
+              />
+            </span>
+            <span class="avatar">
+              <img
+                src="https://static.onecms.io/wp-content/uploads/sites/9/2019/09/Hot-Cranberry-Juice-Fall-Cocktail-FT-Blog0919.jpg"
+              />
+            </span>
+            <span class="avatar">
+              <img
+                src="https://images.unsplash.com/photo-1574672280600-4accfa5b6f98?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+              />
+            </span>
+          </div>
+        </td>
+        <td>12.09.21</td>
+        <td>05.20 PM</td>
+        <td>100 kcal</td>
+        <td>10 g</td>
+        <td>10 g</td>
+        <td>10 g</td>
+        <td>1000</td>
+        <td>
+          <div class="btn">
+            <span class="material-icons-outlined"> shopping_bag </span>
+          </div>
+        </td>
+      </tr> -->
+    </table>
+    <div class="footer bg-gray-4 p-12 mt-20">
+      <div class="text-center flex-space-between">
+        <div class="flex-column">
+          <img src="images/Asset 304x.png" width="10%" alt="" />
+          <p class="ml-12">Verdur 2021. All Rights Reserved.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

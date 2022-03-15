@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/pastures.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="rider.css" />
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="login.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <section class="text-center">
+      <div class="col-6 mt-15" id="login">
+        <img src="images/Asset 304x.png" width="36%" alt="" />
+        <h2 class="mt-15 mb-4">Login</h2>
+
+        <label
+          >Email*
+          <input
+            type="text"
+            id="username"
+            class="width-4 ml-28"
+            placeholder="dulaj@gmail.com"
+          />
+        </label>
+        <!-- <p class="text-red mb-3" style="font-size: smaller">random text</p> -->
+
+        <label
+          >Password*
+          <input
+            type="password"
+            id="password"
+            class="width-4 ml-28"
+            placeholder="Min. 8 characters"
+          />
+        </label>
+        <!-- <p class="text-red mb-3" style="font-size: smaller">random text</p> -->
+        <p class="mt-4 mb-4 text-green">Forgot password?</p>
+        <a onclick="login()" class="btn width-4 text-center mb-6">Login</a>
+        <p class="mb-8">
+          Not registered yet?<span class="text-info" id="createAccount">
+            Create an account</span
+          >
+        </p>
+        <div class="mb-30 ml-23" style="bottom: 0; position: fixed">
+          <span class="material-icons icon"> copyright </span>
+          <p class="text">2021 Verdur. All Rights Reserved</p>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

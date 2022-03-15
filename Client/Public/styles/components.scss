@@ -1,0 +1,294 @@
+@import "colors";
+@import "fonts";
+
+.card {
+  /* Change background color */
+  background-color: white;
+  width: 300px;
+  /* Add border */
+  border: 1px solid #bacdd8;
+
+  /* Add space between the border and the content */
+  padding: 8px;
+
+  border-radius: 12px;
+
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.02) translateY(-15px);
+    box-shadow: 0 7px 30px -10px rgba(150, 170, 180, 0.5);
+  }
+
+  img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    height: 214px;
+  }
+}
+.btn {
+  border: none;
+  padding: 12px 24px;
+  border-radius: 15px;
+  text-decoration: none;
+  color: #0a0a0a;
+  background-color: #30ff8d;
+  vertical-align: bottom;
+
+  /* Button is inline-block element by default, it need to have block display for margin: 0 auto; to work */
+  display: inline-block;
+
+  /* Button is a clickable element, therefore it should have a pointer cursor */
+  cursor: pointer;
+
+  transition: 0.3s;
+
+  &:hover {
+    background-color: $black;
+    color: white;
+  }
+}
+
+.btn-dark {
+  background-color: $black;
+  color: white;
+}
+
+.btn-blue {
+  background-color: #cef3fc;
+  color: #00c2fd;
+  border-color: #80e2ff;
+}
+
+/* The sidebar menu */
+.sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 80px;
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+
+  img {
+    padding: 6px 8px 6px 16px;
+    width: 80px;
+  }
+
+  a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 50px;
+    color: #a1a1a1;
+    display: block;
+
+    &:hover {
+      color: #000000;
+    }
+  }
+}
+
+.main {
+  margin-left: 80px;
+}
+
+@for $i from 1 through 10 {
+  .image-#{$i} {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    height: #{$i * 100}px;
+  }
+}
+@for $i from 1 through 10 {
+  .icon-#{$i} {
+    width: #{$i * 20}px;
+    object-fit: cover;
+    border-radius: 12px;
+    height: #{$i * 20}px;
+  }
+}
+
+.profile {
+  border-radius: 50%;
+}
+
+.redirect {
+  cursor: pointer;
+
+  &:hover {
+    color: #30ff8d;
+  }
+}
+
+.modal-bg {
+  top: 0;
+  left: 0;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.2);
+
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s;
+
+  .modal-body {
+    background-color: white;
+    // width: 30%;
+    // height: 30%;
+    position: relative;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+}
+
+.modal-active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.blur {
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+}
+
+.greyout {
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+.tag {
+  text-decoration: none;
+  list-style: none;
+}
+
+.icon,
+.text {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.object {
+  animation: upDown 1.5s linear infinite;
+}
+.object2 {
+  animation: leftRight 1.5s linear infinite;
+}
+
+@keyframes upDown {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-50px);
+  }
+}
+@keyframes leftRight {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
+
+.icon-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: #333333;
+  background: #dddddd;
+  border: none;
+  outline: none;
+  border-radius: 50%;
+}
+
+.icon-button:hover {
+  cursor: pointer;
+}
+
+.icon-button:active {
+  background: #cccccc;
+}
+
+.icon-button__badge {
+  position: absolute;
+  top: -15px;
+  right: -10px;
+  width: 20px;
+  height: 20px;
+  background: red;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.underline {
+  position: relative;
+}
+.underline:after {
+  content: "";
+  position: absolute;
+  background-color: #ff3c78;
+  height: 3px;
+  width: 0;
+  left: 0;
+  bottom: -10px;
+  transition: 0.3s;
+}
+.underline:hover {
+}
+.underline:hover:after {
+  width: 100%;
+}
+
+.rotate-center {
+  -webkit-animation: rotate-center 0.6s ease-in-out both;
+  animation: rotate-center 0.6s ease-in-out both;
+}
+
+@-webkit-keyframes rotate-center {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotate-center {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

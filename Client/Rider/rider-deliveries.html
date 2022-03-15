@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/pastures.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="rider.css" />
+    <script
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCO45MrLYhJoU1hIzZ88DSupwTaT-gItoQ"
+    ></script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="DeliveryController.js"></script>
+    <script src="DeliverySerializer.js"></script>
+    <script src="Profile.js"></script>
+    <script src="ProfileSerializer.js"></script>
+    <script src="OrderSerializer.js"></script>
+    <script src="MenuSerializer.js"></script>
+    <script src="DishSerializer.js"></script>
+    <script src="Dish.js"></script>
+
+    <script src="Order.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="map"></div>
+    <section class="text-center">
+      <h4 class="mt-6 mb-6">My Deliveries</h4>
+      <div class="" id="content">
+        <div class="flex-space-around ml-6">
+          <!-- <span class="material-icons-outlined"> chevron_left </span> -->
+          <div class="flex-column">
+            <img
+              src="https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/oats-1296x728-feature.jpg?w=1155&h=1528"
+              class="icon-6"
+              alt=""
+              id="main"
+            />
+            <h1>ORDER ID : <span id="active-order"></span></h1>
+            <p class="text-upper">items : <span id="totalItems"></span></p>
+          </div>
+          <div class="flex-grid" id="dishes">
+            <!-- <img
+              src="https://soufflebombay.com/wp-content/uploads/2019/02/Homemade-Blueberry-Swirl-for-Yogurt.jpg"
+              class="icon-2"
+              alt=""
+            />
+            <img
+              src="https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/oats-1296x728-feature.jpg?w=1155&h=1528"
+              class="icon-2 selected"
+              alt=""
+            />
+            <img
+              src="https://vaya.in/recipes/wp-content/uploads/2019/01/Avocado-Smoothie.jpg"
+              class="icon-2"
+              alt=""
+            /> -->
+          </div>
+          <span class="material-icons-outlined" id="next"> chevron_right </span>
+        </div>
+        <div class="delivery-details mt-6 mb-6">
+          <div class="flex-space-evenly ml-20 mt-3">
+            <h1>Customer</h1>
+            <p class="pl-20 pr-20" id="customer">Dulaj Prabasha</p>
+          </div>
+          <div class="flex-space-evenly ml-20 mt-3">
+            <h1>Location</h1>
+            <p class="pl-20 pr-20" id="location">
+              205/A, Elm Street, Colombo 50, Colombo
+            </p>
+          </div>
+          <div class="flex-space-evenly mt-3 mr-17">
+            <h1 class="pl-20 pr-20 mr-4">Contact Number</h1>
+            <p class="mr-10" id="contact">077101234</p>
+          </div>
+          <div class="flex-space-evenly mt-3 mr-20">
+            <h1 class="pl-20 pr-20 mr-8">Payment Method</h1>
+            <p class="mr-15" id="method">Card</p>
+          </div>
+          <div class="flex-space-evenly mt-3 mr-20">
+            <h1 class="pl-20 pr-20 mr-8">Amount</h1>
+            <p class="mr-15">Rs. <span id="price"></span></p>
+          </div>
+        </div>
+        <p class="fw-b tag-green m-8 p-3 round-2 bg-black" id="confirm">
+          Confirm Delivery
+        </p>
+      </div>
+
+      <a href="rider-home.html" class="delivery btn mt-3">
+        <span class="material-icons-outlined icon"> home </span>
+        <p class="fw-b text">Home</p>
+      </a>
+    </section>
+  </body>
+</html>

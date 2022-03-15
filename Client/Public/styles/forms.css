@@ -1,0 +1,262 @@
+.bg-dark-grey {
+  background-color: #313131;
+}
+
+.bg-grey {
+  background-color: #ccc;
+}
+
+.bg-white {
+  background-color: #fafafa;
+  color: #1c1d21;
+}
+
+.bg-black {
+  background-color: #1c1d21;
+  color: #fafafa;
+}
+
+.bg-purple {
+  background-color: #423bf7;
+  color: #fafafa;
+}
+
+.bg-primary {
+  background-color: #e1f5fe;
+}
+
+.bg-success {
+  background-color: #36d17c;
+  color: #1c1d21;
+}
+
+.bg-info {
+  background-color: #5886f5;
+  color: #fafafa;
+}
+
+.bg-danger {
+  background-color: #d9534f;
+}
+
+.bg-muted {
+  background-color: #fafafa;
+}
+
+.tag-red {
+  color: #c62828;
+  background-color: #ffcdd2;
+}
+
+.tag-yellow {
+  color: #a68b00;
+  background-color: #fff0c2;
+}
+
+.tag-green {
+  color: #388e3c;
+  background-color: #c8e6c9;
+}
+
+.tag-blue {
+  color: #2962ff;
+  background-color: #e1f5fe;
+}
+
+.bg-gray-1 {
+  background-color: #f9fbff;
+}
+
+.outline-gray1 {
+  border-color: #f9fbff;
+}
+
+.bg-gray-2 {
+  background-color: #f4f6fb;
+}
+
+.outline-gray2 {
+  border-color: #f4f6fb;
+}
+
+.bg-gray-3 {
+  background-color: #eef1f6;
+}
+
+.outline-gray3 {
+  border-color: #eef1f6;
+}
+
+.bg-gray-4 {
+  background-color: #e1e5ee;
+}
+
+.outline-gray4 {
+  border-color: #e1e5ee;
+}
+
+.bg-gray-5 {
+  background-color: #767b91;
+}
+
+.outline-gray5 {
+  border-color: #767b91;
+}
+
+.bg-gray-6 {
+  background-color: #4f546c;
+}
+
+.outline-gray6 {
+  border-color: #4f546c;
+}
+
+.bg-gray-7 {
+  background-color: #2a324b;
+}
+
+.outline-gray7 {
+  border-color: #2a324b;
+}
+
+.bg-gray-8 {
+  background-color: #161d34;
+}
+
+.outline-gray8 {
+  border-color: #161d34;
+}
+
+.outline-purple {
+  border-color: #423bf7;
+}
+
+.outline-blue {
+  border-color: #5886f5;
+}
+
+.outline-black {
+  border-color: #1c1d21;
+}
+
+input {
+  display: block;
+  font-size: 0.9em;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #f5f8fc;
+  border-radius: 8px;
+  border: 1px solid #e6edf5;
+  -webkit-transition: 0.3s border-color;
+  transition: 0.3s border-color;
+}
+
+input:hover {
+  border: 1px solid black;
+}
+
+input:focus {
+  outline: none;
+}
+
+textarea {
+  background-color: #f5f8fc;
+  resize: none;
+  width: 95%;
+  border-radius: 8px;
+  border: 1px solid #e6edf5;
+  -webkit-transition: 0.3s border-color;
+  transition: 0.3s border-color;
+  font-size: 1em;
+  padding: 10px;
+}
+
+textarea:hover {
+  border: 1px solid black;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+.search-box {
+  position: relative;
+  height: 60px;
+  width: 0px;
+  -webkit-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.search-box input {
+  height: 100%;
+  width: 100%;
+  border: none;
+  font-size: 18px;
+  border-radius: 50px;
+  padding: 0 60px 0 20px;
+  outline: none;
+  opacity: 0;
+  -webkit-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.search-box .search-btn {
+  height: 50px;
+  width: 50px;
+  color: #1c1d21;
+  position: absolute;
+  top: 50%;
+  right: -75px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  line-height: 50px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  -webkit-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: 2;
+}
+
+.search-box .cancel-btn {
+  position: absolute;
+  color: #1c1d21;
+  top: 50%;
+  right: -75px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-size: 25px;
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.search-box.active {
+  width: 350px;
+}
+
+.search-box.active input {
+  opacity: 1;
+}
+
+.search-box.active .search-btn {
+  height: 50px;
+  width: 50px;
+  background: #1c1d21;
+  color: #fff;
+}
+
+.search-box.active .cancel-btn {
+  right: -135px;
+  opacity: 1;
+  color: #1c1d21;
+  -webkit-transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+/*# sourceMappingURL=forms.css.map */

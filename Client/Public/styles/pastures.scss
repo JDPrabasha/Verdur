@@ -1,0 +1,8 @@
+@import "layout", "colors", "reset", "fonts", "borders", "tables", "components",
+  "forms";
+
+body {
+  color: $clr-gray500;
+  font-size: 0.9rem;
+  background-color: $clr-gray100;
+}

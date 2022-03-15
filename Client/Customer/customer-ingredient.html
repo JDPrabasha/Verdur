@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/pastures.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+    <script src="IngredientSerializer.js"></script>
+    <script src="Ingredient.js"></script>
+    <script src="IngredientController.js"></script>
+
+    <script src="try.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <nav>
+      <div class="flex-space-between m-8">
+        <a href="customer-landing.html" class="width-1"
+          ><img src="images/Asset 304x.png" width="100%" alt=""
+        /></a>
+        <ul class="flex">
+          <li class="pl-5"><a id="menu" href="customer-menu.html">Menu</a></li>
+          <li class="pl-5">
+            <a href="customer-orders.html"
+              ><span class="material-icons">local_mall</span></a
+            >
+          </li>
+          <li class="ml-5 btn">Sign Up</li>
+          <li class="ml-5 btn">Sign Up</li>
+        </ul>
+      </div>
+    </nav>
+    <p class="ml-10 mb-5">
+      Menu > Sesame Chicken w/ Broccoli > <span class="fw-b">Egg</span>
+    </p>
+    <div class="row">
+      <div class="col-6 pl-13">
+        <h6 class="mb-4" id="name">Egg</h6>
+        <p id="description">
+          As mother nature’s original superfood – eggs have been part of our
+          diets since the dawning of time. Yet only now are we learning the full
+          extent of the nutritional wonders they pack, and how beneficial they
+          are in promoting lasting health benefits. Loaded with 13 essential
+          vitamins and minerals, eggs also provide key sources of these
+          important nutrients that are needed as part of a healthy diet to help
+          you be your best, every day.
+        </p>
+
+        <h2 class="mt-6 mb-4">Nutritional Information (per 100g)</h2>
+        <div class="flex-space-around">
+          <div class="felx-column text-center">
+            <p class="fw-b">Calories</p>
+            <p><span id="calories">154</span> cal</p>
+          </div>
+          <div class="felx-column text-center">
+            <p class="fw-b">Protein</p>
+            <p><span id="protein">12.6</span>g</p>
+          </div>
+          <div class="felx-column text-center">
+            <p class="fw-b">Fat</p>
+            <p><span id="fat">10.6</span>g</p>
+          </div>
+          <div class="felx-column text-center">
+            <p class="fw-b">Carbs</p>
+            <p><span id="carbs">1.2</span>g</p>
+          </div>
+        </div>
+        <h2 class="mt-8 mb-4">Health Benefits</h2>
+        <ul class="ml-6">
+          <li class="pb-3" id="benefit1">
+            The powerful advantage of the protein in eggs links to the fact that
+            eggs contain all nine essential amino acids – in sufficient amounts
+            – to support effective muscle growth, recovery and maintenance.
+          </li>
+          <li class="pb-3" id="benefit2">
+            Eggs help increase high-density lipoprotein (HDL) levels – or “good”
+            cholesterol as it’s commonly known – and this is one reason why eggs
+            have been found to have little to no effect on heart disease risk.
+          </li>
+          <li class="pb-3" id="benefit3">
+            Eggs also contain useful amounts of vitamins A, E, B5, B12, as well
+            as iron, iodine and phosphorus – all vital nutrients in supporting
+            your healthy, balanced diet.
+          </li>
+        </ul>
+        <h2 class="mb-4 mt-4">Our Suppliers</h2>
+        <div class="flex-space-around">
+          <span class="material-icons-outlined"> chevron_left </span>
+          <div class="card">
+            <img
+              class="round-2"
+              src="https://www.sundayobserver.lk/sites/default/files/styles/large/public/news/2021/07/10/z_p10-Nonpareil1.jpg?itok=I5RLmy2E"
+              alt=""
+            />
+            <h1 class="m-1">BAARAK FARMS</h1>
+          </div>
+          <span class="material-icons-outlined"> chevron_right </span>
+        </div>
+      </div>
+      <div class="col-6 text-center">
+        <img
+          src="https://png.pngitem.com/pimgs/s/214-2147007_egg-white-caesar-salad-chicken-scrambled-eggs-two.png"
+          width="80%"
+          alt=""
+          class="round-2 mt-6"
+          id="image"
+        />
+      </div>
+    </div>
+
+    <div class="footer bg-gray-4 p-12 mt-20">
+      <div class="text-center flex-space-between">
+        <div class="flex-column">
+          <img id="image" src="images/Asset 304x.png" width="10%" alt="" />
+          <p class="ml-12">Verdur 2021. All Rights Reserved.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,155 @@
+package Customer.Ingredient;
+
+import Core.ConnectionFactory.DB;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class IngredientDAO {
+    private static final String SELECT_INGREDIENTS = "select i.ingID,i.name, h.defaultValue as quantity, i.image, h.unit, i.expandable, i.image,h.min,h.max from dish d join hasingredient h on d.dishID = h.dishID join ingredient i on h.ingID = i.ingID join ingredientweight w on w.unit = h.unit and w.ingID=i.ingID where d.dishID=?";
+    private static final String SELECT_CUSTOMIZABLE_INGREDIENTS = "select i.ingID,i.name, h.min, h.max, h.ppq,h.type,i.proteinphg, i.carbsphg, i.calphg, i.fatsphg,w.weight, h.defaultValue as quantity, i.image, i.unit, i.expandable, i.image from dish d join hasingredient h on d.dishID = h.dishID join ingredient i on h.ingID = i.ingID join ingredientweight w on w.unit = h.unit and w.ingID=i.ingID where d.dishID =? and h.type!=?";
+    private static final String SELECT_INGREDIENT_DETAILS = "select i.description, n.description as benefit, i.ingID, i.name, i.image from ingredient i join nutritionbenefits n on n.ingID=i.ingID where i.ingID = ? ";
+    private static final String SELECT_TOTAL_NUTRIENTS = " select  sum(c2.quantity * i.carbsphg * w.weight) as carbs,sum(c2.quantity * i.proteinphg * w.weight) as protein,sum(c2.quantity * i.calphg * w.weight) as calories,sum(c2.quantity * i.fatsphg * w.weight) as fats from orders o join hasdish h2 on o.orderID = h2.orderID join customizeddish c on c.cdishID =h2.cdishID join dish d on c.cdishID =d.dishID join hasingredient h on c.dishID = h.dishID join ingredient i on h.ingID = i.ingID join customization c2 on c2.ingID = h.ingID join ingredientweight w on w.unit = h.unit and w.ingID=i.ingID where o.orderID =?";
+
+    public List<Ingredient> selectAllIngredients(int id) {
+        System.out.println("im in ing");
+        // using try-with-resources to avoid closing resources (boiler plate code)
+        List<Ingredient> ingredients = new ArrayList<>();
+        // Step 1: Establishing a Connection
+        try (Connection connection = DB.initializeDB();
+
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_INGREDIENTS);) {
+            preparedStatement.setInt(1, id);
+
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.
+            while (rs.next()) {
+
+                String name = rs.getString("name");
+                Integer ingID = rs.getInt("ingID");
+                Integer quantity = rs.getInt("quantity");
+                String image = rs.getString("image");
+                String unit = rs.getString("unit");
+                Boolean expandable = rs.getBoolean("expandable");
+
+                ingredients.add(new Ingredient(ingID, name, image, unit, quantity, expandable));
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            printSQLException((SQLException) e);
+        }
+        return ingredients;
+    }
+
+    public List<Ingredient> selectCustomizableIngredients(int id) {
+        System.out.println("im in ing");
+        // using try-with-resources to avoid closing resources (boiler plate code)
+        List<Ingredient> ingredients = new ArrayList<>();
+        // Step 1: Establishing a Connection
+        try (Connection connection = DB.initializeDB();
+
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CUSTOMIZABLE_INGREDIENTS);) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.setString(2, "fixed");
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.
+            while (rs.next()) {
+
+                String name = rs.getString("name");
+                Integer ingID = rs.getInt("ingID");
+                Integer quantity = rs.getInt("quantity");
+                Integer minimum = rs.getInt("min");
+                Integer proteinphg = rs.getInt("proteinphg");
+                Integer caloriesphg = rs.getInt("calphg");
+                Integer carbsphg = rs.getInt("carbsphg");
+                Integer fatsphg = rs.getInt("fatsphg");
+                Integer maximum = rs.getInt("max");
+                Integer weightperunit = rs.getInt("weight");
+                Integer priceperquantity = rs.getInt("ppq");
+                String image = rs.getString("image");
+                String unit = rs.getString("unit");
+                String type = rs.getString("type");
+
+
+                ingredients.add(new Ingredient(ingID, name, unit, image, proteinphg, caloriesphg, carbsphg, fatsphg, priceperquantity, weightperunit, quantity, type, minimum, maximum));
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            printSQLException((SQLException) e);
+        }
+        return ingredients;
+    }
+
+    public Ingredient selectIngredient(int id) {
+
+        // using try-with-resources to avoid closing resources (boiler plate code)
+        Ingredient ingredient = null;
+        // Step 1: Establishing a Connection
+        try (Connection connection = DB.initializeDB();
+
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_INGREDIENT_DETAILS);) {
+            preparedStatement.setInt(1, id);
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+            List<String> benefits = new ArrayList<>();
+
+            String name = null;
+            String description = null;
+            String image = null;
+            // Step 4: Process the ResultSet object.
+            while (rs.next()) {
+
+                name = rs.getString("name");
+                System.out.println(name);
+                image = rs.getString("image");
+                description = rs.getString("description");
+
+                benefits.add(rs.getString("benefit"));
+
+                System.out.println(description);
+
+
+            }
+
+            ingredient = new Ingredient(id, name, image, description, benefits);
+        } catch (SQLException | ClassNotFoundException e) {
+            printSQLException((SQLException) e);
+        }
+        return ingredient;
+    }
+
+//    public void addIngredientCustomization(Ingredient ingredient, int dishID, int cdishID) throws SQLException {
+//        System.out.println(ADD_CUSTOMIZED_INGREDIENT);
+//        // try-with-resource statement will auto close the connection.
+//        try (
+//                Connection connection = DB.initializeDB();
+//             PreparedStatement preparedStatement = connection.prepareStatement(ADD_CUSTOMIZED_INGREDIENT)) {
+//            preparedStatement.setInt(1,ingredient.);
+//            preparedStatement.setInt(2, );
+//            preparedStatement.setInt(3,);
+//            preparedStatement.setInt(4,);
+//            System.out.println(preparedStatement);
+//            preparedStatement.executeUpdate();
+//        } catch (SQLException e) {
+//            printSQLException(e);
+//        }
+//    }
+
+
+    private void printSQLException(SQLException e) {
+    }
+
+
+}
