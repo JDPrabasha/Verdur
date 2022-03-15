@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/Client/styles/pastures.css">
+    <link rel="stylesheet" href="/Client/styles/myedition.css">
+    <!-- <link rel="stylesheet" href="/Client/styles/employee.css">
+        <link rel="stylesheet" href="/Client/styles/add-employee.css"> -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/Client/styles/ongoing.css">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/Client/styles/colors.css">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="/Client/kitchenmanager/js/kitchenmanagersidemenu.js"></script>
+    <script src="/Client/kitchenmanager/js/hedder.js"></script>
+    <script src="/Client//kitchenmanager/js/fotterKM.js"></script>
+    <link rel="stylesheet" href="/Client/styles/layout.css">
+    <script src="/Client/kitchenmanager/js/slider.js"></script>
+    <link rel="stylesheet" href="/Client/kitchenmanager/slider.css">
+    
+    <script src="/Client/kitchenmanager/js/inventory.js"></script>
+    <script src="/Client/kitchenmanager/js/inventorycontroller.js"></script>
+    <script src="/Client/kitchenmanager/js/inventoryserializer.js"></script>
+
+   
+
+   
+
+</head>
+<body>
+
+    <script>
+        function expand(i){
+            document.getElementById(`emp-${i}`).classList.add("hidden");
+            document.getElementById(`emp-e-${i}`).classList.remove("hidden");
+        }
+        function hide(i){
+            document.getElementById(`emp-${i}`).classList.remove("hidden");
+            document.getElementById(`emp-e-${i}`).classList.add("hidden");
+        }
+    </script>  
+ <div  class="" id="notification"></div>
+<div class="sidenav " id="sidenavkm"></div>
+
+<div class="main">
+<div class="row">
+    <div class="col-10  mb-8 mt-24 ml-4 ">
+        <h5>Inventory</h5>
+        <h2 id="typeView">All Items</h2>
+    </div>
+  
+</div>
+
+<div class="row mt-8">
+    <div class="col-1"></div>
+    <div class="col-2"> <a id ="all-btn" class="btn text-center tag-all tag-select" style="width: 65%;">All Items</a></div>
+    <div class="col-2"><a id="vegetables-btn" class="btn text-center tag-green" style="width: 65%;">Vegetables</a></div>
+    <div class="col-2"><a id="fruits-btn" class="btn text-center tag-yellow" style="width: 65%;">Fruits</a></div>
+    <div class="col-2"><a id="meat-btn" class="btn text-center tag-red"  style="width: 65%;">Meat</a></div>
+    <div class="col-2"><a id="others-btn" class="btn text-center tag-other" style="width: 65%;">Others</a></div>
+    <div class="col-1"></div>
+</div>
+
+
+
+
+  
+    <table class="inventorytable ml-12">
+        <thead>
+            <th>Photo</th>
+            <th>Item Code</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Restocked Date</th>
+            <th>quantity</th>
+            <th>VieW</th>
+            <th>Action</th>
+            <th>More</th>
+
+        </thead>
+        <tbody id="inventorytable">
+           
+
+      
+    </tbody>
+    </table>
+</div>
+   
+
+<div id="KMfotter"></div>   
+
+
+
+
+
+</body>
+</html>

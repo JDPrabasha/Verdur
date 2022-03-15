@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/Client/styles/pastures.css">
+    <link rel="stylesheet" href="/Client/styles/myedition.css">
+    <!-- <link rel="stylesheet" href="/Client/styles/employee.css">
+        <link rel="stylesheet" href="/Client/styles/add-employee.css"> -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/Client/styles/colors.css">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="/Client/kitchenmanager/js/kitchenmanagersidemenu.js"></script>
+    <script src="/Client/chef/cheffhedder.js"></script>
+    <script src="/Client/chef/cheffotter.js"></script>
+
+
+    <!--    <title>Title</title>-->
+
+</head>
+<body>
+    <div  class="notification" id="notification"></div>
+    <div class="row">
+<div class="col-8 mt-6 mt-27">
+ <!-- <h4>Orders</h4> -->
+ <div class="row"><div class="col-3 "></div><div class="col-6"> <h4 class="text-darkgrey">Avocado Smoothie</h4></div> </div>
+ <div class="row"><div class="col-4"></div><div class="col-6"><h2 class="text-info">Quantity : 2</h2></div></div>
+ 
+ 
+
+    <div class="row">
+        <div class="col-8">
+ 
+<table class="restocktable" style="width: 125%;">
+    <thead>
+        <thead>
+            <th></th>
+            <th>Image</th>
+            <th>Ingredient</th>
+            <th>Quantity</th>
+        </thead>
+    </thead>
+   
+    <tr>
+        <td>01</td>
+        <td><img class="icon-4" src="https://media.istockphoto.com/vectors/avocado-icon-cartoon-singe-fruit-icon-vector-id612518434?b=1&k=20&m=612518434&s=612x612&w=0&h=rCqNMNIQUpSTWGksYNXUSFLMflyjFdPd55Z1PDpvzpw="></td>
+        <td>Avacado</td>
+        <td>150g</td>
+    </tr>
+
+    <tr>
+        <td>02</td>
+        <td><img class="icon-4" src="https://previews.123rf.com/images/fauzymuhammad030/fauzymuhammad0302006/fauzymuhammad030200600045/150032173-bottle-of-milk-vector-with-flat-design-isolated-on-white-background-milk-icon.jpg" alt=""></td>
+        <td>Fresh Milk</td>
+        <td>300ml</td>
+    </tr>
+
+    <tr>
+        <td>03</td>
+        <td><img  class="icon-4" src="https://www.seekpng.com/png/detail/829-8298524_fiona-whipcream-fiona-whipping-cream.png" alt=""></td>
+        <td>Heavy Cream</td>
+        <td>50ml</td>
+    </tr>
+
+    <tr>
+        <td>04</td>
+        <td><img class="icon-4" src="https://st.depositphotos.com/1763191/4816/v/950/depositphotos_48162523-stock-illustration-a-cup-of-ice-cream.jpg" alt=""></td>
+        <td>Vanila Ice Cream</td>
+        <td>3 tbsp</td>
+    </tr>
+    <tr>
+        <td>05</td>
+        <td><img class="icon-4" src="https://media.istockphoto.com/vectors/sugar-with-scoop-in-burlap-sack-vector-illustration-vector-id643578056?b=1&k=20&m=643578056&s=612x612&w=0&h=1VpA9smXI0GqZ2MFz0xPViqlEtDyJuQK57kZXqW2mIY=" alt=""></td>
+        <td>Suger</td>
+        <td>2 tbsp</td>
+    </tr>
+
+</table>
+</div>
+</div>
+</div>
+
+<div class="col-4 mt-27">
+  
+  
+    <div class="row ml-12 pt-12"> 
+        
+        <div class="cards ml-12">
+        <div class="card" id="results" style="height: 700px; width: 450px;">
+            <h2 class="ml-2">A003</h2>
+            <div class="mt-3" style="padding: 10px; border:1px solid #bacdd8;border-radius: 10% ;height:560px;;">
+                <div class="flex-space-evenly">
+                    <img class="round-2" src="https://soufflebombay.com/wp-content/uploads/2019/02/Homemade-Blueberry-Swirl-for-Yogurt.jpg" alt="" style="width:90px;height:90px;">
+                    <div style="flex-direction: column;">
+                        
+                            <h1 class=" m-1 text-upper">granola w/ honey</h1>
+                        <div class="ml-12">
+                            <p>Quantity : x2</p>
+                            <a class= "btn  tag-green text-center text-bold" href="" style="size:1cm;">Start</a>
+                           
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="bg-gray-4">
+                <hr class="mb-2 mt-2">
+                <div  class="flex-space-evenly">
+                   <a href="/Client/chef/home.html"><img class="round-2" src="https://vaya.in/recipes/wp-content/uploads/2019/01/Avocado-Smoothie.jpg" alt="" style="width:90px;height:90px; filter: grayscale(100%);"></a> 
+                    <div style="flex-direction: column;">
+                        
+                    <h1 class=" m-1 text-upper">Avocado Smoothie</h1>
+                <div class="ml-12">
+                    <p>Quantity : x1</p>
+                    
+                   
+                </div>
+                
+            </div>
+                </div>
+                <div class="bg-gray-4">
+                <hr class="mb-2 mt-2">
+            </div>
+          
+                <div  class="flex-space-evenly">
+                   <a href="/Client/chef/home2.html"> <img class="round-2" src="data:image/jpeg;base64,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" alt="" style="width:90px;height:90px; filter: grayscale(100%);"></a>
+                    <div style="flex-direction: column;">
+                        
+                    <h1 class=" m-1 text-upper">Mango Smoothie</h1>
+                <div class="ml-12">
+                    <p>Quantity : x1</p>
+                    
+                   
+                </div>
+                
+            </div>
+                </div>
+                <hr class="mb-2 mt-2">
+            </div>
+                <div class="flex-space-evenly">
+                    <img class="round-2" src="https://bestofvegan.com/wp-content/uploads/2017/06/no-bake-protein-chocolate-cookie-sandwiches-by-@eatwithfingers-.-.-makes-20-22-cookies-12-cup-vegan-.jpg" alt="" style="width:90px;height:90px;">
+                    <div style="flex-direction: column;">
+                    
+                        <h1 class=" m-1 text-upper">granola w/ honey</h1>
+                        <div class="ml-12">
+                            <p>Quantity : x2</p>
+                            <a class= "btn tag-green text-center text-bold" href="" style="size:1cm;">Start</a>
+                           
+                        </div>
+                
+            </div>
+                </div>
+                <hr class="mb-2 mt-2">
+            </div>
+            
+            <div class="flex-space-evenly mt-4">
+                <a class= "btn tag-other text-bold" href="home3.html">Complete Order</a>
+            <!-- <a class= "btn" >Completed</a> -->
+            </div>
+        </div>
+        <!-- <div class="row nb-12"><a class="btn " style="size: 30cm;">Complete Order</a></div> -->
+</div>
+</div>
+ </div>   
+</div>
+<div id="cfotter"></div>
+</body>
+</html>
