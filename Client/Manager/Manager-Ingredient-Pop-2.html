@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/Client/styles/pastures.css">
+    <link rel="stylesheet" href="/Client/styles/add-employee.css">
+    <link rel="stylesheet" href="/Client/styles/employee.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#add-btn").click(function () {
+                let row = $('<tr>'),
+                    td1 = $('<td>'),
+                    td2 = $('<td>'),
+                    td3 = $("<td>")
+                td1.load("/Client/Manager/Manager-Pop-Row.html #unit")
+                td2.load("/Client/Manager/Manager-Pop-Row.html #ratio")
+                td3.load("/Client/Manager/Manager-Pop-Row.html #buttons")
+                row.append(td1, td2, td3)
+                $("#unit-tbody").append(row)
+            })
+            $("#done-btn").click(function () {
+                doneAdding();
+            })
+        })
+
+        $(document).ajaxStop(function initiate_Buttons() {
+            let unit, ratio;
+            $('[id=edit]').click(function () {
+                let maindiv = this.parentElement;
+                $(this).attr("style", "display:none;")
+                $($(maindiv).find('#delete')[0]).attr("style", "display:none;");
+                $($(maindiv).find('#done')[0]).attr("style", "display:inline-block;");
+                $($(maindiv).find('#close')[0]).attr("style", "display:inline-block;");
+
+                let row = maindiv.parentElement.parentElement;
+                $(row).find('#unit')[0].classList.add("enabled-input")
+                $(row).find('#unit').prop("disabled", false)
+                $(row).find('#ratio')[0].classList.add("enabled-input")
+                $(row).find('#ratio').prop("disabled", false)
+
+
+                unit = $(row).find('#unit').val()
+                ratio = $(row).find('#ratio').val()
+
+
+            })
+
+            $('[id=close]').click(function () {
+                let maindiv = this.parentElement;
+                $(this).attr("style", "display:none;")
+                $($(maindiv).find('#done')[0]).attr("style", "display:none;");
+                $($(maindiv).find('#edit')[0]).attr("style", "display:inline-block;");
+                $($(maindiv).find('#delete')[0]).attr("style", "display:inline-block;");
+
+                let row = maindiv.parentElement.parentElement;
+                $(row).find('#unit')[0].classList.remove("enabled-input")
+                $(row).find('#unit').prop("disabled", true)
+                $(row).find('#ratio')[0].classList.remove("enabled-input")
+                $(row).find('#ratio').prop("disabled", true)
+
+                $(row).find('#unit').val(unit)
+                $(row).find('#ratio').val(ratio)
+            })
+
+            $('[id=delete]').click(function () {
+                let row = this.parentElement.parentElement.parentElement
+                $(row).remove()
+            })
+
+            $('[id=done]').click(function () {
+                let maindiv = this.parentElement;
+                $(this).attr("style", "display:none;")
+                $($(maindiv).find('#close')[0]).attr("style", "display:none;");
+                $($(maindiv).find('#edit')[0]).attr("style", "display:inline-block;");
+                $($(maindiv).find('#delete')[0]).attr("style", "display:inline-block;");
+
+                let row = maindiv.parentElement.parentElement;
+                $(row).find('#unit')[0].classList.remove("enabled-input")
+                $(row).find('#unit').prop("disabled", true)
+                $(row).find('#ratio')[0].classList.remove("enabled-input")
+                $(row).find('#ratio').prop("disabled", true)
+            })
+        })
+
+        function doneAdding() {
+            var unitsList = new Array();
+            $('#unit-tbody tr').each(function (row, tr) {
+                unitsList[row] = {
+                    "unit": $(tr).find('#unit').val(),
+                    "ratio": $(tr).find('#ratio').val(),
+                } //tableData[row]
+            });
+            console.log(unitsList)
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+    <div id="pop-2-content" class="reg-pop pop-2-frame" style="display: flex;">
+        <style>
+            .pop-2 {
+                position: fixed;
+                right: 50%;
+                top: 15vh;
+                bottom: 15vh;
+                z-index: 9;
+            }
+
+            .bring-up{
+                z-index: 11;
+            }
+            .pop-2 input {
+                width: 100px;
+            }
+
+            .table-Units {
+                display: block;
+                overflow-y: auto;
+                max-height: 40vh;
+                width: calc( 100% - 1em );
+            }
+
+            thead,
+            tbody tr {
+                display: table;
+                width: 100%;
+                table-layout: fixed;
+                /* even columns width , fix width of table too*/
+            }
+        </style>
+        <div class="m-12">
+            <h2 class="mb-3">Add Units</h2>
+            <button id="add-btn">Add</button>
+            <button id="done-btn">Done</button>
+            <button onclick="$('#pop-2')[0].classList.toggle('bring-up');">test</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Measuring Unit</th>
+                        <th>Relation to Main Unit</th>
+                        <th>Operations</th>
+                    </tr>
+                </thead>
+                <tbody class="table-Units" id="unit-tbody">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

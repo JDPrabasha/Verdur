@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/Client/styles/pastures.css">
+        <!-- <link rel="stylesheet" href="/Client/styles/employee.css"> -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="/Client/styles.css">
+        <link rel="stylesheet" href="/Client/styles/employee.css">
+        <link rel="stylesheet" href="/Client/styles/add-employee.css">
+        <!-- <script src="https://code.jquery.com/jquery-3.4.1.js"></script>   -->
+        <!-- <script src="/Client/Manager/JS/ingredient_list.js"></script> -->
+        <!-- <script src="/Client/Manager/JS/ingredient_list_serializer.js"></script> -->
+        <!-- <script src="/Client/Manager/JS/ingredient_list_controller.js"></script> -->
+        
+        <script>
+           
+            function enabletext(){
+                // document.getElementsByTagNameNS("input").disabled=false;
+                document.getElementById("name").disabled=false;
+                // var form = document.getElementById("emp_form");
+                // var elements = form.elements;
+                // for (var i = 0, len = elements.length; i < len; ++i) {
+                //     elements[i].disabled = false;
+                // }
+            }
+        </script>
+    </head>
+    <body>
+        
+
+    
+
+
+
+
+    <div class="add-emp-form reg-frame p-12" id="form_frame">
+        <link rel="stylesheet" href="/Client/styles/employee.css">
+        <link rel="stylesheet" href="/Client/styles/add-employee.css">
+        <div class="reg-pop flex-left pl-12 " id="form">
+            <div class="ml-12">
+                <h2 class="mb-1">Create Ingredient</h2>
+                <button onclick="$('#pop-2')[0].classList.toggle('bring-up');">test</button>
+                <div class="image-upload">
+
+                    <!-- <label>Image</label><br> -->
+                    <label for="file-input">
+                        <img id="label-image" class="icon-4" src="https://www.alstedefarms.com/wp-content/plugins/wp-blog-and-widgets/placeholder.png"/>
+                    </label>
+                    <form enctype="multipart/form-data" id="image-form">
+                        <input id="file-input" type="file" name="image" style="display:none;">
+                    </form>
+                </div>
+                <label for="expandable" class="text-bold">Expandable</label>
+                <div class="ing-form-radio-inputs">
+                    <input type="radio" value=1 id="yes" name="expandable">
+                    <label for="yes">Yes</label>
+                    <input type="radio" value=0 id="no" name="expandable" checked>
+                    <label for="no">No</label>                    
+                </div>
+                <label class="text-bold">Item Type</label>
+                <select id="Item-Type" style="width:80%">
+                    <!-- <option value="All">All</option> -->
+                    <option value="Vegetable">Vegetable</option>
+                    <option value="Meat">Meat</option>
+                    <option value="Fruits">Fruits</option>
+                    <option value="Spices">Spices</option>
+                    <option value="Other">Other</option>
+                </select>
+                <button class="btn mt-3 btn-confirm" style="width:80%" id="add_Ing_btn">Add</button>
+                <button class="btn mt-3 btn-reject" style="width:80%" onclick="resetForm()" id="left-reset">Reset</button>
+            </div>
+            <div class="m-3 mt-12 mb-12" style="width: 30%;">
+                    <label class="text-bold">Item Code</label>
+                    <input type="input" id="itemcode">
+                    <label class="text-bold">Item Name</label>
+                    <input type="text" id="itemname">
+                    <label class="text-bold">Measurement Unit</label>
+                    <select type="text" id="itemunit">
+                        <option value=""></option>
+                        <option value="kg">Kilograms</option>
+                        <option value="g">grams</option>
+                        <option value="L">Liters</option>
+                        <option value="ml">Mililiters</option>
+                    </select>
+                    <label class="text-bold" for ="description">Description</label>
+                    <textarea name="description" id="description" cols="63" rows="6"></textarea>
+                    <div class="text-bold">Restock Levels</div>
+                    <div class="ing-form-row-inputs">
+                        <label>Minimum Level</label>
+                        <input class="ml-3" type="number" id="min-lvl">
+                        <label>Restock Level</label>
+                        <input class="ml-3" type="number" id ="res-lvl">
+                        <label>Maximum Capacity</label>
+                        <input class="ml-3" type="number" id="max-lvl">
+                    </div>
+                    <div class="text-bold">Nutrient Values</div>
+                    <div class="ing-form-row-inputs">    
+                        <label>Carbs/g</label>
+                        <input type="number" id="carb-pg">
+                        <label>Calories/g</label>
+                        <input  type="number" id="cal-pg">
+                    </div>
+                    <div class="ing-form-row-inputs">
+                        <label>Protiens/g</label>
+                        <input  type="number" id="prot-pg">
+                        <label>Fats/g</label>
+                        <input  type="number" id="fats-pg">
+                    </div>
+                    
+            </div>
+            <button id="close-pop-inv" class=" btn cancel-btn material-icons btn-reject" onclick="hidepop()">close</button>
+        </div>
+        <div id="pop-2" class="pop-2">
+            
+        </div>
+    </div>
+    <script>
+        
+
+        function test(){
+            var x =document.getElementById("file-input").value;
+            var data = JSON.stringify({
+                "x" : x
+            });
+            console.log(data);
+        }
+        // function update(x){
+        //     var image = document.getElementById("image-label");
+        //     console.log(x.value);
+        //     var y = x.value.lastIndexOf('\\');
+            
+        //     image.setAttribute("src","/Client/images/"+x.value.substr(y+1));
+        // }
+
+        
+    </script>
+
+    </body>
+</html>
+

@@ -1,0 +1,138 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/Client/styles/pastures.css" />
+    <!-- <link rel="stylesheet" href="/Client/styles/pastures_new.css" /> -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <!-- <script src="dish.js"></script> -->
+    <title>Document</title>
+
+</head>
+
+<body>
+    <!-- <nav>
+        <div class="flex-space-between ml-8 mr-8 mt-8">
+            <img src="images/Asset 304x.png" width="10%" alt="" />
+
+            <ul class="flex">
+                <li class="pl-5"><a id="menu">Menu</a></li>
+                <li class="pl-5">
+                    <span class="material-icons">local_mall</span>
+                </li>
+                <li class="pl-5">
+                    <img src="images/EbNX_erVcAUlwIx.jpg" alt="" class="icon-2" />
+                </li>
+                <li class="fw-b pl-5">Dulaj Prabasha</li>
+            </ul>
+        </div>
+    </nav> -->
+
+    <div id="dishpop" class="mt-9">
+        <style>
+            .icon1-3 {
+                width: 60px;
+                -o-object-fit: cover;
+                object-fit: cover;
+                border-radius: 12px;
+                height: 60px;
+            }
+        </style>
+        <div
+            style="transform:scale(0.8);transform-origin: 0% 0% 0px;margin-top: -30px;margin-left: 100px;margin-right: -150px;">
+            <div class="row">
+                <div class="col-6 pl-6">
+                    
+                    <h1 id="name" class="display-3"></h1>
+                    <h3 id="request-out"></h3>
+                    <p class="text-1 p-5" id="description">
+                        
+                    </p>
+                    <hr />
+                    <div class="row">
+                        <div class="flex-column text-center col-4">
+                            <p class="display-2" id="time">20 min</p>
+                            <p class="">Total Time</p>
+                        </div>
+                        <div class="flex-column text-center col-4">
+                            <p class="display-2" id="cost-in">Rs. 100</p>
+                            <p class="">Total Cost</p>
+                        </div>
+                        <div class="flex-column text-center col-4">
+                            <p class="display-2" id="price-out">Rs. 110</p>
+                            <p class="">Price</p>
+                        </div>
+                    </div>
+
+                    <hr />
+                    <div class="details">
+                        <h3 class="m-1 p-5">Ingredients</h3>
+                        <div id="ingredients" style="max-height: 20vh;overflow-y: auto;">
+                            <div class="ingredients ml-8 mr-25">
+                                <div class="ingredient m-1 flex-space-between mb-4">
+                                    <img class="round-1 icon1-3"
+                                        src="https://learnenglishteens.britishcouncil.org/sites/teens/files/styles/article/public/rs7776_thinkstockphotos-856586464_1-low.jpg?itok=zHdfQ6Ij"
+                                        alt="Hot air balloons" />
+                                    <p>1/2 unit</p>
+                                    <p class="ml-1">Avacado</p>
+                                </div>
+                                <div class="ingredient m-1 flex-space-between mb-4">
+                                    <img class="round-1 icon1-3"
+                                        src="https://images.immediate.co.uk/production/volatile/sites/30/2020/02/Glass-and-bottle-of-milk-fe0997a.jpg?quality=90&resize=960,872"
+                                        alt="Hot air balloons" />
+                                    <p>1 1/2 cups</p>
+                                    <p class="ml-1">Milk</p>
+                                </div>
+                                <div class="ingredient m-1 flex-space-between mb-4">
+                                    <img class="round-1 icon1-3"
+                                        src="https://brownthumbmama.com/wp-content/uploads/2012/06/bottles-beans-OPT.jpg"
+                                        alt="Hot air balloons" />
+                                    <p>1 tbsp</p>
+                                    <p class="ml-1">Vanilla Extract</p>
+                                </div>
+                                <div class="ingredient m-1 flex-space-between mb-4">
+                                    <img class="round-1 icon1-3"
+                                        src="https://images.theconversation.com/files/262406/original/file-20190306-100805-2fzbbm.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop"
+                                        alt="Hot air balloons" />
+                                    <p>1/8 tbsp</p>
+                                    <p class="ml-1">Salt</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 ml-12 mr-12 text-center">
+                    <img id="image" class="round-1 image-6 mt-6"
+                        src="https://vaya.in/recipes/wp-content/uploads/2019/01/Avocado-Smoothie.jpg"
+                        alt="Hot air balloons" />
+
+                    <!-- <a class="btn fw-b m-4 mt-8" href="/Client/customize.html">
+                        > Customize</a> -->
+                        <script>
+                            function modifyPrice(x){
+                                let percent = x.value,
+                                    price = parseInt($("#cost-in").html().split(" ")[1]);
+                                $("#price-out").html("Rs. "+(price+ (price*percent)/100))
+                            }
+                        </script>
+                    <div>
+                        <label for="price" style="display: inline-block;">Set Profit Margin</label>
+                        <input type="number" name="" id="price" value="10" style="display: inline-block;width: 10%;" onchange="modifyPrice(this)">
+                    </div>
+                    <div>
+                        <button class="btn mr-6 btn-confirm" id="approve" style="width:30%;display: inline-block;padding: 10px 10px 10px 10px;" onclick="">Approve</button>
+                        <button class="btn ml-6 btn-reject" id="reject" style="width:30%;display: inline-block;padding: 10px 10px 10px 10px;" onclick="">Deny</button>
+                    </div>
+                </div>
+            </div>
+            <button class=" btn material-icons btn-reject" style="position: relative ;top:-720px;right:-1700px;padding: 12px 24; border-radius: 15px;text-decoration: none;"onclick="hidepop()">close</button>
+        </div>
+        
+    </div>
+</body>
+
+</html
