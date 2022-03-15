@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/Client/styles/pastures.css">
+    <link rel="stylesheet" href="/Client/styles/myedition.css">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/Client/styles/ongoing.css">
+    <link rel="stylesheet" href="/Client/styles/employee.css">
+    <!-- <link rel="stylesheet" href="/Client/styles/add-employee.css"> -->
+    <link rel="stylesheet" href="/Client/styles/slider.css">
+    <link rel="stylesheet" href="/Client/styles/notification.css">
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script type="module" src="/Client/Manager/JS/functionalities/loading_screen.js"></script>
+
+
+    <script type="module" src="/Client/Manager/JS/inventory/inventory_controller.js"></script>
+    <script type="module" src="/Client/Manager/JS/functionalities/notification/Manager_Notification_Controller.js"></script>
+
+
+    <meta charset="UTF-8">
+    <script>
+
+    </script>
+    <link rel="stylesheet" href="/Client/styles/notification.css">
+    <link rel="stylesheet" href="/Client/styles/new_layout.css">
+
+
+
+
+
+    <!--    <title>Title</title>-->
+
+</head>
+
+<body>
+    <div id="loading"></div>
+
+    <div class="sidenav" id="sidenav">
+
+    </div>
+    
+        <div class="main" id="main">
+            <div class="row">
+                <div class="col-10 mb-6">
+                    <h3>Inventory</h3>
+                    <h2 id="typeView">All Items</h2>
+                </div>
+
+                <div class="col-2 pt-12"><button class="btn-confirm text-center" style="width: 65%;padding: 10px;"
+                        onclick="displaypop()">Add Ingredients</button></div>
+
+
+            </div>
+            <div class="row mt-12">
+                <div class="col-1"></div>
+                <div class="col-2"> <a id="all-btn" class="btn text-center tag-all tag-select" style="width: 65%;">All
+                        Items</a></div>
+                <div class="col-2"><a id="vegetables-btn" class="btn text-center tag-green"
+                        style="width: 65%;">Vegetables</a></div>
+                <div class="col-2"><a id="fruits-btn" class="btn text-center tag-yellow" style="width: 65%;">Fruits</a>
+                </div>
+                <div class="col-2"><a id="meat-btn" class="btn text-center tag-red" style="width: 65%;">Meat</a></div>
+                <div class="col-2"><a id="others-btn" class="btn text-center tag-other" style="width: 65%;">Others</a>
+                </div>
+                <div class="col-1"></div>
+            </div>
+
+
+
+            <table class="inventorytable ml-12">
+                <thead>
+                    <th>Photo</th>
+                    <th>Item Code</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Restocked Date</th>
+                    <th>quantity</th>
+                    <th>VieW</th>
+                    <th>Action</th>
+                    <th>More</th>
+
+                </thead>
+
+                <tbody id="inventory-tbody">
+
+                </tbody>
+
+            </table>
+            <div id="nextbuttons" style="position:fixed;right:100px;bottom:50px;"></div>
+        </div>
+        <div id="addarea"></div>
+
+
+        <div id="notificationbox"></div>
+        <div id="fotter"></div>
+
+
+
+
+
+
+
+</body>
+
+</html>

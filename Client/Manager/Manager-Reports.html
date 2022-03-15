@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager-Reports</title>
+    <link rel="stylesheet" href="/Client/styles.css">
+    <link rel="stylesheet" href="/Client/styles/pastures.css">
+    <link rel="stylesheet" href="/Client/styles/notification.css">
+    <link rel="stylesheet" href="/Client/styles/manager_dash.css">
+    <style>
+        .piemid{
+            position:relative;
+            top:-180px;
+            left:120px;
+            font-size: 3em;
+            width:20%;
+            z-index:100;
+            margin-bottom: -100px;
+        }
+        .piemidval{
+            position:relative;
+            top:-83px;
+            left:130px;
+            font-size: 3em;
+            width:20%;
+            z-index:100;
+        }
+    </style>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="/Client/Manager/JS/functionalities/loading_screen.js"></script>
+    <script type = "module" src="/Client/Manager/JS/reports/reports_controller.js"></script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type = "module" src="/Client/Manager/JS/functionalities/notification/Manager_Notification_Controller.js"></script>
+    
+    <link rel="stylesheet" href="/Client/styles/notification.css">
+    <link rel="stylesheet" href="/Client/styles/new_layout.css">
+    <link rel="stylesheet" href="/Client/styles/employee.css">
+</head>
+
+<body>
+    
+    <div id="loading"></div>
+    <div id="notificationbox"></div>
+    <div class="sidenav" id="sidenav"></div>
+    <div class="main" style="margin-top: 0px;">
+        <h3>Reports</h3>
+        <h2 class="mb-6">(August, September, October)</h2>
+
+        <div class="row">
+            <div class="col-4 mr-3">
+                <div class="p-6 px-12 wrapper">
+                    <div class="card graph" >
+                        <div id="curve_chart" style="display:flex;justify-content: center;align-content: center;"></div>
+                        <div class="piemid">Total </div>
+                        <div class="piemidval" id="dishTotal">500</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 ml-3 mr-3">
+                <div class="p-6 px-12 wrapper">
+                    <div class="card graph">
+                        <div id="curve_chart2"></div>
+                        <div class="piemid">Total </div>
+                        <div class="piemidval" id="supplierTotal">500</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4 ml-3">
+                <div class="p-6 px-12 wrapper">
+                    <div class="card graph">
+                        <div id="curve_chart3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 mt-6">
+                <h2 class="mb-3">Top Dishes</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Dish Code</th>
+                            <th>Dish Name</th>
+                            <th>Units Sold</th>
+                            <th>Profit Margin</th>
+                            <th>Profit Made</th>
+                        </tr>
+                    </thead>
+                    <tbody id ="topDishesReports">
+                        
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-6 mt-6" style="margin-left:-30px;">
+                <h2 class="mb-3">Top Suppliers</h2>
+                <table>
+                    <thead>
+                        <th>Supplier Name</th>
+                        <th>Organisation</th>
+                        <th>Orders Done</th>
+                        <th>Order Accept %</th>
+                        <th>Total Amount Payed</th>
+                    </thead>
+                    <tbody id= "topSuppliersReports">
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="fotter"></div>
+</body>
+
+</html>
