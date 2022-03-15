@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+   
+    <link rel="stylesheet" href="/Client/styles/pastures.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="/Client/kitchenmanager/js/login.js"></script>
+    <title>Document</title>
+  </head>
+  <body style="overflow: hidden">
+    <div class="row">
+      <div class="col-6 pl-30 mt-15 hidden" id="register">
+        <img src="/Client/images/Asset 304x.png" width="18%" alt="" />
+        <h2 class="mt-15 mb-4">Sign Up</h2>
+
+        <label
+          >Full Name
+          <input
+            type="text"
+           
+            class="width-4"
+            placeholder="Dulaj Prabasha"
+          />
+        </label>
+        <!-- <p class="text-red mb-3" style="font-size: smaller">random text</p> -->
+        <label
+          >Email
+          <input
+            type="text"
+           
+            class="width-4"
+            placeholder="dulaj@gmail.com"
+          />
+          <!-- <p class="text-red mb-3" style="font-size: smaller">random text</p> -->
+        </label>
+        <label
+          >Phone Number
+          <input
+            type="text"
+            
+            class="width-4"
+            placeholder="0711005678"
+          />
+          <!-- <p class="text-red mb-3" style="font-size: smaller">random text</p> -->
+        </label>
+        <label
+          >Password
+          <input
+            type="password"
+          
+            class="width-4"
+            placeholder="Min. 8 characters"
+          />
+          <!-- <p class="text-red mb-3" style="font-size: smaller">random text</p> -->
+        </label>
+        <a href="" class="btn width-4 text-center mb-6 mt-2">Sign Up</a>
+        <p class="mb-8">
+          Already have an account?<span class="text-info" id="signIn">
+            Sign In</span
+          >
+        </p>
+        <div class="mb-10" style="bottom: 0; position: fixed">
+          <span class="material-icons icon"> copyright </span>
+          <p class="text">2021 Verdur. All Rights Reserved</p>
+        </div>
+      </div>
+      <div class="col-6 pl-30 mt-15" id="login">
+        <img src="/Client/images/Asset 304x.png" width="18%" alt="" />
+        <h2 class="mt-15 mb-4">Login</h2>
+
+        <label
+          >Email*
+          <input
+            type="text"
+            id="username"
+            class="width-4"
+            placeholder="dulaj@gmail.com"
+          />
+        </label>
+        <!-- <p class="text-red mb-3" style="font-size: smaller">random text</p> -->
+
+        <label>
+            Password*
+          <input
+            type="password"
+            id="password"
+            class="width-4"
+            placeholder="Min. 8 characters"
+          />
+        </label>
+        <!-- <p class="text-red mb-3" style="font-size: smaller">random text</p> -->
+        <p class="mt-4 mb-4 text-green">Forgot password?</p>
+        <a  class="btn width-4 text-center mb-6" href="/Client/chef/home.html">Login</a>
+        <p class="mb-8">
+          Not registered yet?<span class="text-info" id="createAccount">
+            Create an account</span
+          >
+        </p>
+        <div class="mb-10" style="bottom: 0; position: fixed">
+          <span class="material-icons icon"> copyright </span>
+          <p class="text">2021 Verdur. All Rights Reserved</p>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="bg-success" style="height: 100vh">
+          <img src="/Client/images/pngegg.png" alt="" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
