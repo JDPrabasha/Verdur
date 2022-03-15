@@ -1,6 +1,6 @@
-package Core;
+package User;
 
-import Core.ConnectionFactory.DB;
+import User.ConnectionFactory.DB;
 
 
 import java.sql.*;

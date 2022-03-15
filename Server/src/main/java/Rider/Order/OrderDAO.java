@@ -1,6 +1,6 @@
 package Rider.Order;
 
-import Core.ConnectionFactory.DB;
+import User.ConnectionFactory.DB;
 import Customer.Dish.Dish;
 
 import java.sql.*;

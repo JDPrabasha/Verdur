@@ -1,4 +1,4 @@
-package Core;
+package User;
 
 public class ResetPasswordServlet {
 }

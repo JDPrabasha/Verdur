@@ -1,9 +1,9 @@
 package Rider.Delivery;
 
-import Core.ConnectionFactory.DB;
+import User.ConnectionFactory.DB;
 import Customer.Dish.Dish;
 import Rider.Order.Order;
-import Core.User;
+import User.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

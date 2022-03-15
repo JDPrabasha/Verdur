@@ -1,6 +1,6 @@
 package kitchenmanager.restockorder;
 
-import Dao.DB;
+import User.ConnectionFactory.DB;
 import kitchenmanager.inventory.inventory;
 
 import java.sql.*;
@@ -50,9 +50,9 @@ public class restockdao {
 //        String query = "SELECT * FROM stock JOIN ingredient ON ingredient.ingID=stock.ingID JOIN restockrequest ON restockrequest.ingID = stock.ingID JOIN restockorder ON restockorder.restockID=restockrequest.restockID WHERE ingredient.ingID =?";
         String query = "SELECT * FROM stock JOIN ingredient ON ingredient.ingID=stock.ingID WHERE ingredient.ingID =?";
         PreparedStatement st3 = this.conn.prepareStatement(query);
-        st3.setString(1,id);
+        st3.setString(1, id);
 //        st2.setInt(2,r.getSupplierid());
-        ResultSet rs= st3.executeQuery();
+        ResultSet rs = st3.executeQuery();
 
 //        Statement st = this.conn.createStatement();
 //        ResultSet rs = st.executeQuery(query);
@@ -82,11 +82,11 @@ public class restockdao {
                 int supplierid = rs2.getInt("supplierID");
                 String suppliername = rs2.getString("firstName");
                 int price = rs2.getInt("price");
-                supplierlist.add(new supplier(supplierid, suppliername,price));
+                supplierlist.add(new supplier(supplierid, suppliername, price));
 
             }
 
-            stockitem.add(new inventory(ingid, ingcode, ingtype, ingname, quantity, maxlevel, safelevel, restocklevel, image,restockdate,unit));
+            stockitem.add(new inventory(ingid, ingcode, ingtype, ingname, quantity, maxlevel, safelevel, restocklevel, image, restockdate, unit));
             inventoryitem = new restock(stockitem, supplierlist);
 
 
@@ -96,19 +96,19 @@ public class restockdao {
 
     }
 
-    public int addrestockrequest(restock r) throws SQLException{
+    public int addrestockrequest(restock r) throws SQLException {
         int rs = 0;
         PreparedStatement st = null;
         String quary = "INSERT INTO restockrequest(ingid,dueBy,quantity,status,requestedAt,deadline,approvalStatus,expired,supplierID,price) VALUES(?,?,?,?,?,?,?,?,?,?)";
         String quary2 = "SELECT * FROM inventory WHERE ingID =? and supplierID=?";
 
-        try{
+        try {
             int price = 0;
             PreparedStatement st2 = this.conn.prepareStatement(quary2);
-            st2.setInt(1,r.getIngID());
-            st2.setInt(2,r.getSupplierid());
+            st2.setInt(1, r.getIngID());
+            st2.setInt(2, r.getSupplierid());
             ResultSet rs2 = st2.executeQuery();
-            while(rs2.next()){
+            while (rs2.next()) {
                 price = rs2.getInt("price");
 
             }
@@ -128,19 +128,18 @@ public class restockdao {
             st.setString(6, r.getDeadline());
             st.setString(7, "pending");
             st.setInt(8, r.getExpired());
-            if(r.getSupplierid()==0){
-                st.setNull(9,0);
-            }
-            else{
+            if (r.getSupplierid() == 0) {
+                st.setNull(9, 0);
+            } else {
                 st.setInt(9, r.getSupplierid());
 
             }
-            st.setInt(10,price);
+            st.setInt(10, price);
             rs = st.executeUpdate();
 
-        }catch (SQLException throwables) {
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
-            if(conn!=null){
+            if (conn != null) {
                 try {
                     System.err.print("Transaction is being rolled back");
                     conn.rollback();

@@ -1,6 +1,6 @@
 package kitchenmanager.kitchenmanagerorder;
 
-import Dao.DB;
+import User.ConnectionFactory.DB;
 import com.google.gson.Gson;
 
 import javax.servlet.annotation.WebServlet;
@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/KitchenManager/orderkm")
-public class orderkmservelet  extends HttpServlet {
+public class orderkmservelet extends HttpServlet {
     DB db = new DB();
     orderkmdao orderkm = new orderkmdao(db);
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp){
-        List <orderkm> orderitem = new ArrayList<>();
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+        List<orderkm> orderitem = new ArrayList<>();
 
 
 //        String s = req.getParameter("search");
@@ -29,12 +29,10 @@ public class orderkmservelet  extends HttpServlet {
         String type = req.getParameter("type");
 
         try {
-            if(type == null)
-            {
-                orderitem=orderkm.read();
-            }
-            else {
-                orderitem=orderkm.readongoingorders();
+            if (type == null) {
+                orderitem = orderkm.read();
+            } else {
+                orderitem = orderkm.readongoingorders();
             }
 //            if(id != null)
 //            {
@@ -42,20 +40,19 @@ public class orderkmservelet  extends HttpServlet {
 //            }
 
 
-
-
-        }catch (SQLException throwables) {
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         String orderresponce = new Gson().toJson(orderitem);
-        outputResponse(resp,orderresponce,200);
+        outputResponse(resp, orderresponce, 200);
 
     }
-    private void outputResponse(HttpServletResponse response, String payload, int status){
+
+    private void outputResponse(HttpServletResponse response, String payload, int status) {
         response.setHeader("Content-Type", "application/json");
-        try{
+        try {
             response.setStatus(status);
-            if (payload != null){
+            if (payload != null) {
                 OutputStream outputStream = response.getOutputStream();
                 outputStream.write(payload.getBytes());
                 outputStream.flush();

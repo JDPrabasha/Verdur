@@ -1,6 +1,6 @@
 package chef;
 
-import Dao.DB;
+import User.ConnectionFactory.DB;
 import kitchenmanager.kitchenmanagerorder.orderkm;
 
 import java.sql.*;
@@ -14,7 +14,7 @@ public class chefdao {
 
     public chefdao(DB db) {
         try {
-            this.conn = db.initializeDB();
+            this.conn = DB.initializeDB();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {
@@ -22,8 +22,8 @@ public class chefdao {
         }
     }
 
-//    public List<chef> readcheflist() throws SQLException{
-     public List<chef> readcheflist(String id) throws SQLException{
+    //    public List<chef> readcheflist() throws SQLException{
+    public List<chef> readcheflist(String id) throws SQLException {
 
         List<chef> cheflist = new ArrayList<>();
         String query = "SELECT * FROM user u JOIN employee e ON u.userID=e.userID WHERE u.role =\"Chef\"";
@@ -40,16 +40,16 @@ public class chefdao {
 //            String query2 = "SELECT * FROM orders WHERE chefID=?";
             String query2 = "SELECT * FROM orders WHERE orders.status = \"assigned\" AND chefID=?";
             PreparedStatement st2 = this.conn.prepareStatement(query2);
-            st2.setInt(1,chefid);
-            ResultSet rs2= st2.executeQuery();
+            st2.setInt(1, chefid);
+            ResultSet rs2 = st2.executeQuery();
 
 
-            while (rs2.next()){
+            while (rs2.next()) {
                 int orderid = rs2.getInt("orderID");
                 order.add(new orderkm(orderid));
 
             }
-            cheflist.add(new chef(chefid,chefname,chefimage,order));
+            cheflist.add(new chef(chefid, chefname, chefimage, order));
 //            cheflist.add(new chef(chefid,chefname,chefimage,status));
         }
 
@@ -65,8 +65,8 @@ public class chefdao {
         int chefid = d.getChefid();
         System.out.println(chefid);
         PreparedStatement st = this.conn.prepareStatement(quary);
-        st.setInt(1,chefid);
-        st.setInt(2,orderid);
+        st.setInt(1, chefid);
+        st.setInt(2, orderid);
         return st.executeUpdate();
     }
 

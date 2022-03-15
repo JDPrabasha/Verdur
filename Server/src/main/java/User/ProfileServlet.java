@@ -1,5 +1,5 @@
 
-package Core;
+package User;
 
 import com.google.gson.Gson;
 

@@ -1,4 +1,4 @@
-package Core;
+package User;
 
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;

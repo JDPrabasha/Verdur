@@ -1,4 +1,4 @@
-package Core.ConnectionFactory;
+package User.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

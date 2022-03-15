@@ -1,4 +1,4 @@
-package Core;
+package User;
 
 import java.io.IOException;
 import javax.servlet.Filter;
