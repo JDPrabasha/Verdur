@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+        <link rel="stylesheet" href="/Client/styles/pastures.css">
+        <!-- <link rel="stylesheet" href="/Client/styles/employee.css"> -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="/Client/styles.css">
+        <link rel="stylesheet" href="/Client/styles/employee.css">
+        <link rel="stylesheet" href="/Client/styles/add-employee.css">
+        <link rel="stylesheet" href="/Client/styles/myedition.css">
+        <script src="/Client/kitchenmanager/js/hedder.js"></script>
+        <!-- <link rel="stylesheet" href="/Client/styles/ongoing.css"> -->
+    
+        <script src="/Client/kitchenmanager/js/kitchenmanagersidemenu.js"></script>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>  
+        <script src="/Client/kitchenmanager/js/ingredient_list.js"></script>
+        <script src="/Client//kitchenmanager/js/ingredient_list_serializer.js"></script>
+        <script src="/Client//kitchenmanager/js/ingredient_list_controller.js"></script>
+        <script src="/Client/kitchenmanager/js/fotterKM.js"></script>
+        <script src="/Client/kitchenmanager/js/hedder.js"></script>
+        
+        <script>
+            function enabletext(){
+                // document.getElementsByTagNameNS("input").disabled=false;
+                document.getElementById("name").disabled=false;
+                // var form = document.getElementById("emp_form");
+                // var elements = form.elements;
+                // for (var i = 0, len = elements.length; i < len; ++i) {
+                //     elements[i].disabled = false;
+                // }
+            }
+        </script>
+    </head>
+    <body>
+        <div  class="" id="notification"></div>
+        <div class="sidenav " id="sidenavkm"></div>
+        
+    <div class="main" id="main">
+      
+        <div class="row">
+            <div class="col-9   mt-24 ml-4 ">
+                <h5>Create Dish</h5>
+                
+            </div>
+            <div class="col-3   mt-36 "> <button onclick="submitDish()" class="btn tag-green text-2" style="width: 4cm;"> Done</button></div>
+            </div>
+      
+
+        <div class="mt-15">
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-3 mt-6"> 
+                    <div class="image-upload mt-12 ">
+                        <!-- <label>Image</label><br> -->
+                        <label for="file-input">
+                            <img id="image-label" class="icon-10" src="http://cartercookbook.com/wp-content/themes/fairgame/assets/images/placeholder@2x.png"/>
+                        </label>
+                    
+                        <input id="file-input" type="file" onchange="update(this)">
+                    </div>
+                    
+                </div>
+               
+                <div class="col-4">
+                <form class="col-6 ml-6" style="width: 30%;">
+                    <!-- <h2 class="mb-6">Creating Dish </h2> -->
+                    <label>Dish Code</label>
+                    <input type="input" id="dishcode">
+                    <label>Dish Name</label>
+                    <input type="email" id="dishname">
+                    <label>Estimated Time</label>
+                    <input type="text" id="estimatedTime">
+                    <label for ="description">Description</label>
+                    <textarea name="description" id="description" cols="63" rows="8"></textarea>
+                </form>
+            </div>
+         
+            </div>
+            <div class="row">
+                <div class="col-9"></div>
+                <div><button onclick="displaypop()" class="btn tag-other mb-8 text-bold"> Add Ingredient</button></div>
+            </div>
+            <div class="row">
+                <div class="col-2"></div>
+
+                <div class="col-9">
+                    <table>
+                        <thead>
+                            <th>Image</th>
+                            <th>Ingredient Code</th>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Minimum Quantity</th>
+                            <th>Default Quantity</th>
+                            <th>Maximum Quantity</th>
+                        </thead>
+                        <tbody id="ingredients-list" class="text-center">
+                            <tr>
+                               
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+
+    <div class="reg-frame" id="form_frame">
+        <div class="reg-pop flex-center" id="form">
+            <div>
+                <h2 class="mb-5">Add Ingredient</h2> 
+                <div class="image-upload mt-3 ">
+                    <label>Image</label><br>
+                    <!-- <label for="file-input"> -->
+                        <img id="ingredient-insert-image" class="icon-8" src=""/>
+                    <!-- </label> -->
+                
+                    <!-- <input id="file-input" type="file"> -->
+                </div>
+                <label for ="Ingredient-Type">Customization Type</label>
+                <select name="Ingredient-Type" id="Ingredient-Type" class="mb-6">
+                    <option value="Fixed">Fixed</option>
+                    <option value="Slider">Slider</option>
+                    <option value="Quantity">Quantity</option>
+                </select>
+                
+                
+                
+                <button class="btn mt-6 tag-green" style="width:100%" onclick="addingredient()">Add</button>
+                <button class="btn mt-6 tag-yellow" style="width:100%" onclick="resetForm()" id="left-reset">Reset</button>
+            </div>
+            <div class="m-6 mt-12" style="width: 30%;">
+                <label>Ingredient Category</label>
+                <select id="Ingredient-Category">
+                    <option value="All">All</option>
+                    <option value="Vegetable">Vegetable</option>
+                    <option value="Meat">Meat</option>
+                    <option value="Fruits">Fruits</option>
+                    <option value="Spices">Spices</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label>Ingredient Name</label>
+                <select id="Ingredient-Name"></select>
+
+                <!-- <label>Ingredient Type</label> -->
+                <!-- <select>   <option value="Fixed">Chicken Breast</option> -->
+                    <!-- <option value="Slider">Chicken Leg</option> -->
+                    <!-- <option value="Quantity">Quantity</option> -->
+                <!-- </select> -->
+              
+               
+             
+                <label for ="Ingredient-Type">Measurement Unit</label>
+                <select name="Ingredient-Type" id="Ingredient-Type" class="mb-6">
+                    <option value="Fixed">Unit</option>
+                    <option value="Fixed">g</option>
+                    <option value="Slider">kg</option>
+                    <option value="Quantity">ml</option>
+                    <option value="Quantity">L</option>
+                    <option value="Quantity">tbsp</option>
+                    <option value="Quantity">tsp</option>
+                </select>
+                <div id="form_min_wrap">
+                    <label>Minimum Quantity</label>
+                    <input type="number"  style="width: 4cm;" id="form_min">
+                </div>
+                <label>Default Quantity</label>
+                <input type="number" style="width: 4cm;" id="form_default">
+                <div id="form_max_wrap">
+                    <label>Maximum Quantity</label>
+                    <input type="number"  style="width: 4cm;" id="form_max">
+                </div>
+                <button class="btn mt-9 tag-yellow" style="width:100%" onclick="resetForm()" id="right-reset">Reset</button>
+            </div>
+            <button class=" btn cancel-btn material-icons" onclick="hidepop()">close</button>
+        </div>
+    </div>
+    <script>
+        
+
+        function test(){
+            var x =document.getElementById("file-input").value;
+            var data = JSON.stringify({
+                "x" : x
+            });
+            console.log(data);
+        }
+        function update(x){
+            var image = document.getElementById("image-label");
+            console.log(x.value);
+            var y = x.value.lastIndexOf('\\');
+            
+            image.setAttribute("src","/Client/images/"+x.value.substr(y+1));
+        }
+
+        
+    </script>
+<div id="KMfotter"></div>
+    </body>
+</html>
+

@@ -1,0 +1,182 @@
+body {
+    font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #015a25;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    text-align:center;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 8px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #81fd9a;
+    display: block;
+    transition: 0.3s;
+
+}
+
+.sidenav a:hover{
+    color: #f1f1f1;
+}
+
+.topic h2{
+    color: #10c039;
+    text-align: center;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+.list{
+    height: 50%;
+    width: 60%;
+    position: static;
+    border-style: solid;
+}
+.list li{
+    border-style: groove;
+    height: 5%;
+
+    /*width: 20%;*/
+}
+.inv{
+    height: 30%;
+    width: 30%;
+    position: static;
+    border-style: solid;
+}
+
+
+
+
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+
+.table1 {
+    position: relative;
+    width:90%;
+    /*border-spacing:3em;*/
+    font-size: 1vw;
+}
+
+.table1 button{
+    font-size: 1vw;
+    padding: 10px;
+    float:right;
+    margin-left: 2%;
+}
+.table1 td{
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 2.5%;
+    padding-top: 2.5%;
+
+   
+
+}
+
+
+.sectionleft{
+    position:fixed;
+    /* padding-left: 12%; */
+    width: 50%;
+    /* white-space:nowrap; */
+    margin-left: 2%;
+   
+
+}
+.sectionright{
+    position:fixed;
+    /*padding-left: 50%;*/
+    margin-left: 50%;
+    width: 50%;
+    /* white-space:nowrap; */
+   
+
+}
+.sectionfull{
+    position: fixed;
+    padding-left: 2%; 
+    width:100%;
+    padding-right: 2%;
+   
+
+}
+
+.button2{
+    font-size: 1vw;
+    padding: 10px;
+    float:right;
+    margin-right: 10%;
+}
+
+
+/* sliders */
+
+.slidecontainer {
+    width: 100%;
+  }
+  
+  .slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    color: #015a25;
+  }
+  
+  .slider:hover {
+    opacity: 1;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #012719;
+    cursor: pointer;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #002719;
+    cursor: pointer;
+  }
+
+
+  .logo{
+      width: 5cm;
+      height: 5cm;
+  }
+
+
+  .chefimg {
+    border-radius: 50%;
+  }
+
+
+

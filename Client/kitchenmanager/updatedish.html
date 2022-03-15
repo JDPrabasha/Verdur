@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/Client/styles/pastures.css">
+    <!-- <link rel="stylesheet" href="/Client/styles/employee.css"> -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/Client/styles.css">
+    <link rel="stylesheet" href="/Client/styles/employee.css">
+    <link rel="stylesheet" href="/Client/styles/add-employee.css">
+    <link rel="stylesheet" href="/Client/styles/myedition.css">
+    <link rel="stylesheet" href="/Client/styles/colors.css">
+
+    <!-- <link rel="stylesheet" href="/Client/styles/ongoing.css"> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="/Client/kitchenmanager/js/kitchenmanagersidemenu.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="/Client/kitchenmanager/js/ingredient_list.js"></script>
+    <script src="/Client//kitchenmanager/js/ingredient_list_serializer.js"></script>
+    <script src="/Client//kitchenmanager/js/ingredient_list_controller.js"></script>
+    <script src="/Client/kitchenmanager/js/hedder.js"></script>
+    <script src="/Client/kitchenmanager/js/fotterKM.js"></script>
+    <link rel="stylesheet" href="/Client/styles/layout.css">
+    <script type="module" src="/Client/kitchenmanager/js/updatedishcontroller.js"></script>
+    <!-- <script src="/Client/kitchenmanager/js/changeimage.js"></script> -->
+    <script>
+        function enabletext() {
+            // document.getElementsByTagNameNS("input").disabled=false;
+            document.getElementById("name").disabled = false;
+            // var form = document.getElementById("emp_form");
+            // var elements = form.elements;
+            // for (var i = 0, len = elements.length; i < len; ++i) {
+            //     elements[i].disabled = false;
+            // }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="" id="notification"></div>
+    <div class="sidenav " id="sidenavkm"></div>
+
+    <div class="main" id="main">
+
+
+        <div class="row ">
+            <div class=" col-10  mb-2 mt-24 ml-4">
+
+                <h5 class="">Update Dish</h5>
+            </div>
+        </div>
+
+
+
+        <div class="">
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-3 mt-6">
+                    <div class="image-upload mt-12 ">
+                        <!-- <label>Image</label><br> -->
+                        <label for="file-input">
+                            <img id="image-label" class="image-4" />
+                        </label>
+
+                        <input id="file-input" type="file" onchange="update(this)">
+                    </div>
+
+                </div>
+
+
+                <div class="col-4">
+                    <form class="col-6 ml-6" style="width: 30%;">
+                        <!-- <h2 class="mb-6">Update Dish </h2> -->
+                        <label>Dish Code</label>
+                        <input type="input" id="dishcode">
+                        <label>Dish Name</label>
+                        <input type="email" id="dishname">
+                        <label>Estimated Time</label>
+                        <input type="text" id="estimatedTime">
+                        <label for="description">Description</label>
+                        <textarea name="description" id="description" cols="63" rows="8"></textarea>
+                    </form>
+                </div>
+                <div class="col-3"> <button onclick="updateDish()" class="btn tag-green text-2" style="width: 4cm;">
+                        Update</button></div>
+            </div>
+            <div class="row">
+                <div class="col-9"></div>
+
+            </div>
+            <div class="row">
+                <div class="col-9"></div>
+                <div class="col-2">
+                    <div button onclick="displaypop()" class="btn tag-green text-bold text-center " style="width: 4cm;">
+                        Add Ingredient</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2"></div>
+
+                <div class="col-9">
+                    <table class="ing">
+                        <thead>
+                            <th>Image</th>
+                            <th>Ingredient Code</th>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Minimum Quantity</th>
+                            <th>Default Quantity</th>
+                            <th>Maximum Quantity</th>
+                            <th> </th>
+                        </thead>
+                        <tbody id="ingredients-list">
+                            <tr>
+                                <td> <img class="icon-4"
+                                        src="https://www.collinsdictionary.com/images/full/egg_110803370.jpg" alt="">
+                                </td>
+                                <td>i001</td>
+                                <td>Egg</td>
+                                <td>Quantity</td>
+                                <td> 1</td>
+                                <td> 2</td>
+                                <td>4</td>
+                                <td><button onclick="displaypop()" class="btn tag-green">Update</button></td>
+
+                            </tr>
+                            <tr>
+                                <td><img class="icon-4"
+                                        src="https://static.vecteezy.com/system/resources/previews/002/794/186/original/cartoon-illustration-isolated-object-delicious-food-bread-vector.jpg"
+                                        alt=""></td>
+                                <td>i009</td>
+                                <td>Brown Bread</td>
+                                <td>Fixed</td>
+                                <td></td>
+                                <td>2</td>
+                                <td></td>
+                                <td><button class="btn tag-green">Update</button></td>
+
+                            </tr>
+                            <tr>
+                                <td><img class="icon-4"
+                                        src="https://media.istockphoto.com/vectors/jar-of-mayonnaise-vector-isolated-illustration-vector-id1166632806?k=20&m=1166632806&s=612x612&w=0&h=XORwd2aLsHeGdinzDXy06dp47MGxXk6KxNpBqSkQtXY="
+                                        alt=""></td>
+                                <td>i002</td>
+                                <td>Mayonnaise</td>
+                                <td>Slider</td>
+                                <td>0tbs</td>
+                                <td>2tbs</td>
+                                <td>4tbs</td>
+                                <td><button class="btn tag-green">Update</button></td>
+
+                            </tr>
+                            <tr>
+                                <td> <img class="icon-4"
+                                        src="https://thumbs.dreamstime.com/z/vector-salt-illustration-isolated-cartoon-style-herbs-species-series-84550759.jpg"
+                                        alt=""></td>
+                                <td>i038</td>
+                                <td>Salt</td>
+                                <td>Slider</td>
+                                <td>0tbs</td>
+                                <td>2tbs</td>
+                                <td>4tbs</td>
+                                <td><button class="btn tag-green">Update</button></td>
+
+                            </tr>
+                            <tr>
+                                <td><img class="icon-4"
+                                        src="https://media.istockphoto.com/vectors/vector-black-pepper-illustration-isolated-in-cartoon-style-herbs-and-vector-id959114748?b=1&k=20&m=959114748&s=612x612&w=0&h=i7IrQ8HSC5AlHalqTAFv-LnrkSxd1HoRQGQxT-vs71s="
+                                        alt=""></td>
+                                <td>i038</td>
+                                <td>Black Pepper</td>
+                                <td>Slider</td>
+                                <td>0tbs</td>
+                                <td>2tbs</td>
+                                <td>4tbs</td>
+                                <td><button class="btn tag-green">Update</button> </td>
+
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="reg-frame" id="form_frame">
+        <div class="reg-pop flex-center" id="form">
+            <div>
+                <h2 class="mb-1">Update Ingredient</h2>
+                <div class="image-upload mt-3 ">
+                    <label>Image</label><br>
+                    <!-- <label for="file-input"> -->
+                    <img id="ingredient-insert-image" class="icon-8" src="" />
+                    <!-- <img  class="iconmy-6" src="https://www.collinsdictionary.com/images/full/egg_110803370.jpg"/> -->
+                    <!-- </label> -->
+
+                    <!-- <input id="file-input" type="file"> -->
+                </div>
+                <label for="Ingredient-Type">Customization Type</label>
+                <select name="Ingredient-Type" id="Ingredient-Type" class="mb-6">
+                    <option value="toggle">Toggle</option>
+                    <option value="slider">Slider</option>
+                    <option value="fixed">Fixed</option>
+                </select>
+
+
+
+
+                <button class="btn mt-6 tag-green" style="width:100%"
+                    onclick="addingredienttoupdatetable()">Update</button>
+                <button class="btn mt-6 tag-red" style="width:100%" onclick="resetForm()"
+                    id="left-reset">Delete</button>
+            </div>
+            <div class="m-6 mt-12" style="width: 30%;">
+                <label>Ingredient Category</label>
+                <select id="Ingredient-Category">
+                    <option value="All">Other</option>
+                    <option value="Vegetable">Vegetable</option>
+                    <option value="Meat">Meat</option>
+                    <option value="Fruits">Fruits</option>
+                    <option value="Spices">Spices</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label>Ingredient Name</label>
+                <select id="Ingredient-Name">
+                </select>
+
+                <label for="Ingredient-Type">Measurement Unit</label>
+                <select name="Ingredient-Type" id="Ingredient-Type" class="mb-6">
+                    <option value="Fixed">Unit</option>
+                    <option value="Fixed">g</option>
+                    <option value="Slider">kg</option>
+                    <option value="Quantity">ml</option>
+                    <option value="Quantity">L</option>
+                    <option value="Quantity">tbsp</option>
+                    <option value="Quantity">tsp</option>
+                </select>
+
+                <div id="form_min_wrap">
+                    <label>Minimum Quantity</label>
+                    <input type="number" id="form_min" style="width: 4cm;">
+                </div>
+                <label>Default Quantity</label>
+                <input type="number" id="form_default" style="width: 4cm;">
+                <div id="form_max_wrap">
+                    <label>Maximum Quantity</label>
+                    <input type="number" id="form_max" style="width: 4cm;">
+                </div>
+                <button class="btn mt-9 tag-red" style="width:100%" onclick="resetForm()"
+                    id="right-reset">Reset</button>
+            </div>
+            <button class=" btn cancel-btn material-icons" onclick="hidepop()">close</button>
+        </div>
+    </div>
+    <script>
+
+
+        function test() {
+            var x = document.getElementById("file-input").value;
+            var data = JSON.stringify({
+                "x": x
+            });
+            console.log(data);
+        }
+        function update(x) {
+            var image = document.getElementById("image-label");
+            console.log(x.value);
+            var y = x.value.lastIndexOf('\\');
+
+            image.setAttribute("src", "/Client/images/" + x.value.substr(y + 1));
+        }
+
+
+    </script>
+
+    <div class="reg-frame" id="editform">
+        <div class="reg-pop flex-center" id="updateform">
+            <div>
+                <h2 class="mb-1">Update Ingredient</h2>
+                <div class="image-upload mt-3 ">
+                    <label>Image</label><br>
+                    <!-- <label for="file-input"> -->
+                    <img id="ingredient-insert-image" class="icon-8" src="" />
+                    <!-- <img  class="iconmy-6" src="https://www.collinsdictionary.com/images/full/egg_110803370.jpg"/> -->
+                    <!-- </label> -->
+
+                    <!-- <input id="file-input" type="file"> -->
+                </div>
+                <label for="Ingredient-Type">Customization Type</label>
+                <select name="Ingredient-Type" id="Ingredient-Type" class="mb-6">
+                    <option value="toggle">Toggle</option>
+                    <option value="slider">Slider</option>
+                    <option value="fixed">Fixed</option>
+                </select>
+
+
+
+
+                <button class="btn mt-6 tag-green" style="width:100%" onclick="addingredient()">Update</button>
+                <button class="btn mt-6 tag-red" style="width:100%" onclick="resetForm()"
+                    id="left-reset">Delete</button>
+            </div>
+            <div class="m-6 mt-12" style="width: 30%;">
+                <label>Ingredient Category</label>
+                <select id="Ingredient-Category">
+                    <option value="All">Other</option>
+                    <option value="Vegetable">Vegetable</option>
+                    <option value="Meat">Meat</option>
+                    <option value="Fruits">Fruits</option>
+                    <option value="Spices">Spices</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label>Ingredient Name</label>
+                <select id="Ingredient-Name">
+                </select>
+
+                <label for="Ingredient-Type">Measurement Unit</label>
+                <select name="Ingredient-Type" id="Ingredient-Type" class="mb-6">
+                    <option value="Fixed">Unit</option>
+                    <option value="Fixed">g</option>
+                    <option value="Slider">kg</option>
+                    <option value="Quantity">ml</option>
+                    <option value="Quantity">L</option>
+                    <option value="Quantity">tbsp</option>
+                    <option value="Quantity">tsp</option>
+                </select>
+
+                <div id="form_min_wrap">
+                    <label>Minimum Quantity</label>
+                    <input type="number" id="form_min" style="width: 4cm;">
+                </div>
+                <label>Default Quantity</label>
+                <input type="number" id="form_default" style="width: 4cm;">
+                <div id="form_max_wrap">
+                    <label>Maximum Quantity</label>
+                    <input type="number" id="form_max" style="width: 4cm;">
+                </div>
+                <button class="btn mt-9 tag-red" style="width:100%" onclick="resetForm()"
+                    id="right-reset">Reset</button>
+            </div>
+            <button class=" btn cancel-btn material-icons" onclick="hideupdatepop()">close</button>
+        </div>
+    </div>
+    <div id="KMfotter"></div>
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+  
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="/Client/styles/pastures.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/Client/styles/supplieredit.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="/Client/Supplier/supplier_ingredient_list.js"></script>
+    <script src="/Client/Supplier/supplier_ingridient_list_controller.js"></script>
+    <script src="/Client/Supplier/supplier_ingredient_serializer.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="/Client/Supplier/sidenev.js"></script>
+
+
+    <!--    <title>Title</title>-->
+
+</head>
+<body>
+    <div class="sidenav" id="sidenav">
+        <!-- <img class="mt-4" src="/Client/images/Asset 304x.png" alt="">
+        <a href="RestockRequests.html"><i class="material-icons">free_cancellation</i></a>
+        <a href="SupplierOrders.html"><i class="material-icons">fact_check</i></a>
+        <a href="ViewStock.html"><i class="material-icons">inventory</i></a>
+        <a href="Payments.html"><i class="material-icons">request_page</i></a> -->
+     
+      </div>
+<div class="main ">
+    <div class=" mt-12" id="add-item">
+
+    <div class=row><div class="col-12 flex-center mt-8 mb-8"><h3>Add Item</h3></div></div>
+
+
+                <div class="row">
+                    <!-- <div class="mt-4"> -->
+                    <label class="col-6 mt-8 mb-4 flex-center"><h2>Item name:</h2></label>
+                    <select class= "col-4 mt-8" id="items1">
+
+
+                    </select>
+                <!-- </div> -->
+                    
+
+                </div>
+                <div class="row">
+                   <label class="col-6 mt-8 mb-4 flex-center"><h2>Quantity:</h2></label><input class="col-4 mt-8 " type="text" name="quantity" id="quantity">
+                </div>
+                <div class="row">
+                    <label class="col-6  mt-8 mb-4 flex-center"><h2>Price/Unit:</h2></label><input class="col-4 mt-8 mb" type="text" name="price" id="price">
+
+                </div>
+            
+
+    
+
+
+        <div class="row mt-12">
+            <div class="col-4"></div>
+            <div class="col-3 mt-12"> <button  type="submit" class="btn fw-b text-2 bg-clr-paid" onclick="doSubmit()" id="sub">Confirm</button></div>
+            <div class="col-4 mt-12"> <button  type="submit" class="btn fw-b text-2 bg-clr-unpaid">Cancel</button></div>
+            <!-- <button  type="submit" class="mybutton2" id="sub">Confirm</button> -->
+            <!-- <button  type="submit" class="mybutton2">Cancel</button> -->
+
+            <!-- </div> -->
+            
+
+        </div>
+        
+
+        
+          
+
+        
+    
+
+    <dic class="footer">
+
+    </dic>
+
+   
+
+</div>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="AddItem.js"></script>
+</div>
+</div>
+</body>
+
+
+</html>

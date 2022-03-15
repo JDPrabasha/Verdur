@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+    <link rel="stylesheet" href="/Client/kitchenmanager/slider.css">
+    <meta charset="UTF-8">
+
+  
+    
+
+</head>
+
+<body>
+<div class="textslider">
+    <input type="range" min="0" max="100" value="10" id="slider">
+    <div id="selector">
+        <div class="selectorBtn"></div>
+        <div id="selectvalue"></div>
+    </div>
+    <div id="progras"></div>
+  
+</div>
+
+<script>
+    var slider = document.getElementById("slider");
+    var selector = document.getElementById("selector");
+    var selectvalue = document.getElementById("selectvalue");
+
+    selectvalue.innerHTML = slider.value;
+
+
+    slider.oninput = function(){
+        selectvalue.innerHTML = this.value;
+        selector.style.left = this.value + "%";
+        progras.style.left = this.value + "%";
+    }
+</script>
+</body>
+</html>

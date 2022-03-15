@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/Client/styles/pastures.css">
+    <link rel="stylesheet" href="/Client/styles/cashier.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/Client/styles.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="/Client/Cashier/sidenevcashier.js"></script>
+    <script src="/Client/Cashier/header.js"></script>
+    <script src="/Client/Cashier/fotterCashier.js"></script>
+
+    <script src="/Client/Cashier/orders_assign_riderlist_controller.js" type="module"></script>
+
+    <script src="/Client/Cashier/assignriders/ridercontroller.js" type="module"></script>
+
+
+    <script src="/Client/Cashier/orders_cashier_cooked_controller.js" type="module"></script>
+
+
+    <link rel="stylesheet" href="/Client/styles/model.css">
+    <link rel="stylesheet" href="/Client/styles/colors.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+
+
+<body>
+    <div id="notification"></div>
+    <div class="sidenav " id="sidenav"></div>
+
+    <div class="main">
+
+        <div class="row">
+            <div class="col-5 mb-4 mt-27">
+                <h4>Cooked Orders</h4>
+            </div>
+
+
+            <div class="col-1 mt-27 mb-8 mr-12"><a class="btn fw-b tag-yellow tag-select"
+                    href="/Client/Cashier/Pending.html">Pending</a></div>
+            <div class="col-1 mt-27 mb-8 mr-12 "><a class="btn fw-b  tag-select"
+                    href="/Client/Cashier/Cooked.html">Cooked</a></div>
+            <!-- <div class="col-1  mt-27 mb-8 mr-12"><a class="btn fw-b tag-purple tag-select "
+                    href="/Client/Cashier/Cooking.html">Cooking</a></div> -->
+            <div class="col-1 mt-27 mb-8 mr-12"><a class="btn fw-b tag-blue2 tag-select"
+                    href="/Client/Cashier/Delivering.html">Delivering</a></div>
+            <div class="col-1 mt-27 mb-8 "><a class="btn fw-b tag-orange text-center tag-select"
+                    href="/Client/Cashier/OngoingOrders.html">All</a></div>
+
+
+
+
+        </div>
+        <div class="row">
+            <div class="col-12">
+
+
+                <div class="cards" id="cooked">
+                    <div class="card" id="results" style="height: 350px;">
+                        <h2 class="ml-2">Order ID: A011</h2>
+                        <div class="mt-3"
+                            style="padding: 10px; border:1px solid #bacdd8;border-radius: 10% ;height:225px;overflow-y: scroll;">
+                            <div class="flex-space-evenly">
+                                <img class="round-2"
+                                    src="https://soufflebombay.com/wp-content/uploads/2019/02/Homemade-Blueberry-Swirl-for-Yogurt.jpg"" alt="" style="
+                                    width:90px;height:90px;">
+                                <div style="flex-direction: column;">
+
+                                    <h1 class=" m-1 text-upper">Blueberry Yogurt</h1>
+                                    <div class="ml-12">
+                                        <p>Quantity : x2</p>
+                                        <p>Rs.400 x 2</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <hr class="mb-2 mt-2">
+                            <div class="flex-space-evenly">
+                                <img class="round-2"
+                                    src="https://vaya.in/recipes/wp-content/uploads/2019/01/Avocado-Smoothie.jpg" alt=""
+                                    style="width:90px;height:90px;">
+                                <div style="flex-direction: column;">
+
+                                    <h1 class=" m-1 text-upper">Avocado Smoothie</h1>
+                                    <div class="ml-12">
+                                        <p>Quantity : x1</p>
+                                        <p>Rs.350 x 1</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <hr class="mb-2 mt-2">
+                            <div class="flex-space-evenly">
+                                <img class="round-2"
+                                    src="https://bestofvegan.com/wp-content/uploads/2017/06/no-bake-protein-chocolate-cookie-sandwiches-by-@eatwithfingers-.-.-makes-20-22-cookies-12-cup-vegan-.jpg"
+                                    alt="" style="width:90px;height:90px;">
+                                <div style="flex-direction: column;">
+
+                                    <h1 class=" m-1 text-upper">PROTEIN COOKIE</h1>
+                                    <div class="ml-12">
+                                        <p>Quantity : x2</p>
+                                        <p>Rs.300 x3</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <hr class="mb-2 mt-2">
+                        </div>
+                        <div class="row">
+                            <div class="col-7  mt-5">
+                                <h2>Rs. 4200</h2>
+
+                            </div>
+
+                            <div style="flex-direction: column;">
+                                <div class="col-6 mt-3">
+                                    <button id="btn2" class="btn2 ml-12 " style="height: 45px;">Assign Rider</button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <div id="Cashierfotter"></div>
+</body>
+
+</html>
+
+
+<!-- 
+
+
+        <div class="card" id="results" style="height: 350px;">
+             <h2 class="ml-2">Order ID: A012</h2>
+            <div class="mt-3" style="padding: 10px; border:1px solid #bacdd8;border-radius: 10% ;height:225px;overflow-y: scroll;">
+                <div class="flex-space-evenly">
+                    <img class="round-2" src="https://media.istockphoto.com/photos/vegan-banana-and-oatmeal-smoothie-in-glass-jar-on-the-light-picture-id1194152250?k=20&m=1194152250&s=612x612&w=0&h=5O4mOYgY-zLMeHwf0APnTDZt1ZzLGKDrJz17KrlOb28=" alt="" style="width:90px;height:90px;">
+                    <div style="flex-direction: column;">
+                        
+                            <h1 class=" m-1 text-upper">BANANA SHAKE</h1>
+                        <div class="ml-12">
+                            <p>Quantity : x4</p>
+                            <p>Rs.500 x 4</p>
+                        </div>
+                        
+                    </div>
+                </div>
+                <hr class="mb-2 mt-2">
+                <div class="flex-space-evenly">
+                    <img class="round-2" src="https://soufflebombay.com/wp-content/uploads/2019/02/Homemade-Blueberry-Swirl-for-Yogurt.jpg" alt="" style="width:90px;height:90px;">
+                    <div style="flex-direction: column;">
+                        
+                    <h1 class=" m-1 text-upper">granola w/ honey</h1>
+                <div class="ml-12">
+                    <p>Quantity : x2</p>
+                    <p>Rs.450 x 2</p>
+                </div>
+                
+            </div>
+                </div>
+                <hr class="mb-2 mt-2">
+                <div class="flex-space-evenly">
+                    <img class="round-2" src="https://www.quakeroats.com/images/default-source/QuakerRecipes/quaker_fruitandhoneygranola_750x433.jpg" alt="" style="width:90px;height:90px;">
+                    <div style="flex-direction: column;">
+                        
+                    <h1 class=" m-1 text-upper">granola w/ honey</h1>
+                <div class="ml-12">
+                    <p>Quantity : x2</p>
+                    <p>Rs.600 x 2</p>
+                </div>
+                
+            </div>
+                </div>
+                <hr class="mb-2 mt-2">
+            </div>
+            <div class="row">
+                <div class="col-7  mt-5">
+                    <h2>Rs. 3120</h2>
+                  
+                </div>
+               
+                <div style="flex-direction: column;">
+                    <div class="col-6 mt-3">
+                        <button id="btn2" class="btn2 ml-12 " style="height: 45px;">Assign Rider</button>
+                    </div>
+
+                </div>
+            </div>
+    
+        </div>
+
+
+
+
+
+
+        <div class="card" id="results" style="height: 350px;">
+             <h2 class="ml-2">Order ID: A013</h2>
+            <div class="mt-3" style="padding: 10px; border:1px solid #bacdd8;border-radius: 10% ;height:225px;overflow-y: scroll;">
+                <div class="flex-space-evenly">
+                    <img class="round-2" src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2008/11/24/0/IG1C11_Roast-Turkey.jpg.rend.hgtvcom.826.620.suffix/1382538696807.jpeg" alt="Hot air balloons"  style="width:90px;height:90px;">
+                   
+                    <div style="flex-direction: column;">
+                        
+                            <h1 class=" m-1 text-upper">Roasted Turkey</h1>
+                        <div class="ml-12">
+                            <p>Quantity : x1</p>
+                            <p>Rs.900 x 1</p>
+                        </div>
+                        
+                    </div>
+                </div>
+                <hr class="mb-2 mt-2">
+                <div class="flex-space-evenly">
+                    <img class="round-2" src="https://bestofvegan.com/wp-content/uploads/2017/06/no-bake-protein-chocolate-cookie-sandwiches-by-@eatwithfingers-.-.-makes-20-22-cookies-12-cup-vegan-.jpg" alt="" style="width:90px;height:90px;">
+
+                   
+                    <div style="flex-direction: column;">
+                        
+                    <h1 class=" m-1 text-upper">protien Cookie</h1>
+                <div class="ml-12">
+                    <p>Quantity : x5</p>
+                    <p>Rs.300 x 5</p>
+                </div>
+                
+            </div>
+                </div>
+                <hr class="mb-2 mt-2">
+                <div class="flex-space-evenly">
+                    <img class="round-2" src="https://www.quakeroats.com/images/default-source/QuakerRecipes/quaker_fruitandhoneygranola_750x433.jpg" alt="" style="width:90px;height:90px;">
+                    <div style="flex-direction: column;">
+                        
+                    <h1 class=" m-1 text-upper">granola w/ honey</h1>
+                <div class="ml-12">
+                    <p>Quantity : x2</p>
+                    <p>Rs.600 x 2</p>
+                </div>
+                
+            </div>
+                </div>
+                <hr class="mb-2 mt-2">
+            </div>
+            <div class="row">
+                <div class="col-7  mt-5">
+                    <h2>Rs. 2600</h2>
+                  
+                </div>
+               
+                <div style="flex-direction: column;">
+                    <div class="col-6 mt-3">
+                        <button id="btn2" class="btn2 ml-12 " style="height: 45px;">Assign Rider</button>
+                    </div>
+
+                </div>
+            </div>
+       
+        </div>
+
+
+
+
+
+
+
+
+
+        <div class="card" id="results" style="height: 350px;">
+             <h2 class="ml-2">Order ID: A014</h2>
+            <div class="mt-3" style="padding: 10px; border:1px solid #bacdd8;border-radius: 10% ;height:225px;overflow-y: scroll;">
+                <div class="flex-space-evenly">
+                    <img class="round-2" src="https://vaya.in/recipes/wp-content/uploads/2019/01/Avocado-Smoothie.jpg" alt="" style="width:90px;height:90px;">
+
+                  
+                    <div style="flex-direction: column;">
+                        
+                            <h1 class=" m-1 text-upper">Avocado Smoothie</h1>
+                        <div class="ml-12">
+                            <p>Quantity : x5</p>
+                            <p>Rs.350 x 5</p>
+                        </div>
+                        
+                    </div>
+                </div>
+                <hr class="mb-2 mt-2">
+                <div class="flex-space-evenly">
+                    <img class="round-2" src="https://www.quakeroats.com/images/default-source/QuakerRecipes/quaker_fruitandhoneygranola_750x433.jpg" alt="" style="width:90px;height:90px;">
+                    <div style="flex-direction: column;">
+                        
+                    <h1 class=" m-1 text-upper">granola w/ honey</h1>
+                <div class="ml-12">
+                    <p>Quantity : x2</p>
+                    <p>Rs.450 x 2</p>
+                </div>
+                
+            </div>
+                </div>
+                <hr class="mb-2 mt-2">
+                <div class="flex-space-evenly">
+                    <img class="round-2" src="https://www.quakeroats.com/images/default-source/QuakerRecipes/quaker_fruitandhoneygranola_750x433.jpg" alt="" style="width:90px;height:90px;">
+                    <div style="flex-direction: column;">
+                        
+                    <h1 class=" m-1 text-upper">granola w/ honey</h1>
+                <div class="ml-12">
+                    <p>Quantity : x2</p>
+                    <p>Rs.600 x 2</p>
+                </div>
+                
+            </div>
+                </div>
+                <hr class="mb-2 mt-2">
+            </div>
+            <div class="row">
+                <div class="col-7  mt-5">
+                    <h2>Rs. 1900</h2>
+                  
+                </div>
+               
+                <div style="flex-direction: column;">
+                    <div class="col-6 mt-3">
+                        <button id="btn2" class="btn2 ml-12 " style="height: 45px;">Assign Rider</button>
+                    </div>
+
+                </div>
+            </div>
+          
+        </div>
+
+
+
+
+
+
+
+
+
+        
+        <div class="card" id="results" style="height: 350px;">
+             <h2 class="ml-2">Order ID: A015</h2>
+            <div class="mt-3" style="padding: 10px; border:1px solid #bacdd8;border-radius: 10% ;height:225px;overflow-y: scroll;">
+                <div class="flex-space-evenly">
+                    <img class="round-2" src="https://bestofvegan.com/wp-content/uploads/2017/06/no-bake-protein-chocolate-cookie-sandwiches-by-@eatwithfingers-.-.-makes-20-22-cookies-12-cup-vegan-.jpg" alt="" style="width:90px;height:90px;">
+
+                   
+                    <div style="flex-direction: column;">
+                        
+                            <h1 class=" m-1 text-upper">protien Cookie</h1>
+                        <div class="ml-12">
+                            <p>Quantity : x6</p>
+                            <p>Rs.300 x 6</p>
+                        </div>
+                        
+                    </div>
+                </div>
+                <hr class="mb-2 mt-2">
+                <div class="flex-space-evenly">
+                    <img class="round-2" src="https://www.quakeroats.com/images/default-source/QuakerRecipes/quaker_fruitandhoneygranola_750x433.jpg" alt="" style="width:90px;height:90px;">
+                    <div style="flex-direction: column;">
+                        
+                    <h1 class=" m-1 text-upper">granola w/ honey</h1>
+                <div class="ml-12">
+                    <p>Quantity : x2</p>
+                    <p>Rs.450 x 2</p>
+                </div>
+                
+            </div>
+                </div>
+                <hr class="mb-2 mt-2">
+                <div class="flex-space-evenly">
+                    <img class="round-2" src="https://www.quakeroats.com/images/default-source/QuakerRecipes/quaker_fruitandhoneygranola_750x433.jpg" alt="" style="width:90px;height:90px;">
+                    <div style="flex-direction: column;">
+                        
+                    <h1 class=" m-1 text-upper">granola w/ honey</h1>
+                <div class="ml-12">
+                    <p>Quantity : x2</p>
+                    <p>Rs.450 x 2</p>
+                </div>
+                
+            </div>
+                </div>
+                <hr class="mb-2 mt-2">
+            </div>
+            <div class="row">
+                <div class="col-7  mt-5">
+                    <h2>Rs. 3120</h2>
+                  
+                </div>
+               
+                <div style="flex-direction: column;">
+                    <div class="col-6 mt-3">
+                        <button id="btn2" class="btn2 ml-12 " style="height: 45px;">Assign Rider</button>
+                    </div>
+
+                </div>
+            </div>
+        
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="card" id="results" style="height: 350px;">
+         <h2 class="ml-2">Order ID: A016</h2>
+        <div class="mt-3" style="padding: 10px; border:1px solid #bacdd8;border-radius: 10% ;height:225px;overflow-y: scroll;">
+            <div class="flex-space-evenly">
+                <img class="round-2" src="https://www.quakeroats.com/images/default-source/QuakerRecipes/quaker_fruitandhoneygranola_750x433.jpg" alt="" style="width:90px;height:90px;">
+                <div style="flex-direction: column;">
+                    
+                        <h1 class=" m-1 text-upper">granola w/ honey</h1>
+                    <div class="ml-12">
+                        <p>Quantity : x2</p>
+                        <p>Rs.600 x 2</p>
+                    </div>
+                    
+                </div>
+            </div>
+            <hr class="mb-2 mt-2">
+            <div class="flex-space-evenly">
+                <img class="round-2" src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2008/11/24/0/IG1C11_Roast-Turkey.jpg.rend.hgtvcom.826.620.suffix/1382538696807.jpeg" alt="Hot air balloons"  style="width:90px;height:90px;">
+              
+                <div style="flex-direction: column;">
+                    
+                <h1 class=" m-1 text-upper">Roasted Turkey</h1>
+            <div class="ml-12">
+                <p>Quantity : x1</p>
+                <p>Rs.900 x 1</p>
+            </div>
+            
+        </div>
+            </div>
+            <hr class="mb-2 mt-2">
+            <div class="flex-space-evenly">
+                <img class="round-2" src="https://media.istockphoto.com/photos/vegan-banana-and-oatmeal-smoothie-in-glass-jar-on-the-light-picture-id1194152250?k=20&m=1194152250&s=612x612&w=0&h=5O4mOYgY-zLMeHwf0APnTDZt1ZzLGKDrJz17KrlOb28=" alt="" style="width:90px;height:90px;">
+
+               
+                <div style="flex-direction: column;">
+                    
+                <h1 class=" m-1 text-upper">granola w/ honey</h1>
+            <div class="ml-12">
+                <p>Quantity : x2</p>
+                <p>Rs.600 x 2</p>
+            </div>
+            
+        </div>
+            </div>
+            <hr class="mb-2 mt-2">
+        </div>
+        <div class="row">
+            <div class="col-7  mt-5">
+                <h2>Rs. 3120</h2>
+              
+            </div>
+           
+            <div style="flex-direction: column;">
+                <div class="col-6 mt-3">
+                    <button id="btn2" class="btn2 ml-12 " style="height: 45px;">Assign Rider</button>
+                </div>
+
+            </div>
+        </div>
+      
+    </div>
+
+
+
+
+    <div class="card" id="results" style="height: 350px;">
+         <h2 class="ml-2">Order ID: A017</h2>
+        <div class="mt-3" style="padding: 10px; border:1px solid #bacdd8;border-radius: 10% ;height:225px;overflow-y: scroll;">
+            <div class="flex-space-evenly">
+                <img class="round-2" src="https://soufflebombay.com/wp-content/uploads/2019/02/Homemade-Blueberry-Swirl-for-Yogurt.jpg"" alt="" style="width:90px;height:90px;">
+                <div style="flex-direction: column;">
+                    
+                        <h1 class=" m-1 text-upper">Blueberry Yogurt</h1>
+                    <div class="ml-12">
+                        <p>Quantity : x4</p>
+                        <p>Rs.400 x 4</p>
+                    </div>
+                    
+                </div>
+            </div>
+            <hr class="mb-2 mt-2">
+            <div class="flex-space-evenly">
+                <img class="round-2" src="https://vaya.in/recipes/wp-content/uploads/2019/01/Avocado-Smoothie.jpg" alt="" style="width:90px;height:90px;">
+                <div style="flex-direction: column;">
+                    
+                <h1 class=" m-1 text-upper">Avocado Smoothie</h1>
+            <div class="ml-12">
+                <p>Quantity : x1</p>
+                <p>Rs.350 x 1</p>
+            </div>
+            
+        </div>
+            </div>
+            <hr class="mb-2 mt-2">
+            <div class="flex-space-evenly">
+                <img class="round-2" src="https://bestofvegan.com/wp-content/uploads/2017/06/no-bake-protein-chocolate-cookie-sandwiches-by-@eatwithfingers-.-.-makes-20-22-cookies-12-cup-vegan-.jpg" alt="" style="width:90px;height:90px;">
+                <div style="flex-direction: column;">
+                    
+                <h1 class=" m-1 text-upper">PROTEIN COOKIE</h1>
+            <div class="ml-12">
+                <p>Quantity : x2</p>
+                <p>Rs.500</p>
+            </div>
+            
+        </div>
+            </div>
+            <hr class="mb-2 mt-2">
+        </div>
+        <div class="row">
+            <div class="col-7  mt-5">
+                <h2>Rs. 4120</h2>
+              
+            </div>
+           
+            <div style="flex-direction: column;">
+                <div class="col-6 mt-3">
+                    <button id="btn2" class="btn2 ml-12 " style="height: 45px;">Assign Rider</button>
+                </div>
+
+            </div>
+        </div>
+     
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="card" id="results" style="height: 350px;">
+         <h2 class="ml-2">Order ID: A018</h2>
+        <div class="mt-3" style="padding: 10px; border:1px solid #bacdd8;border-radius: 10% ;height:225px;overflow-y: scroll;">
+            <div class="flex-space-evenly">
+                <img class="round-2" src="https://soufflebombay.com/wp-content/uploads/2019/02/Homemade-Blueberry-Swirl-for-Yogurt.jpg"" alt="" style="width:90px;height:90px;">
+
+               
+                <div style="flex-direction: column;">
+                    
+                        <h1 class=" m-1 text-upper">Blueberry Yogurt</h1>
+                    <div class="ml-12">
+                        <p>Quantity : x2</p>
+                        <p>Rs.400 x 2</p>
+                    </div>
+                    
+                </div>
+            </div>
+            <hr class="mb-2 mt-2">
+            <div class="flex-space-evenly">
+                <img class="round-2" src="https://media.istockphoto.com/photos/vegan-banana-and-oatmeal-smoothie-in-glass-jar-on-the-light-picture-id1194152250?k=20&m=1194152250&s=612x612&w=0&h=5O4mOYgY-zLMeHwf0APnTDZt1ZzLGKDrJz17KrlOb28=" alt="" style="width:90px;height:90px;">
+
+                
+                <div style="flex-direction: column;">
+                    
+                <h1 class=" m-1 text-upper">banana shake</h1>
+            <div class="ml-12">
+                <p>Quantity : x3</p>
+                <p>Rs.500 x 3</p>
+            </div>
+            
+        </div>
+            </div>
+            <hr class="mb-2 mt-2">
+            <div class="flex-space-evenly">
+                <img class="round-2" src="https://www.quakeroats.com/images/default-source/QuakerRecipes/quaker_fruitandhoneygranola_750x433.jpg" alt="" style="width:90px;height:90px;">
+                <div style="flex-direction: column;">
+                    
+                <h1 class=" m-1 text-upper">granola w/ honey</h1>
+            <div class="ml-12">
+                <p>Quantity : x2</p>
+                <p>Rs.600 x 2</p>
+            </div>
+            
+        </div>
+            </div>
+            <hr class="mb-2 mt-2">
+        </div>
+        <div class="row">
+            <div class="col-7  mt-5">
+                <h2>Rs. 3500</h2>
+              
+            </div>
+           
+            <div style="flex-direction: column;">
+                <div class="col-6 mt-3">
+                    <button id="btn2" class="btn2 ml-12 " style="height: 45px;">Assign Rider</button>
+                </div>
+
+            </div>
+        </div>
+        
+      
+    </div>
+
+
+
+
+
+    <div class="card" id="results" style="height: 350px;">
+         <h2 class="ml-2">Order ID: A019</h2>
+        <div class="mt-3" style="padding: 10px; border:1px solid #bacdd8;border-radius: 10% ;height:225px;overflow-y: scroll;">
+            <div class="flex-space-evenly">
+                <img class="round-2" src="https://media.istockphoto.com/photos/vegan-banana-and-oatmeal-smoothie-in-glass-jar-on-the-light-picture-id1194152250?k=20&m=1194152250&s=612x612&w=0&h=5O4mOYgY-zLMeHwf0APnTDZt1ZzLGKDrJz17KrlOb28=" alt="" style="width:90px;height:90px;">
+                <div style="flex-direction: column;">
+                    
+                        <h1 class=" m-1 text-upper">BANANA SHAKE</h1>
+                    <div class="ml-12">
+                        <p>Quantity : x5</p>
+                        <p>Rs.500 x 5</p>
+                    </div>
+                    
+                </div>
+            </div>
+            <hr class="mb-2 mt-2">
+            <div class="flex-space-evenly">
+                <img class="round-2" src="https://soufflebombay.com/wp-content/uploads/2019/02/Homemade-Blueberry-Swirl-for-Yogurt.jpg" alt="" style="width:90px;height:90px;">
+                <div style="flex-direction: column;">
+                    
+                <h1 class=" m-1 text-upper">granola w/ honey</h1>
+            <div class="ml-12">
+                <p>Quantity : x2</p>
+                <p>Rs.450 x 2</p>
+            </div>
+            
+        </div>
+            </div>
+            <hr class="mb-2 mt-2">
+            <div class="flex-space-evenly">
+                <img class="round-2" src="https://www.quakeroats.com/images/default-source/QuakerRecipes/quaker_fruitandhoneygranola_750x433.jpg" alt="" style="width:90px;height:90px;">
+                <div style="flex-direction: column;">
+                    
+                <h1 class=" m-1 text-upper">granola w/ honey</h1>
+            <div class="ml-12">
+                <p>Quantity : x2</p>
+                <p>Rs.600 x 2</p>
+            </div>
+            
+        </div>
+            </div>
+            <hr class="mb-2 mt-2">
+        </div>
+        <div class="row">
+            <div class="col-7  mt-5">
+                <h2>Rs. 3120</h2>
+              
+            </div>
+           
+            <div style="flex-direction: column;">
+                <div class="col-6 mt-3">
+                    <button id="btn2" class="btn2 ml-12 " style="height: 45px;">Assign Rider</button>
+                </div>
+
+            </div>
+        </div>
+      
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="card" id="results" style="height: 350px;">
+        <h2 class="ml-2">Order ID: A020</h2>
+        <div class="mt-3" style="padding: 10px; border:1px solid #bacdd8;border-radius: 10% ;height:225px;overflow-y: scroll;">
+            <div class="flex-space-evenly">
+                <img class="round-2" src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2008/11/24/0/IG1C11_Roast-Turkey.jpg.rend.hgtvcom.826.620.suffix/1382538696807.jpeg" alt="Hot air balloons"  style="width:90px;height:90px;">
+               
+                <div style="flex-direction: column;">
+                    
+                        <h1 class=" m-1 text-upper">Roasted Turkey</h1>
+                    <div class="ml-12">
+                        <p>Quantity : x1</p>
+                        <p>Rs.900 x 1</p>
+                    </div>
+                    
+                </div>
+            </div>
+            <hr class="mb-2 mt-2">
+            <div class="flex-space-evenly">
+                <img class="round-2" src="https://www.quakeroats.com/images/default-source/QuakerRecipes/quaker_fruitandhoneygranola_750x433.jpg" alt="" style="width:90px;height:90px;">
+                <div style="flex-direction: column;">
+                    
+                <h1 class=" m-1 text-upper">granola w/ honey</h1>
+            <div class="ml-12">
+                <p>Quantity : x2</p>
+                <p>Rs.450 x 2</p>
+            </div>
+            
+        </div>
+            </div>
+            <hr class="mb-2 mt-2">
+            <div class="flex-space-evenly">
+                
+               
+                <img class="round-2" src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2008/11/24/0/IG1C11_Roast-Turkey.jpg.rend.hgtvcom.826.620.suffix/1382538696807.jpeg" alt="Hot air balloons"  style="width:90px;height:90px;">
+                <div style="flex-direction: column;">
+                    
+                <h1 class=" m-1 text-upper">granola w/ honey</h1>
+            <div class="ml-12">
+                <p>Quantity : x2</p>
+                <p>Rs.600 x 2</p>
+            </div>
+            
+        </div>
+            </div>
+            <hr class="mb-2 mt-2">
+        </div>
+        <div class="row">
+            <div class="col-6  mt-5">
+                <h2>Rs. 3120</h2>
+              
+            </div>
+           
+            <div style="flex-direction: column;">
+                <div class="col-6 mt-3">
+                    <button id="btn2" class="btn2 ml-12 " style="height: 45px;">Assign Rider</button>
+                </div>
+
+            </div>
+        </div>
+       -->
+
+
+
+
+
+
+<!-- </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    
+
+    <div id="Cashierfotter"></div> 
+</body>
+</html>
+     -->

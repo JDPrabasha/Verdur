@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/Client/styles/pastures.css">
+   
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="/Client/kitchenmanager/js/kitchenmanagersidemenu.js"></script>
+    <link rel="stylesheet" href="/Client/styles/colors.css">
+    <link rel="stylesheet" href="/Client/styles/ongoing.css">
+    <script src="/Client/kitchenmanager/js/hedder.js"></script>
+    <script src="/Client/kitchenmanager/js/fotterKM.js"></script>
+
+    <!-- <script  src="/Client/kitchenmanager/js/dish.js"></script> -->
+    <script type="module"  src="/Client/kitchenmanager/js/dissabledishcontroller.js"></script>
+    <!-- <script src="/Client/kitchenmanager/js/dishserializer.js"></script> -->
+    <script src="/Client/kitchenmanager/js/enable.js"></script>
+    <script src="/Client/kitchenmanager/js/disable.js"></script>
+    <script src="/Client/kitchenmanager/js/disableall.js"></script>
+    <script src="/Client/kitchenmanager/js/enableall.js"></script>
+    <link rel="stylesheet" href="/Client/styles/myedition.css">
+
+
+  
+
+</head>
+<body>
+    <div  class="notification" id="notification"></div>
+    <div class="sidenav " id="sidenavkm"></div>
+    <div class="main">
+        
+    <!-- <div id="dishbying"> -->
+
+    <div class="row"> 
+        <div class="col-10"> <h5 class="text-left    mt-24 ml-4 ">Disable Dishes</h5></div>
+        <div class="col-2 mt-12"> <button onclick="disableall()" class=" tag-red text-center text-2 btn mt-24 mr-4">Disable All <i class="material-icons tag-red ml-4">lunch_dining</i></button></div>
+
+    </div>  
+    
+    <table class="disabletable" >
+        <thead>
+            <th>Picture</th>
+            <th>Name</th>
+            <th>Ingredient Type</th>
+            <th>Quantity</th>
+            <th>Action</th>
+        </thead>
+        <tbody id="dishbying">
+            <!-- <tr>
+                <td><img  class="icon-6" src="${this.image}" ></td>
+                <td>${this.name}</td>
+                <td>${this.ingtype}</td>
+                <td>${this.defaultingamount}</td>
+                <td><div ><button onclick="${functionname}" class=" ${buttoncolor} " style="width: 100px;">${buttonname}</button></div></td>
+            </tr> -->
+    
+        </tbody>
+    </table>
+    <!-- </div> -->
+</div>
+<div id="KMfotter"></div>
+</body>
+</html>

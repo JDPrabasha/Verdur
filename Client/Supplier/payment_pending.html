@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/Client/styles/pastures.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/Client/styles/supplieredit.css">
+
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="/Client/Supplier/sidenev.js"></script>
+    <script src="/Client/Supplier/supplierheader.js"></script>
+    <script src="/Client/Supplier/fotterSupplier.js"></script>
+
+    <script type="module" src="payment_pending_controller.js"></script>
+
+    <link rel="stylesheet" href="/Client/styles/colors.css">
+
+
+    <!--    <title>Title</title>-->
+
+</head>
+
+<body>
+    <div id="notification"></div>
+    <div class="sidenav " id="sidenav">
+
+    </div>
+    <div class="main">
+        <div class="row">
+            <div class="col-3 mt-27">
+                <h4>Payments</h4>
+            </div>
+
+            <div class="col-1  mt-27 mb-4 "><a class="btn text-2  fw-b tag-select"
+                    href="/Client/Supplier/payment_pending.html">Pending</a></div>
+            <div class="col-1"></div>
+            <div class="col-1  mt-27 mb-4 "><a class="btn text-2 tag-purple text-center fw-b tag-select"
+                    href="/Client/Supplier/payment_all.html">All</a></div>
+            <div class="col-1"></div>
+            <div class="col-1  mt-27 mb-4 "><a class="btn text-2 tag-green fw-b tag-select"
+                    href="/Client/Supplier/payment_completed.html">Completed</a></div>
+
+        </div>
+        <div class="row">
+            <div class="col-12 ">
+
+                <table class=" mt-4 " style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Invoice ID</th>
+                            <th>Invoice Date</th>
+                            <th>Total Amount(Rs.)</th>
+                            <th>Requested Date</th>
+                            <th>Delivery Date</th>
+                            <!-- <td><a class="button">Accept</a> </td> -->
+
+                        </tr>
+                    </thead>
+                    <tbody id="pending"></tbody>
+
+                </table>
+
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+    <div id="Supplierfotter"></div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- <script src="payment_pending_controller.js"></script> -->
+<!-- <script src="payment.js"></script>
+<script src="payment_serializer.js"></script> -->
+
+</html>
