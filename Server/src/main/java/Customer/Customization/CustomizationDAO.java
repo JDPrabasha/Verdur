@@ -1,7 +1,7 @@
 package Customer.Customization;
 
 
-import Core.ConnectionFactory.DB;
+import User.ConnectionFactory.DB;
 import Customer.Ingredient.Ingredient;
 
 import java.sql.Connection;

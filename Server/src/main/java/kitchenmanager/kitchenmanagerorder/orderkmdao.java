@@ -1,6 +1,6 @@
 package kitchenmanager.kitchenmanagerorder;
 
-import Dao.DB;
+import User.ConnectionFactory.DB;
 import kitchenmanager.dishes.dish;
 
 
@@ -38,19 +38,19 @@ public class orderkmdao {
             int chefid = 0;
             String chefname = "";
             String chefimage = "";
-            String query2 ="SELECT * FROM orders JOIN hasdish on orders.orderID=hasdish.orderID JOIN customizedDish ON customizedDish.cdishID=hasdish.cdishID JOIN dish on customizedDish.dishID=dish.dishID WHERE orders.orderID=?";
+            String query2 = "SELECT * FROM orders JOIN hasdish on orders.orderID=hasdish.orderID JOIN customizedDish ON customizedDish.cdishID=hasdish.cdishID JOIN dish on customizedDish.dishID=dish.dishID WHERE orders.orderID=?";
             PreparedStatement st2 = this.conn.prepareStatement(query2);
-            st2.setInt(1,orderid);
-            ResultSet rs2= st2.executeQuery();
-            while (rs2.next()){
+            st2.setInt(1, orderid);
+            ResultSet rs2 = st2.executeQuery();
+            while (rs2.next()) {
                 int dishid = rs2.getInt("cdishID");
                 String dishname = rs2.getString("name");
-                int dishquantity =rs2.getInt("quantity");
-                String dishimage =rs2.getString("image");
+                int dishquantity = rs2.getInt("quantity");
+                String dishimage = rs2.getString("image");
 //                int esttime = rs2.getInt("estTime");   make time a string
 //                int esttime = 0;
 
-                dishitem.add(new dish(dishid,dishname,dishimage,dishquantity));
+                dishitem.add(new dish(dishid, dishname, dishimage, dishquantity));
 
             }
 
@@ -89,20 +89,20 @@ public class orderkmdao {
             String query2 = "SELECT * FROM orders JOIN hasdish  on orders.orderID=hasdish.orderID JOIN customizedDish ON customizedDish.cdishID=hasdish.cdishID JOIN dish on customizedDish.dishID=dish.dishID WHERE orders.orderID=?";
 //            String query2 = "SELECT * FROM orders JOIN customizeddish ON orders.cdishID=customizeddish.cdish JOIN dish ON customizeddish.ddish = dish.ddishID WHERE orderID = ?";
             PreparedStatement st2 = this.conn.prepareStatement(query2);
-            st2.setInt(1,orderid);
-            ResultSet rs2= st2.executeQuery();
-            while (rs2.next()){
-               // String dishid = rs2.getString("cdishID");
+            st2.setInt(1, orderid);
+            ResultSet rs2 = st2.executeQuery();
+            while (rs2.next()) {
+                // String dishid = rs2.getString("cdishID");
                 //String dishname = rs2.getString("name");
                 //int dishquantity =rs2.getInt("quantity");
-               // String dishimage =rs2.getString("image");
+                // String dishimage =rs2.getString("image");
                 int esttime = rs2.getInt("estTime");
 
                 dishitem.add(new dish(esttime));
 
             }
 
-            orderitem.add(new orderkm(orderid, chefid, chefname, chefimage,dishitem));
+            orderitem.add(new orderkm(orderid, chefid, chefname, chefimage, dishitem));
 //            orderitem.add(new orderkm(orderid, chefid, chefname, chefimage));
 
 

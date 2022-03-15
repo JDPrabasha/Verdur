@@ -1,6 +1,6 @@
 package kitchenmanager.dishes;
 
-import Dao.DB;
+import User.ConnectionFactory.DB;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,12 +9,12 @@ import java.util.List;
 public class dishdao {
     private Connection conn;
 
-//    static String insertDishQuery = "INSERT INTO dish (dishcode,name,description,image,estTime,enabled) VALUES (?,?,?,?,?,?)";
+    //    static String insertDishQuery = "INSERT INTO dish (dishcode,name,description,image,estTime,enabled) VALUES (?,?,?,?,?,?)";
 //    static String insertIngredients = "INSERT INTO hasingredient (ddish,ingID,min,max,defaultValue,type) VALUES (?,?,?,?,?,?)";
-static String insertDishQuery = "INSERT INTO dish (dishCode,name,description,image,estTime,enabled,price) VALUES (?,?,?,?,?,?,0)";
-static String insertIngredients = "INSERT INTO hasingredient (dishID,ingID,min,max,defaultValue,type) VALUES (?,?,?,?,?,?)";
+    static String insertDishQuery = "INSERT INTO dish (dishCode,name,description,image,estTime,enabled,price) VALUES (?,?,?,?,?,?,0)";
+    static String insertIngredients = "INSERT INTO hasingredient (dishID,ingID,min,max,defaultValue,type) VALUES (?,?,?,?,?,?)";
 
-    public dishdao(DB db){
+    public dishdao(DB db) {
         try {
             this.conn = db.initializeDB();
         } catch (ClassNotFoundException e) {
@@ -25,45 +25,45 @@ static String insertIngredients = "INSERT INTO hasingredient (dishID,ingID,min,m
     }
 
     public List<dish> read() throws SQLException {
-        List <dish> dishes = new ArrayList<dish>();
+        List<dish> dishes = new ArrayList<dish>();
         String query = "SELECT * from dish WHERE enabled != -3";
         Statement stm = this.conn.createStatement();
         ResultSet rs = stm.executeQuery(query);
 
-        while (rs.next()){
+        while (rs.next()) {
             List<hasIngredient> ingredients = new ArrayList<>();
 
-            int dishid =rs.getInt("dishID");
-            String dishname =rs.getString("name");
-            String dishcode =rs.getString("dishCode");
-            String image=rs.getString("image");
+            int dishid = rs.getInt("dishID");
+            String dishname = rs.getString("name");
+            String dishcode = rs.getString("dishCode");
+            String image = rs.getString("image");
             int enable = rs.getInt("enabled");
 
 //            String ingQuery = "SELECT * FROM hasingredient h INNER JOIN ingredient i WHERE ddish = ? and h.ingID=i.ingID ";
             String ingQuery = "SELECT * FROM hasingredient h INNER JOIN ingredient i join stock s on s.ingID =i.ingID WHERE dishID = ? and h.ingID=i.ingID";
             PreparedStatement st2 = this.conn.prepareStatement(ingQuery);
-            st2.setInt(1 , dishid);
+            st2.setInt(1, dishid);
             ResultSet rs2 = st2.executeQuery();
-            while (rs2.next()){
+            while (rs2.next()) {
                 int ingID = rs2.getInt("I.ingID");
                 String itemcode = rs2.getString("itemCode");
                 String type = rs2.getString("type");
                 String name = rs2.getString("name");
 //                String ingimage = rs2.getString("image");
                 int carbpg = rs2.getInt("carbsphg");
-                int calpg  = rs2.getInt("calphg");
-                int proteinpg  = rs2.getInt("proteinphg");
-                int min  = rs2.getInt("min");
-                int max  = rs2.getInt("max");
-                int defaultValue  = rs2.getInt("defaultValue");
+                int calpg = rs2.getInt("calphg");
+                int proteinpg = rs2.getInt("proteinphg");
+                int min = rs2.getInt("min");
+                int max = rs2.getInt("max");
+                int defaultValue = rs2.getInt("defaultValue");
                 int stock = rs2.getInt("s.quantity");
                 int restocklevel = rs2.getInt("s.min");
 
 
-                ingredients.add(new hasIngredient(ingID,type,min,defaultValue,max,itemcode,name,image,carbpg,calpg,proteinpg,stock,restocklevel));
+                ingredients.add(new hasIngredient(ingID, type, min, defaultValue, max, itemcode, name, image, carbpg, calpg, proteinpg, stock, restocklevel));
             }
 
-            dishes.add(new dish(dishid,dishname,dishcode,image,enable,ingredients));
+            dishes.add(new dish(dishid, dishname, dishcode, image, enable, ingredients));
 
 
         }
@@ -72,27 +72,25 @@ static String insertIngredients = "INSERT INTO hasingredient (dishID,ingID,min,m
     }
 
     public List<dish> readname(String s) throws SQLException {
-        List <dish> dishes = new ArrayList<>();
+        List<dish> dishes = new ArrayList<>();
         String query = "SELECT * from dish WHERE name LIKE ?";
         PreparedStatement st = this.conn.prepareStatement(query);
         st.setString(1, s);
         ResultSet rs = st.executeQuery();
 
-        while (rs.next()){
+        while (rs.next()) {
 
 
-            int dishid =rs.getInt("dishID");
-            String dishname =rs.getString("name");
-            String dishcode =rs.getString("dishCode");
-            String image=rs.getString("image");
-            dishes.add(new dish(dishid,dishname,dishcode,image));
+            int dishid = rs.getInt("dishID");
+            String dishname = rs.getString("name");
+            String dishcode = rs.getString("dishCode");
+            String image = rs.getString("image");
+            dishes.add(new dish(dishid, dishname, dishcode, image));
 
 
         }
         return dishes;
     }
-
-
 
 
     public int add(dish d) {
@@ -146,8 +144,8 @@ static String insertIngredients = "INSERT INTO hasingredient (dishID,ingID,min,m
             }
             return 0;
         }
-        for(int x : rsset){
-            if(x==0){
+        for (int x : rsset) {
+            if (x == 0) {
                 return 0;
             }
         }
@@ -163,52 +161,53 @@ static String insertIngredients = "INSERT INTO hasingredient (dishID,ingID,min,m
     public List<dish> readbyingredient(String id) throws SQLException {
 //        String query = "SELECT * from dish WHERE  = "+"'"+id+"'";
 //        String query = "SELECT * from dish d INNER JOIN hasingredient h ON d.ddishID = h.ddish WHERE h.ingID = "+"'"+id+"'";
-        String query = "SELECT * from dish d INNER JOIN hasingredient h ON d.dishID = h.dishID WHERE h.ingID = "+"'"+id+"'";
+        String query = "SELECT * from dish d INNER JOIN hasingredient h ON d.dishID = h.dishID WHERE h.ingID = " + "'" + id + "'";
 //        String query = "SELECT * from dish d INNER JOIN hasingredient h ON d.dishID = h.dishID WHERE h.ingID = ?";
         Statement st = this.conn.createStatement();
         ResultSet rs = st.executeQuery(query);
-        List <dish> dishes = new ArrayList<>();
-        while (rs.next()){
+        List<dish> dishes = new ArrayList<>();
+        while (rs.next()) {
 
 
-            int dishid =rs.getInt("dishID");
-            String dishname =rs.getString("name");
-            String dishcode =rs.getString("dishCode");
-            String image=rs.getString("image");
+            int dishid = rs.getInt("dishID");
+            String dishname = rs.getString("name");
+            String dishcode = rs.getString("dishCode");
+            String image = rs.getString("image");
             int status = rs.getInt("enabled");
             int defaultIngAmount = rs.getInt("defaultValue");
             String customizetiontype = rs.getString("type");
-            int ingid =rs.getInt("ingID");
+            int ingid = rs.getInt("ingID");
             String unit = rs.getString("unit");
 //            List<hasIngredient> ingredients = new ArrayList<>();
 //            ingredients.add (new hasIngredient(customizetiontype,defaultIngAmount));
 
-            dishes.add (new dish(dishid,dishname,dishcode,image,status,defaultIngAmount,customizetiontype,ingid,unit));
+            dishes.add(new dish(dishid, dishname, dishcode, image, status, defaultIngAmount, customizetiontype, ingid, unit));
 
 
         }
 
         return dishes;
     }
+
     public int deletedish(dish d) throws SQLException {
 //        String quary = "UPDATE dish SET enabled = ? WHERE ddishID = ?";
         String quary = "UPDATE dish SET enabled = ? WHERE dishID = ?";
         int dishid = d.getDishid();
         PreparedStatement st = this.conn.prepareStatement(quary);
-        st.setInt(1,-3);
-        st.setInt(2,dishid);
+        st.setInt(1, -3);
+        st.setInt(2, dishid);
         return st.executeUpdate();
     }
 
-public int enable(dish d) throws SQLException {
+    public int enable(dish d) throws SQLException {
 //        String quary = "UPDATE dish SET enabled = ? WHERE ddishID = ?";
-    String quary = "UPDATE dish SET enabled = ? WHERE dishID = ?";
-    int dishid = d.getDishid();
-    PreparedStatement st = this.conn.prepareStatement(quary);
-    st.setInt(1,1);
-    st.setInt(2,dishid);
-    return st.executeUpdate();
-}
+        String quary = "UPDATE dish SET enabled = ? WHERE dishID = ?";
+        int dishid = d.getDishid();
+        PreparedStatement st = this.conn.prepareStatement(quary);
+        st.setInt(1, 1);
+        st.setInt(2, dishid);
+        return st.executeUpdate();
+    }
 
     public int dissable(dish d) throws SQLException {
 //        String quary = "UPDATE dish SET enabled = ? WHERE ddishID = ?";
@@ -216,15 +215,15 @@ public int enable(dish d) throws SQLException {
         int dishid = d.getDishid();
         PreparedStatement st = this.conn.prepareStatement(quary);
 //        st.setInt(1,ingid);
-        st.setInt(1,0);
-        st.setInt(2,dishid);
+        st.setInt(1, 0);
+        st.setInt(2, dishid);
         return st.executeUpdate();
     }
 
     public int disableall(int ingid) throws SQLException {
         String quary = "update dish d join hasingredient h on h.dishID =d.dishID set d.enabled = 0 where h.ingID =?";
         PreparedStatement st = this.conn.prepareStatement(quary);
-        st.setInt(1,ingid);
+        st.setInt(1, ingid);
         System.out.println(ingid);
 
         return st.executeUpdate();
@@ -238,46 +237,42 @@ public int enable(dish d) throws SQLException {
 //    }
 
 
-
-
-
-
-    public dish readupdatedish (String id) throws SQLException{
+    public dish readupdatedish(String id) throws SQLException {
 
 //        dish dishitem = null;
-          String query = "SELECT * FROM dish WHERE dishID =?";
+        String query = "SELECT * FROM dish WHERE dishID =?";
 //        String quary = "UPDATE dish SET enabled = ? WHERE dishID = ?";
         PreparedStatement st = this.conn.prepareStatement(query);
-        st.setInt(1,Integer.parseInt(id));
+        st.setInt(1, Integer.parseInt(id));
         ResultSet rs = st.executeQuery();
-        while(rs.next()){
-            int  dishid =rs.getInt("dishID");
-            String dishname =rs.getString("name");
-            String dishcode =rs.getString("dishCode");
-            String image=rs.getString("image");
+        while (rs.next()) {
+            int dishid = rs.getInt("dishID");
+            String dishname = rs.getString("name");
+            String dishcode = rs.getString("dishCode");
+            String image = rs.getString("image");
             String description = rs.getString("description");
 
 //            String query2 = "SELECT * FROM hasingredient h INNER JOIN ingredient i WHERE ddish = ? and h.ingID=i.ingID ";
             String query2 = "SELECT * FROM hasingredient h INNER JOIN ingredient i WHERE dishID = ? and h.ingID=i.ingID ";
             PreparedStatement st2 = this.conn.prepareStatement(query2);
-            st2.setInt(1 , dishid);
+            st2.setInt(1, dishid);
             ResultSet rs2 = st2.executeQuery();
             List<hasIngredient> ingredients = new ArrayList<>();
-            while (rs2.next()){
+            while (rs2.next()) {
                 int ingID = rs2.getInt("I.ingID");
                 String itemcode = rs2.getString("itemCode");
                 String type = rs2.getString("type");
                 String name = rs2.getString("name");
                 String ingimage = rs2.getString("image");
                 int carbpg = rs2.getInt("carbsphg");
-                int calpg  = rs2.getInt("calphg");
-                int proteinpg  = rs2.getInt("proteinphg");
-                int min  = rs2.getInt("min");
-                int max  = rs2.getInt("max");
-                int defaultValue  = rs2.getInt("defaultValue");
-                ingredients.add(new hasIngredient(ingID,type,min,defaultValue,max,itemcode,name,ingimage,carbpg,calpg,proteinpg));
+                int calpg = rs2.getInt("calphg");
+                int proteinpg = rs2.getInt("proteinphg");
+                int min = rs2.getInt("min");
+                int max = rs2.getInt("max");
+                int defaultValue = rs2.getInt("defaultValue");
+                ingredients.add(new hasIngredient(ingID, type, min, defaultValue, max, itemcode, name, ingimage, carbpg, calpg, proteinpg));
             }
-            return new dish(dishid,dishname,dishcode,description,image,ingredients);
+            return new dish(dishid, dishname, dishcode, description, image, ingredients);
 //            System.out.println("gona");
         }
         return null;
@@ -294,28 +289,28 @@ public int enable(dish d) throws SQLException {
         try {
             conn.setAutoCommit(false);
             PreparedStatement changeStatusQ = this.conn.prepareStatement(changeStatus);
-            changeStatusQ.setInt(1,d.getDishid());
+            changeStatusQ.setInt(1, d.getDishid());
             changeStatusQ.executeUpdate();
             st = this.conn.prepareStatement(updateDishInsert);
-            st.setInt(1,d.getDishid());
+            st.setInt(1, d.getDishid());
             st.setString(2, d.getDishcode());
             st.setString(3, d.getDishname());
             st.setString(4, d.getDescription());
             st.setString(5, d.getImage());
-            st.setInt(6, d.getEstimatedtime()==null?0:d.getEstimatedtime());
+            st.setInt(6, d.getEstimatedtime() == null ? 0 : d.getEstimatedtime());
             st.setString(7, "-1");
 
             st.setString(8, d.getDishcode());
             st.setString(9, d.getDishname());
             st.setString(10, d.getDescription());
             st.setString(11, d.getImage());
-            st.setInt(12, d.getEstimatedtime()==null?0:d.getEstimatedtime());
+            st.setInt(12, d.getEstimatedtime() == null ? 0 : d.getEstimatedtime());
             st.setString(13, "-1");
             rs = st.executeUpdate();
 
             int dishID = d.getDishid();
             PreparedStatement clearIngredientsQ = this.conn.prepareStatement(clearUpdateHasIngredients);
-            clearIngredientsQ.setInt(1,d.getDishid());
+            clearIngredientsQ.setInt(1, d.getDishid());
             clearIngredientsQ.executeUpdate();
 
             List<hasIngredient> ingredients = d.getIngredients();
@@ -325,9 +320,9 @@ public int enable(dish d) throws SQLException {
             for (hasIngredient i : ingredients) {
                 insertingStatement.setInt(1, dishID);
                 insertingStatement.setInt(2, i.getIngID());
-                insertingStatement.setInt(3, i.getMinimum()==null?0:i.getMinimum());
-                insertingStatement.setInt(4, i.getMaximum()==null?0:i.getMaximum());
-                insertingStatement.setInt(5, i.getDefaultv()==null?0:i.getDefaultv());
+                insertingStatement.setInt(3, i.getMinimum() == null ? 0 : i.getMinimum());
+                insertingStatement.setInt(4, i.getMaximum() == null ? 0 : i.getMaximum());
+                insertingStatement.setInt(5, i.getDefaultv() == null ? 0 : i.getDefaultv());
                 insertingStatement.setString(6, i.getType());
                 insertingStatement.addBatch();
 //                System.out.println("ID " + i.getIngID()+"Default "+i.getDefaultv()+"Max"+i.getMaximum());
@@ -349,16 +344,16 @@ public int enable(dish d) throws SQLException {
             }
             return 0;
         }
-        for(int x : rsset){
-            if(x==0){
+        for (int x : rsset) {
+            if (x == 0) {
                 return 0;
             }
         }
         return rs;
 
 //
-        }
     }
+}
 
 
 

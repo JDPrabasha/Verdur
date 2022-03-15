@@ -1,7 +1,7 @@
 package kitchenmanager.Ingredients;
 
 
-import Dao.DB;
+import User.ConnectionFactory.DB;
 import com.google.gson.Gson;
 
 import javax.servlet.annotation.WebServlet;
@@ -16,43 +16,42 @@ import java.util.List;
 
 
 @WebServlet("/KitchenManager/ingredients")
-public class ingredientservlet  extends HttpServlet{
+public class ingredientservlet extends HttpServlet {
 
     DB db = new DB();
     ingredientdao ingredient = new ingredientdao(db);
 
 
-
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp){
-        String typepara= req.getParameter("type");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+        String typepara = req.getParameter("type");
         System.out.println(typepara);
         List<ingredient> ingredients = new ArrayList<>();
         try {
 //            System.out.println(typepara.contains("All"));
 //            System.out.println("All"=="All");
-            if(typepara.contains("All")) {
+            if (typepara.contains("All")) {
                 System.out.println("All");
                 ingredients = ingredient.read();
-            }else{
+            } else {
                 System.out.println("Not All");
                 ingredients = ingredient.readbytype(typepara);
             }
 
-        }catch (SQLException throwables) {
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         String jsonresponce = new Gson().toJson(ingredients);
-        outputResponse(resp,jsonresponce,200);
+        outputResponse(resp, jsonresponce, 200);
 
     }
 
 
-    private void outputResponse(HttpServletResponse response, String payload, int status){
+    private void outputResponse(HttpServletResponse response, String payload, int status) {
         response.setHeader("Content-Type", "application/json");
-        try{
+        try {
             response.setStatus(status);
-            if (payload != null){
+            if (payload != null) {
                 OutputStream outputStream = response.getOutputStream();
                 outputStream.write(payload.getBytes());
                 outputStream.flush();

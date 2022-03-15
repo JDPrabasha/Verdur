@@ -1,6 +1,6 @@
 package Rider.Goal;
 
-import Core.ConnectionFactory.DB;
+import User.ConnectionFactory.DB;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

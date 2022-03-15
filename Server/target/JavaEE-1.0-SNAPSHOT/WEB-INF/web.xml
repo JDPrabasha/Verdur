@@ -6,7 +6,7 @@
 
     <filter>
         <filter-name>CorsFilter</filter-name>
-        <filter-class>CORSFilter</filter-class>
+        <filter-class>User.CORSFilter</filter-class>
     </filter>
 
     <filter-mapping>
@@ -16,7 +16,7 @@
 
     <filter>
         <filter-name>AuthFilter</filter-name>
-        <filter-class>FrontEndAuthenticationFilter</filter-class>
+        <filter-class>User.FrontEndAuthenticationFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>

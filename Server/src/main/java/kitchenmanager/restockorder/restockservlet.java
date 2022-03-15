@@ -1,6 +1,6 @@
 package kitchenmanager.restockorder;
 
-import Dao.DB;
+import User.ConnectionFactory.DB;
 import com.google.gson.Gson;
 
 import javax.servlet.annotation.WebServlet;
