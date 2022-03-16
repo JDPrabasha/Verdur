@@ -1,6 +1,7 @@
 package cashier.dishes;
 
-import Db.DB;
+
+import User.ConnectionFactory.DB;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,9 +13,9 @@ public class dishdao {
     static String insertDishQuery = "INSERT INTO dish (dishcode,name,description,image,estTime,enabled) VALUES (?,?,?,?,?,?)";
     static String insertIngredients = "INSERT INTO hasingredient (ddish,ingID,min,max,defaultValue,type) VALUES (?,?,?,?,?,?)";
 
-    public dishdao(DB db){
+    public dishdao() {
         try {
-            this.conn = db.initializeDB();
+            this.conn = DB.initializeDB();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {
@@ -23,41 +24,41 @@ public class dishdao {
     }
 
     public List<dish> read() throws SQLException {
-        List <dish> dishes = new ArrayList<dish>();
+        List<dish> dishes = new ArrayList<dish>();
         String query = "SELECT * from dish";
         Statement stm = this.conn.createStatement();
         ResultSet rs = stm.executeQuery(query);
 
-        while (rs.next()){
+        while (rs.next()) {
             List<hasIngredient> ingredients = new ArrayList<>();
 
-            String dishid =rs.getString("ddishID");
-            String dishname =rs.getString("name");
-            String dishcode =rs.getString("dishcode");
-            String image=rs.getString("image");
+            String dishid = rs.getString("ddishID");
+            String dishname = rs.getString("name");
+            String dishcode = rs.getString("dishcode");
+            String image = rs.getString("image");
 
             String ingQuery = "SELECT * FROM hasingredient h INNER JOIN ingredient i WHERE ddish = ? and h.ingID=i.ingID ";
             PreparedStatement st2 = this.conn.prepareStatement(ingQuery);
-            st2.setString(1 , dishid);
+            st2.setString(1, dishid);
             ResultSet rs2 = st2.executeQuery();
-            while (rs2.next()){
+            while (rs2.next()) {
                 int ingID = rs2.getInt("I.ingID");
                 String itemcode = rs2.getString("itemcode");
                 String type = rs2.getString("type");
                 String name = rs2.getString("name");
                 String ingimage = rs2.getString("image");
                 int carbpg = rs2.getInt("carbpg");
-                int calpg  = rs2.getInt("calpg");
-                int proteinpg  = rs2.getInt("proteinpg");
-                int min  = rs2.getInt("min");
-                int max  = rs2.getInt("max");
-                int defaultValue  = rs2.getInt("defaultValue");
+                int calpg = rs2.getInt("calpg");
+                int proteinpg = rs2.getInt("proteinpg");
+                int min = rs2.getInt("min");
+                int max = rs2.getInt("max");
+                int defaultValue = rs2.getInt("defaultValue");
 
 
-                ingredients.add(new hasIngredient(ingID,type,min,defaultValue,max,itemcode,name,image,carbpg,calpg,proteinpg));
+                ingredients.add(new hasIngredient(ingID, type, min, defaultValue, max, itemcode, name, image, carbpg, calpg, proteinpg));
             }
 
-            dishes.add(new dish(dishid,dishname,dishcode,image,ingredients));
+            dishes.add(new dish(dishid, dishname, dishcode, image, ingredients));
 
 
         }
@@ -66,20 +67,20 @@ public class dishdao {
     }
 
     public List<dish> readname(String s) throws SQLException {
-        List <dish> dishes = new ArrayList<>();
+        List<dish> dishes = new ArrayList<>();
         String query = "SELECT * from dish WHERE name LIKE ?";
         PreparedStatement st = this.conn.prepareStatement(query);
         st.setString(1, s);
         ResultSet rs = st.executeQuery();
 
-        while (rs.next()){
+        while (rs.next()) {
 
 
-            String dishid =rs.getString("ddishID");
-            String dishname =rs.getString("name");
-            String dishcode =rs.getString("dishcode");
-            String image=rs.getString("image");
-            dishes.add(new dish(dishid,dishname,dishcode,image));
+            String dishid = rs.getString("ddishID");
+            String dishname = rs.getString("name");
+            String dishcode = rs.getString("dishcode");
+            String image = rs.getString("image");
+            dishes.add(new dish(dishid, dishname, dishcode, image));
 
 
         }
@@ -87,18 +88,18 @@ public class dishdao {
     }
 
     public dish readbyid(String id) throws SQLException {
-        String query = "SELECT * from dish WHERE dish_id = "+"'"+id+"'";
+        String query = "SELECT * from dish WHERE dish_id = " + "'" + id + "'";
         Statement st = this.conn.createStatement();
         ResultSet rs = st.executeQuery(query);
         dish dishes = null;
-        while (rs.next()){
+        while (rs.next()) {
 
-            String dishid =rs.getString("dish_id");
-            String dishname =rs.getString("dish_name");
-            int defaultprice =rs.getInt("default_price");
-            int estimatedtime =rs.getInt("estimated_time");
+            String dishid = rs.getString("dish_id");
+            String dishname = rs.getString("dish_name");
+            int defaultprice = rs.getInt("default_price");
+            int estimatedtime = rs.getInt("estimated_time");
 
-            dishes= new dish(dishid,dishname,defaultprice,estimatedtime);
+            dishes = new dish(dishid, dishname, defaultprice, estimatedtime);
 
 
         }
@@ -155,8 +156,8 @@ public class dishdao {
             }
             return 0;
         }
-        for(int x : rsset){
-            if(x==0){
+        for (int x : rsset) {
+            if (x == 0) {
                 return 0;
             }
         }
@@ -171,25 +172,25 @@ public class dishdao {
 
     public List<dish> readbyingredient(String id) throws SQLException {
 //        String query = "SELECT * from dish WHERE  = "+"'"+id+"'";
-        String query = "SELECT * from dish d INNER JOIN hasingredient h ON d.ddishID = h.ddish WHERE h.ingID = "+"'"+id+"'";
+        String query = "SELECT * from dish d INNER JOIN hasingredient h ON d.ddishID = h.ddish WHERE h.ingID = " + "'" + id + "'";
         Statement st = this.conn.createStatement();
         ResultSet rs = st.executeQuery(query);
-        List <dish> dishes = new ArrayList<>();
-        while (rs.next()){
+        List<dish> dishes = new ArrayList<>();
+        while (rs.next()) {
 
 
-            String dishid =rs.getString("ddishID");
-            String dishname =rs.getString("name");
-            String dishcode =rs.getString("dishcode");
-            String image=rs.getString("image");
+            String dishid = rs.getString("ddishID");
+            String dishname = rs.getString("name");
+            String dishcode = rs.getString("dishcode");
+            String image = rs.getString("image");
             int status = rs.getInt("enabled");
 
             int defaultIngAmount = rs.getInt("defaultValue");
             String customizetype = rs.getString("type");
             List<hasIngredient> ingredients = new ArrayList<>();
-            ingredients.add (new hasIngredient(customizetype,defaultIngAmount));
+            ingredients.add(new hasIngredient(customizetype, defaultIngAmount));
 
-            dishes.add (new dish(dishid,dishname,dishcode,image,status,ingredients));
+            dishes.add(new dish(dishid, dishname, dishcode, image, status, ingredients));
 
 
         }

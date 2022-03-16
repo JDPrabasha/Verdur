@@ -1,9 +1,7 @@
 package cashier.CashierOrders;
 
 
-
-
-import Db.DB;
+import User.ConnectionFactory.DB;
 import cashier.dishes.dish;
 import cashier.rider.rider;
 
@@ -17,9 +15,9 @@ public class CashierOrdersDAO {
     private Connection conn;
 
 
-    public CashierOrdersDAO(DB db) {
+    public CashierOrdersDAO() {
         try {
-            this.conn = db.initializeDB();
+            this.conn = DB.initializeDB();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {
@@ -56,7 +54,7 @@ public class CashierOrdersDAO {
                 int price1 = rs2.getInt("price");
 //                int esttime = 0;
 
-                dishitem.add(new dish(dishid, dishname,  dishimage, dishquantity,price1));
+                dishitem.add(new dish(dishid, dishname, dishimage, dishquantity, price1));
 
             }
 
@@ -83,7 +81,7 @@ public class CashierOrdersDAO {
             int orderid = rs.getInt("orderID");
 
             String status = rs.getString("status");
-            String name = rs.getString("firstName")+" "+rs.getString("lastName");
+            String name = rs.getString("firstName") + " " + rs.getString("lastName");
             String contact = rs.getString("contact");
             String address = rs.getString("address");
             int custID = rs.getInt("custID");
@@ -115,7 +113,7 @@ public class CashierOrdersDAO {
 
     public List<CashierOrders> readcookedorders() throws SQLException {
         List<CashierOrders> orderitem = new ArrayList<>();
-        String query ="SELECT o.orderID,SUM(quantity) AS quantity, u.firstName,u.lastName,u.contact,c.address FROM orders o JOIN hasdish h on o.orderID=h.orderID JOIN customizedDish cd ON cd.cdishID=h.cdishID JOIN dish d on cd.dishID=d.dishID JOIN customer c ON o.custID=c.custID JOIN user u ON u.userID=c.userID WHERE o.status=\"cooked\" GROUP BY o.orderID";
+        String query = "SELECT o.orderID,SUM(quantity) AS quantity, u.firstName,u.lastName,u.contact,c.address FROM orders o JOIN hasdish h on o.orderID=h.orderID JOIN customizedDish cd ON cd.cdishID=h.cdishID JOIN dish d on cd.dishID=d.dishID JOIN customer c ON o.custID=c.custID JOIN user u ON u.userID=c.userID WHERE o.status=\"cooked\" GROUP BY o.orderID";
 
 //        String query = "SELECT * FROM orders o JOIN hasdish h on o.orderID=h.orderID JOIN customizedDish cd ON cd.cdishID=h.cdishID JOIN dish d on cd.dishID=d.dishID JOIN customer c ON o.custID=c.custID JOIN user u ON u.userID=c.userID WHERE o.status=\"cooked\";";
         PreparedStatement st1 = this.conn.prepareStatement(query);
@@ -126,10 +124,10 @@ public class CashierOrdersDAO {
             //orders
             int orderid = rs.getInt("orderID");
             int totalQuantity = rs.getInt("quantity");
-            String name = rs.getString("firstName")+" "+rs.getString("lastName");
+            String name = rs.getString("firstName") + " " + rs.getString("lastName");
             String contact = rs.getString("contact");
             String address = rs.getString("address");
-            orderitem.add(new CashierOrders(orderid,totalQuantity, name, contact, address));
+            orderitem.add(new CashierOrders(orderid, totalQuantity, name, contact, address));
 
 
         }
@@ -139,7 +137,7 @@ public class CashierOrdersDAO {
 
     public List<CashierOrders> readongoingorders() throws SQLException {
         List<CashierOrders> orderitem = new ArrayList<>();
-        String query4 ="SELECT o.orderID,SUM(quantity) AS quantity, p.amount,o.status,p.type,o.timestamp FROM orders o JOIN hasdish h on o.orderID=h.orderID JOIN customizedDish cd ON cd.cdishID=h.cdishID JOIN dish d on cd.dishID=d.dishID JOIN payment p ON p.orderID=o.orderID WHERE status=\"pending\" or status= \"cooked\" or status=\"delivering\" and o.orderID GROUP BY o.orderID";
+        String query4 = "SELECT o.orderID,SUM(quantity) AS quantity, p.amount,o.status,p.type,o.timestamp FROM orders o JOIN hasdish h on o.orderID=h.orderID JOIN customizedDish cd ON cd.cdishID=h.cdishID JOIN dish d on cd.dishID=d.dishID JOIN payment p ON p.orderID=o.orderID WHERE status=\"pending\" or status= \"cooked\" or status=\"delivering\" and o.orderID GROUP BY o.orderID";
 //        String query4 ="SELECT o.orderID,SUM(quantity) AS quantity, p.amount,o.status,p.type,o.timestamp FROM orders o JOIN hasdish h on o.orderID=h.orderID JOIN customizedDish cd ON cd.cdishID=h.cdishID JOIN dish d on cd.dishID=d.dishID JOIN payment p ON p.orderID=o.orderID WHERE o.orderID GROUP BY o.orderID";
 
 //        String query = "SELECT * FROM orders o JOIN hasdish h on o.orderID=h.orderID JOIN customizedDish cd ON cd.cdishID=h.cdishID JOIN dish d on cd.dishID=d.dishID JOIN customer c ON o.custID=c.custID JOIN user u ON u.userID=c.userID WHERE o.status=\"cooked\";";
@@ -155,7 +153,7 @@ public class CashierOrdersDAO {
             String status = rs.getString("status");
             String paymentMethod = rs.getString("type");
             String date = rs.getString(("timestamp"));
-            orderitem.add(new CashierOrders(orderid,status, amount, totalQuantity, date, paymentMethod ));
+            orderitem.add(new CashierOrders(orderid, status, amount, totalQuantity, date, paymentMethod));
 
 
         }
@@ -177,11 +175,6 @@ public class CashierOrdersDAO {
     }
 
 
-
-
-
-
-
     public Integer assignrider(rider d) {
 //        String quary = "UPDATE dish SET enabled = ? WHERE ddishID = ?";
         int orderid = d.getOrderID();
@@ -192,42 +185,43 @@ public class CashierOrdersDAO {
         PreparedStatement getDeliveryIDStatement = null;
         try {
             getDeliveryIDStatement = this.conn.prepareStatement(deliveryIDQuery);
-            getDeliveryIDStatement.setInt(1,riderid);
+            getDeliveryIDStatement.setInt(1, riderid);
             ResultSet deliveryIDRS = getDeliveryIDStatement.executeQuery();
             Integer deliryID = null;
-            while (deliveryIDRS.next()){
+            while (deliveryIDRS.next()) {
                 deliryID = deliveryIDRS.getInt("deliveryID");
             }
             System.out.println(deliryID);
-            if(deliryID == null){
+            if (deliryID == null) {
                 this.conn.setAutoCommit(false);
-                PreparedStatement createDeliveryStatement = this.conn.prepareStatement(createDelivery,Statement.RETURN_GENERATED_KEYS);
-                createDeliveryStatement.setInt(1,riderid);
+                PreparedStatement createDeliveryStatement = this.conn.prepareStatement(createDelivery, Statement.RETURN_GENERATED_KEYS);
+                createDeliveryStatement.setInt(1, riderid);
 
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
                 LocalDateTime now = LocalDateTime.now();
-                createDeliveryStatement.setString(2,dtf.format(now));
+                createDeliveryStatement.setString(2, dtf.format(now));
                 createDeliveryStatement.executeUpdate();
                 ResultSet rs = createDeliveryStatement.getGeneratedKeys();
-                while (rs.next()){
+                while (rs.next()) {
                     deliryID = rs.getInt(1);
                 }
                 PreparedStatement updateDeliveryStatement = this.conn.prepareStatement(updateOrder);
-                updateDeliveryStatement.setInt(1,deliryID);
+                updateDeliveryStatement.setInt(1, deliryID);
                 System.out.println(deliryID);
-                updateDeliveryStatement.setInt(2,orderid);
+                updateDeliveryStatement.setInt(2, orderid);
                 int x = updateDeliveryStatement.executeUpdate();
                 this.conn.commit();
                 this.conn.setAutoCommit(true);
                 return x;
-            }else{
+            } else {
                 PreparedStatement updateDeliveryStatement = this.conn.prepareStatement(updateOrder);
-                updateDeliveryStatement.setInt(1,deliryID);
-                updateDeliveryStatement.setInt(2,orderid);
+                updateDeliveryStatement.setInt(1, deliryID);
+                updateDeliveryStatement.setInt(2, orderid);
                 return updateDeliveryStatement.executeUpdate();
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();if(this.conn!=null){
+            throwables.printStackTrace();
+            if (this.conn != null) {
                 try {
                     System.err.print("Transaction is being rolled back");
                     this.conn.rollback();
@@ -239,9 +233,6 @@ public class CashierOrdersDAO {
             return null;
 
         }
-
-
-
 
 
 //        String quary = "UPDATE orders SET riderID = ? WHERE orderID = ?";
@@ -266,7 +257,7 @@ public class CashierOrdersDAO {
     }
 
 
-    public int reject(int orderid,String reason){
+    public int reject(int orderid, String reason) {
 
         String quary = "UPDATE orders SET status='rejected' WHERE orderID = ?";
         String quary1 = "INSERT INTO rejectorders(orderID,reason) VALUES(?,?)";
@@ -274,12 +265,12 @@ public class CashierOrdersDAO {
         try {
             this.conn.setAutoCommit(false);
             PreparedStatement st = this.conn.prepareStatement(quary);
-            st.setInt(1,orderid);
+            st.setInt(1, orderid);
             st.executeUpdate();
 
             PreparedStatement st2 = this.conn.prepareStatement(quary1);
-            st2.setInt(1,orderid);
-            st2.setString(2,reason);
+            st2.setInt(1, orderid);
+            st2.setString(2, reason);
             st2.executeUpdate();
 
 
@@ -290,7 +281,7 @@ public class CashierOrdersDAO {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
 
-            if(this.conn!=null){
+            if (this.conn != null) {
                 try {
                     System.err.print("Transaction is being rolled back");
                     this.conn.rollback();
@@ -304,9 +295,6 @@ public class CashierOrdersDAO {
 
         return 0;
     }
-
-
-
 
 
     public List<rider> readconfirmriderlist() throws SQLException {
@@ -323,7 +311,6 @@ public class CashierOrdersDAO {
             int deliveryID = rs.getInt("deliveryID");
 
 
-
             List<CashierOrders> order = new ArrayList<>();
 
             String query2 = "SELECT o.orderID,SUM(quantity) AS quantity, o.deliveryID, o.status FROM user u JOIN employee e ON u.userID=e.userID JOIN rider r ON e.empID=r.riderID join delivery d on d.riderID = r.riderID join orders o on o.deliveryID = d.deliveryID JOIN hasdish h ON h.orderID=o.orderID JOIN customizeddish cd ON cd.cdishID=h.cdishID where o.status =\"rider_assigned\" and r.riderID = ? GROUP BY o.orderID";
@@ -335,13 +322,13 @@ public class CashierOrdersDAO {
                 int orderid = rs2.getInt("orderID");
 
                 int Quantity = rs2.getInt("quantity");
-                String status =rs2.getString(("status"));
+                String status = rs2.getString(("status"));
                 order.add(new CashierOrders(orderid, Quantity));
 
             }
 
 
-            riderlist.add(new rider(riderID,deliveryID,order));
+            riderlist.add(new rider(riderID, deliveryID, order));
 
         }
 
@@ -349,13 +336,6 @@ public class CashierOrdersDAO {
 
 
     }
-
-
-
-
-
-
-
 
 
 }
