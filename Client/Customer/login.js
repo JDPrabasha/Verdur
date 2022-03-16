@@ -68,7 +68,7 @@ function login() {
         window.localStorage.setItem("name", user.name);
         console.log(window.localStorage.getItem("name"));
 
-        window.location = "/Client/rider-home.html";
+        window.location = "/Client/Rider/rider-home.html";
       });
     } else {
       $.ajax({
