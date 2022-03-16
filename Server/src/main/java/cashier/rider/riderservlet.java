@@ -1,7 +1,7 @@
 package cashier.rider;
 
-import CashierOrders.CashierOrdersDAO;
-import Db.DB;
+
+import User.ConnectionFactory.DB;
 
 import com.google.gson.Gson;
 
@@ -19,13 +19,13 @@ import java.util.List;
 @WebServlet("/Cashier/rider")
 public class riderservlet extends HttpServlet {
 
-    DB db = new DB();
-    riderdao  riderdao = new riderdao(db);
+   
+    riderdao riderdao = new riderdao();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         List<rider> riderlist = new ArrayList<>();
-        String id= req.getParameter("id");
+        String id = req.getParameter("id");
 
 
         try {
@@ -41,17 +41,16 @@ public class riderservlet extends HttpServlet {
     }
 
 
-
     @Override
-    protected void doPut(HttpServletRequest request, HttpServletResponse response){
+    protected void doPut(HttpServletRequest request, HttpServletResponse response) {
 
     }
 
-    private void outputResponse(HttpServletResponse response, String payload, int status){
+    private void outputResponse(HttpServletResponse response, String payload, int status) {
         response.setHeader("Content-Type", "application/json");
-        try{
+        try {
             response.setStatus(status);
-            if (payload != null){
+            if (payload != null) {
                 OutputStream outputStream = response.getOutputStream();
                 outputStream.write(payload.getBytes());
                 outputStream.flush();
@@ -60,7 +59,6 @@ public class riderservlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-
 
 
 }

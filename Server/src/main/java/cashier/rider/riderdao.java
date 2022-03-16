@@ -1,7 +1,7 @@
 package cashier.rider;
 
+import User.ConnectionFactory.DB;
 import cashier.CashierOrders.CashierOrders;
-import Db.DB;
 
 
 import java.sql.*;
@@ -13,9 +13,9 @@ public class riderdao {
     private Connection conn;
 
 
-    public riderdao(DB db) {
+    public riderdao() {
         try {
-            this.conn = db.initializeDB();
+            this.conn = DB.initializeDB();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {
@@ -68,16 +68,6 @@ public class riderdao {
 
 
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }
