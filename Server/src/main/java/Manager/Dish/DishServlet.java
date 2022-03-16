@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/dish/*")
+//@WebServlet(name = "Dish", urlPatterns = {"/dish/*"})
 public class DishServlet extends HttpServlet {
 
     private DishDAO dishDAO;
@@ -31,12 +31,11 @@ public class DishServlet extends HttpServlet {
         System.out.println(action);
         try {
 
-                    showDish(request, response);
+            showDish(request, response);
         } catch (SQLException ex) {
             throw new ServletException(ex);
         }
     }
-
 
 
     private void showDish(HttpServletRequest request, HttpServletResponse response)

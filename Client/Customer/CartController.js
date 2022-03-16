@@ -110,6 +110,9 @@ $(window).on("load", function () {
   $("#cartBtn").click(function (e) {
     e.preventDefault();
     $("#vtf").toggleClass("modal-active ");
+    var quantity = parseInt($("#quantity").html());
+    var price = parseInt($("#price").html().split(" ")[1]);
+    $("#totalPrice").html("Rs. " + quantity * price);
     $(".modal").show();
   });
 

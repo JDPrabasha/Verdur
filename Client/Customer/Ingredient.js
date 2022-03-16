@@ -77,11 +77,20 @@ class Ingredient {
   }
 
   addCustomizableIngredients() {
-    console.log(this.priceperunit);
+    console.log("this.protein " + this.name);
+    console.log(this.proteinphg);
+    console.log(this.unitWeight);
+    console.log(this.quantity);
+
     $("#protein").html(
       parseFloat($("#protein").html()) +
         (this.proteinphg * this.unitWeight * this.quantity) / 100
     );
+
+    console.log("this.carbs " + this.name);
+    console.log(this.carbsphg);
+    console.log(this.unitWeight);
+    console.log(this.quantity);
 
     $("#carbs").html(
       (
@@ -104,7 +113,7 @@ class Ingredient {
       ).toFixed(2)
     );
 
-    console.log(this.calphg);
+    // console.log(this.calphg);
 
     var ingredient = $(document.createElement("div"))
       .addClass("ingredient mr-3 flex-space-between mb-4")
@@ -145,10 +154,15 @@ class Ingredient {
       minus.attr("data-calories", this.calphg);
       minus.attr("data-minimum", this.minimum);
       minus.attr("data-price", this.priceperunit);
+      minus.attr("data-default", this.quantity);
+      minus.attr("data-weight", this.unitWeight);
 
       $(minus).click(function (e) {
+        console.log($(this).attr("data-default"));
         e.preventDefault();
+
         var initialQuantity = parseInt($(this).siblings(".quantity").html());
+        var defaultQuantity = parseInt($(this).attr("data-default"));
         quantity =
           initialQuantity == $(this).attr("data-minimum")
             ? initialQuantity
@@ -157,86 +171,123 @@ class Ingredient {
           $(this)
             .siblings(".quantity")
             .html(quantity > 9 ? quantity : "0" + quantity);
+          var preQuantity = quantity;
+          quantity -= defaultQuantity;
 
-          $(this)
-            .parent()
-            .siblings(".price")
-            .html("+Rs. " + quantity * $(this).attr("data-price"));
+          if (quantity >= 0) {
+            $(this)
+              .parent()
+              .siblings(".price")
+              .html("+Rs. " + quantity * $(this).attr("data-price"));
 
-          $("#increase").html(
-            parseInt($("#increase").html()) -
-              parseInt($(this).attr("data-price"))
-          );
+            $("#increase").html(
+              parseInt($("#increase").html()) -
+                parseInt($(this).attr("data-price"))
+            );
 
-          $("#price").html(
-            "Rs. " +
-              parseInt(
-                parseInt($("#price").html().split(" ")[1]) -
-                  parseInt($(this).attr("data-price"))
-              )
-          );
-          $(this)
-            .parent()
-            .siblings(".nutrients")
-            .children(".protein")
-            .html("+" + quantity * $(this).attr("data-protein") + "g");
-          $(this)
-            .parent()
-            .siblings(".nutrients")
-            .children(".carbs")
-            .html("+" + quantity * $(this).attr("data-carbs") + "g");
-          $(this)
-            .parent()
-            .siblings(".nutrients")
-            .children(".fats")
-            .html("+" + quantity * $(this).attr("data-fats") + "g");
-          $(this)
-            .parent()
-            .siblings(".nutrients")
-            .children(".calories")
-            .html("+" + quantity * $(this).attr("data-calories") + "kcal");
+            $("#price").html(
+              "Rs. " +
+                parseInt(
+                  parseInt($("#price").html().split(" ")[1]) -
+                    parseInt($(this).attr("data-price"))
+                )
+            );
+
+            $(this)
+              .parent()
+              .siblings(".nutrients")
+              .children(".protein")
+              .html(
+                "+" +
+                  (quantity *
+                    $(this).attr("data-protein") *
+                    $(this).attr("data-weight")) /
+                    100 +
+                  "g"
+              );
+            $(this)
+              .parent()
+              .siblings(".nutrients")
+              .children(".carbs")
+              .html(
+                "+" +
+                  (quantity *
+                    $(this).attr("data-carbs") *
+                    $(this).attr("data-weight")) /
+                    100 +
+                  "g"
+              );
+            $(this)
+              .parent()
+              .siblings(".nutrients")
+              .children(".fats")
+              .html(
+                "+" +
+                  (quantity *
+                    $(this).attr("data-fats") *
+                    $(this).attr("data-weight")) /
+                    100 +
+                  "g"
+              );
+            $(this)
+              .parent()
+              .siblings(".nutrients")
+              .children(".calories")
+              .html(
+                "+" +
+                  (quantity *
+                    $(this).attr("data-calories") *
+                    $(this).attr("data-weight")) /
+                    100 +
+                  "kcal"
+              );
+          }
+
           $("#protein").html(
-            parseFloat($("#protein").html()) -
+            (
+              parseFloat($("#protein").html()) -
               parseFloat(
-                $(this)
-                  .parent()
-                  .siblings(".nutrients")
-                  .children(".protein")
-                  .html()
+                (1 *
+                  $(this).attr("data-protein") *
+                  $(this).attr("data-weight")) /
+                  100
               )
+            ).toFixed(2)
           );
+
           $("#carbs").html(
-            parseFloat($("#carbs").html()) -
+            (
+              parseFloat($("#carbs").html()) -
               parseFloat(
-                $(this)
-                  .parent()
-                  .siblings(".nutrients")
-                  .children(".carbs")
-                  .html()
+                (1 * $(this).attr("data-carbs") * $(this).attr("data-weight")) /
+                  100
               )
+            ).toFixed(2)
           );
           $("#fats").html(
-            parseFloat($("#fats").html()) -
+            (
+              parseFloat($("#fats").html()) -
               parseFloat(
-                $(this).parent().siblings(".nutrients").children(".fats").html()
+                (1 * $(this).attr("data-fats") * $(this).attr("data-weight")) /
+                  100
               )
+            ).toFixed(2)
           );
           $("#calories").html(
-            parseFloat($("#calories").html()) -
+            (
+              parseFloat($("#fats").html()) -
               parseFloat(
-                $(this)
-                  .parent()
-                  .siblings(".nutrients")
-                  .children(".calories")
-                  .html()
+                (1 * $(this).attr("data-fats") * $(this).attr("data-weight")) /
+                  100
               )
+            ).toFixed(2)
           );
         }
       });
 
       var defaultQuantity = $(document.createElement("p"))
         .addClass("text-1 fw-b pl-5 pr-5 quantity")
-        .html(this.quantity);
+        .html(this.quantity > 9 ? this.quantity : "0" + this.quantity);
 
       var plus = $(document.createElement("span"))
         .addClass("material-icons-outlined icon bg-success round-1 p-1 plus")
@@ -247,10 +298,13 @@ class Ingredient {
       plus.attr("data-calories", this.calphg);
       plus.attr("data-maximum", this.maximum);
       plus.attr("data-price", this.priceperunit);
+      plus.attr("data-default", this.quantity);
+      plus.attr("data-weight", this.unitWeight);
 
       $(plus).click(function (e) {
         e.preventDefault();
         var initialQuantity = parseInt($(this).siblings(".quantity").html());
+        var defaultQuantity = parseInt($(this).attr("data-default"));
         quantity =
           initialQuantity == $(this).attr("data-maximum")
             ? initialQuantity
@@ -260,80 +314,121 @@ class Ingredient {
           $(this)
             .siblings(".quantity")
             .html(quantity > 9 ? quantity : "0" + quantity);
-          $(this)
-            .parent()
-            .siblings(".nutrients")
-            .children(".protein")
-            .html("+" + quantity * $(this).attr("data-protein") + "g");
-          $(this)
-            .parent()
-            .siblings(".nutrients")
-            .children(".carbs")
-            .html("+" + quantity * $(this).attr("data-carbs") + "g");
-          $(this)
-            .parent()
-            .siblings(".nutrients")
-            .children(".fats")
-            .html("+" + quantity * $(this).attr("data-fats") + "g");
-          $(this)
-            .parent()
-            .siblings(".nutrients")
-            .children(".calories")
-            .html("+" + quantity * $(this).attr("data-calories") + "kcal");
 
-          $(this)
-            .parent()
-            .siblings(".price")
-            .html("+Rs. " + quantity * $(this).attr("data-price"));
+          console.log(quantity);
+          console.log(defaultQuantity);
+          var preQuantity = quantity;
+          quantity -= defaultQuantity;
+          console.log(quantity);
 
-          $("#increase").html(
-            parseInt($("#increase").html()) +
-              parseInt($(this).attr("data-price"))
-          );
+          if (quantity > 0) {
+            $(this)
+              .parent()
+              .siblings(".nutrients")
+              .children(".protein")
+              .html(
+                "+" +
+                  (quantity *
+                    $(this).attr("data-protein") *
+                    $(this).attr("data-weight")) /
+                    100 +
+                  "g"
+              );
+            $(this)
+              .parent()
+              .siblings(".nutrients")
+              .children(".carbs")
+              .html(
+                "+" +
+                  (quantity *
+                    $(this).attr("data-carbs") *
+                    $(this).attr("data-weight")) /
+                    100 +
+                  "g"
+              );
+            $(this)
+              .parent()
+              .siblings(".nutrients")
+              .children(".fats")
+              .html(
+                "+" +
+                  (quantity *
+                    $(this).attr("data-fats") *
+                    $(this).attr("data-weight")) /
+                    100 +
+                  "g"
+              );
+            $(this)
+              .parent()
+              .siblings(".nutrients")
+              .children(".calories")
+              .html(
+                "+" +
+                  (quantity *
+                    $(this).attr("data-calories") *
+                    $(this).attr("data-weight")) /
+                    100 +
+                  "kcal"
+              );
 
-          $("#price").html(
-            "Rs. " +
-              parseInt(
-                parseInt($("#price").html().split(" ")[1]) +
-                  parseInt($(this).attr("data-price"))
-              )
-          );
+            $(this)
+              .parent()
+              .siblings(".price")
+              .html("+Rs. " + quantity * $(this).attr("data-price"));
+
+            $("#increase").html(
+              parseInt($("#increase").html()) +
+                parseInt($(this).attr("data-price"))
+            );
+
+            $("#price").html(
+              "Rs. " +
+                parseInt(
+                  parseInt($("#price").html().split(" ")[1]) +
+                    parseInt($(this).attr("data-price"))
+                )
+            );
+          }
 
           $("#protein").html(
-            parseFloat($("#protein").html()) +
+            (
+              parseFloat($("#protein").html()) +
               parseFloat(
-                $(this)
-                  .parent()
-                  .siblings(".nutrients")
-                  .children(".protein")
-                  .html()
+                (1 *
+                  $(this).attr("data-protein") *
+                  $(this).attr("data-weight")) /
+                  100
               )
+            ).toFixed(2)
           );
           $("#carbs").html(
-            parseFloat($("#carbs").html()) +
+            (
+              parseFloat($("#carbs").html()) +
               parseFloat(
-                $(this)
-                  .parent()
-                  .siblings(".nutrients")
-                  .children(".carbs")
-                  .html()
+                (1 * $(this).attr("data-carbs") * $(this).attr("data-weight")) /
+                  100
               )
+            ).toFixed(2)
           );
           $("#fats").html(
-            parseFloat($("#fats").html()) +
+            (
+              parseFloat($("#fats").html()) +
               parseFloat(
-                $(this).parent().siblings(".nutrients").children(".fats").html()
+                (1 * $(this).attr("data-fats") * $(this).attr("data-weight")) /
+                  100
               )
+            ).toFixed(2)
           );
           $("#calories").html(
-            parseFloat($("#calories").html()) +
+            (
+              parseFloat($("#calories").html()) +
               parseFloat(
-                $(this)
-                  .parent()
-                  .siblings(".nutrients")
-                  .children(".calories")
-                  .html()
+                (1 *
+                  $(this).attr("data-calories") *
+                  $(this).attr("data-weight")) /
+                  100
               )
+            ).toFixed(2)
           );
         }
       });

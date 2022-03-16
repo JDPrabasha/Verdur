@@ -1,6 +1,6 @@
 package chef;
 
-import Dao.DB;
+import User.ConnectionFactory.DB;
 import com.google.gson.Gson;
 
 
@@ -21,11 +21,10 @@ public class chefservlet extends HttpServlet {
     chefdao chef = new chefdao(db);
 
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         List<chef> cheflist = new ArrayList<>();
-        String id= req.getParameter("id");
+        String id = req.getParameter("id");
 
 
         try {
@@ -37,8 +36,9 @@ public class chefservlet extends HttpServlet {
         String jsonresponce = new Gson().toJson(cheflist);
         outputResponse(resp, jsonresponce, 200);
     }
-    protected void doPut(HttpServletRequest req,HttpServletResponse resp) throws IOException {
-        chef chefitem = new Gson().fromJson(req.getReader(),chef.class);
+
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        chef chefitem = new Gson().fromJson(req.getReader(), chef.class);
 //        System.out.println(restockitem.getApprovalstatus() != null);
         try {
 //            if(dishitem.getApprovalstatus() != null){
@@ -47,19 +47,19 @@ public class chefservlet extends HttpServlet {
 //                restock.managerDeliveryCompletion(restockitem);
 //            }
             chef.assignchef(chefitem);
-            outputResponse(resp,"",204);
-        }catch (SQLException throwables) {
+            outputResponse(resp, "", 204);
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
-            outputResponse(resp,"",400);
+            outputResponse(resp, "", 400);
         }
 
     }
 
-    private void outputResponse(HttpServletResponse response, String payload, int status){
+    private void outputResponse(HttpServletResponse response, String payload, int status) {
         response.setHeader("Content-Type", "application/json");
-        try{
+        try {
             response.setStatus(status);
-            if (payload != null){
+            if (payload != null) {
                 OutputStream outputStream = response.getOutputStream();
                 outputStream.write(payload.getBytes());
                 outputStream.flush();
@@ -68,7 +68,6 @@ public class chefservlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-
 
 
 }

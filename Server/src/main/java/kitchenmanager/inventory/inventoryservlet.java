@@ -1,6 +1,6 @@
 package kitchenmanager.inventory;
 
-import Dao.DB;
+import User.ConnectionFactory.DB;
 import com.google.gson.Gson;
 
 
@@ -18,9 +18,8 @@ import java.util.List;
 public class inventoryservlet extends HttpServlet {
 
     DB db = new DB();
-//    inventorydao stock = new inventorydao(db);
+    //    inventorydao stock = new inventorydao(db);
     inventorydao inventory = new inventorydao(db);
-
 
 
     @Override
@@ -37,12 +36,10 @@ public class inventoryservlet extends HttpServlet {
         outputResponse(resp, jsonresponce, 200);
     }
 
-    protected void doPut(HttpServletRequest req,HttpServletResponse resp) throws IOException {
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 //        stock inventoryitem = new Gson().fromJson(req.getReader(),stock.class);
 //        stock inventoryitem = new Gson().fromJson(req.getReader(),inventory.class);
-      inventory inventoryitem = new Gson().fromJson(req.getReader(),inventory.class);
-
-
+        inventory inventoryitem = new Gson().fromJson(req.getReader(), inventory.class);
 
 
         try {
@@ -53,14 +50,13 @@ public class inventoryservlet extends HttpServlet {
         }
 
 
-
     }
 
-    private void outputResponse(HttpServletResponse response, String payload, int status){
+    private void outputResponse(HttpServletResponse response, String payload, int status) {
         response.setHeader("Content-Type", "application/json");
-        try{
+        try {
             response.setStatus(status);
-            if (payload != null){
+            if (payload != null) {
                 OutputStream outputStream = response.getOutputStream();
                 outputStream.write(payload.getBytes());
                 outputStream.flush();
@@ -69,7 +65,6 @@ public class inventoryservlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-
 
 
 }

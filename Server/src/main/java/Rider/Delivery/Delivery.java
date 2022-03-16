@@ -1,7 +1,7 @@
 package Rider.Delivery;
 
 import Rider.Order.Order;
-import Core.User;
+import User.User;
 
 public class Delivery {
     private Order order;
