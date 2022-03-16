@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebFilter("/*")
 public class FrontEndAuthenticationFilter implements Filter {
-    List<String> allowedPaths = Arrays.asList("/jauth", "/register", "/activate", "/dish", "/menu", "/customize", "ingredient");
+    List<String> allowedPaths = Arrays.asList("/jauth", "/register", "/activate", "/dish", "/menu", "/customize", "ingredient","/Employee/Verification","/Images");
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
@@ -26,45 +26,58 @@ public class FrontEndAuthenticationFilter implements Filter {
 
 
         String path = req.getServletPath();
-        System.out.println(path);
+//        System.out.println(path);
 
         if (allowedPaths.contains(path)) {
-
-            System.out.println(path);
+//            System.out.println("meka allowed");
+//            System.out.println(path);
             chain.doFilter(request, response);
 
 
         } else {
 
             String btk = req.getHeader("authorization");
-            System.out.println(btk);
+//            System.out.println(btk);
             String ea = btk.substring(btk.indexOf(' ') + 1);
 
-            System.out.println(path);
-
-            System.out.println(btk);
+//            System.out.println(path);
+//
+//            System.out.println(btk);
 
             JWebToken incomingToken = null;
 
             try {
-                btk = req.getHeader("authorization");
+//                btk = req.getHeader("authorization");
 
 
-                System.out.println("im here now");
+//                System.out.println("im here now");
                 incomingToken = new JWebToken(ea);
-                System.out.println(incomingToken);
+//                System.out.println(incomingToken);
             } catch (NoSuchAlgorithmException e) {
-                System.out.println("im in catch");
+//                System.out.println("im in catch");
                 e.printStackTrace();
             }
             if (incomingToken.isValid()) {
-                System.out.println("i came here");
+//                System.out.println("i came here");
+                List<String>aud =incomingToken.getAudience();
 
-                chain.doFilter(request, response);
+                if (path.contains("/Manager/") && aud.contains("Manager")) {
+                    chain.doFilter(request, response);
+                }else if (path.contains("/KitchenManager/") && aud.contains("Kitchen Manager")){
+                    chain.doFilter(request, response);
+                }else if (path.contains("/Supplier/") && aud.contains("Supplier")){
+                    chain.doFilter(request, response);
+                }else if(path.contains("/profile")){
+                    chain.doFilter(request,response);
+                }
+//                add customer paths here
+//                else if(path.contains("/customer")){
+//                    chain.doFilter(request, response);
+//                }
 
 
             } else {
-                System.out.println("hello");
+//                System.out.println("hello");
 
                 res.sendError(HttpServletResponse.SC_UNAUTHORIZED);
             }
@@ -75,7 +88,7 @@ public class FrontEndAuthenticationFilter implements Filter {
 
 
     public FrontEndAuthenticationFilter() {
-        System.out.println("kujll");
+//        System.out.println("kujll");
     }
 
     public void destroy() {
