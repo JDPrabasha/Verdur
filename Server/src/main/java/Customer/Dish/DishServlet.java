@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//@WebServlet("/dish/*")
+@WebServlet("/dish/*")
 public class DishServlet extends HttpServlet {
 
     private DishDAO dishDAO;
