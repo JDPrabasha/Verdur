@@ -282,13 +282,13 @@
 
 @font-face {
   font-family: "Circular";
-  src: url(../../Client/static/fonts/CircularStd-Book.otf) format("opentype");
+  src: url(../static/fonts/CircularStd-Book.otf) format("opentype");
   font-display: fallback;
 }
 
 @font-face {
   font-family: "Circular-Bold";
-  src: url(../../Client/static/fonts/CircularStd-Bold.otf) format("opentype");
+  src: url(../static/fonts/CircularStd-Bold.otf) format("opentype");
   font-display: fallback;
 }
 
