@@ -48,6 +48,7 @@ public class CustomizationServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            System.out.println("herev");
             listDish(request, response);
         } catch (SQLException ex) {
             throw new ServletException(ex);
@@ -89,7 +90,7 @@ public class CustomizationServlet extends HttpServlet {
 
     private void listDish(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-
+        System.out.println("carting");
         String requestUrl = request.getRequestURI();
         String id = requestUrl.substring("/Server_war_exploded/cart/".length());
 

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebFilter("/*")
 public class FrontEndAuthenticationFilter implements Filter {
-    List<String> allowedPaths = Arrays.asList("/jauth", "/register", "/activate", "/dish", "/menu", "/customize", "ingredient","/Employee/Verification","/Images");
+    List<String> allowedPaths = Arrays.asList("/jauth", "/register", "/activate", "/dish", "/menu", "/customize", "/cart", "ingredient", "/Employee/Verification", "/Images");
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
@@ -59,16 +59,16 @@ public class FrontEndAuthenticationFilter implements Filter {
             }
             if (incomingToken.isValid()) {
 //                System.out.println("i came here");
-                List<String>aud =incomingToken.getAudience();
+                List<String> aud = incomingToken.getAudience();
 
                 if (path.contains("/Manager/") && aud.contains("Manager")) {
                     chain.doFilter(request, response);
-                }else if (path.contains("/KitchenManager/") && aud.contains("Kitchen Manager")){
+                } else if (path.contains("/KitchenManager/") && aud.contains("Kitchen Manager")) {
                     chain.doFilter(request, response);
-                }else if (path.contains("/Supplier/") && aud.contains("Supplier")){
+                } else if (path.contains("/Supplier/") && aud.contains("Supplier")) {
                     chain.doFilter(request, response);
-                }else if(path.contains("/profile")){
-                    chain.doFilter(request,response);
+                } else if (path.contains("/profile")) {
+                    chain.doFilter(request, response);
                 }
 //                add customer paths here
 //                else if(path.contains("/customer")){
