@@ -5,6 +5,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +18,7 @@ import java.util.Base64;
 import java.util.List;
 
 
-//@WebServlet("/jauth")
+@WebServlet("/jauth")
 public class JAuthServlet extends HttpServlet {
 
     private UserDAO userDAO;

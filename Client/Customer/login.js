@@ -87,7 +87,7 @@ function login() {
         window.localStorage.setItem("name", user.name);
         console.log(window.localStorage.getItem("name"));
 
-        window.location = "/Client/customer-menu.html";
+        window.location = "/Client/Customer/customer-menu.html";
       });
     }
   }
