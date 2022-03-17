@@ -1,6 +1,6 @@
 package Manager.RestocksOrders;
 
-import Manager.Dao.DB;
+import User.ConnectionFactory.DB;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -14,9 +14,9 @@ public class RestockOrdersDAO {
 //    private String paymentsQuery = "SELECT * FROM restockorder r INNER JOIN user u ON r.supplierID = u.userID INNER JOIN restockrequest re on r.reorderID = re.restockID  INNER  JOIN ingredient i on re.ingID = i.ingID";
     private String paymentsQuery = "SELECT * FROM restockorder r INNER JOIN user u ON r.supplierID = u.userID INNER JOIN restockrequest re on r.restockID = re.restockID  INNER  JOIN ingredient i on re.ingID = i.ingID";
 
-    public RestockOrdersDAO(DB db){
+    public RestockOrdersDAO(){
         try{
-            this.conn = db.initializeDB();
+            this.conn = DB.initializeDB();
         } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
         }

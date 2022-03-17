@@ -1,6 +1,6 @@
 package Manager.Supplier;
 
-import Manager.Dao.DB;
+import User.ConnectionFactory.DB;
 
 
 
@@ -15,9 +15,9 @@ public class SupplierDAO {
     static String userquery         = "INSERT INTO user (role,name,contact_No) VALUES (?,?,?)";
     static String loginquery        = "INSERT INTO login (userID,email,password,code) VALUES (?,?,?,?)";
 
-    public SupplierDAO(DB db){
+    public SupplierDAO(){
         try{
-            this.conn = db.initializeDB();
+            this.conn = DB.initializeDB();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {

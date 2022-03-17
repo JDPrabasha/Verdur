@@ -1,6 +1,6 @@
 package Manager.Ingredients;
 
-import Manager.Dao.DB;
+import User.ConnectionFactory.DB;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,9 +16,9 @@ public class ingredientdao {
 
     private static String insertUnitsQuery = "insert into ingredientweight(ingID,unit,weight) values (?,?,?)";
 
-    public ingredientdao(DB db){
+    public ingredientdao(){
         try {
-            this.conn = db.initializeDB();
+            this.conn = DB.initializeDB();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {

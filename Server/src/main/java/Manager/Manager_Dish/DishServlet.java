@@ -1,6 +1,6 @@
 package Manager.Manager_Dish;
 
-import Manager.Dao.DB;
+import User.ConnectionFactory.DB;
 import com.google.gson.Gson;
 
 //import javax.servlet.ServletException;
@@ -16,13 +16,11 @@ import java.util.List;
 
 @WebServlet("/Manager/dishes/*")
 public class DishServlet extends HttpServlet {
-    private DB db;
     private DishDAO dish;
 
     public void init() {
 //        System.out.println("dishawa");
-        db = new DB();
-        dish = new DishDAO(db);
+        dish = new DishDAO();
     }
 
     @Override

@@ -1,7 +1,6 @@
 package Manager.Ingredients;
 
 
-import Manager.Dao.DB;
 import Manager.Output.outputResponse;
 import com.google.gson.Gson;
 
@@ -17,10 +16,7 @@ import java.util.List;
 
 @WebServlet("/Manager/ingredients/*")
 public class ingredientservlet  extends HttpServlet{
-
-
-    DB db = new DB();
-    ingredientdao ingredient = new ingredientdao(db);
+    ingredientdao ingredient = new ingredientdao();
 
 
 

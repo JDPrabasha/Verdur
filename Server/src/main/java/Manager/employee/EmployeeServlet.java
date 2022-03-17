@@ -1,6 +1,5 @@
 package Manager.employee;
 
-import Manager.Dao.DB;
 import Manager.Output.outputResponse;
 import com.google.gson.Gson;
 //import org.apache.naming.factory.SendMailFactory;
@@ -17,13 +16,11 @@ import java.util.Random;
 
 @WebServlet("/Manager/employee/*")
 public class EmployeeServlet extends HttpServlet {
-    private DB db;
     private EmployeeDAO employee;
     private SendMail mailer;
 
     public void init(){
-        db = new DB();
-        employee = new EmployeeDAO(db);
+        employee = new EmployeeDAO();
     }
 
     @Override

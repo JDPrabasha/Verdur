@@ -1,6 +1,5 @@
 package Manager.RestocksOrders;
 
-import Manager.Dao.DB;
 import com.google.gson.Gson;
 
 import javax.servlet.annotation.WebServlet;
@@ -16,12 +15,11 @@ import java.util.List;
 @WebServlet("/Manager/RestockOrders")
 public class RestockOrdersServlet extends HttpServlet {
 
-    private DB db;
+
     private RestockOrdersDAO restocks;
 
     public void init(){
-        db = new DB();
-        restocks = new RestockOrdersDAO(db);
+        restocks = new RestockOrdersDAO();
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp){

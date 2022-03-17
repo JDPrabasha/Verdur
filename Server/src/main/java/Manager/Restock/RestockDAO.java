@@ -1,7 +1,7 @@
 package Manager.Restock;
 
-import Manager.Dao.DB;
-;
+import User.ConnectionFactory.DB;
+
 
 
 import java.sql.*;
@@ -28,9 +28,9 @@ public class RestockDAO {
 //    private String createRestockOrderQuery = "INSERT INTO restockorder VALUES(?,?,?,?,?,?)";
     private String createRestockOrderQuery = "UPDATE restockorder set  invoiceNo = ? ,status = ?, deliveryDate = ? where restockID = ?";
 
-    public RestockDAO(DB db){
+    public RestockDAO(){
         try{
-            this.conn = db.initializeDB();
+            this.conn = DB.initializeDB();
         } catch (SQLException | ClassNotFoundException throwable) {
             throwable.printStackTrace();
         }

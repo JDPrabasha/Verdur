@@ -1,0 +1,209 @@
+$xs-width: 576px;
+$md-width: 768px;
+$lg-width: 992px;
+$xl-width: 1200px;
+
+$sizes: 100;
+.new{
+    
+    @mixin margin-classes {
+      @for $i from 1 through $sizes {
+        $margin: $i * 0.25rem;
+        /* margin #{$margin} */
+        .m-#{$i} {
+          margin: $margin;
+        }
+        .ml-#{$i} {
+          margin-left: $margin;
+        }
+        .mr-#{$i} {
+          margin-right: $margin;
+        }
+        .mt-#{$i} {
+          margin-top: $margin;
+        }
+        .mb-#{$i} {
+          margin-bottom: $margin;
+        }
+        .mx-#{$i} {
+          margin-left: $margin;
+          margin-right: $margin;
+        }
+        .my-#{$i} {
+          margin-top: $margin;
+          margin-bottom: $margin;
+        }
+      }
+    }
+    @include margin-classes;
+    
+    @mixin padding-classes {
+      @for $i from 1 through $sizes {
+        $padding: $i * 0.25rem;
+        /* padding #{$padding} */
+        .p-#{$i} {
+          padding: $padding;
+        }
+        .pl-#{$i} {
+          padding-left: $padding;
+        }
+        .pr-#{$i} {
+          padding-right: $padding;
+        }
+        .pt-#{$i} {
+          padding-top: $padding;
+        }
+        .pb-#{$i} {
+          padding-bottom: $padding;
+        }
+        .px-#{$i} {
+          padding-left: $padding;
+          padding-right: $padding;
+        }
+        .py-#{$i} {
+          padding-top: $padding;
+          padding-bottom: $padding;
+        }
+      }
+    }
+    @include padding-classes;
+    
+    $columns: 12;
+    
+    .content {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+    
+    .v-center {
+      position: absolute;
+      top: 50%;
+      -webkit-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+    }
+    
+    .h-center {
+      position: relative;
+      left: 50%;
+      -webkit-transform: translate(0, -50%);
+      transform: translate(0, -50%);
+    }
+    
+    .flex {
+      display: flex;
+      align-items: center;
+    
+      li {
+        list-style: none;
+      }
+    }
+    
+    .flex-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .flex-start {
+      justify-content: flex-start;
+    }
+    
+    .flex-end {
+      justify-content: flex-end;
+    }
+    
+    .flex-center {
+      display: flex;
+      justify-content: center;
+    }
+    .flex-space-evenly {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+    .flex-space-between {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .flex-space-around {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    
+    .flex-grid {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    
+    .row {
+      display: grid;
+      width: 100%;
+      margin: 0 auto;
+      grid-template-columns: repeat(12, 1fr);
+      grid-column-gap: 0;
+    }
+    
+    @for $i from 1 through 4 {
+      .grid-gap-#{$i} {
+        grid-column-gap: 0.5em * $i;
+      }
+    }
+    
+    @for $i from 1 through $columns {
+      .col-#{$i} {
+        grid-column: span $i;
+      }
+    }
+    
+    @for $i from 1 through $columns {
+      .col-xs-#{$i} {
+        @media (max-width: 576px) {
+          grid-column: span $i;
+        }
+      }
+    }
+    @for $i from 1 through $columns {
+      .col-md-#{$i} {
+        @media only screen and (min-width: $xs-width) and (max-width: $md-width) {
+          grid-column: span $i;
+        }
+      }
+    }
+    
+    @for $i from 1 through $columns {
+      .col-lg-#{$i} {
+        @media (min-width: $md-width) and (max-width: $lg-width) {
+          grid-column: span $i;
+        }
+      }
+    }
+    
+    @for $i from 1 through $columns {
+      .col-xl-#{$i} {
+        @media (min-width: $lg-width) and (max-width: $xl-width) {
+          grid-column: span $i;
+        }
+      }
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    @for $i from 1 through 10 {
+      .width-#{$i} {
+        width: 10% * $i;
+      }
+      .height-#{$i} {
+        width: 10% * $i;
+      }
+    }
+}
