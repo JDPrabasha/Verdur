@@ -24,7 +24,7 @@ public class ReportServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp){
         String requestUrl = req.getRequestURI();
-        String type = requestUrl.substring("/Server_war_exploded/Manager/Manager.Report/".length());
+        String type = requestUrl.substring("/Server_war_exploded/Manager/Report/".length());
 //        System.out.println(type);
         if(type.equals("dish")){
             List<reportsDish> topDish = report.getTopDish();
