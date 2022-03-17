@@ -20,7 +20,8 @@ function login() {
             }
         }
     };
-    console.log("hy");
+    // console.log("hy");
+    // console.log(authHeader);
     ajaxRequest.open('POST', 'http://localhost:8080/Server_war_exploded/jauth');
     ajaxRequest.setRequestHeader("authorization", authHeader);
     ajaxRequest.send();
@@ -39,7 +40,7 @@ function setDetails(role) {
             },
         }).then(function (data) {
             var user = $.parseJSON(data);
-            console.log(user);
+            // console.log(user);
             window.localStorage.setItem("avatar", user.avatar);
             window.localStorage.setItem("customer", user.id);
             window.localStorage.setItem("name", user.name);
@@ -57,7 +58,7 @@ function setDetails(role) {
                 authorization: authHeader,
             },
         }).then(function (data) {
-            console.log(role)
+            // console.log(role)
             var user = $.parseJSON(data);
             // console.log(user);
             window.localStorage.setItem("photo", user.avatar);

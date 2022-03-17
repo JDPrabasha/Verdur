@@ -54,14 +54,6 @@ public class JAuthServlet extends HttpServlet {
         JSONObject jwtPayload = new JSONObject();
 //        jwtPayload.put("status", 0);
 
-        JSONArray audArray = new JSONArray();
-//        audArray.put("admin");
-        jwtPayload.put("sub", username);
-        jwtPayload.put("pass", password);
-        jwtPayload.put("aud", audArray);
-        LocalDateTime ldt = LocalDateTime.now().plusDays(EXPIRY_DAYS);
-        jwtPayload.put("exp", ldt.toEpochSecond(ZoneOffset.UTC)); //this needs to be configured
-
 
 //        String token = new User.JWebToken("John",audArray,ldt.toEpochSecond(ZoneOffset.UTC)).toString();
         User loggedInPerson = null;
@@ -93,6 +85,15 @@ public class JAuthServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        JSONArray audArray = new JSONArray();
+//        audArray.put("admin");
+        audArray.put(role);
+        jwtPayload.put("sub", username);
+        jwtPayload.put("pass", password);
+        jwtPayload.put("aud", audArray);
+        LocalDateTime ldt = LocalDateTime.now().plusDays(EXPIRY_DAYS);
+        jwtPayload.put("exp", ldt.toEpochSecond(ZoneOffset.UTC)); //this needs to be configured
         String token = new JWebToken(jwtPayload).toString();
         Login login = new Login(id, role, token);
         String json = new Gson().toJson(login);

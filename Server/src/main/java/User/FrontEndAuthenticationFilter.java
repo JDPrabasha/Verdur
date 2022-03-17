@@ -70,7 +70,7 @@ public class FrontEndAuthenticationFilter implements Filter {
                 } else if (path.contains("/profile")) {
                     chain.doFilter(request, response);
 
-                    
+
                 } else if (path.contains("/profile")) {
                     chain.doFilter(request, response);
                 } else if (path.contains("/Cashier/") && aud.contains("Cashier")) {
