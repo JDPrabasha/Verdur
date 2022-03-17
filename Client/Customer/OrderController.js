@@ -8,6 +8,7 @@ $(window).on("load", function () {
   var array = [];
   var names = [];
   var order = {};
+  var deserializedOrder = {};
 
   $.ajax({
     url: "http://localhost:8080/Server_war_exploded/order/" + customer,
@@ -18,8 +19,8 @@ $(window).on("load", function () {
     order = $.parseJSON(data);
     console.log(order);
 
-    const deSerializedData = OrderSerializer.deSerialize(order);
-    new Order(deSerializedData).addOrder();
+    deserializedOrder = OrderSerializer.deSerialize(order);
+    new Order(deserializedOrder).addOrder();
 
     if (order) {
       $("#orders").removeClass("transparent");
@@ -50,21 +51,25 @@ $(window).on("load", function () {
 
     switch (status) {
       case "Pending":
-        const deSerializedData = OrderSerializer.deSerialize(order);
-        new Order(deSerializedData).showPendingOrder();
+        new Order(deserializedOrder).showPendingOrder();
         break;
-      case "Delivering":
-        console.log("Oranges are $0.59 a pound.");
 
+      case "Accepted":
+        new Order(deserializedOrder).showAcceptedOrder();
+        break;
+
+      case "Rejected":
+        new Order(deserializedOrder).showRejectedOrder();
+        break;
+
+      case "Delivering":
+        new Order(deserializedOrder).showDeliveringOrder();
         break;
       case "Delivered":
-        console.log("Mangoes and papayas are $2.79 a pound.");
-
-        reviewOrder();
-
+        new Order(deserializedOrder).showDeliveredOrder();
         break;
+
       default:
-        console.log(`Sorry, we are out of .`);
         break;
     }
   });
@@ -94,8 +99,8 @@ $(window).on("load", function () {
   }
 
   function reviewOrder() {
-    // const deSerializedData = OrderSerializer.deSerialize(order);
-    // new Order(deSerializedData).showPendingOrder();
+    const deSerializedData = OrderSerializer.deSerialize(order);
+    new Order(deSerializedData).showDelivering();
   }
 
   function confirmReview() {

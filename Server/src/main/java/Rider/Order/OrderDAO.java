@@ -25,7 +25,7 @@ public class OrderDAO {
         // try-with-resource statement will auto close the connection.
         try (Connection connection = DB.initializeDB()) {
             System.out.println("hello");
-            connection.setAutoCommit(false);
+//            connection.setAutoCommit(false);
             PreparedStatement preparedStatement = connection.prepareStatement(ADD_ORDER, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, order.getCustomer());
             preparedStatement.setFloat(2, order.getDistance());

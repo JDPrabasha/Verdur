@@ -90,22 +90,22 @@ class Order {
     // deSerializedData.map((params) => new Dish(params).addReviewDish());
   }
 
-  showDeliveredOrder() {
+  showAcceptedOrder() {
     var title = $(document.createElement("h1")).html("Your Order");
     var line = $(document.createElement("div")).addClass("vl");
     var content = $(document.createElement("div")).addClass(
-      "flex-space-evenly"
+      "flex-space-around"
     );
     var left = $(document.createElement("div"));
     var id = $(document.createElement("p"))
       .addClass("fw-b mt-15")
-      .html("ORDER ID : ");
+      .html("ORDER ID : " + this.id);
     var status = $(document.createElement("p"))
-      .addClass("fw-b mt-15")
-      .html("STATUS : ");
+      .addClass("fw-b mt-15 text-upper")
+      .html("STATUS : " + this.status);
     var time = $(document.createElement("p"))
       .addClass("fw-b mt-15")
-      .html("EST. TIME : ");
+      .html("EST. TIME : - ");
     $("#modalContent").append(title);
     $("#modalContent").append(line);
     left.append(id);
@@ -126,6 +126,88 @@ class Order {
     $(button).click(function (e) {
       console.log("helh");
     });
+  }
+
+  showDeliveringOrder() {
+    var title = $(document.createElement("h1")).html("Your Order");
+    var line = $(document.createElement("div")).addClass("vl");
+    var content = $(document.createElement("div")).addClass(
+      "flex-space-around"
+    );
+    var left = $(document.createElement("div"));
+    var id = $(document.createElement("p"))
+      .addClass("fw-b mt-15")
+      .html("ORDER ID : " + this.id);
+    var status = $(document.createElement("p"))
+      .addClass("fw-b mt-15 text-upper")
+      .html("STATUS : " + this.status);
+
+    var time = $(document.createElement("p"))
+      .addClass("fw-b mt-15")
+      .html("EST. TIME : - ");
+    $("#modalContent").append(title);
+    $("#modalContent").append(line);
+    left.append(id);
+    left.append(status);
+    left.append(time);
+    content.append(left);
+
+    var right = $(document.createElement("div"));
+
+    var rider = $(document.createElement("p"))
+      .addClass("fw-b mt-15")
+      .html("RIDER : " + "NAMAL");
+    var contact = $(document.createElement("p"))
+      .addClass("fw-b mt-15 text-upper")
+      .html("PHONE : " + "0711008978");
+
+    // console.log(this.dishes);
+
+    right.append(rider);
+    right.append(contact);
+    content.append(right);
+
+    $("#modalContent").append(content);
+  }
+
+  showRejectedOrder() {
+    var title = $(document.createElement("h1")).html("Your Order");
+    var line = $(document.createElement("div")).addClass("vl");
+    var content = $(document.createElement("div")).addClass(
+      "flex-space-around"
+    );
+    var left = $(document.createElement("div"));
+    var id = $(document.createElement("p"))
+      .addClass("fw-b mt-15")
+      .html("ORDER ID : " + this.id);
+    var status = $(document.createElement("p"))
+      .addClass("fw-b mt-15 text-upper")
+      .html("STATUS : " + this.status);
+
+    var time = $(document.createElement("p"))
+      .addClass("fw-b mt-15")
+      .html("EST. TIME : - ");
+    $("#modalContent").append(title);
+    $("#modalContent").append(line);
+    left.append(id);
+    left.append(status);
+    left.append(time);
+    content.append(left);
+
+    var right = $(document.createElement("div"));
+
+    var dummyText = $(document.createElement("p"))
+      .html(
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
+      )
+      .addClass("width-3");
+
+    // console.log(this.dishes);
+
+    right.append(dummyText);
+    content.append(dummyText);
+
+    $("#modalContent").append(content);
   }
 
   addRiderOrder() {
