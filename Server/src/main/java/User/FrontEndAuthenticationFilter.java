@@ -76,6 +76,8 @@ public class FrontEndAuthenticationFilter implements Filter {
                 } else if (path.contains("/Cashier/") && aud.contains("Cashier")) {
                     chain.doFilter(request, response);
 
+                }else if (path.contains("/Chef/") && aud.contains("Chef")){
+                    chain.doFilter(request, response);
                 }
 //                add customer paths here
 //                else if(path.contains("/customer")){
