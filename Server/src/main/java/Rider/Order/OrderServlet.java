@@ -1,5 +1,6 @@
 package Rider.Order;
 
+import Customer.Dish.Dish;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -25,12 +26,24 @@ public class OrderServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            addOrder(request, response);
-        } catch (SQLException ex) {
-            throw new ServletException(ex);
+
+        String action = request.getPathInfo();
+
+        System.out.println("action is " + action);
+
+        if (Objects.equals(action, "/complaint")) {
+            fileComplaint(request, response);
+        } else {
+            try {
+
+                addOrder(request, response);
+            } catch (SQLException ex) {
+                throw new ServletException(ex);
+            }
         }
+
     }
+
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -117,5 +130,12 @@ public class OrderServlet extends HttpServlet {
         response.getOutputStream().println(order);
 
 
+    }
+
+    private void fileComplaint(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Order complaintOrder = new Gson().fromJson(request.getReader(), Order.class);
+        System.out.println("got here");
+        orderDAO.addComplaint(complaintOrder);
+        System.out.println("done");
     }
 }

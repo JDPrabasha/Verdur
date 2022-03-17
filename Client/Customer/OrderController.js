@@ -196,12 +196,35 @@ $(window).on("load", function () {
     $(".modal").show();
   });
 
-  $("#ratingContent").on("click", "#rate", function () {
-    // const deSerializedData = OrderSerializer.deSerialize(order);
-    // var orderIndex = parseInt($("#ratingContent").attr("data-index"));
-    // console.log(orderIndex);
-    // new Order(deSerializedData).reviewOrder(0);
+  $("#ratingContent").on("click", "#complain", function () {
+    var complaint = $(this).parent().siblings("#complaint").val();
 
+    var orderID = order.id;
+
+    $.ajax({
+      type: "POST",
+      url: "http://localhost:8080/Server_war_exploded/order/complaint",
+      headers: {
+        authorization: authHeader,
+      },
+
+      data: JSON.stringify({
+        customer: customer,
+        complaint: complaint,
+        id: orderID,
+      }),
+      contentType: "application/json; charset=utf-8",
+
+      success: function (response) {
+        console.log("pass");
+      },
+      failure: function () {
+        console.log("fail");
+      },
+    });
+  });
+
+  $("#ratingContent").on("click", "#rate", function () {
     var rating = $("#ratingContent").attr("data-rating");
     var dish = $("#ratingContent").attr("data-dish");
 
@@ -220,6 +243,11 @@ $(window).on("load", function () {
 
       success: function (response) {
         console.log("pass");
+        const deSerializedData = OrderSerializer.deSerialize(order);
+        var orderIndex = parseInt($("#ratingContent").attr("data-index"));
+        console.log(orderIndex);
+        console.log(orderIndex);
+        new Order(deSerializedData).reviewOrder(orderIndex);
       },
       failure: function () {
         console.log("fail");

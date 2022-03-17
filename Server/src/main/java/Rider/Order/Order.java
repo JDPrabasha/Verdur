@@ -21,6 +21,7 @@ public class Order {
     private int protein;
     private int calories;
     private int fats;
+    private String complaint;
 
     public Order(int id, String payment, Double longitude, Double latitude, int price, List<Dish> dishes) {
         this.id = id;
@@ -103,6 +104,14 @@ public class Order {
         this.price = price;
         this.customer = customer;
         this.dishes = dishes;
+    }
+
+    public String getComplaint() {
+        return complaint;
+    }
+
+    public void setComplaint(String complaint) {
+        this.complaint = complaint;
     }
 
     private int price;

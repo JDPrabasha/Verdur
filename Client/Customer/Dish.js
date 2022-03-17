@@ -57,7 +57,6 @@ class Dish {
     }
 
     var childrenArray = $(stars).children().toArray();
-    console.log(childrenArray);
 
     for (var i = 0, len = childrenArray.length; i < len; i++) {
       childrenArray[i].onclick = function () {
@@ -71,13 +70,6 @@ class Dish {
         $("#ratingContent").attr("data-rating", parseInt(rating) + 1);
       };
     }
-
-    var first = $(stars).find("span[data-number='0']");
-    var second = $(stars).find("span[data-number='1']");
-    var third = $(stars).find("span[data-number='2']");
-    var fourth = $(stars).find("span[data-number='3']");
-    var fifth = $(stars).find("span[data-number='4']");
-    // console.log(star.attr("data-number"));
 
     var rate = $(document.createElement("p"))
       .html("RATE")

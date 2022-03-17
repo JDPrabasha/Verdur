@@ -35,10 +35,19 @@ class Order {
   }
 
   reviewOrder(order) {
+    let dishSet = this.dishes.filter((item, index, objects) => {
+      if (index === 0) {
+        return item;
+      } else if (item.name !== objects[index - 1].name) {
+        return item;
+      }
+    });
     order += 1;
-    if (order < this.dishes.length) {
+    console.log(order);
+    console.log(dishSet.length);
+    if (order < dishSet.length) {
       $("#ratingContent").attr("data-index", order);
-      var dish = this.dishes[order];
+      var dish = dishSet[order];
       const deSerializedData = DishSerializer.deSerialize(dish);
       new Dish(deSerializedData).addReviewDish();
     } else {
@@ -52,11 +61,12 @@ class Order {
           "placeholder",
           "Please let us know about any issues you had with your order "
         )
-        .addClass("height-1");
+        .addClass("height-1")
+        .attr("id", "complaint");
 
       var button = $(document.createElement("div"))
         .addClass("btn fw-b text-center ml-80 mt-15")
-        .attr("id", "viewDishes")
+        .attr("id", "complain")
         .html("Submit Complaint");
       // complaintSection.append(head);
       // complaintSection.append(complaint);
