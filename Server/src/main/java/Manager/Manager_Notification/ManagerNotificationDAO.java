@@ -1,6 +1,6 @@
 package Manager.Manager_Notification;
 
-import Manager.Dao.DB;
+import User.ConnectionFactory.DB;
 
 import java.sql.*;
 import java.util.ArrayList;

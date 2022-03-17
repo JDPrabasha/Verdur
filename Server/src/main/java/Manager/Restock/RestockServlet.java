@@ -1,6 +1,6 @@
 package Manager.Restock;
 
-import Manager.Dao.DB;
+
 import com.google.gson.Gson;
 
 import javax.servlet.annotation.WebServlet;
@@ -13,15 +13,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/Manager/Manager.Restock")
+@WebServlet("/Manager/Restock")
 public class RestockServlet extends HttpServlet {
 
-    private DB db;
     private RestockDAO restock;
 
     public void init(){
-        db = new DB();
-        restock = new RestockDAO(db);
+        restock = new RestockDAO();
     }
 
     @Override

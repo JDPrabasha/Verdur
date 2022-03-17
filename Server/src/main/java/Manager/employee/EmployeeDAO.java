@@ -1,6 +1,6 @@
 package Manager.employee;
 
-import Manager.Dao.DB;
+import User.ConnectionFactory.DB;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -28,9 +28,9 @@ public class EmployeeDAO {
 
 
 
-    public EmployeeDAO(DB db){
+    public EmployeeDAO(){
         try{
-            this.conn = db.initializeDB();
+            this.conn = DB.initializeDB();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {
