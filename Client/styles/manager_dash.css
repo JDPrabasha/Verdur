@@ -1,0 +1,243 @@
+.bg-dark-grey {
+  background-color: #313131;
+}
+
+.bg-grey {
+  background-color: #ccc;
+}
+
+.bg-white {
+  background-color: #fafafa;
+  color: #1c1d21;
+}
+
+.bg-black {
+  background-color: #1c1d21;
+  color: #fafafa;
+}
+
+.bg-purple {
+  background-color: #423bf7;
+  color: #fafafa;
+}
+
+.bg-primary {
+  background-color: #e1f5fe;
+}
+
+.bg-success {
+  background-color: #36d17c;
+  color: #1c1d21;
+}
+
+.bg-info {
+  background-color: #5886f5;
+  color: #fafafa;
+}
+
+.bg-danger {
+  background-color: #d9534f;
+}
+
+.bg-muted {
+  background-color: #fafafa;
+}
+
+.tag-red {
+  color: #c62828;
+  background-color: #ffcdd2;
+}
+
+.tag-yellow {
+  color: #a68b00;
+  background-color: #fff0c2;
+}
+
+.tag-green {
+  color: #388e3c;
+  background-color: #c8e6c9;
+}
+
+.tag-blue {
+  color: #2962ff;
+  background-color: #e1f5fe;
+}
+
+.bg-gray-1 {
+  background-color: #f9fbff;
+}
+
+.outline-gray1 {
+  border-color: #f9fbff;
+}
+
+.bg-gray-2 {
+  background-color: #f4f6fb;
+}
+
+.outline-gray2 {
+  border-color: #f4f6fb;
+}
+
+.bg-gray-3 {
+  background-color: #eef1f6;
+}
+
+.outline-gray3 {
+  border-color: #eef1f6;
+}
+
+.bg-gray-4 {
+  background-color: #e1e5ee;
+}
+
+.outline-gray4 {
+  border-color: #e1e5ee;
+}
+
+.bg-gray-5 {
+  background-color: #767b91;
+}
+
+.outline-gray5 {
+  border-color: #767b91;
+}
+
+.bg-gray-6 {
+  background-color: #4f546c;
+}
+
+.outline-gray6 {
+  border-color: #4f546c;
+}
+
+.bg-gray-7 {
+  background-color: #2a324b;
+}
+
+.outline-gray7 {
+  border-color: #2a324b;
+}
+
+.bg-gray-8 {
+  background-color: #161d34;
+}
+
+.outline-gray8 {
+  border-color: #161d34;
+}
+
+.outline-purple {
+  border-color: #423bf7;
+}
+
+.outline-blue {
+  border-color: #5886f5;
+}
+
+.outline-black {
+  border-color: #1c1d21;
+}
+
+.manager_cards {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(260px, 1fr))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-gap: 20px;
+}
+
+.circle {
+  background-color: #e0edde;
+  border: 1px solid white;
+  color: #56b686;
+  height: 50px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  width: 50px;
+}
+
+.wrapper {
+  border: 1px solid #9dd198;
+  border-radius: 40px;
+}
+
+.dash_card {
+  width: 290px;
+  height: 100px;
+}
+
+.graph {
+  width: 100%;
+}
+
+.graph:hover {
+  -webkit-transform: none;
+          transform: none;
+}
+
+.cus_list_wrapper {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.cus_list {
+  width: 100%;
+  border-radius: 10%;
+}
+
+.cus_list td {
+  vertical-align: middle;
+  padding-top: 10px;
+}
+
+.cus_list tr:nth-child(odd) {
+  font-size: 15px;
+}
+
+.cus_list img {
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+}
+
+.dish_list {
+  width: 100%;
+}
+
+.dish_list img {
+  height: 50px;
+  width: 50px;
+  border-radius: 10px;
+}
+
+.dish_list td {
+  vertical-align: middle;
+  font-size: 1.2rem;
+}
+
+.status_enabled {
+  margin-left: 0;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: #c8e6c9;
+  color: #388e3c;
+  padding: 0.2rem 1rem;
+  text-align: center;
+  border-radius: 10%;
+}
+
+.status_disabled {
+  margin-left: 0;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0.2rem 1rem;
+  text-align: center;
+  background-color: #ffcdd2;
+  color: #c62828;
+  border-radius: 10%;
+}
+/*# sourceMappingURL=manager_dash.css.map */

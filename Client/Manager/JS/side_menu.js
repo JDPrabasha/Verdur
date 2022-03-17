@@ -7,7 +7,7 @@ $(document).ready(function sideMenu() {
     //         <a href="/Client/Manager/Manager-Dishes.html"><i class="material-icons">restaurant_menu</i></a>
     //         <a href="/Client/Manager/Manager-Employee.html"><i class="material-icons">person_search</i></a>
     //         <a href="/Client/Manager/Manager-Supplier.html"><i class="material-icons">local_shipping</i></a>`);
-    $("#sidenav").load("/Client/sidemenu.html #sidenav")
+    $("#sidenav").load("/Client/Manager/sidemenu.html #sidenav")
     $(document.getElementById("sidenav")).attr("style","transform:scale(1.3);transform-origin: 0% 0% 0px;");
 });
 function showinfo(x){

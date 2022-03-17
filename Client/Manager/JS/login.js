@@ -71,10 +71,11 @@ function setDetails(role) {
                 window.location = "/Client/Manager/Manager-Home.html";
             } else if (role == "Kitchen Manager") {
                 // window.localStorage.setItem("userID", user.id);
-                window.location = "/Client/tabtest.html"
+                window.location = "/Client/kitchenmanager/home.html"
                 //Km location
             } else if (role == "Supplier") {
                 //supplier location
+                window.location = "/Client/Supplier/SupplierOrders.html"
             } else if (role == "Cashier") {
                 //cashier
             }

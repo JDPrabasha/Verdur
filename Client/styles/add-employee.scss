@@ -1,0 +1,94 @@
+
+.add-emp-form{
+    .image-upload>input{
+        display: none;
+    }
+    select {
+        display:block;
+        width:100%;
+        margin:10px 0;
+        padding:10px;
+        background-color: rgb(245, 245, 245);
+        border-radius:8px;
+        border: 1px solid #eee;
+        transition: .3s border-color;
+    }
+    select:hover {
+        border: 1px solid #aaa;
+    }
+
+    textarea {
+        display:block;
+        /* width:100%; */
+        margin:10px 0;
+        padding:10px;
+        background-color: rgb(245, 245, 245);
+        border-radius:8px;
+        border: 1px solid #eee;
+        transition: .3s border-color;
+    }
+    textarea:hover {
+        border: 1px solid #aaa;
+    }
+        
+    .add_border{
+        border: 1px solid #bacdd8;
+    }
+    /* hide number arrows */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    /* in firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+    /* until this */
+
+    input{
+        width: 500px;
+    }
+
+    .reg-pop{
+        position:fixed;
+        top:15vh;
+        left:20vw;
+        right:20vw;
+        bottom:15vh;
+        padding-top:2vh;
+        /* margin-left: -10vh; */
+        background: white;
+        border:1px solid rgb(114, 199, 125);
+        
+        border-radius: 20px;
+        z-index: 10;
+        display: none;
+    }
+
+    
+
+    .cancel-btn{
+        position: fixed;
+        top:18vh;
+        right:43vh;
+        width: 40px;
+        height:40px;
+        padding: 0;
+    }
+}
+
+.blur-back{
+    filter: blur(10px);
+}
+
+.reg-frame{
+    position:fixed;
+    background: transparent;
+    display: none;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+}
