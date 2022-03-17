@@ -25,6 +25,7 @@ public class DishDAO {
     private static final String SELECT_LATEST_DISHES = "select * from dish where enabled=1 limit 8";
     private static final String SELECT_DISHES_BY_TIME = "select * from dish where enabled=1";
     private static final String SELECT_RECENT_DISHES = "select d.name,d.image,d.price,d.dishID from dish d join customizeddish c on c.dishId =d.dishID join hasdish h on c.cdishID = h.cdishID join orders o on h.orderID = o.orderID  where o.custID = ? and status = ? order by o.timestamp limit 4";
+    private static final String RATE_DISH = "update rating set rating=? where dishID=? and custID=?";
 
 
     private static final String INSERT_DISH = "INSERT INTO customizedDish VALUES " +
@@ -283,6 +284,24 @@ public class DishDAO {
         return dishes;
     }
 
+    public void rateDish(Dish dish, String customer) {
+        try (Connection connection = DB.initializeDB(); PreparedStatement preparedStatement = connection.prepareStatement(RATE_DISH)) {
+
+
+            preparedStatement.setInt(1, dish.getRating());
+            preparedStatement.setInt(2, dish.getId());
+            preparedStatement.setString(3, customer);
+
+            System.out.println(preparedStatement);
+            preparedStatement.executeUpdate();
+
+
+        } catch (SQLException | ClassNotFoundException e) {
+            printSQLException((SQLException) e);
+        }
+
+
+    }
 
     public Dish selectDish(int id) {
 

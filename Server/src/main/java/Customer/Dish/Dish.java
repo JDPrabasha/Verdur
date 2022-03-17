@@ -24,8 +24,22 @@ public class Dish {
 
     private int price;
     private int rating;
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
     private int quantity;
     private List<Ingredient> ingredients;
+
+    public Dish(int id, int rating) {
+        this.id = id;
+        this.rating = rating;
+    }
 
     public int getQuantity() {
         return quantity;

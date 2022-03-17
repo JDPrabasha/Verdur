@@ -34,25 +34,88 @@ class Order {
     deSerializedData.map((params) => new Dish(params).addPendingDish());
   }
 
-  showDeliveredOrder() {
-    var title = $(document.createElement("h2")).html("Review Order");
-    $("#modalContent").append(title);
-    var complaint = $(document.createElement("textarea")).attr(
-      "placeholder",
-      "Please let us know about any issues you had with your order "
-    );
-    $("#modalContent").append(title);
-    console.log(this.dishes);
-    const deSerializedData = this.dishes.map(DishSerializer.deSerialize);
-    console.log(deSerializedData);
+  reviewOrder(order) {
+    order += 1;
+    if (order < this.dishes.length) {
+      $("#ratingContent").attr("data-index", order);
+      var dish = this.dishes[order];
+      const deSerializedData = DishSerializer.deSerialize(dish);
+      new Dish(deSerializedData).addReviewDish();
+    } else {
+      $("#ratingContent").empty();
 
-    deSerializedData.map((params) => new Dish(params).addReviewDish());
+      var head = $(document.createElement("p"))
+        .addClass(" mb-8")
+        .html("Pleaes Review Your Order");
+      var complaint = $(document.createElement("textarea"))
+        .attr(
+          "placeholder",
+          "Please let us know about any issues you had with your order "
+        )
+        .addClass("height-1");
+
+      var button = $(document.createElement("div"))
+        .addClass("btn fw-b text-center ml-80 mt-15")
+        .attr("id", "viewDishes")
+        .html("Submit Complaint");
+      // complaintSection.append(head);
+      // complaintSection.append(complaint);
+      var content = $(document.createElement("div")).addClass(
+        "flex-space-between"
+      );
+      var skip = $(document.createElement("p"))
+        .addClass("fw-b mt-15")
+        .html("SKIP")
+        .attr("id", "skipReview");
+      content.append(skip);
+      content.append(button);
+      $("#ratingContent").append(head);
+      $("#ratingContent").append(complaint);
+      $("#ratingContent").append(content);
+    }
+
+    // const deSerializedData = this.dishes.map(DishSerializer.deSerialize);
+    // console.log(deSerializedData);
+
+    // deSerializedData.map((params) => new Dish(params).addReviewDish());
+  }
+
+  showDeliveredOrder() {
+    var title = $(document.createElement("h1")).html("Your Order");
+    var line = $(document.createElement("div")).addClass("vl");
+    var content = $(document.createElement("div")).addClass(
+      "flex-space-evenly"
+    );
+    var left = $(document.createElement("div"));
+    var id = $(document.createElement("p"))
+      .addClass("fw-b mt-15")
+      .html("ORDER ID : ");
+    var status = $(document.createElement("p"))
+      .addClass("fw-b mt-15")
+      .html("STATUS : ");
+    var time = $(document.createElement("p"))
+      .addClass("fw-b mt-15")
+      .html("EST. TIME : ");
+    $("#modalContent").append(title);
+    $("#modalContent").append(line);
+    left.append(id);
+    left.append(status);
+    left.append(time);
+    content.append(left);
+
+    // console.log(this.dishes);
+
     var button = $(document.createElement("div"))
-      .addClass("btn fw-b text-center")
-      .attr("id", "completeReview")
-      .html("Complete Review");
-    $("#modalContent").append(complaint);
-    $("#modalContent").append(button);
+      .addClass("btn fw-b text-center ml-80 mt-15")
+      .attr("id", "viewDishes")
+      .html("View Dishes");
+
+    content.append(button);
+    $("#modalContent").append(content);
+
+    $(button).click(function (e) {
+      console.log("helh");
+    });
   }
 
   addRiderOrder() {

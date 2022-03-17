@@ -20,6 +20,10 @@ $(window).on("load", function () {
 
     const deSerializedData = OrderSerializer.deSerialize(order);
     new Order(deSerializedData).addOrder();
+
+    if (order) {
+      $("#orders").removeClass("transparent");
+    }
   });
 
   $.ajax({
@@ -42,7 +46,7 @@ $(window).on("load", function () {
     console.log($("#active-status").html());
     var status = $("#active-status").html();
     var content = $("#modalContent");
-    $("#modalContent").html("");
+    // $("#modalContent").html("");
 
     switch (status) {
       case "Pending":
@@ -55,11 +59,12 @@ $(window).on("load", function () {
         break;
       case "Delivered":
         console.log("Mangoes and papayas are $2.79 a pound.");
+
         reviewOrder();
 
         break;
       default:
-        console.log(`Sorry, we are out of ${expr}.`);
+        console.log(`Sorry, we are out of .`);
         break;
     }
   });
@@ -89,10 +94,8 @@ $(window).on("load", function () {
   }
 
   function reviewOrder() {
-    // var order = $("#active-order").html();
-    // console.log(order);
-    const deSerializedData = OrderSerializer.deSerialize(order);
-    new Order(deSerializedData).showDeliveredOrder();
+    // const deSerializedData = OrderSerializer.deSerialize(order);
+    // new Order(deSerializedData).showPendingOrder();
   }
 
   function confirmReview() {
@@ -193,7 +196,49 @@ $(window).on("load", function () {
     $(".modal").show();
   });
 
+  $("#ratingContent").on("click", "#rate", function () {
+    // const deSerializedData = OrderSerializer.deSerialize(order);
+    // var orderIndex = parseInt($("#ratingContent").attr("data-index"));
+    // console.log(orderIndex);
+    // new Order(deSerializedData).reviewOrder(0);
+
+    var rating = $("#ratingContent").attr("data-rating");
+    var dish = $("#ratingContent").attr("data-dish");
+
+    $.ajax({
+      type: "PUT",
+      url: "http://localhost:8080/Server_war_exploded/dish/rate/" + customer,
+      headers: {
+        authorization: authHeader,
+      },
+
+      data: JSON.stringify({
+        rating: rating,
+        id: dish,
+      }),
+      contentType: "application/json; charset=utf-8",
+
+      success: function (response) {
+        console.log("pass");
+      },
+      failure: function () {
+        console.log("fail");
+      },
+    });
+  });
+
   $("#checkout").click(function (e) {
+    if ($("#active-status").html() == "Delivered") {
+      $("#rateOrder").toggleClass("modal-active ");
+      $(".modal").show();
+      const deSerializedData = OrderSerializer.deSerialize(order);
+      var orderIndex = parseInt($("#ratingContent").attr("data-index"));
+      console.log(orderIndex);
+      new Order(deSerializedData).reviewOrder(orderIndex);
+      console.log(order.dishes.length);
+
+      return;
+    }
     console.log("bdjbvc");
     e.preventDefault();
     if ($("#card").hasClass("selected")) {

@@ -37,7 +37,10 @@ class Dish {
   }
 
   addReviewDish() {
-    var dish = $(document.createElement("div")).addClass("flex-space-between");
+    $("#ratingContent").attr("data-dish", this.id);
+    var dish = $(document.createElement("div")).addClass(
+      "flex-space-between cy"
+    );
     var image = $(document.createElement("img"))
       .attr("src", this.image)
       .addClass("icon-5");
@@ -49,37 +52,73 @@ class Dish {
         $(document.createElement("span"))
           .addClass("material-icons-outlined")
           .html("star_outline")
+          .attr("data-number", index)
       );
     }
-    var label = $(document.createElement("label"))
-      .attr("for", "quantity")
-      .html("Add to Today's Intake");
-    var intake = $(document.createElement("input"))
-      .attr({
-        min: 0,
-        max: this.quantity,
 
-        type: "number",
-      })
-      .addClass("width-1");
-    var add = $(document.createElement("div"))
-      .addClass("btn fw-b")
-      .attr("id", "completeReview")
-      .html("Add");
-    var quantity = $(document.createElement("p"))
-      .html(this.quantity)
-      .addClass("fw-b");
-    console.log("vh");
-    var content = $("#modalContent");
+    var childrenArray = $(stars).children().toArray();
+    console.log(childrenArray);
+
+    for (var i = 0, len = childrenArray.length; i < len; i++) {
+      childrenArray[i].onclick = function () {
+        var rating = $(this).attr("data-number");
+        for (let index = 0; index <= 4; index++) {
+          $(childrenArray[index]).html("star_outline");
+        }
+        for (let index = 0; index <= rating; index++) {
+          $(childrenArray[index]).html("star");
+        }
+        $("#ratingContent").attr("data-rating", parseInt(rating) + 1);
+      };
+    }
+
+    var first = $(stars).find("span[data-number='0']");
+    var second = $(stars).find("span[data-number='1']");
+    var third = $(stars).find("span[data-number='2']");
+    var fourth = $(stars).find("span[data-number='3']");
+    var fifth = $(stars).find("span[data-number='4']");
+    // console.log(star.attr("data-number"));
+
+    var rate = $(document.createElement("p"))
+      .html("RATE")
+      .addClass("fw-b")
+      .attr("id", "rate");
+    var skip = $(document.createElement("p")).html("SKIP").addClass("fw-b");
+
+    // var label = $(document.createElement("label"))
+    //   .attr("for", "quantity")
+    //   .html("Add to Today's Intake");
+    // var intake = $(document.createElement("input"))
+    //   .attr({
+    //     min: 0,
+    //     max: this.quantity,
+
+    //     type: "number",
+    //   })
+    //   .addClass("width-1");
+    // var add = $(document.createElement("div"))
+    //   .addClass("btn fw-b")
+    //   .attr("id", "completeReview")
+    //   .html("Add");
+    // var quantity = $(document.createElement("p"))
+    //   .html(this.quantity)
+    //   .addClass("fw-b");
+    // console.log("vh");
+    var content = $("#ratingContent");
 
     dish.append(image);
     dish.append(name);
-    dish.append(label);
-    dish.append(intake);
-    dish.append(add);
+
+    // dish.append(add);
 
     dish.append(stars);
+    dish.append(rate);
+    dish.append(skip);
     content.append(dish);
+    $(rate).click(function (e) {
+      e.preventDefault();
+      // console.log("kbjdb");
+    });
   }
 
   addDishDetails() {
