@@ -20,7 +20,8 @@ export default class inventory{
     printInventoryRecord(){
         let table = $("#inventory-tbody"),
             row1 = $(document.createElement('tr')).attr("id",`rec-${parseInt(this.id)}`).html(`
-                <td><img class="icon-1" src="${this.image}"></td>
+                <! <td><img class="icon-1" src="${this.image}"></td> -->
+                <td><img class="icon-5" src="${this.image}"></td>
                 <td>${this.itemcode}</td>
                 <td>${this.name}</td>
                 <td>${this.type}</td>

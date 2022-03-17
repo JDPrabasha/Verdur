@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-@WebServlet("/Manager/Manager.Report/*")
+@WebServlet("/Manager/Report/*")
 public class ReportServlet extends HttpServlet {
     private ReportDAO report;
 

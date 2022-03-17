@@ -1,6 +1,6 @@
 package Manager.Report;
 
-import Manager.Dao.DB;
+import User.ConnectionFactory.DB;
 
 
 import java.sql.*;

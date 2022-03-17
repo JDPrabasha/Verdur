@@ -1,6 +1,6 @@
 package Manager.Manager_Dish;
 
-import Manager.Dao.DB;
+import User.ConnectionFactory.DB;
 import Manager.dishes.hasIngredient;
 
 import java.sql.*;
@@ -35,9 +35,9 @@ public class DishDAO {
 
 
 
-    public DishDAO(DB db){
+    public DishDAO(){
         try {
-            this.conn = db.initializeDB();
+            this.conn = DB.initializeDB();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {

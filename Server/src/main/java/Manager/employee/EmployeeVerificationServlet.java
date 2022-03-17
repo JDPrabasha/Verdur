@@ -1,6 +1,5 @@
 package Manager.employee;
 
-import Manager.Dao.DB;
 import com.google.gson.Gson;
 
 import javax.servlet.annotation.WebServlet;
@@ -12,12 +11,10 @@ import java.io.OutputStream;
 
 @WebServlet("/Employee/Verification")
 public class EmployeeVerificationServlet extends HttpServlet {
-    private DB db;
     private EmployeeDAO employee;
 
     public void init(){
-        db = new DB();
-        employee = new EmployeeDAO(db);
+        employee = new EmployeeDAO();
     }
     @Override
     protected void doGet(HttpServletRequest req , HttpServletResponse resp) throws IOException {

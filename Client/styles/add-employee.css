@@ -1,0 +1,100 @@
+.add-emp-form {
+  /* hide number arrows */
+  /* in firefox */
+  /* until this */
+}
+
+.add-emp-form .image-upload > input {
+  display: none;
+}
+
+.add-emp-form select {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: whitesmoke;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  -webkit-transition: .3s border-color;
+  transition: .3s border-color;
+}
+
+.add-emp-form select:hover {
+  border: 1px solid #aaa;
+}
+
+.add-emp-form textarea {
+  display: block;
+  /* width:100%; */
+  margin: 10px 0;
+  padding: 10px;
+  background-color: whitesmoke;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  -webkit-transition: .3s border-color;
+  transition: .3s border-color;
+}
+
+.add-emp-form textarea:hover {
+  border: 1px solid #aaa;
+}
+
+.add-emp-form .add_border {
+  border: 1px solid #bacdd8;
+}
+
+.add-emp-form input::-webkit-outer-spin-button,
+.add-emp-form input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.add-emp-form input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.add-emp-form input {
+  width: 500px;
+}
+
+.add-emp-form .reg-pop {
+  position: fixed;
+  top: 15vh;
+  left: 20vw;
+  right: 20vw;
+  bottom: 15vh;
+  padding-top: 2vh;
+  /* margin-left: -10vh; */
+  background: white;
+  border: 1px solid #72c77d;
+  border-radius: 20px;
+  z-index: 10;
+  display: none;
+}
+
+.add-emp-form .cancel-btn {
+  position: fixed;
+  top: 18vh;
+  right: 43vh;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+}
+
+.blur-back {
+  -webkit-filter: blur(10px);
+          filter: blur(10px);
+}
+
+.reg-frame {
+  position: fixed;
+  background: transparent;
+  display: none;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+}
+/*# sourceMappingURL=add-employee.css.map */

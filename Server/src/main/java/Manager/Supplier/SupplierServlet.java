@@ -1,6 +1,5 @@
 package Manager.Supplier;
 
-import Manager.Dao.DB;
 import com.google.gson.Gson;
 
 import javax.servlet.annotation.WebServlet;
@@ -13,14 +12,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/Manager/Manager.Supplier")
+@WebServlet("/Manager/Supplier")
 public class SupplierServlet extends HttpServlet {
-    private DB db;
     private SupplierDAO supplier;
 
     public void init(){
-        db = new DB();
-        supplier = new SupplierDAO(db);
+        supplier = new SupplierDAO();
     }
 
     @Override
