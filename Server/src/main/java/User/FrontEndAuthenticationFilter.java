@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebFilter("/*")
 public class FrontEndAuthenticationFilter implements Filter {
-    List<String> allowedPaths = Arrays.asList("/jauth", "/register", "/activate", "/dish", "/menu", "/customize", "ingredient", "/Employee/Verification", "/Images");
+    List<String> allowedPaths = Arrays.asList("/jauth", "/register", "/activate", "/dish", "/menu", "/customize", "ingredient", "/Employee/Verification", "/Images", "/cart", "/order");
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
@@ -76,7 +76,7 @@ public class FrontEndAuthenticationFilter implements Filter {
                 } else if (path.contains("/Cashier/") && aud.contains("Cashier")) {
                     chain.doFilter(request, response);
 
-                }else if (path.contains("/Chef/") && aud.contains("Chef")){
+                } else if (path.contains("/Chef/") && aud.contains("Chef")) {
                     chain.doFilter(request, response);
                 }
 //                add customer paths here
