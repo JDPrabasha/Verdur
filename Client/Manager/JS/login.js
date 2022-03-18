@@ -61,9 +61,9 @@ function setDetails(role) {
             // console.log(role)
             var user = $.parseJSON(data);
             // console.log(user);
-            window.localStorage.setItem("photo", user.avatar);
-            window.localStorage.setItem("name", user.name);
-            console.log(window.localStorage.getItem("name"));
+            // window.localStorage.setItem("photo", user.avatar);
+            // window.localStorage.setItem("name", user.name);
+            // console.log(window.localStorage.getItem("name"));
             if (role == "Rider") {
                 window.localStorage.setItem("rider", user.id);
                 window.location = "/Client/rider-home.html";
@@ -79,6 +79,10 @@ function setDetails(role) {
                 window.location = "/Client/Supplier/SupplierOrders.html"
             } else if (role == "Cashier") {
                 //cashier
+                window.location = "/Client/Cashier/CashierHome.html"
+            } else if (role == "Chef"){
+                //chef location
+                window.location = "/Client/chef/home.html"
             }
         });
     }
