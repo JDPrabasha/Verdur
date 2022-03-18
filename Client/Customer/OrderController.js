@@ -65,6 +65,7 @@ $(window).on("load", function () {
       case "Delivering":
         new Order(deserializedOrder).showDeliveringOrder();
         break;
+
       case "Delivered":
         new Order(deserializedOrder).showDeliveredOrder();
         break;

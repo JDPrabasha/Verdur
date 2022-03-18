@@ -1,7 +1,6 @@
 package Manager.Report;
 
 
-
 import Manager.Output.outputResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -17,20 +16,20 @@ import java.util.List;
 public class ReportServlet extends HttpServlet {
     private ReportDAO report;
 
-    public void init(){
+    public void init() {
         report = new ReportDAO();
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp){
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         String requestUrl = req.getRequestURI();
-        String type = requestUrl.substring("/Server_war_exploded/Manager/Manager.Report/".length());
+        String type = requestUrl.substring("/Server_war_exploded/Manager/Report/".length());
 //        System.out.println(type);
-        if(type.equals("dish")){
+        if (type.equals("dish")) {
             List<reportsDish> topDish = report.getTopDish();
             String json = new Gson().toJson(topDish);
-            outputResponse.sendresponse(resp,json,200);
-        }else if(type.equals("reports")){
+            outputResponse.sendresponse(resp, json, 200);
+        } else if (type.equals("reports")) {
             JsonObject rootElement = new JsonObject();
 
             JsonElement topSuppliers = new Gson().toJsonTree(report.getTopSuppliers());
@@ -39,15 +38,15 @@ public class ReportServlet extends HttpServlet {
             JsonElement totalSupplierOrders = new Gson().toJsonTree(report.getAllSupplierOrders());
             JsonElement lastRevenue = new Gson().toJsonTree(report.getLastMonthSales());
 
-            rootElement.add("topDish",topDish);
-            rootElement.add("topSupplier",topSuppliers);
-            rootElement.add("totalDishSales",totalDishSales);
-            rootElement.add("totalSupplierOrders",totalSupplierOrders);
-            rootElement.add("lastRevenue",lastRevenue);
+            rootElement.add("topDish", topDish);
+            rootElement.add("topSupplier", topSuppliers);
+            rootElement.add("totalDishSales", totalDishSales);
+            rootElement.add("totalSupplierOrders", totalSupplierOrders);
+            rootElement.add("lastRevenue", lastRevenue);
 
 
-            outputResponse.sendresponse(resp,rootElement.toString(),200);
-        }else if(type.equals("home")){
+            outputResponse.sendresponse(resp, rootElement.toString(), 200);
+        } else if (type.equals("home")) {
             JsonObject rootElement = new JsonObject();
 
             JsonElement topDish = new Gson().toJsonTree(report.getTopDishHome());
@@ -56,12 +55,12 @@ public class ReportServlet extends HttpServlet {
             JsonElement totalExpenses = new Gson().toJsonTree(report.getTotalExpenses());
             JsonElement todayRevenue = new Gson().toJsonTree(report.getTodaysRevenue());
             JsonElement lastRevenue = new Gson().toJsonTree(report.getLastMonthSales());
-            rootElement.add("topDish",topDish);
-            rootElement.add("topCustomers",topCustomer);
-            rootElement.add("totalSales",totalSales);
-            rootElement.add("totalExpenses",totalExpenses);
-            rootElement.add("todaysRevenue",todayRevenue);
-            rootElement.add("lastRevenue",lastRevenue);
+            rootElement.add("topDish", topDish);
+            rootElement.add("topCustomers", topCustomer);
+            rootElement.add("totalSales", totalSales);
+            rootElement.add("totalExpenses", totalExpenses);
+            rootElement.add("todaysRevenue", todayRevenue);
+            rootElement.add("lastRevenue", lastRevenue);
 
             outputResponse.sendresponse(resp, rootElement.toString(), 200);
         }
