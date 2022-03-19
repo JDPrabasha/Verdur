@@ -15,7 +15,7 @@ public class RestockDAO {
     private Connection conn;
 //    private String restockQuery         = "SELECT * FROM restockrequest r INNER join ingredient i  ON  r.ingID = i.ingID INNER JOIN user u on r.supplierID = u.userID WHERE (status='' or status='Manager.Supplier Pending') and expired=0 and approvalStatus != 'managerDecline'";
 
-    private String restockQuery         = "SELECT * FROM restockrequest r INNER join ingredient i  ON  r.ingID = i.ingID WHERE (status='' or status='Manager.Supplier Pending') and expired=0 and approvalStatus != 'managerDecline'";
+    private String restockQuery         = "SELECT * FROM restockrequest r INNER join ingredient i  ON  r.ingID = i.ingID WHERE (status='' or status='Supplier Pending') and expired=0 and approvalStatus != 'managerDecline'";
     private String getSupplierNameQuery = "select concat(u.firstName,' ',u.lastName) as name from supplier s inner join user u on s.userID = u.userID where s.supplierID = ?";
 
 //    private String restockDeliveryQuery = "SELECT * FROM restockrequest r INNER join ingredient i  ON  r.ingID = i.ingID INNER JOIN user u on r.supplierID = u.userID WHERE (status='Delivering' or status='Delivered') and expired=0";

@@ -6,7 +6,7 @@ $(document).ready(function reload() {
     $("#notificationbox").load("/Client/Manager/Manager-Header.html #notification",function(){
         $.getScript("/Client/Manager/JS/functionalities/profile.js");
     })
-    $("#fotter").load("/Client/fotterKM.html #KMfotter")
+    $("#fotter").load("/Client/Manager/fotterKM.html #KMfotter")
 
     // $("#approvalList").html('');
     // approval_pending_list.map(i => printApprovalPending(i));
