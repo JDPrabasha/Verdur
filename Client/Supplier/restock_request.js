@@ -7,7 +7,7 @@ class restockrequest {
         this.price = params.price;
         this.responseDeadline = params.responseDeadline;
         this.deliveryRequestDate = params.deliveryRequestDate;
-        this.timeTillExpiry = params.timeTillExpiry;
+        this.timeTillExpiry = this.getTimeRemaining(params.responseDeadline);
     }
     printrestockrequest() {
         var view = $("#output");
@@ -20,7 +20,7 @@ class restockrequest {
         var price = $(document.createElement('td')).html(this.price);
         var responseDeadline = $(document.createElement('td')).html(this.responseDeadline);
         var deliveryRequestDate = $(document.createElement('td')).html(this.deliveryRequestDate);
-        var timeTillExpiry = $(document.createElement('td')).html(this.timeTillExpiry);
+        var timeTillExpiry = $(document.createElement('td')).html(this.timeTillExpiry).attr("time",this.responseDeadline).attr("id","timeTillExp-"+this.restockID);
 
         // var button1 = $(document.createElement('td')).html(`<a href="UpdateStock.html?id=${this.itemID}" class="btn text-1 bg-clr-paid fw-b text-center">Update</button>`);
         var button2 = $(document.createElement('td')).html(`<button class="btn text-1 bg-clr-paid fw-b text-center " name="OK" class="ok" value="OK" onclick="hiderow(${this.restockID})">Accept</button>`);
@@ -73,6 +73,36 @@ class restockrequest {
 
         view.append(row);
     }
+
+    getTimeRemaining(x) {
+        // console.log(new Date(x))
+        // let difference = new Date(new Date(x) - new Date() - new Date("1970-01-01 11:00:00"))
+        console.log(x)
+        let difference = new Date(new Date(x) - new Date() + new Date().getTimezoneOffset() * 60 * 1000)
+    
+    
+    
+        let months = difference.getMonth(), 
+        days = difference.getDate(),
+        hours = difference.getHours(),
+        mins = difference.getMinutes(),
+        secs = difference.getSeconds(),
+        timeremain;
+        if(months!=0){
+            timeremain = months+"  "+" Months "+days+" Days " + hours +" hours "+ mins + " mins " + secs +" secs"  
+        }else if(days!=0){
+            timeremain = days+" Days " + hours +" hours "+ mins + " mins " + secs +" secs"  
+        }else if(hours!=0){
+            timeremain =  hours +" hours "+ mins + " mins " + secs +" secs"  
+        }else if(mins!=0){
+            timeremain = mins + " mins " + secs +" secs"  
+        }else{
+            timeremain =   secs +" secs"  
+        }
+        return timeremain;
+    
+    }
+
 }
 
 function hiderow(rc) {
@@ -94,5 +124,4 @@ function hiderow(rc) {
     }).done(function () {
         console.log("done");
     })
-
 }

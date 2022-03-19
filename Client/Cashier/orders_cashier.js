@@ -31,7 +31,7 @@ export class orders_cashier{
       
         var neworder = $("#pending");
         
-        var ordercard = $(document.createElement('div')).attr("class","card").attr("id","results").attr("style","height: 390px");
+        var ordercard = $(document.createElement('div')).attr("class","card").attr("id","results_"+this.orderID).attr("style","height: 390px");
         var orderid = $(document.createElement('h2')).attr("class","ml-2").html(`OrderID: ${this.orderID}`);
         var window = $(document.createElement('div')).attr("class","mt-3 hidescroll").attr("style","padding: 10px; border:1px solid #bacdd8;border-radius: 10% ;height:240px;overflow-y: scroll;");
         var hr = $(document.createElement('hr')).attr("class","mb-2 mt-2")
