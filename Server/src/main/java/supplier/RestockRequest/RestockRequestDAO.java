@@ -20,7 +20,7 @@ public class RestockRequestDAO {
 
 
 //    private static final String GET_ALL_ITEMS = "SELECT * FROM restockrequest ";
-    private static final String GET_ALL_ITEMS = "SELECT * FROM restockrequest r  INNER JOIN ingredient i WHERE r.ingID=i.ingID  and approvalStatus=\"managerApproved\" and status=\"pending\" and (r.supplierID=1 or r.supplierID is NULL)";
+    private static final String GET_ALL_ITEMS = "SELECT * FROM restockrequest r  INNER JOIN ingredient i WHERE r.ingID=i.ingID  and approvalStatus=\"managerApproved\" and (status=\"pending\" or status=\"\")and (r.supplierID=? or r.supplierID is NULL)";
     private static final String GET_REQUEST = " UPDATE `restockrequest` SET `status` = 'Delivering' WHERE `restockrequest`.`restockID` = ?";
     protected Connection getConnection() {
         Connection connection = null;
@@ -38,7 +38,7 @@ public class RestockRequestDAO {
     }
 
 
-    public List<RestockRequest> selectAllItems() {
+    public List<RestockRequest> selectAllItems(int id) {
 
         // using try-with-resources to avoid closing resources (boiler plate code)
         List < RestockRequest > items = new ArrayList< >();
@@ -47,6 +47,7 @@ public class RestockRequestDAO {
 
              // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_ITEMS);) {
+            preparedStatement.setInt(1,id);
             System.out.println("hasara");
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
