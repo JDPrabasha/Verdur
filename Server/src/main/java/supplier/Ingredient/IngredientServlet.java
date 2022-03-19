@@ -2,7 +2,9 @@
 package supplier.Ingredient;
 
 
+import Manager.Output.outputResponse;
 import com.google.gson.Gson;
+import org.apache.catalina.Manager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -56,7 +58,9 @@ public class IngredientServlet extends HttpServlet {
         String json = new Gson().toJson(currentDish);
 
 //        System.out.println(json);
-        response.getOutputStream().println(json);
+//        response.getOutputStream().println(json);
+        outputResponse.sendresponse(response,json,200);
+//        outputResponse(response,json,200)
 
 
     }

@@ -9,13 +9,14 @@ function accept(rc) {
     };
     $.ajax({
         type: 'PUT',
-        url: 'http://localhost:8080/Server_war_exploded/Cashier/CashierOrders',
+        url: 'http://localhost:8080/Server_war_exploded/Cashier/CashierOrders/accept',
         headers: {
             "authorization": jwt
         },
         data: JSON.stringify(accept)
     }).done(function () {
         console.log("done");
+        $(`#results_${rc}`).remove()
     })
 
 }

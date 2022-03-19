@@ -1,0 +1,310 @@
+.mybutton {
+    background-color: #30ff8d;
+    /* Green */
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+
+  // .mybutton2 {
+  //   background-color: #30ff8d;
+  //   /* Green */
+  //   border: none;
+  //   color: black;
+  //   padding: 20px 40px;
+  //   text-align: center;
+  //   text-decoration: none;
+  //   font-size: 15px;
+  //   border-radius: 5px;
+  //   margin-top: 10px;
+
+  // }
+  .mybutton2 {
+    background-color: #fff0c2;
+    /* Green */
+    border: 0px solid #a68b00;
+    color:#a68b00;
+    padding: 4px 30px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 20px;
+    margin-top: 10px;
+
+  }
+  .mybutton3 {
+    background-color: #f9d1f5;
+    /* Green */
+    border:0px solid rgb(202, 3, 176);
+    color:rgb(202, 3, 176);
+    padding: 4px 30px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 20px;
+    margin-top: 10px;
+
+  }
+  .mybutton4 {
+    background-color: #c8e6c9;
+    /* Green */
+    border: 0px solid #388e3c;
+    color:#388e3c;
+    padding: 4px 30px;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 15px;
+    border-radius: 20px;
+    margin-top: 10px;
+
+  }
+  .mybutton5 {
+    background-color: #d5cffa;
+    /* Green */
+    border: 0px solid rgb(45, 47, 158);
+    color:rgb(45, 47, 158);
+    padding: 4px 23px;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 15px;
+    border-radius: 20px;
+    margin-top: 10px;
+
+  }
+  // .mybutton2{
+  //   border: none;
+  //   padding: 20px 40px;
+  //   font-size: 15px;
+  //   text-align: center;
+  //   border-radius: 5px;
+  //   text-decoration: none;
+  //   margin-top: 10px;
+  //   color: #0a0a0a;
+  //   background-color: #30ff8d;
+  
+  //   /* Button is inline-block element by default, it need to have block display for margin: 0 auto; to work */
+  //   display: block;
+  
+  //   /* Button is a clickable element, therefore it should have a pointer cursor */
+  //   cursor: pointer;
+  
+  //   transition: 0.3s;
+  
+  
+  //   &:hover{
+  //     background-color: black;
+  //     color: white;
+  //   }
+
+  // }
+  .btn {
+    border: none;
+    padding: 12px 24px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 15px;
+  text-decoration: none;
+    color: #0a0a0a;
+    background-color: #30ff8d;
+  
+    /* Button is inline-block element by default, it need to have block display for margin: 0 auto; to work */
+    display: block;
+  
+    /* Button is a clickable element, therefore it should have a pointer cursor */
+    cursor: pointer;
+  
+    transition: 0.3s;
+  
+  
+    &:hover{
+      background-color: black;
+      color: white;
+    }
+  }
+  .btn2 {
+    border: none;
+    width: 100%;
+    font-size: 14px;
+    margin-top: 4px;
+    padding: 5px 5px;
+    border-radius: 5px;
+  text-decoration: none;
+    color: white;
+    background-color: black;
+  
+    /* Button is inline-block element by default, it need to have block display for margin: 0 auto; to work */
+    display: block;
+  
+    /* Button is a clickable element, therefore it should have a pointer cursor */
+    cursor: pointer;
+  
+    transition: 0.3s;
+  
+  
+    &:hover{
+      background-color: black;
+      color: white;
+    }
+  }
+
+ 
+  .btn5 {
+    background-color: #f7e5f5;
+    /* Green */
+    height: 100px;
+    border:2px solid rgb(202, 3, 176);
+    color:rgb(202, 3, 176);
+    padding: 4px 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+
+  }
+  .btn6 {
+    background-color: #fff0c2;
+    /* Green */
+    border: 2px solid #a68b00;
+    color:#a68b00;
+    padding: 4px 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+
+  }
+  .btn7 {
+    background-color: #c8e6c9;
+    /* Green */
+    border: 2px solid #388e3c;
+    color:#388e3c;
+    padding: 4px 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+
+  }
+  .btn8 {
+    background-color: #d5cffa;
+    /* Green */
+    border: 2px solid rgb(84, 60, 189);
+    color:rgb(45, 47, 158);
+    padding: 4px 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+
+  }
+  .cooking-color{  
+    color: #ca03b0;
+  }
+  .pending-color{  
+    color: #a68b00;
+  }
+  .cooked-color{  
+    color: #388e3c;
+  }
+  .delivering-color{  
+    color: rgb(45, 47, 158);
+  }
+  
+  .assign-rider{
+
+    div{
+      vertical-align: middle;
+    }
+  }
+
+  .tag-select {
+    color: white;
+    background-color:#495057;
+  }
+
+  .tag-other {
+    color: #0077b6;
+    background-color: #ade8f4;
+  }
+
+  .status-blue {
+    width:fit-content;
+    color: #0077b6;
+    border-radius: 8px;
+    padding-left: 15px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-right: 15px;
+    background-color: #ade8f4;
+  }
+  
+  .status-green {
+    width:fit-content;
+    color: #388e3c;
+    border-radius: 8px;
+    padding-left: 15px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-right: 15px;
+    background-color:  #c8e6c9;
+  }
+  
+  .status-purple {
+    width:fit-content;
+    color:  rgb(202, 3, 176);
+    border-radius: 8px;
+    padding-left: 15px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-right: 15px;
+    background-color: #f7e5f5;
+  }
+  .status-yellow {
+    width:fit-content;
+    color:  #a68b00;
+    border-radius: 8px;
+    padding-left: 15px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-right: 15px;
+    background-color: #fff0c2;
+  }
+  
+ 
+  
+//   .cards {
+//     display: grid;
+//     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+//     grid-gap: 20px;
+//   }
+
+//   .card{
+//       height:380px;
+
+      
+//   }
+  
+//   .cardboader{
+//     padding: 10px; 
+//     border:1px solid #bacdd8;
+//     border-radius: 10% ;
+//     height:225px;
+//     overflow-y: scroll;
+// }
+
+
+  

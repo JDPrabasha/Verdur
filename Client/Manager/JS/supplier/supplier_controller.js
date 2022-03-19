@@ -5,7 +5,9 @@ import { supplierSerializer } from "./supplier_serializer.js";
 $.getScript("/Client/Manager/JS/side_menu.js");
 
 $(document).ready(function reload(){
-    $("#notificationbox").load("/Client/Manager/Manager-Header.html #notification")
+    $("#notificationbox").load("/Client/Manager/Manager-Header.html #notification",function(){
+        $.getScript("/Client/Manager/JS/functionalities/profile.js");
+    })
     $("#fotter").load("/Client/fotterKM.html #KMfotter")
     $("#add_pop").load("/Client/Manager/Manager-Add-Supplier-Pop.html #form_frame")
     $.getScript("/Client/Manager/JS/functionalities/popup.js");

@@ -2,6 +2,10 @@ import { complaints } from "./complaints.js";
 import { Complaints_Serializer } from "./complaints_serializer.js";
 
 $(document).ready(function complaints() {
+    $("#notificationbox").load("/Client/Manager/Manager-Header.html #notification",function(){
+        $.getScript("/Client/Manager/JS/functionalities/profile.js");
+    })
+    $("#fotter").load("/Client/fotterKM.html #KMfotter")
     // console.log(complaints);
     $("#complaints").html('');
     // var x = complaints.map(i=>printcomplaints(i));

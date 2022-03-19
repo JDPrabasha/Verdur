@@ -8,7 +8,7 @@ $(document).ready(function(){
     }).then(function(data){
         var requests = $("#items1");
         requests.html(` `);
-        var array = $.parseJSON(data);
+        var array = (data);
         console.log("this is the array");
         console.log(array);
         const deserialized = array.map(i=>Supplier_Ingredient_serializer.doSerialize(i));
