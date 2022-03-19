@@ -107,7 +107,7 @@ public class ProfileServlet extends HttpServlet {
         String id = request.getParameter("id");
         String role = request.getParameter("role");
         User user;
-        if(Objects.equals(role, "supplier")){
+        if(Objects.equals(role, "Supplier")){
             user = userDAO.getEmployeeDetails(Integer.parseInt(id),true);
         }else{
             user = userDAO.getEmployeeDetails(Integer.parseInt(id),false);
