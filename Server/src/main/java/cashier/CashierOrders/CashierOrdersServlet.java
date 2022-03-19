@@ -88,15 +88,7 @@ public class CashierOrdersServlet extends HttpServlet {
             String reason = req.getParameter("reason");
             cashierOrdersDAO.reject(Integer.parseInt(id), reason);
 
-        } else if (type.equals("accept")){
-            CashierOrders c = new Gson().fromJson(req.getReader(),CashierOrders.class);
-            try {
-                cashierOrdersDAO.accept(c);
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        }
-        else {
+        } else {
             rider orders = new Gson().fromJson(req.getReader(), rider.class);
 
             if (cashierOrdersDAO.assignrider(orders) == null) {
@@ -128,3 +120,4 @@ public class CashierOrdersServlet extends HttpServlet {
     }
 
 }
+
