@@ -26,7 +26,7 @@ $.getScript("/Client/Manager/JS/side_menu.js",
         $("#notificationbox").load("/Client/Manager/Manager-Header.html #notification",function(){
             $.getScript("/Client/Manager/JS/functionalities/profile.js");
         })
-        $("#fotter").load("/Client/fotterKM.html #KMfotter")
+        $("#fotter").load("/Client/Manager/fotterKM.html #KMfotter")
 
         var authHeader = "Bearer " + window.localStorage.getItem("jwt");
         $.ajax({
