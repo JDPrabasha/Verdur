@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//@WebServlet("/notification/*")
+@WebServlet("/notification/*")
 
 
 public class NotificationServlet extends HttpServlet {
@@ -44,11 +44,11 @@ public class NotificationServlet extends HttpServlet {
 
         String customer = request.getParameter("id");
         String role = request.getParameter("role");
-
+        System.out.println("i tried to notify firt");
         List<Notification> notifications = notificationDAO.getNotifications(Integer.parseInt(customer), role);
 //        request.setAttribute("listDish", listDish);
         String json = new Gson().toJson(notifications);
-        System.out.println("im in menu");
+        System.out.println("i tried to notify");
 //        System.out.println(json);
 
         response.getOutputStream().println(json);
