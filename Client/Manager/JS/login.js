@@ -46,13 +46,13 @@ function setDetails(role) {
             window.localStorage.setItem("name", user.name);
             console.log(window.localStorage.getItem("name"));
 
-            window.location = "/Client/customer-menu.html";
+            window.location = "/Client/Customer/customer-menu.html";
         });
     } else {
         $.ajax({
             type: "GET",
             url:
-                "http://localhost:8080/Server_war_exploded/profile?role=rider&id=" +
+                `http://localhost:8080/Server_war_exploded/profile?role=${role}&id=` +
                 window.localStorage.getItem("id"),
             headers: {
                 authorization: authHeader,
@@ -61,9 +61,9 @@ function setDetails(role) {
             // console.log(role)
             var user = $.parseJSON(data);
             // console.log(user);
-            // window.localStorage.setItem("photo", user.avatar);
-            // window.localStorage.setItem("name", user.name);
-            // console.log(window.localStorage.getItem("name"));
+            window.localStorage.setItem("photo", user.avatar);
+            window.localStorage.setItem("name", user.name);
+            console.log(window.localStorage.getItem("name"));
             if (role == "Rider") {
                 window.localStorage.setItem("rider", user.id);
                 window.location = "/Client/rider-home.html";
