@@ -46,13 +46,13 @@
             <a href="customer-pastorders.html" class="btn ml-100 fw-b bg-purple">View Order History</a>
           </div>
        
-          <div class="flex-space-between mr-38 mt-6" id="orders">
+          <div class="flex-space-between mr-38 mt-6 transparent" id="orders">
             <img src="../images/blueberry.jpg" class="icon-4 mt-3" alt="" id="active-image" />
             <div class="order-specs">
               <p class="text-2">Order <span id="active-order">2212</span></p>
               <p id="active-quantity"></p>
             </div>
-            <p id="active-status" class="fw-b tag tag-green round-3 pt-1 pb-1 pl-3 pr-3">Accepted</p>
+            <p id="active-status" class="fw-b tag tag-green round-3 pt-1 pb-1 pl-3 pr-3 ">None</p>
             <!-- <span class="material-icons-outlined" id="next"> navigate_next </span> -->
           </div>
         </div>
@@ -129,7 +129,7 @@
   </div>
   <div class="modal hidden">
     <div class="modal-bg" id="orderInfo">
-      <div class="modal-body  p-5 round-2 width-6 height-8" >
+      <div class="modal-body  p-5 round-2 width-6 height-5" >
         <div class="width-9 ml-9 height-7 mt-8" id="modalContent"></div>
 
           
@@ -139,6 +139,23 @@
 
   </div> 
   </div>
+
+  <div class="modal hidden">
+    <div class="modal-bg" id="rateOrder">
+      <div class="modal-body  p-5 round-2 width-6 height-5" >
+        <div class="width-9 ml-9 height-7 mt-8" id="ratingContent" data-index="-1" data-dish="0" data-rating="0" >
+          <p class="mb-8">Please Rate Your Order</p>
+        </div>
+
+
+          
+          
+        <span class="material-icons modal-close" id="close"> close </span>
+      </div> 
+
+  </div> 
+  </div>
+
   <form method="post" action="https://sandbox.payhere.lk/pay/checkout" id="targetz">
     <input type="hidden" name="merchant_id" value="1218949" />
     <!-- Replace your Merchant ID -->

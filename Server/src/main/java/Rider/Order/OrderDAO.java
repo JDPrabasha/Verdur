@@ -4,6 +4,7 @@ import User.ConnectionFactory.DB;
 import Customer.Dish.Dish;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class OrderDAO {
     private static final String ADD_ORDER = " insert into orders(custID, distance, longitude, latitude, timestamp) values (?,?,?,?,?) ";
     private static final String ADD_PAYMENT = " insert into payment(orderID, type, amount) values (?,?,?) ";
     private static final String ADD_ORDER_DISHES = " insert into hasdish(orderID, cdishID) values (?,?) ";
+    private static final String ADD_COMPLAINT = " insert into complaint(custID, description,orderID,timestamp ) values (?,?,?,?) ";
     private static final String EMPTY_DISHES_FROM_CART = " update customizeddish set inCart=0 where custID = ";
     private static final String SELECT_ACTIVE_ORDER = " select p.orderID, status,amount,type from orders o join payment p on o.orderID=p.orderID where custID =?  and status != \"completed\" ";
     private static final String SELECT_RECENT_ORDERS = " select o.orderID,amount,o.timestamp from orders o join payment p on o.orderID = p.orderID where custID =? and completed = 1 ";
@@ -23,7 +25,7 @@ public class OrderDAO {
         // try-with-resource statement will auto close the connection.
         try (Connection connection = DB.initializeDB()) {
             System.out.println("hello");
-            connection.setAutoCommit(false);
+//            connection.setAutoCommit(false);
             PreparedStatement preparedStatement = connection.prepareStatement(ADD_ORDER, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, order.getCustomer());
             preparedStatement.setFloat(2, order.getDistance());
@@ -178,6 +180,35 @@ public class OrderDAO {
         return orders;
     }
 
+    public void addComplaint(Order order) {
+
+        // try-with-resource statement will auto close the connection.
+        try (Connection connection = DB.initializeDB()) {
+            System.out.println("hello");
+//            connection.setAutoCommit(false);
+            PreparedStatement preparedStatement = connection.prepareStatement(ADD_COMPLAINT);
+            preparedStatement.setInt(1, order.getCustomer());
+            preparedStatement.setInt(3, order.getId());
+
+            preparedStatement.setString(2, order.getComplaint());
+            Timestamp ts = new Timestamp(System.currentTimeMillis());
+            String s = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(ts);
+
+            preparedStatement.setString(4, s);
+            System.out.println(preparedStatement);
+//            System.out.println("succsss");
+
+            preparedStatement.executeUpdate();
+
+
+        } catch (SQLException | ClassNotFoundException e) {
+            printSQLException((SQLException) e);
+        }
+
+    }
+
     private void printSQLException(SQLException e) {
     }
+
+
 }

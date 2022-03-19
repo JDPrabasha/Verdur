@@ -1,5 +1,6 @@
 package Customer.Dish;
 
+import Customer.Customization.Customization;
 import Customer.Ingredient.Ingredient;
 import Customer.Ingredient.IngredientDAO;
 import com.google.gson.Gson;
@@ -31,6 +32,12 @@ public class DishServlet extends HttpServlet {
             throws ServletException, IOException {
         doGet(request, response);
     }
+
+    protected void doPut(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        rateDish(request, response);
+    }
+
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -86,5 +93,14 @@ public class DishServlet extends HttpServlet {
         response.getOutputStream().println(s);
 
 
+    }
+
+    private void rateDish(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String requestUrl = request.getRequestURI();
+        String id = requestUrl.substring("/Server_war_exploded/dish/rate/".length());
+        Dish ratedDish = new Gson().fromJson(request.getReader(), Dish.class);
+        System.out.println("got here");
+        dishDAO.rateDish(ratedDish, id);
+        System.out.println("done");
     }
 }

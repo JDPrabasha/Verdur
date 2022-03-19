@@ -8,6 +8,7 @@ $(window).on("load", function () {
   var array = [];
   var names = [];
   var order = {};
+  var deserializedOrder = {};
 
   $.ajax({
     url: "http://localhost:8080/Server_war_exploded/order/" + customer,
@@ -18,8 +19,12 @@ $(window).on("load", function () {
     order = $.parseJSON(data);
     console.log(order);
 
-    const deSerializedData = OrderSerializer.deSerialize(order);
-    new Order(deSerializedData).addOrder();
+    deserializedOrder = OrderSerializer.deSerialize(order);
+    new Order(deserializedOrder).addOrder();
+
+    if (order) {
+      $("#orders").removeClass("transparent");
+    }
   });
 
   $.ajax({
@@ -42,24 +47,30 @@ $(window).on("load", function () {
     console.log($("#active-status").html());
     var status = $("#active-status").html();
     var content = $("#modalContent");
-    $("#modalContent").html("");
+    // $("#modalContent").html("");
 
     switch (status) {
       case "Pending":
-        const deSerializedData = OrderSerializer.deSerialize(order);
-        new Order(deSerializedData).showPendingOrder();
+        new Order(deserializedOrder).showPendingOrder();
         break;
+
+      case "Accepted":
+        new Order(deserializedOrder).showAcceptedOrder();
+        break;
+
+      case "Rejected":
+        new Order(deserializedOrder).showRejectedOrder();
+        break;
+
       case "Delivering":
-        console.log("Oranges are $0.59 a pound.");
-
+        new Order(deserializedOrder).showDeliveringOrder();
         break;
+
       case "Delivered":
-        console.log("Mangoes and papayas are $2.79 a pound.");
-        reviewOrder();
-
+        new Order(deserializedOrder).showDeliveredOrder();
         break;
+
       default:
-        console.log(`Sorry, we are out of ${expr}.`);
         break;
     }
   });
@@ -89,10 +100,8 @@ $(window).on("load", function () {
   }
 
   function reviewOrder() {
-    // var order = $("#active-order").html();
-    // console.log(order);
     const deSerializedData = OrderSerializer.deSerialize(order);
-    new Order(deSerializedData).showDeliveredOrder();
+    new Order(deSerializedData).showDelivering();
   }
 
   function confirmReview() {
@@ -193,7 +202,77 @@ $(window).on("load", function () {
     $(".modal").show();
   });
 
+  $("#ratingContent").on("click", "#complain", function () {
+    var complaint = $(this).parent().siblings("#complaint").val();
+
+    var orderID = order.id;
+
+    $.ajax({
+      type: "POST",
+      url: "http://localhost:8080/Server_war_exploded/order/complaint",
+      headers: {
+        authorization: authHeader,
+      },
+
+      data: JSON.stringify({
+        customer: customer,
+        complaint: complaint,
+        id: orderID,
+      }),
+      contentType: "application/json; charset=utf-8",
+
+      success: function (response) {
+        console.log("pass");
+      },
+      failure: function () {
+        console.log("fail");
+      },
+    });
+  });
+
+  $("#ratingContent").on("click", "#rate", function () {
+    var rating = $("#ratingContent").attr("data-rating");
+    var dish = $("#ratingContent").attr("data-dish");
+
+    $.ajax({
+      type: "PUT",
+      url: "http://localhost:8080/Server_war_exploded/dish/rate/" + customer,
+      headers: {
+        authorization: authHeader,
+      },
+
+      data: JSON.stringify({
+        rating: rating,
+        id: dish,
+      }),
+      contentType: "application/json; charset=utf-8",
+
+      success: function (response) {
+        console.log("pass");
+        const deSerializedData = OrderSerializer.deSerialize(order);
+        var orderIndex = parseInt($("#ratingContent").attr("data-index"));
+        console.log(orderIndex);
+        console.log(orderIndex);
+        new Order(deSerializedData).reviewOrder(orderIndex);
+      },
+      failure: function () {
+        console.log("fail");
+      },
+    });
+  });
+
   $("#checkout").click(function (e) {
+    if ($("#active-status").html() == "Delivered") {
+      $("#rateOrder").toggleClass("modal-active ");
+      $(".modal").show();
+      const deSerializedData = OrderSerializer.deSerialize(order);
+      var orderIndex = parseInt($("#ratingContent").attr("data-index"));
+      console.log(orderIndex);
+      new Order(deSerializedData).reviewOrder(orderIndex);
+      console.log(order.dishes.length);
+
+      return;
+    }
     console.log("bdjbvc");
     e.preventDefault();
     if ($("#card").hasClass("selected")) {
