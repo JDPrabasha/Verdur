@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//@WebServlet("/order/*")
+@WebServlet("/order/*")
 
 
 public class OrderServlet extends HttpServlet {
