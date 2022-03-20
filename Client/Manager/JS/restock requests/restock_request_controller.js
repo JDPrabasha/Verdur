@@ -45,7 +45,9 @@ $(document).ready(function reload() {
         },
     }).then(function (data) {
         $("#deliveryPendingList").html('');
-        data.map(i => new restockRequest(i).printDeliveryPending());
+        console.log(data)
+        data.filter(i=>i.status=="pending").map(i => new restockRequest(i).printDeliveryPending());
+        data.filter(i=>i.status=="delivered").slice(0,4).map(i => new restockRequest(i).printDeliveryPending());
         updateButtons();
         $("#loading").trigger("loaded")
         $('[id^=time-cal-').each(function(){
