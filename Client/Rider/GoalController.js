@@ -10,6 +10,27 @@ $(window).on("load", function () {
   $("#name").html(name);
   $("#firstName").html(name.split(" ")[0]);
   $("#riderId").html(rider);
+
+  $.ajax({
+    type: "GET",
+    url: "http://localhost:8080/Server_war_exploded/rider/orders?id=" + rider,
+    headers: {
+      authorization: authHeader,
+    },
+  }).then(function (data) {
+    console.log(data);
+    var orders = data;
+    current = data;
+    $("#totalOrders").html(orders);
+
+    console.log(mgoal);
+
+    // const deSerializedData = array.map(CartSerializer.deSerialize);
+    // console.log(deSerializedData);
+    // console.log("hyu");
+    // deSerializedData.map((params) => new Dish(params).addCartItem());
+  });
+
   $.ajax({
     type: "GET",
     url: "http://localhost:8080/Server_war_exploded/goals",
@@ -20,16 +41,20 @@ $(window).on("load", function () {
     var array = $.parseJSON(data);
     console.log(array);
     goals = array;
-    array.forEach(function (arrayItem) {
+    array.every(function (arrayItem) {
       if (arrayItem.orders > current) {
+        console.log(current);
         mgoal = arrayItem;
+        return false;
       }
+
+      return true;
       // var x = arrayItem.orders + 2;
       // console.log(x);
     });
 
     console.log(mgoal);
-    $("#cp").html(mgoal.checkpoint);
+    $("#cp").html(mgoal.checkpint);
     $("#rem").html(mgoal.orders - current);
 
     var ctx = document.getElementById("myChart").getContext("2d");
@@ -50,26 +75,6 @@ $(window).on("load", function () {
         responsize: true,
       },
     });
-
-    // const deSerializedData = array.map(CartSerializer.deSerialize);
-    // console.log(deSerializedData);
-    // console.log("hyu");
-    // deSerializedData.map((params) => new Dish(params).addCartItem());
-  });
-
-  $.ajax({
-    type: "GET",
-    url: "http://localhost:8080/Server_war_exploded/rider/orders?id=" + rider,
-    headers: {
-      authorization: authHeader,
-    },
-  }).then(function (data) {
-    console.log(data);
-    var orders = data;
-    current = data;
-    $("#totalOrders").html(orders);
-
-    console.log(mgoal);
 
     // const deSerializedData = array.map(CartSerializer.deSerialize);
     // console.log(deSerializedData);

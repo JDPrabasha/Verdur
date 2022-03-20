@@ -73,7 +73,7 @@ public class RiderServlet extends HttpServlet {
         System.out.println("i reached the gn");
         String id = request.getParameter("id");
         System.out.println(id);
-        int orders = riderDAO.getOderCount(Integer.parseInt(id));
+        int orders = riderDAO.getCheckpointCount(Integer.parseInt(id));
 //        request.setAttribute("listDish", listDish);
 
 //        System.out.println("im in menu");
