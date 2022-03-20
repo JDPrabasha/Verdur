@@ -3,6 +3,11 @@ import { delivery_pending_list } from "./delivery_pending_list.js";
 import { restockRequest } from "./restockRequest.js";
 
 $(document).ready(function reload() {
+    $("#notificationbox").load("/Client/Manager/Manager-Header.html #notification",function(){
+        $.getScript("/Client/Manager/JS/functionalities/profile.js");
+    })
+    $("#fotter").load("/Client/Manager/fotterKM.html #KMfotter")
+
     // $("#approvalList").html('');
     // approval_pending_list.map(i => printApprovalPending(i));
     var authHeader = "Bearer " + window.localStorage.getItem("jwt");

@@ -23,8 +23,10 @@ $.getScript("/Client/Manager/JS/functionalities/expand.js");
 
 $.getScript("/Client/Manager/JS/side_menu.js",
     $(document).ready(function reload() {
-        $("#notificationbox").load("/Client/Manager/Manager-Header.html #notification")
-        $("#fotter").load("/Client/fotterKM.html #KMfotter")
+        $("#notificationbox").load("/Client/Manager/Manager-Header.html #notification",function(){
+            $.getScript("/Client/Manager/JS/functionalities/profile.js");
+        })
+        $("#fotter").load("/Client/Manager/fotterKM.html #KMfotter")
 
         var authHeader = "Bearer " + window.localStorage.getItem("jwt");
         $.ajax({

@@ -18,6 +18,7 @@ public class UserDAO {
     private static final String VERIFY_USER = "UPDATE users SET verified=1 WHERE username=? AND code=?";
     private static final String GET_NAVBAR_DETAILS = "SELECT firstName, lastName, image, c.custID from customer c join user u on c.userID=u.userID join avatar a on c.avatarID = a.avatarID where c.userID=?";
     private static final String GET_EMPLOYEE_DETAILS = "SELECT firstName, lastName, photo, e.empID from user u join employee e on e.userID=u.userID where e.userID=?";
+    private static final String GET_SUPPLIER_DETAILS = "SELECT firstName, lastName, image as photo, s.supplierID as empID from user u join supplier s on s.userID=u.userID where s.userID=?";
     private static final String GET_CUSTOMER_DETAILS = "select address ,contact,email from customer c join user u on c.userID =u.userID join login l on u.userID =l.userID where c.custID =? ";
     private static final String UPDATE_CUSTOMER_DETAILS = "update customer c join user u on c.userID = u.userID set contact =?,address=?,avatar=(select avatarID from avatar where image = ?) where c.custID =? ";
 
@@ -158,11 +159,17 @@ public class UserDAO {
 
     }
 
-    public User getEmployeeDetails(int userID) throws SQLException {
+    public User getEmployeeDetails(int userID,boolean supplier) throws SQLException {
 
         // try-with-resource statement will auto close the connection.
         User user = null;
-        try (Connection connection = DB.initializeDB(); PreparedStatement preparedStatement = connection.prepareStatement(GET_EMPLOYEE_DETAILS)) {
+        String QueryString;
+        if (supplier){
+            QueryString = GET_SUPPLIER_DETAILS;
+        }else{
+            QueryString = GET_EMPLOYEE_DETAILS;
+        }
+        try (Connection connection = DB.initializeDB(); PreparedStatement preparedStatement = connection.prepareStatement(QueryString)) {
             preparedStatement.setInt(1, userID);
 
             System.out.println(preparedStatement);

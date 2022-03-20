@@ -171,7 +171,6 @@ public class CashierOrdersDAO {
         System.out.println("step4");
         st.setInt(1, orderid);
         return st.executeUpdate();
-
     }
 
 

@@ -25,6 +25,7 @@ class Dish {
     var image = $(document.createElement("img"))
       .attr("src", this.image)
       .addClass("icon-5");
+
     var name = $(document.createElement("p")).html(this.name).addClass("fw-b");
     var quantity = $(document.createElement("p"))
       .html(this.quantity)
@@ -41,6 +42,7 @@ class Dish {
     var dish = $(document.createElement("div")).addClass(
       "flex-space-between cy"
     );
+
     var image = $(document.createElement("img"))
       .attr("src", this.image)
       .addClass("icon-5");

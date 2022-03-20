@@ -20,8 +20,9 @@ public class RestockRequestDAO {
 
 
 //    private static final String GET_ALL_ITEMS = "SELECT * FROM restockrequest ";
-    private static final String GET_ALL_ITEMS = "SELECT * FROM restockrequest r  INNER JOIN ingredient i WHERE r.ingID=i.ingID  and approvalStatus=\"managerApproved\" and status=\"pending\" and (r.supplierID=1 or r.supplierID is NULL)";
+    private static final String GET_ALL_ITEMS = "SELECT * FROM restockrequest r  INNER JOIN ingredient i WHERE r.ingID=i.ingID  and approvalStatus=\"managerApproved\" and (status=\"pending\" or status=\"\")and (r.supplierID=? or r.supplierID is NULL)";
     private static final String GET_REQUEST = " UPDATE `restockrequest` SET `status` = 'Delivering' WHERE `restockrequest`.`restockID` = ?";
+    private static final String CREATE_NOTIFICATION = "insert into managernotification (type,description,targetID) values (?,?,?)";
     protected Connection getConnection() {
         Connection connection = null;
         try {
@@ -38,7 +39,7 @@ public class RestockRequestDAO {
     }
 
 
-    public List<RestockRequest> selectAllItems() {
+    public List<RestockRequest> selectAllItems(int id) {
 
         // using try-with-resources to avoid closing resources (boiler plate code)
         List < RestockRequest > items = new ArrayList< >();
@@ -47,6 +48,7 @@ public class RestockRequestDAO {
 
              // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_ITEMS);) {
+            preparedStatement.setInt(1,id);
             System.out.println("hasara");
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
@@ -82,16 +84,36 @@ public class RestockRequestDAO {
         System.out.println(java.time.LocalDate.now());
         System.out.println(GET_REQUEST);
         // try-with-resource statement will auto close the connection.
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(GET_REQUEST)) {
+        Connection connection = getConnection();
+        try {
+            connection.setAutoCommit(false);
+            PreparedStatement preparedStatement = connection.prepareStatement(GET_REQUEST);
             preparedStatement.setInt(1, reorder.getRestockID());
             System.out.println(preparedStatement);
-
-
-
             preparedStatement.executeUpdate();
+
+            PreparedStatement preparedStatement1 = connection.prepareStatement(CREATE_NOTIFICATION);
+//            "insert into managernotification (type,description,targetID) values (?,?,?)";
+
+            preparedStatement1.setString(1,"restock");
+            preparedStatement1.setString(2,"Restock Request Accepted By Supplier");
+            preparedStatement1.setInt(3,reorder.getRestockID());
+            preparedStatement1.executeUpdate();
+
+            connection.commit();
+            connection.setAutoCommit(true);
             //System.out.println("ok");
         } catch (SQLException e) {
             printSQLException(e);
+            if(connection!=null){
+                try {
+                    System.err.print("Transaction is being rolled back");
+                    connection.rollback();
+                    connection.setAutoCommit(true);
+                } catch (SQLException sqlException) {
+                    sqlException.printStackTrace();
+                }
+            }
         }
     }
 

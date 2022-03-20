@@ -2,6 +2,11 @@ import { dish_new } from "./dish_new.js";
 import { dish_new_serialier } from "./dish_new_serializer.js";
 
 $(document).ready(function () {
+    $("#notificationbox").load("/Client/Manager/Manager-Header.html #notification",function(){
+        $.getScript("/Client/Manager/JS/functionalities/profile.js");
+    })
+    $("#fotter").load("/Client/Manager/fotterKM.html #KMfotter")
+
     $("#main").on("done", function () {
         $(".card").each(function () {
             $(this).on('click', function () {

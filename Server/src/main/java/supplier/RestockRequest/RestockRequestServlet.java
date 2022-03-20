@@ -68,9 +68,9 @@ public class RestockRequestServlet extends HttpServlet {
             throws SQLException, ServletException, IOException {
 //        int id = Integer.parseInt(request.getParameter("id"));
         String requestUrl = request.getRequestURI();
-        String id = requestUrl.substring("/Server_war_exploded/dish/".length());
+        String id = request.getParameter("id");
 //        ViewStock currentDish = viewStockDAO.selectItem(Integer.parseInt(id));
-        List<RestockRequest> currentDish = restockRequestDAO.selectAllItems();
+        List<RestockRequest> currentDish = restockRequestDAO.selectAllItems(Integer.parseInt(id));
 //        RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
         request.setAttribute("dish", currentDish);
         String json = new Gson().toJson(currentDish);

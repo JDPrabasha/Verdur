@@ -46,6 +46,11 @@ $(window).on("load", function () {
     notification.append(bell);
     notification.append(badge);
 
+    $(bell).click(function (e) {
+      e.preventDefault();
+      console.log("vjeb");
+    });
+
     getNotifications();
     getInformation();
 

@@ -16,8 +16,10 @@ $.getScript("/Client/Manager/JS/side_menu.js",
     $(document).ready(function reload() {
 
         //adding Header and Footer
-        $("#notificationbox").load("/Client/Manager/Manager-Header.html #notification")
-        $("#fotter").load("/Client/fotterKM.html #KMfotter")
+        $("#notificationbox").load("/Client/Manager/Manager-Header.html #notification",function(){
+            $.getScript("/Client/Manager/JS/functionalities/profile.js");
+        })
+        $("#fotter").load("/Client/Manager/fotterKM.html #KMfotter")
 
         let jwt = "Bearer " + window.localStorage.getItem("jwt");
         $.ajax({
