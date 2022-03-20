@@ -9,7 +9,7 @@ function enable(rc) {
     };
     $.ajax({
         type:'PUT',
-        url :'http://localhost:8080/Server_war_exploded/KitchenManager/dish/enable',
+        url :'http://localhost:8080/Server_war_exploded/kitchenManager/dish/enable',
         headers: {
             "authorization":jwt
         },
