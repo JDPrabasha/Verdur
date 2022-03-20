@@ -65,29 +65,18 @@ public class MenuServlet extends HttpServlet {
 
         } else if (Objects.equals(action, "/filter")) {
             String ingredients = request.getParameter("ingredient");
-            String diets = request.getParameter("preference");
+
             if (ingredients != null) {
                 String[] array = ingredients.split(",", 0);
                 List<Dish> listDish = dishDAO.filterDishesByIngredients(array);
                 System.out.println(array[array.length - 1]);
                 String json = new Gson().toJson(listDish);
                 response.getOutputStream().println(json);
-            } else if (diets != null) {
-                String preferences = request.getParameter("preference");
-                String[] parray = preferences.split(",", 0);
-                String lifestyles = request.getParameter("lifestyle");
-                String[] larray = lifestyles.split(",", 0);
-                String allergies = request.getParameter("allergy");
-                String[] aarray = allergies.split(",", 0);
-                List<Dish> listDish = dishDAO.filterDishesByDiet(parray, larray, aarray);
-                String json = new Gson().toJson(listDish);
-                response.getOutputStream().println(json);
-
             } else {
                 String budget = request.getParameter("budget");
                 String time = request.getParameter("time");
-                String types = request.getParameter("type");
-                String[] array = types.split(",", 0);
+                String tags = request.getParameter("tags");
+                String[] array = tags.split(",", 0);
                 List<Dish> listDish = dishDAO.filterDishesByFilters(Integer.parseInt(budget), Integer.parseInt(time), array);
                 System.out.println(array[array.length - 1]);
                 String json = new Gson().toJson(listDish);
