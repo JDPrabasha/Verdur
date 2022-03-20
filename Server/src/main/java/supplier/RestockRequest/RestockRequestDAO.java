@@ -22,7 +22,7 @@ public class RestockRequestDAO {
 //    private static final String GET_ALL_ITEMS = "SELECT * FROM restockrequest ";
     private static final String GET_ALL_ITEMS = "SELECT * FROM restockrequest r  INNER JOIN ingredient i WHERE r.ingID=i.ingID  and approvalStatus=\"managerApproved\" and (status=\"pending\" or status=\"\")and (r.supplierID=? or r.supplierID is NULL)";
     private static final String GET_REQUEST = " UPDATE `restockrequest` SET `status` = 'Delivering' WHERE `restockrequest`.`restockID` = ?";
-    private static final String CREATE_NOTIFICATION = "insert into managernotification (type,description,targetID) values (?,?,?)";
+    private static final String CREATE_NOTIFICATION = "insert into managernotifications (type,description,targetID) values (?,?,?)";
     protected Connection getConnection() {
         Connection connection = null;
         try {
@@ -95,7 +95,7 @@ public class RestockRequestDAO {
             PreparedStatement preparedStatement1 = connection.prepareStatement(CREATE_NOTIFICATION);
 //            "insert into managernotification (type,description,targetID) values (?,?,?)";
 
-            preparedStatement1.setString(1,"restock");
+            preparedStatement1.setString(1,"Restock");
             preparedStatement1.setString(2,"Restock Request Accepted By Supplier");
             preparedStatement1.setInt(3,reorder.getRestockID());
             preparedStatement1.executeUpdate();
