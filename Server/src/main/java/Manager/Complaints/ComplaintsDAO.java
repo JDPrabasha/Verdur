@@ -36,8 +36,8 @@ public class ComplaintsDAO {
             while (comlpaintsR.next()){
                 int compaintID = comlpaintsR.getInt("complaintID");
                 String custName = comlpaintsR.getString("customername");
-//                String type = comlpaintsR.getString("type");
-                String type = "";
+                String type = comlpaintsR.getString("type");
+//                String type = "";
                 String riderName = comlpaintsR.getString("ridername");
                 String description = comlpaintsR.getString("description");
                 String date = comlpaintsR.getString("timestamp");
