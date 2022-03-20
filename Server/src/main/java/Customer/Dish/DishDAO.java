@@ -18,8 +18,10 @@ public class DishDAO {
     private static final String FILTER_DISHES_BY_NAME = "select * from dish where name like ?";
     private static final String FILTER_DISHES_BY_MEAL = "select * from dish d join hastag h on h.dishID = d.dishID join tag t on t.tagID =h.tagID where t.name = ? and d.enabled =1";
     private static final String FILTER_DISHES_BY_INGREDIENT = "select * from dish where dishID in (select h.dishID from ingredient i join hasingredient h on h.ingID = i.ingID where i.name in (?,?,?,?,?,?,?,?,?,?,?,?,?,?))";
-    private static final String FILTER_DISHES_BY_FILTERS = "select * from dish where time<=? AND price<=? AND dishID in (?,?,?,?,?,?,?)";
-
+    //    private static final String FILTER_DISHES_BY_FILTERS = "select * from dish where time<=? AND price<=? AND dishID in (?,?,?,?,?,?,?)";
+    private static final String FILTER_DISHES_BY_FILTERS = "select d.dishID,d.name,d.image,d.price from dish d join hastag h on d.dishID =h.dishID join tag t on h.tagID =t.tagID where d.estTime<=? AND d.price<=? AND  t.name in (?,?,?,?,?,?,?,?,?,?) group by d.dishID having count(*)=?";
+    //    private static final String FILTER_DISHES_BY_FILTERS = "select * from dish d join hastag h on d.dishID =h.dishID join tag t on h.tagID =t.tagID where d.time<=? AND d.price<=? AND  t.name in (?,?,?,?,?,?,?)";
+    //    select d.dishID from dish d join hastag h on d.dishID =h.dishID join tag t on h.tagID =t.tagID where t.name in (?,?,?)
     private static final String SELECT_CART_DISHES = "select c.cdishID, c.dishID, c.quantity, c.price, d.image, d.name from dish d join customizeddish c on d.dishID = c.dishID where c.custID =? and inCart=1";
     private static final String SELECT_ALL_DISHES = "select * from dish where enabled=1";
     private static final String SELECT_LATEST_DISHES = "select * from dish where enabled=1 limit 8";
@@ -162,61 +164,8 @@ public class DishDAO {
         return dishes;
     }
 
-    public List<Dish> filterDishesByDiet(String[] preferences, String[] lifestyles, String[] allergies) {
 
-        // using try-with-resources to avoid closing resources (boiler plate code)
-        List<Dish> dishes = new ArrayList<>();
-        String preference = "select d.dishID from dish d join hastag h on d.dishID =h.dishID join tag t on h.tagID =t.tagID where t.name in (?,?,?)";
-        String allergyquery = "select d.dishID from dish d join hastag h on d.dishID =h.dishID join tag t on h.tagID =t.tagID where t.name =?";
-        String dietquery = "select d.dishID from dish d join hastag h on d.dishID =h.dishID join tag t on h.tagID =t.tagID where t.name in (?,?,?,?,?)";
-        String finalquery = "select * from dish where dishID in (" + preference + ") AND dishID in (" + dietquery + ")";
-        for (int i = 0; i < allergies.length; i++) {
-            finalquery += " AND dishID in (" + allergyquery + ")";
-        }
-
-        System.out.println(finalquery);
-
-        try (Connection connection = DB.initializeDB();
-
-             // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(finalquery);) {
-            for (int i = 0; i < 3; i++) {
-                preparedStatement.setString(i + 1, null);
-            }
-            for (int i = 0; i < preferences.length; i++) {
-                preparedStatement.setString(i + 1, preferences[i]);
-            }
-            for (int i = 0; i < 6; i++) {
-                preparedStatement.setString(i + 3, null);
-            }
-            for (int i = 0; i < lifestyles.length; i++) {
-                preparedStatement.setString(i + 3, lifestyles[i]);
-            }
-            for (int i = 0; i < allergies.length; i++) {
-                preparedStatement.setString(i + 8, allergies[i]);
-            }
-
-            System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
-            ResultSet rs = preparedStatement.executeQuery();
-
-            // Step 4: Process the ResultSet object.
-            while (rs.next()) {
-
-                String name = rs.getString("name");
-                String image = rs.getString("image");
-                Integer price = rs.getInt("price");
-                int id = rs.getInt("dishID");
-
-                dishes.add(new Dish(name, image, id, price));
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            printSQLException((SQLException) e);
-        }
-        return dishes;
-    }
-
-    public List<Dish> filterDishesByFilters(int budget, int time, String[] types) {
+    public List<Dish> filterDishesByFilters(int budget, int time, String[] tags) {
 
         // using try-with-resources to avoid closing resources (boiler plate code)
         List<Dish> dishes = new ArrayList<>();
@@ -225,12 +174,16 @@ public class DishDAO {
 
              // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(FILTER_DISHES_BY_FILTERS);) {
-            for (int i = 0; i < 7; i++) {
-                preparedStatement.setString(i + 1, null);
+            preparedStatement.setInt(1, time);
+            preparedStatement.setInt(2, budget);
+            for (int i = 0; i < 10; i++) {
+                preparedStatement.setString(i + 3, null);
             }
-            for (int i = 0; i < types.length; i++) {
-                preparedStatement.setString(i + 2, types[i]);
+            for (int i = 0; i < tags.length; i++) {
+                preparedStatement.setString(i + 3, tags[i]);
             }
+
+            preparedStatement.setInt(13, tags.length);
 
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
