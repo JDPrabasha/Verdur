@@ -6,7 +6,12 @@ var ingredientArray = [];
 var preferenceArray = [];
 var allergyArray = [];
 var lifestyleArray = [];
-var typeArray = [];
+var time = 5000;
+var budget = 5000;
+
+var tagArray = [];
+var type = "";
+var preference = "";
 
 $(document).ready(function () {
   if (!window.localStorage.getItem("customer")) {
@@ -316,16 +321,16 @@ $(document).ready(function () {
   $(".type").click(function (e) {
     // $(this).toggleClass("greyout");
     var name = $(this).children().html();
-    if (typeArray.includes(name)) {
-      const index = typeArray.indexOf(name);
-      typeArray.splice(index, 1);
+    $(this).siblings().removeClass("bg-success");
+    if (type == name) {
+      type = "";
       $(this).removeClass("bg-success");
     } else {
-      typeArray.push(name);
+      type = name;
       $(this).addClass("bg-success");
     }
 
-    console.log(typeArray);
+    console.log(type);
   });
 
   $("#ingredientFilter").click(function (e) {
@@ -365,72 +370,24 @@ $(document).ready(function () {
     });
   });
 
-  $("#dietFilterBtn").click(function (e) {
-    var prefparams = "";
-    preferenceArray.forEach((i) => {
-      prefparams = prefparams + i + ",";
-    });
-    prefparams = prefparams.slice(0, -1);
-    console.log(prefparams);
-    var lifestyleparams = "";
-    lifestyleArray.forEach((i) => {
-      lifestyleparams = lifestyleparams + i + ",";
-    });
-    lifestyleparams = lifestyleparams.slice(0, -1);
-    console.log(lifestyleparams);
-    var allergyparams = "";
-    allergyArray.forEach((i) => {
-      allergyparams = allergyparams + i + ",";
-    });
-    allergyparams = allergyparams.slice(0, -1);
-    allergyparams.log(allergyparams);
-
-    console.log("hnn");
-    $.ajax({
-      type: "GET",
-      url:
-        "http://localhost:8080/Server_war_exploded/menu/filter?preference=" +
-        prefparams +
-        "&lifestyle=" +
-        lifestyleparams +
-        "&allergy=" +
-        allergyparams,
-      headers: {
-        authorization: authHeader,
-      },
-    }).then(function (data) {
-      console.log(data);
-
-      var array = $.parseJSON(data);
-      // $("#dishes").empty();
-      // $("#breakfast").empty();
-      // $("#new").empty();
-      // $("#trending").html(
-      //   array.length > 1 ? array.length + " results" : array.length + " result"
-      // );
-      // console.log(array);
-      // const deSerializedData = array.map(MenuSerializer.deSerialize);
-      // // console.log(deSerializedData);
-      // deSerializedData.map((params) => new Dish(params).addDish());
-
-      // console.log(array);
-      $("#vtf").removeClass("modal-active ");
-    });
-  });
-
-  $("#filterFilterBtn").click(function (e) {
+  function runFilters() {
     var params = "";
-    typeArray.forEach((i) => {
+    allergyArray.length ? tagArray.push(...allergyArray) : null;
+    lifestyleArray.length ? tagArray.push(...lifestyleArray) : null;
+    type != "" ? tagArray.push(type) : null;
+    preference != "" ? tagArray.push(preference) : null;
+    tagArray.forEach((i) => {
       params = params + i + ",";
     });
     params = params.slice(0, -1);
     console.log(params);
 
-    console.log("hnn");
+    console.log(tagArray);
+    tagArray = [];
     $.ajax({
       type: "GET",
       url:
-        "http://localhost:8080/Server_war_exploded/menu/filter?type=" +
+        "http://localhost:8080/Server_war_exploded/menu/filter?tags=" +
         params +
         "&budget=" +
         budget +
@@ -443,20 +400,32 @@ $(document).ready(function () {
       console.log(data);
 
       var array = $.parseJSON(data);
-      // $("#dishes").empty();
-      // $("#breakfast").empty();
-      // $("#new").empty();
-      // $("#trending").html(
-      //   array.length > 1 ? array.length + " results" : array.length + " result"
-      // );
-      // console.log(array);
-      // const deSerializedData = array.map(MenuSerializer.deSerialize);
-      // // console.log(deSerializedData);
-      // deSerializedData.map((params) => new Dish(params).addDish());
+      $("#dishes").empty();
+      $("#breakfast").empty();
+      $("#new").empty();
+      $("#trending").html(
+        array.length > 1 ? array.length + " results" : array.length + " result"
+      );
+      console.log(array);
+      const deSerializedData = array.map(MenuSerializer.deSerialize);
+      // console.log(deSerializedData);
+      deSerializedData.map((params) => new Dish(params).addDish());
 
-      // // console.log(array);
-      // $("#vtf").removeClass("modal-active ");
+      // console.log(array);
+      $("#vtf").removeClass("modal-active ");
+      $("#current").addClass("hidden");
+      $("#recent").addClass("hidden");
     });
+  }
+
+  $("#dietFilterBtn").click(function (e) {
+    e.preventDefault();
+    runFilters();
+  });
+
+  $("#filterFilterBtn").click(function (e) {
+    e.preventDefault();
+    runFilters();
   });
 
   $(".lifestyle").click(function (e) {
@@ -477,25 +446,27 @@ $(document).ready(function () {
   $("#priceRange").on("propertychange input", function (e) {
     $("#maxPrice").html(this.value);
     console.log(this.value);
+    budget = this.value;
   });
   $("#timeRange").on("propertychange input", function (e) {
     $("#maxTime").html(this.value);
     console.log(this.value);
+    time = this.value;
   });
 
   $(".preference").click(function (e) {
     // $(this).toggleClass("greyout");
     var name = $(this).children().html();
-    if (preferenceArray.includes(name)) {
+    $(this).siblings().removeClass("bg-success");
+    if (preference == name) {
       $(this).removeClass("bg-success");
-      const index = preferenceArray.indexOf(name);
-      preferenceArray.splice(index, 1);
+      preference = "";
     } else {
       $(this).addClass("bg-success");
-      preferenceArray.push(name);
+      preference = name;
     }
 
-    console.log(preferenceArray);
+    console.log(preference);
   });
 
   //     var ajaxRequest = new XMLHttpRequest();

@@ -14,6 +14,9 @@ export class ingredients{
         this.proteinpg = params.proteinpg;
         this.custquantity = params.custquantity;
         this.unit = params.unit;
+
+        this.restocklevel = params.restocklevel;
+        this.stock = params.stock;
     } 
 
     printingredients(){
@@ -56,7 +59,13 @@ export class ingredients{
 
     }
 
+    // must return 0 if restock level is not met or else 1
     checklevels(){
-        return 1
+        // console.log(this.stock<=this.restocklevel)
+        if(this.stock<=this.restocklevel){
+            return 1
+        }else{
+            return 0
+        }
     }
 }

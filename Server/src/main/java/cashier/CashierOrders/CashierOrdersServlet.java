@@ -128,4 +128,3 @@ public class CashierOrdersServlet extends HttpServlet {
     }
 
 }
-

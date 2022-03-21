@@ -9,19 +9,20 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class RestockDAO {
 
     private Connection conn;
 //    private String restockQuery         = "SELECT * FROM restockrequest r INNER join ingredient i  ON  r.ingID = i.ingID INNER JOIN user u on r.supplierID = u.userID WHERE (status='' or status='Manager.Supplier Pending') and expired=0 and approvalStatus != 'managerDecline'";
 
-    private String restockQuery         = "SELECT * FROM restockrequest r INNER join ingredient i  ON  r.ingID = i.ingID WHERE (status='' or status='Manager.Supplier Pending') and expired=0 and approvalStatus != 'managerDecline'";
+    private String restockQuery         = "SELECT * FROM restockrequest r INNER join ingredient i  ON  r.ingID = i.ingID WHERE (status='' or status='pending') and expired=0 and approvalStatus != 'managerDecline'";
     private String getSupplierNameQuery = "select concat(u.firstName,' ',u.lastName) as name from supplier s inner join user u on s.userID = u.userID where s.supplierID = ?";
 
 //    private String restockDeliveryQuery = "SELECT * FROM restockrequest r INNER join ingredient i  ON  r.ingID = i.ingID INNER JOIN user u on r.supplierID = u.userID WHERE (status='Delivering' or status='Delivered') and expired=0";
 //    private String restockDeliveryQuery = "SELECT * FROM restockrequest r INNER join ingredient i  ON  r.ingID = i.ingID WHERE (status='Delivering' or status='Delivered') and expired=0";
 //    private String restockDeliveryQuery = "SELECT * FROM restockrequest r INNER join ingredient i  ON  r.ingID = i.ingID WHERE (status='pending' or status='Delivered') and expired=0 order by r.dueBy";
-    private String restockDeliveryQuery = "SELECT * FROM restockrequest r INNER join ingredient i  ON  r.ingID = i.ingID WHERE (status='pending') and expired=0 order by r.dueBy";
+    private String restockDeliveryQuery = "SELECT * FROM restockrequest r INNER join ingredient i  ON  r.ingID = i.ingID WHERE (status='delivering' or status='delivered') and expired=0 order by r.dueBy";
     private String priceQuery           = "SELECT price from inventory WHERE supplierID = ? and ingID = ?";
     private String updateApprovalStatusQuery    = "UPDATE restockrequest SET approvalStatus = ? WHERE restockID = ?";
     private String updateStatusQuery = "UPDATE restockrequest SET status = ? WHERE restockID = ?";
@@ -72,7 +73,7 @@ public class RestockDAO {
             PreparedStatement getSupplierNameQ = this.conn.prepareStatement(getSupplierNameQuery);
             getSupplierNameQ.setInt(1,supplierID);
             ResultSet rs = getSupplierNameQ.executeQuery();
-            String supplier = null;
+            String supplier = "To All";
             while (rs.next()){
                 supplier = rs.getString("name");
             }
@@ -126,7 +127,10 @@ public class RestockDAO {
             String supplier     = getSupplierName(supplierID);
 
             String issueddate   = rs.getString("requestedAt");
-            String status= rs.getString("status");
+            String status =rs.getString("status");
+            if (Objects.equals(status, "delivering")){
+                status = "pending";
+            };
 //            String timeremain   = rs.getString("deadline");
             String timeremain   = rs.getString("dueby");
             int quantity        = rs.getInt("quantity");

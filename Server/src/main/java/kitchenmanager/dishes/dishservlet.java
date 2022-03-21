@@ -61,14 +61,17 @@ public class dishservlet extends HttpServlet {
         String requestUrl = req.getRequestURI();
         String type = requestUrl.substring("/Server_war_exploded/KitchenManager/dish/".length());
         System.out.println(type);
+        System.out.println(ingid);
 
         if (type.equals("enable")) {
+            System.out.println("enable");
             try {
                 dish.enable(dishitem);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
         } else if (type.equals("disable")) {
+            System.out.println("disable");
             try {
                 dish.dissable(dishitem);
             } catch (SQLException throwables) {

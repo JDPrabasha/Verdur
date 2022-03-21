@@ -5,7 +5,7 @@ $(document).ready(function () {
     $("#notificationbox").load("/Client/Manager/Manager-Header.html #notification",function(){
         $.getScript("/Client/Manager/JS/functionalities/profile.js");
     })
-    $("#fotter").load("/Client/fotterKM.html #KMfotter")
+    $("#fotter").load("/Client/Manager/fotterKM.html #KMfotter")
 
     $("#main").on("done", function () {
         $(".card").each(function () {
