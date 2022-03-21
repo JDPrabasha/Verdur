@@ -20,9 +20,9 @@ class orders{
             var totalPrice = $(document.createElement('td')).html(this.totalPrice);
             var requestedDate = $(document.createElement('td')).html(this.requestedDate);
             var deliveryDate = $(document.createElement('td')).html(this.deliveryDate);
-            var timeTillDeadline = $(document.createElement('td')).html(this.timeTillDeadline);
-            var invoiceDate = $(document.createElement('td')).html(this.invoiceDate);
-            var status = $(document.createElement('td')).html(this.status);
+            var timeTillDeadline = $(document.createElement('td')).html(this.timeTillDeadline);//dueBy-current time
+            // var invoiceDate = $(document.createElement('td')).html(this.invoiceDate);
+            // var status = $(document.createElement('td')).html(this.status);
             
             
 
@@ -37,8 +37,8 @@ class orders{
         row.append(requestedDate);
         row.append(deliveryDate);
         row.append(timeTillDeadline);
-        row.append(invoiceDate);
-        row.append(status);
+        // row.append(invoiceDate);
+        // row.append(status);
         
 
         view.append(row);
@@ -56,8 +56,8 @@ class orders{
         var totalPrice = $(document.createElement('td')).html(this.totalPrice);
         var requestedDate = $(document.createElement('td')).html(this.requestedDate);
         var deliveryDate = $(document.createElement('td')).html(this.deliveryDate);
-        var timeTillDeadline = $(document.createElement('td')).html(this.timeTillDeadline);
-        var invoiceDate = $(document.createElement('td')).html(this.invoiceDate);
+        // var timeTillDeadline = $(document.createElement('td')).html(this.timeTillDeadline);
+        // var invoiceDate = $(document.createElement('td')).html(this.invoiceDate);
         var status = $(document.createElement('td')).html(this.status);
         
         
@@ -72,8 +72,8 @@ class orders{
     row.append(totalPrice);
     row.append(requestedDate);
     row.append(deliveryDate);
-    row.append(timeTillDeadline);
-    row.append(invoiceDate);
+    // row.append(timeTillDeadline);
+    // row.append(invoiceDate);
     row.append(status);
     
 
@@ -91,9 +91,9 @@ printcompletedorders(){
     var totalPrice = $(document.createElement('td')).html(this.totalPrice);
     var requestedDate = $(document.createElement('td')).html(this.requestedDate);
     var deliveryDate = $(document.createElement('td')).html(this.deliveryDate);
-    var timeTillDeadline = $(document.createElement('td')).html(this.timeTillDeadline);
+    // var timeTillDeadline = $(document.createElement('td')).html(this.timeTillDeadline);
     var invoiceDate = $(document.createElement('td')).html(this.invoiceDate);
-    var status = $(document.createElement('td')).html(this.status);
+    // var status = $(document.createElement('td')).html(this.status);
     
     
 
@@ -107,9 +107,9 @@ row.append(quantity);
 row.append(totalPrice);
 row.append(requestedDate);
 row.append(deliveryDate);
-row.append(timeTillDeadline);
+// row.append(timeTillDeadline);
 row.append(invoiceDate);
-row.append(status);
+// row.append(status);
 
 
 view.append(row);

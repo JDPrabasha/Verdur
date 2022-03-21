@@ -73,6 +73,10 @@ public class rider {
     public void setOrderID(Integer orderID) {
         this.orderID = orderID;
     }
+
+    public int getcustID() {
+        return 0;
+    }
 }
 
 

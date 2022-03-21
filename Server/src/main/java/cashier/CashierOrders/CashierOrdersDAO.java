@@ -179,9 +179,10 @@ public class CashierOrdersDAO {
 //        String quary = "UPDATE dish SET enabled = ? WHERE ddishID = ?";
         int orderid = d.getOrderID();
         int riderid = d.getRiderID();
+        int cusid = d.getcustID();
         String deliveryIDQuery = "SELECT o.deliveryID FROM user u JOIN employee e ON u.userID=e.userID JOIN rider r ON e.empID=r.riderID join delivery d on d.riderID = r.riderID join orders o on o.deliveryID = d.deliveryID JOIN hasdish h ON h.orderID=o.orderID JOIN customizeddish cd ON cd.cdishID=h.cdishID where o.status =\"rider_assigned\" and r.riderID = ? GROUP BY o.deliveryID";
         String updateOrder = "Update orders SET deliveryID = ?, status ='rider_assigned' where orderID = ?";
-        String createDelivery = "Insert INTO delivery(riderID,timestamp) Values (?,?)";
+        String createDelivery = "Insert INTO delivery(riderID,custID,timestamp) Values (?,?,?)";
         PreparedStatement getDeliveryIDStatement = null;
         try {
             getDeliveryIDStatement = this.conn.prepareStatement(deliveryIDQuery);
@@ -196,10 +197,11 @@ public class CashierOrdersDAO {
                 this.conn.setAutoCommit(false);
                 PreparedStatement createDeliveryStatement = this.conn.prepareStatement(createDelivery, Statement.RETURN_GENERATED_KEYS);
                 createDeliveryStatement.setInt(1, riderid);
+                createDeliveryStatement.setInt(2, cusid);
 
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
                 LocalDateTime now = LocalDateTime.now();
-                createDeliveryStatement.setString(2, dtf.format(now));
+                createDeliveryStatement.setString(3, dtf.format(now));
                 createDeliveryStatement.executeUpdate();
                 ResultSet rs = createDeliveryStatement.getGeneratedKeys();
                 while (rs.next()) {

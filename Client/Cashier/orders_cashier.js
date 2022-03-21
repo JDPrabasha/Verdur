@@ -147,7 +147,7 @@ printriderorders(){
    
     $("#totalQuantity").html(": " + this.totalQuantity)
     $("#riderOrderPrice").html(": " + this.amount)
-    // console.log(this.amount)
+    console.log(this.amount)
     $("#riderOrderName").html(": " + this.name)
     $("#riderOrderName").attr("orderid",this.orderID)
     $("#customerContact").html(": " + this.contact)
