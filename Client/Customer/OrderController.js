@@ -306,8 +306,8 @@ $(window).on("load", function () {
     var longitude = parseFloat($("#longitude").val());
     var latitude = parseFloat($("#latitude").val());
 
-    var distance = 3;
-    var price = 1200;
+    var distance = parseInt($("#distance").html().split(" ")[0]);
+    var price = parseInt($("#price").html().split(" ")[1]);
     var timestamp = new Date().toISOString().slice(0, 19).replace("T", " ");
 
     console.log({
@@ -341,14 +341,15 @@ $(window).on("load", function () {
       contentType: "application/json; charset=utf-8",
 
       success: function (response) {
-        console.log("pass");
+        console.log("successfull order");
         console.log(response);
         if (payment == "card") {
           $("input[name='order_id']").html(response);
 
           $("input[name='items']").val(names.toString());
-          $("#tot").val(price);
-
+          var price = parseInt($("#price").html().split(" ")[1]);
+          console.log(price);
+          $("input[name='amount']").val(price);
           $("#targetz").submit();
         }
 
