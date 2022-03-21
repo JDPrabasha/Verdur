@@ -46,11 +46,9 @@ public class CashierPaymentsServlet extends HttpServlet {
 
     private void showItem(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
-//        int id = Integer.parseInt(request.getParameter("id"));
-        String requestUrl = request.getRequestURI();
-        String id = requestUrl.substring("/Server_war_exploded/dish/".length());
-//        ViewStock currentDish = viewStockDAO.selectItem(Integer.parseInt(id));
-        List<CashierPayments> currentDish = cashierPaymentsDAO.selectAllItems();
+        String date = request.getParameter("date");
+
+        List<CashierPayments> currentDish = cashierPaymentsDAO.selectAllItems(date);
         System.out.println("danaji");
 //        RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
         request.setAttribute("dish", currentDish);

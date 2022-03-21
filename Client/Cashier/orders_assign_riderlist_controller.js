@@ -17,7 +17,7 @@ $(document).ready(function () {
     }).then(function (data) {
 
         var array = $.parseJSON(JSON.stringify(data));
-        // console.log(data);
+        console.log(data);
         $("#riderorderslist").html("")
         cookedOrders = array.map(i => orders_cashier_serializer.doserializer(i));
         cookedOrders.map(params => new orders_cashier(params).printriderorderslist());
@@ -94,6 +94,7 @@ function readAssignRiderButton() {
             console.log(number[1]);
             var orderid = number[1];
             var filteredCooked = cookedOrders.filter(i => i['orderID'] == orderid)
+            console.log(filteredCooked)
             filteredCooked.map(params => new orders_cashier(params).printriderorders());
             //    console.log(cookedOrders)
 
@@ -110,7 +111,7 @@ function readAssignRiderButton() {
                     xhr.setRequestHeader("authorization", authHeader);
                 },
             }).then(function (data) {
-
+                console.log(data)
 
                 // console.log(data[0]["dishitem"])
                 $("#pop_up_dish_list").html(data[0]["dishitem"].map(i => new dish(i).printdish()))

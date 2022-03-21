@@ -2,6 +2,8 @@ package cashier.CashierPayments;
 
 //import OngoingOrders.OngoingOrders;
 
+import User.ConnectionFactory.DB;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,34 +22,19 @@ public class CashierPaymentsDAO {
     private String jdbcPassword = "";
 
 
-    private static final String GET_ALL_ITEMS = "SELECT * FROM orders JOIN payment ON orders.orderID=payment.orderID JOIN delivery ON delivery.deliveryID = orders.deliveryID;";
-
-    protected Connection getConnection() {
-        Connection connection = null;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return connection;
-    }
+    private static final String GET_ALL_ITEMS = "SELECT * FROM orders o JOIN payment p ON o.orderID=p.orderID JOIN delivery d ON d.deliveryID = o.deliveryID where DATE(d.`timestamp`)=? ";
 
 
-    public List<CashierPayments> selectAllItems() {
+
+    public List<CashierPayments> selectAllItems(String date) {
         System.out.println("hasara");
         // using try-with-resources to avoid closing resources (boiler plate code)
         List < CashierPayments > items = new ArrayList< >();
         // Step 1: Establishing a Connection
-        try (Connection connection = getConnection();
-
+        try (Connection connection = DB.initializeDB();
              // Step 2:Create a statement using connection object
              PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_ITEMS);) {
-
+            preparedStatement.setString(1,date);
             System.out.println(preparedStatement);
 
             // Step 3: Execute the query or update query
@@ -71,19 +58,23 @@ public class CashierPaymentsDAO {
             }
         } catch (SQLException e) {
             printSQLException(e);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
         return items;
     }
 
     public Integer completeOrderCashier(int ID){
         String completeOrderQuery = "Update orders set completed = 1 where orderID = ?";
-        try(Connection conn = getConnection()){
+        try(Connection conn = DB.initializeDB()){
             PreparedStatement completeOrderQ = conn.prepareStatement(completeOrderQuery);
             completeOrderQ.setInt(1,ID);
             return completeOrderQ.executeUpdate();
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
         return null;
     }
