@@ -27,7 +27,7 @@ public class riderdao {
 //        public List<chef> readcheflist() throws SQLException{
 
         List<rider> riderlist = new ArrayList<>();
-        String query = "SELECT * FROM user u JOIN employee e ON u.userID=e.userID JOIN rider r ON r.riderID=e.empID WHERE u.role =\"Rider\"";
+        String query = "SELECT * FROM user u JOIN employee e ON u.userID=e.userID JOIN rider r ON r.riderID=e.empID WHERE u.role =\"Rider\" and (r.status =\"available\" or r.status = \"assigned\") ";
         PreparedStatement st = this.conn.prepareStatement(query);
 //        st.setInt(1,Integer.parseInt(id));
         ResultSet rs = st.executeQuery();
