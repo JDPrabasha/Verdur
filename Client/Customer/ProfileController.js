@@ -2,6 +2,11 @@ $(window).on("load", function () {
   var authHeader = "Bearer " + window.localStorage.getItem("jwt");
   var customer = parseInt(window.localStorage.getItem("customer"));
 
+  var avatarID = 0;
+  var address = "";
+  var contact = "";
+  var avatarImage = "";
+
   if (!window.localStorage.getItem("customer")) {
     console.log("hello");
     var signUp = $(document.createElement("li")).addClass("ml-5 btn");
@@ -154,10 +159,19 @@ $(window).on("load", function () {
 
   $("#confirmProfileChange").click(function (e) {
     e.preventDefault();
-    var avatar = $(".avatar, .selected").attr("data-id");
-    var address = $("#newaddress").val();
-    var contact = $("#newcontact").val();
 
+    var address = $("#newaddress").val()
+      ? $("#newaddress").val()
+      : $("#address").html();
+    var contact = $("#newcontact").val()
+      ? $("#newcontact").val()
+      : $("#contact").html();
+    avatarImage = avatarImage
+      ? avatarImage
+      : window.localStorage.getItem("avatar");
+    console.log(avatarImage);
+    console.log(address);
+    console.log(contact);
     updateInformation(avatar, contact, address);
   });
 
@@ -178,6 +192,7 @@ $(window).on("load", function () {
     });
     $(this).addClass("selected");
     console.log($(this).attr("data-id"));
+    avatarImage = $(this).attr("src");
   });
 
   $("#addNewMeal").click(function (e) {
@@ -303,7 +318,7 @@ $(window).on("load", function () {
       $("#newaddress").attr("placeholder", newarray.address);
       var img = window.localStorage.getItem("avatar");
       var ra = $('#profileModal img[src*="' + img + '"]');
-      $(ra).addClass("selected");
+      // $(ra).addClass("selected");
       $("#mail").html(window.localStorage.getItem("email"));
     });
   }
@@ -311,7 +326,7 @@ $(window).on("load", function () {
   function updateInformation(avatar, contact, address) {
     $.ajax({
       type: "PUT",
-      url: "http://localhost:8080/Server_war_exploded/customer?id=" + customer,
+      url: "http://localhost:8080/Server_war_exploded/profile?id=" + customer,
       headers: {
         authorization: authHeader,
       },
