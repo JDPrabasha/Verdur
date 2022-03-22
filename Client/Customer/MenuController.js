@@ -413,6 +413,8 @@ $(document).ready(function () {
 
       // console.log(array);
       $("#vtf").removeClass("modal-active ");
+      $("#current").addClass("hidden");
+      $("#recent").addClass("hidden");
     });
   }
 

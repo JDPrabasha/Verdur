@@ -105,6 +105,29 @@ public class CashierOrders {
         this.dishitem = dishitem;
     }
 
+    public CashierOrders(int orderid, String status, String name, String contact, String address, List<dish> dishitem, int amount) {
+        this.orderid = orderid;
+        this.status = status;
+        this.name = name;
+        this.contact = contact;
+        this.address = address;
+        this.dishitem = dishitem;
+        this.amount = amount;
+    }
+
+//    public CashierOrders(int orderid, int totalQuantity, String name, String contact, String address, int amount) {
+//
+//    }
+
+    public CashierOrders(Integer orderid, Integer amount, Integer totalQuantity, String name, String contact, String address) {
+        this.orderid = orderid;
+        this.amount = amount;
+        this.totalQuantity = totalQuantity;
+        this.name = name;
+        this.contact = contact;
+        this.address = address;
+    }
+
 
     //    public CashierOrders(Integer orderid, Integer quantity, String name, String contact, String address) {
 //        this.orderid = orderid;

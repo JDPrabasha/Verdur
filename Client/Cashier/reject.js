@@ -9,6 +9,10 @@ function reject(rc) {
 
 }
 
+function closeReject(){
+    $("#rejectModel").attr("style", "display : none");
+}
+
 // function submit(rc){
 
 
@@ -50,6 +54,7 @@ function submit() {
     }).done(function () {
      
        console.log("done")
+       closeReject()
     })
 
     

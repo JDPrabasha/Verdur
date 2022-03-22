@@ -168,6 +168,7 @@ $(window).on("load", function () {
     var proteinGoal = $("#newproteingoal").val();
     var carbGoal = $("#newcarbgoal").val();
     var fatGoal = $("#newfatgoal").val();
+    console.log(carbGoal);
     editMealPlan(calorieGoal, proteinGoal, fatGoal, carbGoal);
   });
 
@@ -182,9 +183,9 @@ $(window).on("load", function () {
   $("#addNewMeal").click(function (e) {
     var calories = $("#calorieintake").val();
     var protein = $("#proteinintake").val();
-    var fats = console.log($("#fatintake").val());
+    var fats = $("#fatintake").val();
     var carbs = $("#carbintake").val();
-
+    console.log(fats);
     addMeal(calories, protein, fats, carbs);
     e.preventDefault();
   });
@@ -231,6 +232,7 @@ $(window).on("load", function () {
   });
 
   function editMealPlan(caloriesgoal, proteingoal, fatgoal, carbsgoal) {
+    console.log(carbsgoal);
     $.ajax({
       type: "PUT",
       url:
@@ -244,7 +246,7 @@ $(window).on("load", function () {
         fatgoal: fatgoal,
         proteingoal: proteingoal,
         caloriesgoal: caloriesgoal,
-        carbsgoal: carbsgoal,
+        carbgoal: carbsgoal,
       }),
       contentType: "application/json; charset=utf-8",
 
@@ -331,6 +333,7 @@ $(window).on("load", function () {
   }
 
   function addMeal(calories, protein, fats, carbs) {
+    console.log(fats);
     $.ajax({
       type: "PUT",
       url:

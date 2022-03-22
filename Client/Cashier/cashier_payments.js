@@ -49,7 +49,7 @@ class cashierpayments{
             }
 
             else{
-                var payment = $(document.createElement('td')).html( );   
+                var payment = $(document.createElement('td')).html('');   
 
 
             }

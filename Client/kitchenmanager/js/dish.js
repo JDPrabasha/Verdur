@@ -19,7 +19,9 @@ export class dish{
        
     } 
     printdish(){
-        var level = $(document.createElement('div')).html(this.ingredients.map(i=> new ingredients(i).checklevels()))
+        //check level resturns 0 if restock level is not reached
+        var level = (this.ingredients.map(i=> new ingredients(i).checklevels())).filter(i => i==1).length
+        // console.log((this.ingredients.map(i=> new ingredients(i).checklevels())))
         var buttonname;
         var buttoncolor;
         var functionname;
@@ -36,19 +38,21 @@ export class dish{
             
             buttonname = "Enable";
             buttoncolor = "tag-green";
+            // checks if stocks are not at restock level
             if(level==0){
                 functionname = `enable(${this.dishid})`;
                 id=`${this.dishid}`;
-
-
             }
             else{
+                functionname=`error-${this.dishid}`;
                 id=`error-${this.dishid}`;
             }
     
             bgcolor = "disabled-row";
 
         }
+        // console.log(this.name)
+        // console.log(level)
         var dish = $("#results");
             var card = $(document.createElement('div')).attr( "class","card").attr("id","dishcard-"+this.dishid).html(`  <img class="round-2" src="${this.image}">
             <div class="row">
@@ -57,7 +61,7 @@ export class dish{
             </div>
             <hr class="mb-2 mt-2">
             <div class="flex-space-evenly">
-            <button onclick="${functionname}" class=" btn ${buttoncolor} " id="id" style="width: 100px;">${buttonname}</button>
+            <button onclick="${functionname}" class=" btn ${buttoncolor} " id=${id} style="width: 100px;">${buttonname}</button>
                 <a class= "btn tag-green" href="/Client/kitchenmanager/updatedish.html?id=${this.dishid}"><i class="material-icons icon">edit</i></a>
               <button class="btn tag-red" onclick="deletedish(${this.dishid})"><i class="material-icons icon">close</i></button>
             </div>`);

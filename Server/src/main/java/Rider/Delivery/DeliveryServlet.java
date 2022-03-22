@@ -83,7 +83,7 @@ public class DeliveryServlet extends HttpServlet {
         if (Objects.equals(method, "card")) {
             deliveryDAO.confirmCardOrder(Integer.parseInt(id));
         } else {
-            deliveryDAO.confirmCardOrder(Integer.parseInt(id));
+            deliveryDAO.confirmCashOrder(Integer.parseInt(id));
 
         }
 

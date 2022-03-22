@@ -1,8 +1,34 @@
+let authHeader;
 $(document).ready(function cashierpaymentslist(){
-    var authHeader = "Bearer " + window.localStorage.getItem("jwt");
+    authHeader = "Bearer " + window.localStorage.getItem("jwt");
     // console.log(authHeader)
+    var today = new Date(); var dd = String(today.getDate()).padStart(2, '0'); var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+    var yyyy = today.getFullYear(); today = mm + '/' + dd + '/' + yyyy;
+    let datepass = yyyy+"-"+mm+"-"+dd; 
+
+    $("#filter_date").val(yyyy+"-"+mm+"-"+dd)
+    uiLoad(today,datepass);
+    
+     
+});
+
+$("#filter_date").change(function(){
+    let udate = $(this).val(),
+    yyyy=udate.slice(0,4),
+    mm = udate.slice(5,7),
+    dd = udate.slice(8,10),
+    today = mm + '/' + dd + '/' + yyyy;
+    $("#date_out").html(today)
+    datepass =yyyy+"-"+mm+"-"+dd;
+    uiLoad(today,datepass)
+
+})
+
+
+function uiLoad(today,datepass){
+    $("#output").html('');
     $.ajax({
-        url:"http://localhost:8080/Server_war_exploded/Cashier/CashierPaymentsServlet?id=1" ,
+        url:"http://localhost:8080/Server_war_exploded/Cashier/CashierPaymentsServlet?date="+datepass ,
         beforeSend: function(xhr){
             xhr.setRequestHeader("authorization", authHeader);
         }
@@ -32,22 +58,17 @@ var total=0;
          total=cashtotal+cardtotal;
          
 
-         var today = new Date(); var dd = String(today.getDate()).padStart(2, '0'); var mm = String(today.getMonth() + 1).padStart(2, '0'); 
-         var yyyy = today.getFullYear(); today = mm + '/' + dd + '/' + yyyy;
 
 
          
          document.getElementById("date").innerHTML='<div class="col-3 mt-25 "><h4>Payments</h4></div>'
-         +'<div class="col-2  mt-27 mb-4 status-yellow text-center" ><label class= "  text-center mt-10 text-2  fw-b "> Date <br><div class="text-2" style="font-size: 20px; width: 160px;"> '+ today +'</div> </lable> </div>'
+         +'<div class="col-2  mt-27 mb-4 status-yellow text-center" ><label class= "  text-center mt-10 text-2  fw-b "> Date <br><div id="date_out" class="text-2" style="font-size: 20px; width: 160px;"> '+ today +'</div> </lable> </div>'
          +'<div class="col-2  mt-27 mb-4 status-green  " ><label class= "  text-center mt-10 text-2  fw-b "> Cash Amount <br><div class="text-1" style="font-size: 20px;">Rs.'+ cashtotal +'</div> </lable> </div>'
          +'<div class="col-2  mt-27 mb-4 status-purple "><lable class= "text-2  text-center fw-b tag-purple " > Card Amount<br> <div class="text-1" style="font-size: 20px;">Rs.'+ cardtotal +'</div> </lable></div>'
          +'<div class="col-2  mt-27 mb-4 status-blue  "><lable class= " text-2  fw-b text-center" > Total Amount<br> <div class="text-1" style="font-size: 20px;">Rs.'+ total +' </div> </lable></div>';
     
      })
-    
-    
-     
-});
+}
 
 function initializeConfirmButton(){
     $("[id^=confirm-Pament-").click(function(){
