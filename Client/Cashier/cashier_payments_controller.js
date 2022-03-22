@@ -40,10 +40,12 @@ function uiLoad(today,datepass){
          const deserializeddata = array.map(i=>cashierpaymentsserializer.doserializer(i));
          deserializeddata.map(params=>new cashierpayments(params).printcashierpayments());
          initializeConfirmButton();
-         console.log(array[0]['type']);
+         console.log(array)
+        //  console.log(array[0]['type']);
 var cashtotal=0;
 var cardtotal=0;
 var total=0;
+        // console.log(array.length)
          for(var i=0;i<array.length;i++){
              if(array[i]['type']==="cash" && array[i]['completed']==="1" ){
                  cashtotal+=array[i]['dueAmount'];

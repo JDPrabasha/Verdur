@@ -2,6 +2,7 @@ package supplier.Stock;
 
 import com.google.gson.Gson;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+
+import static Manager.Output.outputResponse.sendresponse;
 
 @WebServlet("/Supplier/UpdateStockServlet")
 public class UpdateStockServlet extends HttpServlet {
@@ -60,15 +63,16 @@ public class UpdateStockServlet extends HttpServlet {
             throws SQLException, ServletException, IOException {
 //        int id = Integer.parseInt(request.getParameter("id"));
         String requestUrl = request.getRequestURI();
-        String id = request.getParameter("id");
+        String ingID = request.getParameter("ingID");
+        String supplierID = request.getParameter("supplierID");
 //        ViewStock currentDish = viewStockDAO.selectItem(Integer.parseInt(id));
-        List<Stock> currentDish = stockDAO.selectAllItems(id);
+        List<Stock> stockItems = stockDAO.selectAnItem(Integer.parseInt(supplierID), Integer.parseInt(ingID));
 //        RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
-        request.setAttribute("dish", currentDish);
-        String json = new Gson().toJson(currentDish);
+        String json = new Gson().toJson(stockItems);
+        sendresponse(response,json,200);
 
 //        System.out.println(json);
-        response.getOutputStream().println(json);
+//        response.getOutputStream().println(json);
 
 
     }
