@@ -12,6 +12,7 @@
     <script src="/Client/Cashier/fotterCashier.js"></script>
 
     <script  src="/Client/Cashier/accept.js"></script>></script>
+    <script src="/Client/Cashier/reject.js"></script>
 
   
 
@@ -138,6 +139,53 @@
                 </div>
 
             </div>
+        </div>
+        <div id="rejectModel" class="modal">
+
+
+            <!-- Modal content -->
+            <div class="modal-content" style="height: 40%; width: 40%;">
+                <span class="close" onclick ="closeReject()">x</span>
+                <!-- <span class="close">&times;</span> -->
+
+                <div class="row">
+                    <div class="col-12">
+               
+
+
+                        <div class="" id="results" style="height: 100%;width: 100%;">
+                            <h3 class="ml-2">Add Reason</h3>
+                            <input type="hidden" name="orderID" id="orderID">
+                            <input class="m-3" type="text" name="reason" id="reason" style="height: 20%;width: 55%;">
+                           
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+                    <div class="col-6">
+
+                        <div id="rider" class="radios" style="width: 100%;">
+
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+
+                    <!-- <div class="col-8"></div> -->
+                    <div class="col-12 "> <button class="btn fw-b tag-blue text-2 mt-20 flex-center " style="width: 200px;"
+                            id="submit" onclick="submit()">Submit</button>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </div>
     </div>
