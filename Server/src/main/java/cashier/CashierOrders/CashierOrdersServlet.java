@@ -76,13 +76,7 @@ public class CashierOrdersServlet extends HttpServlet {
         if (type.equals("confirm")) {
             String id = req.getParameter("deliveryID");//status
             System.out.println(id);
-            try {
-                cashierOrdersDAO.confirm(Integer.parseInt(id));
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-
-
+            cashierOrdersDAO.confirm(Integer.parseInt(id));
         } else if (type.equals("reject")) {
             String id = req.getParameter("orderID");
             String reason = req.getParameter("reason");
