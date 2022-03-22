@@ -39,8 +39,8 @@ public class DeliveryDAO {
             while (rs.next()) {
                 List<Dish> dishes = new ArrayList<>();
                 id = rs.getInt("orderID");
-                Double longitude = rs.getDouble("longitude");
-                Double latutude = rs.getDouble("latitude");
+                String longitude = rs.getString("longitude");
+                String latutude = rs.getString("latitude");
                 int amount = rs.getInt("amount");
                 String type = rs.getString("type");
                 PreparedStatement secondStatement = connection.prepareStatement(SELECT_ORDER_DISHES);

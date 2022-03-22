@@ -5,6 +5,7 @@ import User.ConnectionFactory.DB;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.Random;
 
 
 public class UserDAO {
@@ -14,8 +15,10 @@ public class UserDAO {
     private static final String GET_ROLE = "select role from user where userID = ?";
     private static final String CHECK_USER_CODE = "select * from users where username =? and code=?";
     private static final String INSERT_USER = "INSERT INTO user (firstName,lastName,contact, dateAdded, role) VALUES (?, ?, ?, ?, ?)";
+    private static final String INSERT_CUSTOMER = "INSERT INTO customer (userID) VALUES (?)";
     private static final String ADD_LOGIN = "INSERT INTO login (userID, email, password, code) VALUES (?, ?, ?, ?)";
     private static final String VERIFY_USER = "UPDATE users SET verified=1 WHERE username=? AND code=?";
+    private static final String RESET_CODE = "UPDATE users SET code=? WHERE username=?";
     private static final String GET_NAVBAR_DETAILS = "SELECT firstName, lastName, image, c.custID from customer c join user u on c.userID=u.userID join avatar a on c.avatarID = a.avatarID where c.userID=?";
     private static final String GET_EMPLOYEE_DETAILS = "SELECT firstName, lastName, photo, e.empID from user u join employee e on e.userID=u.userID where e.userID=?";
     private static final String GET_SUPPLIER_DETAILS = "SELECT firstName, lastName, image as photo, s.supplierID as empID from user u join supplier s on s.userID=u.userID where s.userID=?";
@@ -159,14 +162,14 @@ public class UserDAO {
 
     }
 
-    public User getEmployeeDetails(int userID,boolean supplier) throws SQLException {
+    public User getEmployeeDetails(int userID, boolean supplier) throws SQLException {
 
         // try-with-resource statement will auto close the connection.
         User user = null;
         String QueryString;
-        if (supplier){
+        if (supplier) {
             QueryString = GET_SUPPLIER_DETAILS;
-        }else{
+        } else {
             QueryString = GET_EMPLOYEE_DETAILS;
         }
         try (Connection connection = DB.initializeDB(); PreparedStatement preparedStatement = connection.prepareStatement(QueryString)) {
@@ -225,6 +228,11 @@ public class UserDAO {
 
             System.out.println(secondStatement);
             secondStatement.executeUpdate();
+
+            PreparedStatement thirdStatement = connection.prepareStatement(INSERT_CUSTOMER);
+            secondStatement.setInt(1, gid);
+            System.out.println(thirdStatement);
+            thirdStatement.executeUpdate();
         } catch (SQLException | ClassNotFoundException e) {
             printSQLException((SQLException) e);
         }
@@ -263,6 +271,11 @@ public class UserDAO {
             preparedStatement.setInt(2, user.getCode());
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
+            PreparedStatement secondStatement = connection.prepareStatement(VERIFY_USER);
+            preparedStatement.setInt(1, 123456);
+            preparedStatement.setString(2, user.getUsername());
+            System.out.println(secondStatement);
+            secondStatement.executeUpdate();
         } catch (SQLException | ClassNotFoundException e) {
             printSQLException((SQLException) e);
         }

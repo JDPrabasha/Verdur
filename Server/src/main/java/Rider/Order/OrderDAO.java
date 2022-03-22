@@ -30,8 +30,8 @@ public class OrderDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(ADD_ORDER, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, order.getCustomer());
             preparedStatement.setFloat(2, order.getDistance());
-            preparedStatement.setDouble(3, order.getLongitude());
-            preparedStatement.setDouble(4, order.getLatitude());
+            preparedStatement.setString(3, order.getLongitude());
+            preparedStatement.setString(4, order.getLatitude());
             preparedStatement.setString(5, order.getTimestamp());
             System.out.println(preparedStatement);
 //            System.out.println("succsss");
