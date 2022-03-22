@@ -23,7 +23,7 @@ import { orderserializer } from "./orderserializer.js";
 
 $(document).ready(function(){
     var authHeader = "Bearer " + window.localStorage.getItem("jwt");
-    console.log(authHeader);
+    // console.log(authHeader);
     $.ajax({
         url:"http://localhost:8080/Server_war_exploded/KitchenManager/order",
         beforeSend: function(xhr) {
@@ -41,8 +41,3 @@ $(document).ready(function(){
 
 
 
-// $(document).ready(function(){
-//     const deserializeddata = test.map(i=>orderkmserializer.doserializer(i));
-//     console.log(deserializeddata);
-//     deserializeddata.map(params=>new orderkm(params).printneworder())
-// })

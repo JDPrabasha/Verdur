@@ -24,7 +24,6 @@ export class order{
         var window = $(document.createElement('div')).attr("class","mt-3 hidescroll").attr("style","padding: 10px; border:1px solid #bacdd8;border-radius: 10% ;height:240px;overflow-y: scroll;");
         var hr = $(document.createElement('hr')).attr("class","mb-2 mt-2")
         var dishes = this.dish.map(i => new dish(i).printdish());
-        // var dishes = "";
         
         var button = $(document.createElement('div')).attr("class","flex-space-evenly mt-2 mb-6").html(` <div> <a class="btn tag-other text-bold" href="" onclick="completeorder(${this.orderID})" >Complete Order</a>
         </div>`);

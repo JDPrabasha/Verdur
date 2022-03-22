@@ -65,6 +65,8 @@ export class dish{
     }
 
     printdishbyingredient(){
+        console.log(enable);
+
         var buttonname;
         var buttoncolor;
         var functionname;
