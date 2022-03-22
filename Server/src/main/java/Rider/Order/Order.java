@@ -23,7 +23,7 @@ public class Order {
     private int fats;
     private String complaint;
 
-    public Order(int id, String payment, Double longitude, Double latitude, int price, List<Dish> dishes) {
+    public Order(int id, String payment, String longitude, String latitude, int price, List<Dish> dishes) {
         this.id = id;
         this.payment = payment;
         this.longitude = longitude;
@@ -35,15 +35,15 @@ public class Order {
     private int quantity;
     private String payment;
 
-    public Order(int id, Double longitude, Double latitude, List<Dish> dishes) {
+    public Order(int id, String longitude, String latitude, List<Dish> dishes) {
         this.id = id;
         this.longitude = longitude;
         this.latitude = latitude;
         this.dishes = dishes;
     }
 
-    private Double longitude;
-    private Double latitude;
+    private String longitude;
+    private String latitude;
     private Float distance;
     private String timestamp;
 
@@ -62,19 +62,19 @@ public class Order {
         this.payment = payment;
     }
 
-    public Double getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Double longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
-    public Double getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Double latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
@@ -95,7 +95,7 @@ public class Order {
     }
 
 
-    public Order(String payment, Double longitude, Double latitude, Float distance, String timestamp, int price, int customer, List<Dish> dishes) {
+    public Order(String payment, String longitude, String latitude, Float distance, String timestamp, int price, int customer, List<Dish> dishes) {
         this.payment = payment;
         this.longitude = longitude;
         this.latitude = latitude;
