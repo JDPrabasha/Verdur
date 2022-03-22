@@ -1,5 +1,6 @@
 package User;
 
+import Manager.employee.SendMail;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -55,8 +56,9 @@ public class RegisterServlet extends HttpServlet {
         int code = getRandom();
         User user = new Gson().fromJson(request.getReader(), User.class);
         newUser.addUser(user, code);
-//        mailer = new User.SendMail(user.getUsername(), code);
-//        mailer.sendEmail();
+        SendMail mailer = new SendMail(user.getUsername(), code);
+        mailer.sendActivationLink();
+
 
     }
 
