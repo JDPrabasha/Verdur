@@ -130,6 +130,10 @@ $(window).on("load", function () {
         var address = results[0].formatted_address;
         console.log(address);
         $("#location").html(address);
+        $("#location").attr(
+          "href",
+          "https://www.google.com/maps/search/?api=1&query=" + lat + "," + lng
+        );
       }
       return 0;
     });
