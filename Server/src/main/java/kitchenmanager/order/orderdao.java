@@ -22,11 +22,13 @@ public class orderdao {
         }
     }
 
-    public List<order> readOrder() throws SQLException {
+    public List<order> readOrder(int chefID) throws SQLException {
+        System.out.println(chefID);
         List<order> orderitem = new ArrayList<>();
-        String query = "SELECT * FROM orders WHERE chefID = 1 AND orders.`status` = \"assigned\" ";
-        Statement stm = this.conn.createStatement();
-        ResultSet rs = stm.executeQuery(query);
+        String query = "SELECT * FROM orders WHERE chefID = ? AND orders.`status` = \"assigned\" ";
+        PreparedStatement stm = this.conn.prepareStatement(query);
+        stm.setInt(1,chefID);
+        ResultSet rs = stm.executeQuery();
 
 
         while (rs.next()) {
@@ -39,7 +41,8 @@ public class orderdao {
             String chefimage = "";
 
 
-            String query2 = "SELECT * FROM orders JOIN hasdish ON orders.orderID=hasdish.orderID join customizeddish ON hasdish.cdishID=customizeddish.cdishID JOIN customization ON customizeddish.cdishID=customization.cdishID JOIN dish ON customizeddish.dishID= dish.dishID WHERE orders.orderID = ?";
+//            String query2 = "SELECT * FROM orders JOIN hasdish ON orders.orderID=hasdish.orderID join customizeddish ON hasdish.cdishID=customizeddish.cdishID JOIN customization ON customizeddish.cdishID=customization.cdishID JOIN dish ON customizeddish.dishID= dish.dishID WHERE orders.orderID = ?";
+            String query2 = "SELECT * FROM orders o join hasdish h on o.orderID =h.orderID join customizeddish c on c.cdishID =h.cdishID join dish d on d.dishID = c.dishID WHERE o.orderID = ?";
             PreparedStatement st2 = this.conn.prepareStatement(query2);
             st2.setInt(1, orderid);
             ResultSet rs2 = st2.executeQuery();

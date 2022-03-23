@@ -1,6 +1,7 @@
 function enable(rc) {
     let ric = "#" + rc;
     console.log("hi");
+    console.log("y this")
     $(ric).css("display","none")
     console.log(rc)
     var jwt = window.localStorage.getItem('jwt');
@@ -9,7 +10,7 @@ function enable(rc) {
     };
     $.ajax({
         type:'PUT',
-        url :'http://localhost:8080/Server_war_exploded/kitchenManager/dish/enable',
+        url :'http://localhost:8080/Server_war_exploded/KitchenManager/dish/enable',
         headers: {
             "authorization":jwt
         },
