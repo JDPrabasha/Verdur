@@ -20,8 +20,10 @@ class dish {
         var price = $(document.createElement('td')).html(this.price);
         var dateAdded = $(document.createElement('td')).html(this.dateAdded);
 
-        var button1 = $(document.createElement('td')).html(`<a href="UpdateStock.html?id=${this.itemID}" class="btn text-1 bg-clr-paid fw-b text-center">Update</button>`);
-        var button2 = $(document.createElement('td')).html(`<button class="btn bg-clr-unpaid text-1 fw-b"  onclick="hiderow(${this.itemID})">Remove</button>`);
+        var button1 = $(document.createElement('td')).html(`<a href="UpdateStock.html?id=${this.itemID}" class="btn text-1 bg-purple fw-b text-center">Update</button>`);
+        // var button2 = $(document.createElement('td')).html(`<button class="btn bg-red text-1 fw-b remove_button" data-id="${this.itemID}"  onclick="hiderow(${this.itemID})">Remove</button>`);
+        var button2 = $(document.createElement('td')).html(`<button class="btn bg-red text-1 fw-b remove_button" data-id="${this.itemID}">Remove</button>`);
+
 
         // $("#table tr").click(function () {
         //     $(this).addClass('selected').siblings().removeClass('selected');
