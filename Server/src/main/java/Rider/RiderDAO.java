@@ -113,14 +113,14 @@ public class RiderDAO {
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
-
-            PreparedStatement secondStatement = connection.prepareStatement(GET_RIDER_DETAILS);
             if (rs.next()) {
 
                 status = rs.getString("status");
 
 
             }
+            PreparedStatement secondStatement = connection.prepareStatement(TOGGLE_AVAILIBILE);
+
 
             if (Objects.equals(status, "available")) {
                 secondStatement.setString(1, "unavailable");
@@ -128,7 +128,8 @@ public class RiderDAO {
                 secondStatement.setString(1, "available");
 
             }
-            secondStatement.setInt(1, id);
+            secondStatement.setInt(2, id);
+            System.out.println(secondStatement);
             secondStatement.executeUpdate();
 
 

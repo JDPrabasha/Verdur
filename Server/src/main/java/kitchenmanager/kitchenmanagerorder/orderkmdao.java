@@ -65,8 +65,7 @@ public class orderkmdao {
 
     public List<orderkm> readongoingorders() throws SQLException {
         List<orderkm> orderitem = new ArrayList<>();
-//        String query = "SELECT orderID,chefID,status,userID,name FROM orders o JOIN user u WHERE u.userID=o.chefID AND chefID IS NOT NULL Group by orderID,chefID,status";
-//        String query = "SELECT orderID,chefID,status,userID,name FROM orders o JOIN user u WHERE u.userID=o.chefID AND chefID IS NOT NULL Group by orderID,chefID,status";
+//
         String query = "SELECT * From orders o JOIN employee e ON o.chefID=e.empID JOIN user u WHERE  o.`status` = \"assigned\" AND u.userID=e.userID AND chefID IS NOT NULL";
         //String query ="SELECT orderID,chefID,status,userID,name FROM orders o JOIN employee e ON e.empID=o.chefID JOIN user u WHERE u.userID=o.chefID AND chefID IS NOT NULL Group by orderID,chefID,status";
         Statement stm = this.conn.createStatement();

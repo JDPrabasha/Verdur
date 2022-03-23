@@ -13,7 +13,7 @@
     <script
       async
       defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCO45MrLYhJoU1hIzZ88DSupwTaT-gItoQ"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBpRh3BQTtpo7VfT8U4_7PrT4zHnCbMsg"
     ></script>
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -65,36 +65,56 @@
           </div>
           <span class="material-icons-outlined" id="next"> chevron_right </span>
         </div>
-        <div class="delivery-details mt-6 mb-6">
-          <div class="flex-space-evenly ml-20 mt-3">
-            <h1>Customer</h1>
-            <p class="pl-20 pr-20" id="customer">Dulaj Prabasha</p>
+        <div class="row">
+          <div class="col-6 ml-20 mt-5 fw-b" align="left">
+            <p>Customer</p>
           </div>
-          <div class="flex-space-evenly ml-20 mt-3">
-            <h1>Location</h1>
-            <p class="pl-20 pr-20" id="location">
-              205/A, Elm Street, Colombo 50, Colombo
-            </p>
-          </div>
-          <div class="flex-space-evenly mt-3 mr-17">
-            <h1 class="pl-20 pr-20 mr-4">Contact Number</h1>
-            <p class="mr-10" id="contact">077101234</p>
-          </div>
-          <div class="flex-space-evenly mt-3 mr-20">
-            <h1 class="pl-20 pr-20 mr-8">Payment Method</h1>
-            <p class="mr-15" id="method">Card</p>
-          </div>
-          <div class="flex-space-evenly mt-3 mr-20">
-            <h1 class="pl-20 pr-20 mr-8">Amount</h1>
-            <p class="mr-15">Rs. <span id="price"></span></p>
+          <div class="col-6 ml-15 mt-5" align="left">
+            <p id="customer">Dulaj Prabasha</p>
           </div>
         </div>
-        <p class="fw-b tag-green m-8 p-3 round-2 bg-black" id="confirm">
+        <div class="row">
+          <div class="col-6 ml-20 mt-5 fw-b" align="left">
+            <p>Location</p>
+          </div>
+          <div class="col-6 ml-15 mt-5" align="left">
+            <a id="location"></a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 ml-20 mt-5 fw-b" align="left">
+            <p>Contact</p>
+          </div>
+          <div class="col-6 ml-15 mt-5" align="left">
+            <p>07100882727</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 ml-20 mt-5 fw-b" align="left">
+            <p>Payment Method</p>
+          </div>
+          <div class="col-6 ml-15 mt-5" align="left">
+            <p id="method">Card</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 ml-20 mt-5 fw-b" align="left">
+            <p>Amount</p>
+          </div>
+          <div class="col-6 ml-15 mt-5" align="left">
+            <p>Rs. <span id="price"></span></p>
+          </div>
+        </div>
+
+        <p
+          class="fw-b tag-green btn width-6 m-8 p-3 round-2 bg-black mt-15"
+          id="confirm"
+        >
           Confirm Delivery
         </p>
       </div>
 
-      <a href="rider-home.html" class="delivery btn mt-3">
+      <a href="rider-home.html" class="delivery btn mt-10">
         <span class="material-icons-outlined icon"> home </span>
         <p class="fw-b text">Home</p>
       </a>

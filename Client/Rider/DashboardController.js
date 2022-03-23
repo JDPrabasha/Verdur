@@ -9,6 +9,9 @@ $(window).on("load", function () {
   $("#riderId").html(rider);
 
   $("#statusToggle").click(function () {
+    if ($("#status").html() == "ASSIGNED") {
+      return;
+    }
     if ($("#status").html() == "AVAILIBLE") {
       $("#status").html("UNAVAILIBLE");
       $("#statusToggle").html(" toggle_off");
@@ -44,7 +47,8 @@ $(window).on("load", function () {
   function toggleAvailibility() {
     $.ajax({
       type: "PUT",
-      url: "http://localhost:8080/Server_war_exploded/rider/toggle?id=" + rider,
+      url:
+        "http://localhost:8080/Server_war_exploded/rider/toggle?rider=" + rider,
       headers: {
         authorization: authHeader,
       },
@@ -87,12 +91,13 @@ $(window).on("load", function () {
     if (data.availible == "available") {
       $("#status").html("AVAILIBLE");
       $("#statusToggle").html(" toggle_on");
-    } else if (data.availible == "busy") {
-      $("#status").html("EN ROUTE");
-      $("#statusToggle").html(" toggle_off");
-    } else {
+    } else if (data.availible == "unavailable") {
       $("#status").html("UNAVAILIBLE");
       $("#statusToggle").html(" toggle_off");
+      $("#statusToggle").css("color", "red");
+    } else {
+      $("#status").html("ASSIGNED");
+      $("#statusToggle").css("color", "mediumspringgreen");
     }
     console.log(data);
 
