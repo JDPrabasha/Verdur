@@ -324,6 +324,9 @@ $(window).on("load", function () {
   }
 
   function updateInformation(avatar, contact, address) {
+    console.log(avatar);
+    console.log(contact);
+    console.log(address);
     $.ajax({
       type: "PUT",
       url: "http://localhost:8080/Server_war_exploded/profile?id=" + customer,

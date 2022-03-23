@@ -49,30 +49,30 @@ $(window).on("load", function () {
     var content = $("#modalContent");
     // $("#modalContent").html("");
 
-    switch (status) {
-      case "Pending":
-        new Order(deserializedOrder).showPendingOrder();
-        break;
+    // switch (status) {
+    //   case "Pending":
+    //     new Order(deserializedOrder).showPendingOrder();
+    //     break;
 
-      case "Accepted":
-        new Order(deserializedOrder).showAcceptedOrder();
-        break;
+    //   case "Accepted":
+    //     new Order(deserializedOrder).showAcceptedOrder();
+    //     break;
 
-      case "Rejected":
-        new Order(deserializedOrder).showRejectedOrder();
-        break;
+    //   case "Rejected":
+    //     new Order(deserializedOrder).showRejectedOrder();
+    //     break;
 
-      case "Delivering":
-        new Order(deserializedOrder).showDeliveringOrder();
-        break;
+    //   case "Delivering":
+    //     new Order(deserializedOrder).showDeliveringOrder();
+    //     break;
 
-      case "Delivered":
-        new Order(deserializedOrder).showDeliveredOrder();
-        break;
+    //   case "Delivered":
+    //     new Order(deserializedOrder).showDeliveredOrder();
+    //     break;
 
-      default:
-        break;
-    }
+    //   default:
+    //     break;
+    // }
   });
 
   function checkDistance(distance) {
