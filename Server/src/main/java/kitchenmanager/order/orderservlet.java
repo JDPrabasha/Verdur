@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //@WebServlet("/KitchenManager/order")
-@WebServlet("/KitchenManager/order")
+@WebServlet("/Chef/order")
 public class orderservlet extends HttpServlet {
 
     DB db = new DB();
@@ -27,11 +27,11 @@ public class orderservlet extends HttpServlet {
         List<order> orderitem = new ArrayList<>();
 
         String id = req.getParameter("id");
-
+        String chefID = req.getParameter("chefID");
 
         try {
             if (id == null) {
-                orderitem = order.readOrder();
+                orderitem = order.readOrder(Integer.parseInt(chefID));
             } else {
                 orderitem.add(order.readdish(id));
 
