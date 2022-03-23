@@ -52,6 +52,7 @@ public class UpdateStockServlet extends HttpServlet {
     }
     private void updateItem(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
+        System.out.println("update function");
         Stock item = new Gson().fromJson(request.getReader(), Stock.class);
         stockDAO.updateItem(item);
 

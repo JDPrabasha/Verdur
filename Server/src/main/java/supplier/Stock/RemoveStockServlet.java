@@ -49,6 +49,8 @@ public class RemoveStockServlet extends HttpServlet {
     }
     private void removeItem(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
+
+        System.out.println("remove item");
         Stock item = new Gson().fromJson(request.getReader(), Stock.class);
         stockDAO.removeItem(item);
 

@@ -168,12 +168,14 @@ public class StockDAO {
         System.out.println(UPDATE_ITEM_SQL);
         // try-with-resource statement will auto close the connection.
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ITEM_SQL)) {
-            preparedStatement.setInt(1, item.getSupplierID());
-            preparedStatement.setInt(2, item.getItemID());
-            preparedStatement.setDouble(3, item.getQuantity());
-            preparedStatement.setDouble(4, item.getPrice());
+            preparedStatement.setDouble(1, item.getQuantity());
+            preparedStatement.setDouble(2, item.getPrice());
+            preparedStatement.setInt(3, item.getItemID());
             //preparedStatement.setString(5, s);
-            //System.out.println(preparedStatement);
+            preparedStatement.setInt(4, item.getSupplierID());
+
+
+            System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
             System.out.println("ok");
         } catch (SQLException e) {
@@ -194,12 +196,13 @@ public class StockDAO {
         System.out.println(REMOVE_ITEM_SQL);
         // try-with-resource statement will auto close the connection.
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(REMOVE_ITEM_SQL)) {
+            System.out.println(preparedStatement);
             preparedStatement.setInt(1, item.getSupplierID());
             preparedStatement.setInt(2, item.getItemID());
             // preparedStatement.setDouble(3, item.getQuantity());
             //preparedStatement.setDouble(4, item.getPrice());
             //preparedStatement.setString(5, s);
-            //System.out.println(preparedStatement);
+            System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
             //System.out.println("ok");
         } catch (SQLException e) {
