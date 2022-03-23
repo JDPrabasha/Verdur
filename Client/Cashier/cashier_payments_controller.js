@@ -40,7 +40,7 @@ function uiLoad(today,datepass){
          const deserializeddata = array.map(i=>cashierpaymentsserializer.doserializer(i));
          deserializeddata.map(params=>new cashierpayments(params).printcashierpayments());
          initializeConfirmButton();
-         console.log(array[0]['type']);
+        //  console.log(array[0]['type']);
 var cashtotal=0;
 var cardtotal=0;
 var total=0;

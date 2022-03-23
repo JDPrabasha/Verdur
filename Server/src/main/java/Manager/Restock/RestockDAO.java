@@ -29,6 +29,11 @@ public class RestockDAO {
 //    private String createRestockOrderQuery = "INSERT INTO restockorder VALUES(?,?,?,?,?,?)";
     private String createRestockOrderQuery = "UPDATE restockorder set  invoiceNo = ? ,status = ?, deliveryDate = ? where restockID = ?";
 
+    private String stockUpdate = "update stock set quantity=? where ingID = ?";
+    private String getStock = "select quatity from stock where ingID=?";
+    private String getRestockQuantity = "select quantity from restockrequest where restockID =?";
+    private String getIngID = "select ingID restockrequest where restockID = ?";
+
     public RestockDAO(){
         try{
             this.conn = DB.initializeDB();
@@ -174,19 +179,31 @@ public class RestockDAO {
             st.setString(1,r.getStatus());
             st.setInt(2,restockid);
             int r1 = st.executeUpdate();
-            st2 = this.conn.prepareStatement(createRestockOrderQuery);
-//            private String createRestockOrderQuery = "INSERT INTO restockorder VALUES(?,?,?,?,?,?)";
-            st2.setInt(1,restockid);
-            st2.setInt(4,restockid);
-            st2.setString(2,"delivered");
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDateTime now = LocalDateTime.now();
-            st2.setString(3,dtf.format(now));
-//            st2.setInt(4,38);
-//        st2.setInt(4,getsupplier);
-//            st2.setString(5,"Payment Due");
-//            st2.setString(6,dtf.format(now));
-            int r2 = st2.executeUpdate();
+
+//            <<---------moved this part to supplier----------------->>
+
+//            st2 = this.conn.prepareStatement(createRestockOrderQuery);
+////            private String createRestockOrderQuery = "INSERT INTO restockorder VALUES(?,?,?,?,?,?)";
+//            st2.setInt(1,restockid);
+//            st2.setInt(4,restockid);
+//            st2.setString(2,"delivered");
+//            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//            LocalDateTime now = LocalDateTime.now();
+//            st2.setString(3,dtf.format(now));
+////            st2.setInt(4,38);
+////        st2.setInt(4,getsupplier);
+////            st2.setString(5,"Payment Due");
+////            st2.setString(6,dtf.format(now));
+//            int r2 = st2.executeUpdate();
+//        <<-------------------------------------------------------->>
+
+            PreparedStatement increaseStockSt = this.conn.prepareStatement(stockUpdate);
+            int ingID = getIngID(restockid);
+            increaseStockSt.setDouble(1,getStock(restockid)+getStock(ingID));
+            increaseStockSt.setInt(2,ingID);
+            int r2 =increaseStockSt.executeUpdate();
+
+
             conn.setAutoCommit(true);
             if ((r1==1)&&(r2==1)){
                 return 1;
@@ -198,5 +215,48 @@ public class RestockDAO {
 //            return 0;
 
 //
+    }
+
+    private Double getStock(int ingID){
+        try {
+            PreparedStatement getStockSt = this.conn.prepareStatement(getStock);
+            getStockSt.setInt(1,ingID);
+            ResultSet stockR = getStockSt.executeQuery();
+            if(stockR.next()){
+                return stockR.getDouble("quantity");
+            }
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private Double getRestockQuantity(int restockID){
+        try {
+            PreparedStatement restockQuantitySt = this.conn.prepareStatement(getRestockQuantity);
+            restockQuantitySt.setInt(1,restockID);
+            ResultSet restockQuantityR = restockQuantitySt.executeQuery();
+            if(restockQuantityR.next()){
+                return restockQuantityR.getDouble("quantity");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private Integer getIngID(int restockID){
+        try {
+            PreparedStatement ingIDSt = this.conn.prepareStatement(getIngID);
+            ingIDSt.setInt(1,restockID);
+            ResultSet ingIDR = ingIDSt.executeQuery();
+            if(ingIDR.next()){
+                return ingIDR.getInt("ingID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
