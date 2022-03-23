@@ -172,7 +172,7 @@ $(window).on("load", function () {
     console.log(avatarImage);
     console.log(address);
     console.log(contact);
-    updateInformation(avatar, contact, address);
+    updateInformation(avatarImage, contact, address);
   });
 
   $("#confirmPlanChange").click(function (e) {
