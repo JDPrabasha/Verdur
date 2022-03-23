@@ -25,7 +25,7 @@ public class RiderServlet extends HttpServlet {
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String rider = request.getParameter("rider");
-
+        System.out.println("Shoutout");
         riderDAO.toggleAvailibility(Integer.parseInt(rider));
     }
 

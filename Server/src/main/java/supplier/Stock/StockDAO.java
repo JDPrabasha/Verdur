@@ -24,6 +24,7 @@ public class StockDAO {
 
     //    private static final String SELECT_DISH = "select * from inventory where dish_id =?";
     private static final String SELECT_ALL_ITEMS = "SELECT * FROM supplier s  INNER JOIN ingredient i INNER JOIN inventory iv WHERE s.userID=iv.supplierID and iv.ingID=i.ingID and iv.supplierID =?";
+    private static final String SELECT_AN_ITEM = "select * from inventory i join ingredient i2 on i.ingID = i2.ingID  where supplierID = ? and i.ingID = ?";
 
     private static final String INSERT_ITEM_SQL = "INSERT INTO inventory  VALUES  (?, ?, ?, ?,?);";
     private static final String UPDATE_ITEM_SQL ="UPDATE inventory SET quantity = ?, price = ? WHERE ingID = ? and supplierID = ? ";
@@ -70,6 +71,44 @@ public class StockDAO {
 
                 int itemID = rs.getInt("ingID");
                 String itemName = rs.getString("i.name");
+                String itemType=rs.getString("type");
+              //  String itemType=" ";
+                double quantity=rs.getDouble("quantity");
+                double price=rs.getDouble("price");
+                String dateAdded=rs.getString("dateAdded");
+                String unit=rs.getString("unit");
+
+
+
+                items.add(new Stock(itemID,itemName,itemType,quantity,price,dateAdded,unit));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return items;
+    }
+
+    public List<Stock> selectAnItem(int supplierID,int ingID) {
+
+        // using try-with-resources to avoid closing resources (boiler plate code)
+        List <Stock> items = new ArrayList< >();
+        // Step 1: Establishing a Connection
+        try (Connection connection = getConnection();
+
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_AN_ITEM);) {
+            preparedStatement.setInt(1,supplierID);
+            preparedStatement.setInt(2,ingID);
+
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.
+            while (rs.next()) {
+
+                int itemID = rs.getInt("ingID");
+                String itemName = rs.getString("i2.name");
                 String itemType=rs.getString("type");
               //  String itemType=" ";
                 double quantity=rs.getDouble("quantity");
@@ -136,7 +175,7 @@ public class StockDAO {
             //preparedStatement.setString(5, s);
             //System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
-            //System.out.println("ok");
+            System.out.println("ok");
         } catch (SQLException e) {
             printSQLException(e);
         }

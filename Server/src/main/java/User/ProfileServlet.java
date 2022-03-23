@@ -107,10 +107,10 @@ public class ProfileServlet extends HttpServlet {
         String id = request.getParameter("id");
         String role = request.getParameter("role");
         User user;
-        if(Objects.equals(role, "Supplier")){
-            user = userDAO.getEmployeeDetails(Integer.parseInt(id),true);
-        }else{
-            user = userDAO.getEmployeeDetails(Integer.parseInt(id),false);
+        if (Objects.equals(role, "Supplier")) {
+            user = userDAO.getEmployeeDetails(Integer.parseInt(id), true);
+        } else {
+            user = userDAO.getEmployeeDetails(Integer.parseInt(id), false);
         }
 //        request.setAttribute("listDish", listDish);
         String json = new Gson().toJson(user);
@@ -126,9 +126,11 @@ public class ProfileServlet extends HttpServlet {
     }
 
     private void uppdateCustomerInformation(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+        System.out.println("got to func");
         String id = request.getParameter("id");
 
         User user = new Gson().fromJson(request.getReader(), User.class);
+        System.out.println("parsed");
         userDAO.updateCustomerDetails(Integer.parseInt(id), user);
 
     }
