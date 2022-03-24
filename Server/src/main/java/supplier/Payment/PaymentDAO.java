@@ -2,6 +2,8 @@ package supplier.Payment;
 
 
 
+import User.ConnectionFactory.DB;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +28,8 @@ public class PaymentDAO {
         Connection connection = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+//            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+            connection = DB.initializeDB();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

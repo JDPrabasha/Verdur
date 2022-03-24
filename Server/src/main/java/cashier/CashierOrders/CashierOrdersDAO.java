@@ -41,7 +41,7 @@ public class CashierOrdersDAO {
             int price = rs.getInt("amount");
 
 
-            String query2 = "SELECT * FROM orders JOIN hasdish on orders.orderID=hasdish.orderID JOIN customizedDish ON customizedDish.cdishID=hasdish.cdishID JOIN dish on customizedDish.dishID=dish.dishID JOIN payment on orders.orderID=payment.orderID WHERE orders.orderID=?";
+            String query2 = "SELECT * FROM orders JOIN hasdish on orders.orderID=hasdish.orderID JOIN customizeddish ON customizeddish.cdishID=hasdish.cdishID JOIN dish on customizeddish.dishID=dish.dishID JOIN payment on orders.orderID=payment.orderID WHERE orders.orderID=?";
             PreparedStatement st2 = this.conn.prepareStatement(query2);
             st2.setInt(1, orderid);
             ResultSet rs2 = st2.executeQuery();
@@ -88,7 +88,7 @@ public class CashierOrdersDAO {
             int amount = rs.getInt("amount");
 
 
-            String query2 = "SELECT * FROM orders JOIN hasdish on orders.orderID=hasdish.orderID JOIN customizedDish ON customizedDish.cdishID=hasdish.cdishID JOIN dish on customizedDish.dishID=dish.dishID WHERE orders.orderID=?";
+            String query2 = "SELECT * FROM orders JOIN hasdish on orders.orderID=hasdish.orderID JOIN customizeddish ON customizeddish.cdishID=hasdish.cdishID JOIN dish on customizeddish.dishID=dish.dishID WHERE orders.orderID=?";
             PreparedStatement st2 = this.conn.prepareStatement(query2);
             st2.setInt(1, orderid);
             ResultSet rs2 = st2.executeQuery();
@@ -114,11 +114,11 @@ public class CashierOrdersDAO {
 
     public List<CashierOrders> readcookedorders() throws SQLException {
         List<CashierOrders> orderitem = new ArrayList<>();
-        String query = "SELECT o.orderID,SUM(quantity) AS quantity, u.firstName,u.lastName,u.contact,c.address,p.amount FROM orders o JOIN hasdish h on o.orderID=h.orderID JOIN customizedDish cd ON cd.cdishID=h.cdishID JOIN dish d on cd.dishID=d.dishID JOIN customer c ON o.custID=c.custID JOIN user u ON u.userID=c.userID join payment p on p.orderID = o.orderID WHERE o.status=\"cooked\" GROUP BY o.orderID";
+        String query = "SELECT o.orderID,SUM(quantity) AS quantity, u.firstName,u.lastName,u.contact,c.address,p.amount FROM orders o JOIN hasdish h on o.orderID=h.orderID JOIN customizeddish cd ON cd.cdishID=h.cdishID JOIN dish d on cd.dishID=d.dishID JOIN customer c ON o.custID=c.custID JOIN user u ON u.userID=c.userID join payment p on p.orderID = o.orderID WHERE o.status=\"cooked\" GROUP BY o.orderID";
 
-//        String query = "SELECT o.orderID,SUM(quantity) AS quantity, u.firstName,u.lastName,u.contact,c.address FROM orders o JOIN hasdish h on o.orderID=h.orderID JOIN customizedDish cd ON cd.cdishID=h.cdishID JOIN dish d on cd.dishID=d.dishID JOIN customer c ON o.custID=c.custID JOIN user u ON u.userID=c.userID WHERE o.status=\"cooked\" GROUP BY o.orderID";
+//        String query = "SELECT o.orderID,SUM(quantity) AS quantity, u.firstName,u.lastName,u.contact,c.address FROM orders o JOIN hasdish h on o.orderID=h.orderID JOIN customizeddish cd ON cd.cdishID=h.cdishID JOIN dish d on cd.dishID=d.dishID JOIN customer c ON o.custID=c.custID JOIN user u ON u.userID=c.userID WHERE o.status=\"cooked\" GROUP BY o.orderID";
 
-//        String query = "SELECT * FROM orders o JOIN hasdish h on o.orderID=h.orderID JOIN customizedDish cd ON cd.cdishID=h.cdishID JOIN dish d on cd.dishID=d.dishID JOIN customer c ON o.custID=c.custID JOIN user u ON u.userID=c.userID WHERE o.status=\"cooked\";";
+//        String query = "SELECT * FROM orders o JOIN hasdish h on o.orderID=h.orderID JOIN customizeddish cd ON cd.cdishID=h.cdishID JOIN dish d on cd.dishID=d.dishID JOIN customer c ON o.custID=c.custID JOIN user u ON u.userID=c.userID WHERE o.status=\"cooked\";";
         PreparedStatement st1 = this.conn.prepareStatement(query);
         ResultSet rs = st1.executeQuery();
 
@@ -141,10 +141,10 @@ public class CashierOrdersDAO {
 
     public List<CashierOrders> readongoingorders() throws SQLException {
         List<CashierOrders> orderitem = new ArrayList<>();
-        String query4 = "SELECT o.orderID,SUM(quantity) AS quantity, p.amount,o.status,p.type,o.timestamp FROM orders o JOIN hasdish h on o.orderID=h.orderID JOIN customizedDish cd ON cd.cdishID=h.cdishID JOIN dish d on cd.dishID=d.dishID JOIN payment p ON p.orderID=o.orderID WHERE status=\"pending\" or status= \"cooked\" or status=\"delivering\" and o.orderID GROUP BY o.orderID";
-//        String query4 ="SELECT o.orderID,SUM(quantity) AS quantity, p.amount,o.status,p.type,o.timestamp FROM orders o JOIN hasdish h on o.orderID=h.orderID JOIN customizedDish cd ON cd.cdishID=h.cdishID JOIN dish d on cd.dishID=d.dishID JOIN payment p ON p.orderID=o.orderID WHERE o.orderID GROUP BY o.orderID";
+        String query4 = "SELECT o.orderID,SUM(quantity) AS quantity, p.amount,o.status,p.type,o.timestamp FROM orders o JOIN hasdish h on o.orderID=h.orderID JOIN customizeddish cd ON cd.cdishID=h.cdishID JOIN dish d on cd.dishID=d.dishID JOIN payment p ON p.orderID=o.orderID WHERE status=\"pending\" or status= \"cooked\" or status=\"delivering\" and o.orderID GROUP BY o.orderID";
+//        String query4 ="SELECT o.orderID,SUM(quantity) AS quantity, p.amount,o.status,p.type,o.timestamp FROM orders o JOIN hasdish h on o.orderID=h.orderID JOIN customizeddish cd ON cd.cdishID=h.cdishID JOIN dish d on cd.dishID=d.dishID JOIN payment p ON p.orderID=o.orderID WHERE o.orderID GROUP BY o.orderID";
 
-//        String query = "SELECT * FROM orders o JOIN hasdish h on o.orderID=h.orderID JOIN customizedDish cd ON cd.cdishID=h.cdishID JOIN dish d on cd.dishID=d.dishID JOIN customer c ON o.custID=c.custID JOIN user u ON u.userID=c.userID WHERE o.status=\"cooked\";";
+//        String query = "SELECT * FROM orders o JOIN hasdish h on o.orderID=h.orderID JOIN customizeddish cd ON cd.cdishID=h.cdishID JOIN dish d on cd.dishID=d.dishID JOIN customer c ON o.custID=c.custID JOIN user u ON u.userID=c.userID WHERE o.status=\"cooked\";";
         PreparedStatement st4 = this.conn.prepareStatement(query4);
         ResultSet rs = st4.executeQuery();
 

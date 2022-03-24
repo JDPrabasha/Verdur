@@ -1,5 +1,7 @@
 package supplier.AddItem;
 
+import User.ConnectionFactory.DB;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -31,7 +33,8 @@ public class AddItemDAO {
         Connection connection = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+//            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+            connection = DB.initializeDB();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
