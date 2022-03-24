@@ -38,7 +38,7 @@ public class orderkmdao {
             int chefid = 0;
             String chefname = "";
             String chefimage = "";
-            String query2 = "SELECT * FROM orders JOIN hasdish on orders.orderID=hasdish.orderID JOIN customizedDish ON customizedDish.cdishID=hasdish.cdishID JOIN dish on customizedDish.dishID=dish.dishID WHERE orders.orderID=?";
+            String query2 = "SELECT * FROM orders JOIN hasdish on orders.orderID=hasdish.orderID JOIN customizeddish ON customizeddish.cdishID=hasdish.cdishID JOIN dish on customizeddish.dishID=dish.dishID WHERE orders.orderID=?";
             PreparedStatement st2 = this.conn.prepareStatement(query2);
             st2.setInt(1, orderid);
             ResultSet rs2 = st2.executeQuery();
@@ -80,28 +80,26 @@ public class orderkmdao {
             int chefid = rs.getInt("userID");
             String chefname = rs.getString("firstName");
             String chefimage = rs.getString("photo");
+            String timestamp = rs.getString("assignTimestamp");
 //            int chefid = 0;
 //            String chefname = "";
 //            String chefimage = "";
 
 
-            String query2 = "SELECT * FROM orders JOIN hasdish  on orders.orderID=hasdish.orderID JOIN customizedDish ON customizedDish.cdishID=hasdish.cdishID JOIN dish on customizedDish.dishID=dish.dishID WHERE orders.orderID=?";
+            String query2 = "SELECT * FROM orders JOIN hasdish  on orders.orderID=hasdish.orderID JOIN customizeddish ON customizeddish.cdishID=hasdish.cdishID JOIN dish on customizeddish.dishID=dish.dishID WHERE orders.orderID=?";
 //            String query2 = "SELECT * FROM orders JOIN customizeddish ON orders.cdishID=customizeddish.cdish JOIN dish ON customizeddish.ddish = dish.ddishID WHERE orderID = ?";
             PreparedStatement st2 = this.conn.prepareStatement(query2);
             st2.setInt(1, orderid);
             ResultSet rs2 = st2.executeQuery();
             while (rs2.next()) {
-                // String dishid = rs2.getString("cdishID");
-                //String dishname = rs2.getString("name");
-                //int dishquantity =rs2.getInt("quantity");
-                // String dishimage =rs2.getString("image");
+
                 int esttime = rs2.getInt("estTime");
 
                 dishitem.add(new dish(esttime));
 
             }
 
-            orderitem.add(new orderkm(orderid, chefid, chefname, chefimage, dishitem));
+            orderitem.add(new orderkm(orderid, chefid, chefname, chefimage, timestamp,dishitem));
 //            orderitem.add(new orderkm(orderid, chefid, chefname, chefimage));
 
 

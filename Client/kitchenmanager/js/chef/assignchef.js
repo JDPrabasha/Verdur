@@ -45,6 +45,7 @@ function assignchef(rc) {
     }).done(function(){
         console.log("done");
         $(`#dishcard-${rc}`).attr("style","display:none")
+        window.location.reload();
     })
     
 }

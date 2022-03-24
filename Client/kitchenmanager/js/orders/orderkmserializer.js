@@ -5,6 +5,7 @@ export class orderkmserializer{
             chefID: data.chefid,
             chefname: data.chefname,
             chefimage: data.chefimage,
+            timestamp:data.timestamp,
             dish:data.dishitem
         }
     }
