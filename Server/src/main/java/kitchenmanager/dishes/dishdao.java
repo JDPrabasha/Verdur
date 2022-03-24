@@ -206,6 +206,7 @@ public class dishdao {
         PreparedStatement st = this.conn.prepareStatement(quary);
         st.setInt(1, 1);
         st.setInt(2, dishid);
+        System.out.println("enabled dish "+dishid);
         return st.executeUpdate();
     }
 

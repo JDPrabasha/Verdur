@@ -59,7 +59,7 @@ export class orderkm{
     var time = minutes + ":" + seconds 
 
 
-        var order = $(document.createElement('div')).attr("class","card ongoing_dashcard mb-4").html(`<div class="row py-3 pl-2 pr-12">
+        var order = $(document.createElement('div')).attr("class","card ongoing_dashcard mb-4").attr("style","width:fit-content").html(`<div class="row py-3 pl-2 pr-12">
         <div class="circle flex-space-evenly col-2">
             <i class="material-icons">lunch_dining</i>
         </div>
