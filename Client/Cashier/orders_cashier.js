@@ -40,7 +40,7 @@ export class orders_cashier{
 
 
         
-        var button = $(document.createElement('div')).attr("class","flex-space-evenly mt-2 mb-6").html(`  <button class="btn" id="btn" btn fw-b tag-green onclick="accept(${this.orderID})" tag-green>Accept</button><button class="btn fw-b tag-red" id="btn1" onclick="reject(${this.orderID})" >Reject</button>
+        var button = $(document.createElement('div')).attr("class","flex-space-evenly mt-2 mb-1").html(`  <button class="btn" id="btn" btn fw-b tag-green onclick="accept(${this.orderID})" tag-green>Accept</button><button class="btn fw-b tag-red" id="btn1" onclick="reject(${this.orderID})" >Reject</button>
         `);
         
 
@@ -68,7 +68,7 @@ export class orders_cashier{
         // var button = $(document.createElement('div')).html(`<button class="btn2 ml-12 " style="height: 45px;" onclick="hiderow(${this.orderID})">Assign Rider</button>`);
         // `);
 
-        var button = $(document.createElement('div')).attr("class","flex-space-evenly ml-2 mt-2 mb-6 h2").html(`Rs. ${this.amount} <button id="rider-${this.orderID}  class="btn2 ml-12 ">Assign Rider</button> `);
+        var button = $(document.createElement('h2')).attr("class","flex-space-evenly ml-2 mt-2 mb-6 text-2 text-bolt").html(`Rs. ${this.amount} <button id="rider-${this.orderID}"  class="btn2 ml-1" style="height:45px ; width : 100px;">Assign Rider</button> `);
        
 
       
@@ -85,7 +85,7 @@ export class orders_cashier{
         var orderid = $(document.createElement('h2')).attr("class","ml-2").html(`OrderID: ${this.orderID}`);
         var window = $(document.createElement('div')).attr("class","mt-3 hidescroll").attr("style","padding: 10px; border:1px solid #bacdd8;border-radius: 10% ;height:240px;overflow-y: scroll;");
         var hr = $(document.createElement('hr')).attr("class","mb-2 mt-2")
-        var totalprice = $(document.createElement('h2')).attr("class","ml-2").html(`Rs. ${this.amount}`);
+        var totalprice = $(document.createElement('h2')).attr("class","flex-center mt-3 ml-2").html(`Rs. ${this.amount}`);
         var dishes = this.dishitem.map(i => new dish(i).printdish());
         // var dishes = "";
         
