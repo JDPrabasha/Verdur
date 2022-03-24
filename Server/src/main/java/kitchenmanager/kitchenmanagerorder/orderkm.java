@@ -10,6 +10,7 @@ public class orderkm {
     private String chefname;
     private String chefimage;
     private String status;
+    private String timestamp;
     private List<dish> dishitem;
 
 //    public orderkm(int orderid, int dishid, String dishname, String dishimage, int chefid, String chefname, String chefimage, int time, int quantity) {
