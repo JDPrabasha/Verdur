@@ -6844,6 +6844,11 @@
   color: #fafafa;
 }
 
+.bg-red {
+  background-color: #c62828;
+  color: #fafafa;
+}
+
 .bg-purple {
   background-color: #423bf7;
   color: #fafafa;
@@ -7079,6 +7084,11 @@ a:active {
 
 .bg-black {
   background-color: #1c1d21;
+  color: #fafafa;
+}
+
+.bg-red {
+  background-color: #c62828;
   color: #fafafa;
 }
 
@@ -7391,6 +7401,11 @@ h6 {
 
 .bg-black {
   background-color: #1c1d21;
+  color: #fafafa;
+}
+
+.bg-red {
+  background-color: #c62828;
   color: #fafafa;
 }
 
@@ -7830,6 +7845,11 @@ table tr:nth-child(even) {
   color: #fafafa;
 }
 
+.bg-red {
+  background-color: #c62828;
+  color: #fafafa;
+}
+
 .bg-purple {
   background-color: #423bf7;
   color: #fafafa;
@@ -7968,6 +7988,11 @@ table tr:nth-child(even) {
 
 .bg-black {
   background-color: #1c1d21;
+  color: #fafafa;
+}
+
+.bg-red {
+  background-color: #c62828;
   color: #fafafa;
 }
 
@@ -8786,6 +8811,11 @@ h6 {
 
 .bg-black {
   background-color: #1c1d21;
+  color: #fafafa;
+}
+
+.bg-red {
+  background-color: #c62828;
   color: #fafafa;
 }
 

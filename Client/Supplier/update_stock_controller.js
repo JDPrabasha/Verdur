@@ -46,11 +46,14 @@ $(document).ready(function restockrequestlist() {
                 },
                 data:JSON.stringify(json)
             })
+            window.location.href = "ViewStock.html"
         })
 
-        //  var array = $.parseJSON(data);
-        //  console.log(array);
-        //  const deserializeddata = array.map(i=>restockrequestserializer.doserializer(i));
-        //  deserializeddata.map(params=>new restockrequest(params).printrestockrequest());
+
+       
+
     })
+
+
+
 });

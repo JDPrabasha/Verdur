@@ -10,6 +10,7 @@ export class supplier{
     {
       
             // var supplierdetail = $(document.createElement('div')).html(`<option value="${this.suppliername}-${this.price}"`);
+            console.log(this.supplierid)
             var supplierdetail = $(document.createElement('option')).attr("id",`${this.supplierid}`).attr("value", `${this.suppliername}-${this.price}`).html(`${this.suppliername}-${this.price}`);
             return supplierdetail;
 
