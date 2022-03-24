@@ -2,7 +2,7 @@ import Employee from "./manager_employee.js";
 import Manager_employee_serialize from "./manager_employee_serializer.js";
 import { nextbuttons } from "../functionalities/next_Buttons.js";
 
-var chunk = 5;
+var chunk = 7;
 
 $.getScript("/Client/Manager/JS/functionalities/expand.js");
 $.getScript("/Client/Manager/JS/functionalities/popup.js");

@@ -41,7 +41,8 @@ export default class Employee {
         // var employees = $("#employees");
         var employees = $("#results")
         var row_nomrmal = $(document.createElement('tr')).attr("id", `rec-${this.employeeid}`);
-        var col_1 = $(document.createElement('td')).html(`<img class="icon-3 icon emp-icon" src="${this.image}">`);
+        // var col_1 = $(document.createElement('td')).html(`<img class="icon-3 icon emp-icon" src="${this.image}">`);
+        var col_1 = $(document.createElement('td')).html(`<img class="icon-6 icon emp-icon" src="${this.image}">`);
         var col_2 = $(document.createElement('td')).html(`<p class="emp_table_name">${this.name}</p>
                                                                 <p class="emp_table_designation">${this.designation}</p>`);
         var col_3 = $(document.createElement('td')).html(`<p class="status_${this.status}">${this.status}</p>`);

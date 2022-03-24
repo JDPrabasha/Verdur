@@ -46,7 +46,7 @@ public class DishServlet extends HttpServlet {
     protected void doPut(HttpServletRequest req,HttpServletResponse resp) throws IOException {
         Dish d = new Gson().fromJson(req.getReader(),Dish.class);
         String requestUrl = req.getRequestURI();
-        String type = requestUrl.substring("/Server_war_exploded/Manager/Manager.dishes/".length());
+        String type = requestUrl.substring("/Server_war_exploded/Manager/dishes/".length());
 //        System.out.println(type);
 //        System.out.println(type.equals("reject"));
         if(type.equals("reject")){
