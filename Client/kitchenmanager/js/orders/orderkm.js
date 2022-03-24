@@ -8,6 +8,7 @@ export class orderkm{
         this.chefID = params.chefID;
         this.chefname = params.chefname;
         this.chefimage = params.chefimage;
+        this.timestamp = params.timestamp;
         this.dish = params.dish;
       
 
@@ -45,12 +46,12 @@ export class orderkm{
     return previousValue + currentValue.estimatedtime
     }, initialValue)
 
-    // console.log(sum) // logs 6
+    console.log(sum) // logs 6
     var countDownTime = new Date(sum).getTime()
-    console.log(countDownTime)
+    // console.log(countDownTime)
     var now = new Date().getTime();
-    console.log(now)
-    // var distance = countDownTime - now;
+    // //  console.log(now)
+    var distance = countDownTime - now;
     var distance = now - countDownTime;
 
     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -60,7 +61,17 @@ export class orderkm{
     var time = minutes + ":" + seconds 
     
 
-    
+    //  var starttime= new Date(this.timestamp).getTime();
+    console.log(this.timestamp);
+    // var tt = new Date(this.timestamp).getTime();
+    // console.log(starttime);
+    // var totaltime =this.timestamp+sum*60;
+    // console.log(totaltime);
+    // var newDateObj = new Date(this.timestamp.getTime() + sum*60000);
+    var newDateObj = moment(this.timestamp).add(sum, 'm').toDate();
+    console.log(newDateObj);
+    // var time=getTimeRemaining(newDateObj);
+    // var total = new Date(totaltime).getTime();
 
 
         var order = $(document.createElement('div')).attr("class","card ongoing_dashcard mb-4").attr("style","width:fit-content").html(`<div class="row py-3 pl-2 pr-12">

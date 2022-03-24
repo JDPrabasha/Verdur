@@ -17,27 +17,7 @@ export class restock{
     } 
     printrestock(){
 
-        // var currentdate = new Date();
-        // var raandate = new Date(this.timeremain);
-        // // console.log(raandate);
         
-
-        // // var date = currentdate.getFullYear()+'-'+(currentdate.getMonth()+1)+'-'+currentdate.getDate();
-        // var dif = Math.abs(currentdate-raandate);
-        // var drft = new Date(dif);
-        // // var difdate = drft.getDate() + (drft.getDate()>1?" Days ":drft.getDate()==1?" Day ":"")+ drft.getHours() + "hrs" + drft.getMinutes() + "mins" + drft.getSeconds() ;
-        // var difdate = drft.getDate() + (drft.getDate()>1?" Days ":drft.getDate()==1?" Day ":"")+ drft.getHours() + " Hrs " + drft.getMinutes() + " Mins" ;
-        // //;
-
-
-
-        // //  const diffDays = Math.ceil(dif/ (1000 * 60 * 60 * 24));
-        
-
-        // console.log(drft);
-        // console.log(difdate);
-    
-        // console.log(diffDays);
         var statusStyle;
         if(this.status == "Supplier Pending"){
             statusStyle = "SupplierPending"
@@ -53,9 +33,10 @@ export class restock{
         else{
             statusm = this.status
         }
+        // if(this.status == "managerdecline")
         
         var restock = $("#restocktable");
-            var restocktable = $(document.createElement('tr')).attr( "class","res").html(`
+            var restocktable = $(document.createElement('tr')).attr( "class","re ").attr("styles","fontsize:10cm;").html(`
            
             <td>${this.ingname}</td>
             <td>${this.issuedate.split(" ")[0]}</td>

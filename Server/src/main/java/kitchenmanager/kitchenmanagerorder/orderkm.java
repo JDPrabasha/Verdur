@@ -13,18 +13,16 @@ public class orderkm {
     private String timestamp;
     private List<dish> dishitem;
 
-//    public orderkm(int orderid, int dishid, String dishname, String dishimage, int chefid, String chefname, String chefimage, int time, int quantity) {
-//        this.orderid = orderid;
-//        this.dishid = dishid;
-//        this.dishname = dishname;
-//        this.dishimage = dishimage;
-//        this.chefid = chefid;
-//        this.chefname = chefname;
-//        this.chefimage = chefimage;
-//        this.time = time;
-//        this.quantity = quantity;
-//    }
 
+
+    public orderkm(int orderid, int chefid, String chefname, String chefimage, String timestamp, List<dish> dishitem) {
+        this.orderid = orderid;
+        this.chefid = chefid;
+        this.chefname = chefname;
+        this.chefimage = chefimage;
+        this.timestamp = timestamp;
+        this.dishitem = dishitem;
+    }
 
     public orderkm(int orderid, int chefid) {
         this.orderid = orderid;

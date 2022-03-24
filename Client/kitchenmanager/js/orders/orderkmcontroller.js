@@ -7,7 +7,7 @@ import {chef} from "../chef/chef.js";
 
 $(document).ready(function(){
     var authHeader = "Bearer " + window.localStorage.getItem("jwt");
-    console.log(authHeader);
+    // console.log(authHeader);
     $.ajax({
         url:"http://localhost:8080/Server_war_exploded/KitchenManager/orderkm",
         beforeSend: function(xhr) {
@@ -16,9 +16,9 @@ $(document).ready(function(){
      },).then(function(data){
         
          var array = $.parseJSON(JSON.stringify(data));
-         console.log(array);
+        //  console.log(array);
          const deserializeddata = array.map(i=>orderkmserializer.doserializer(i));
-         console.log(deserializeddata);
+        //  console.log(deserializeddata);
          deserializeddata.map(params=>new orderkm(params).printneworder());
          readAssignChefButton();
      })
@@ -27,7 +27,7 @@ $(document).ready(function(){
          $("[id^=chef-]").each(function(){
             // $("#cheflist").html('');  
                     
-             console.log(this);
+            //  console.log(this);
             $(this).on('click',function(){
                 //   $("#chef").html('');
                  console.log(this.id);

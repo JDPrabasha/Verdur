@@ -65,7 +65,8 @@ public class chefdao {
         String quary = "UPDATE orders SET chefID = ? ,status=\"assigned\", assignTimestamp = ?  WHERE orderID = ?";
         int orderid = d.getOrderid();
         int chefid = d.getChefid();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss");
+//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String timestamp = dtf.format(now);
 
@@ -73,8 +74,9 @@ public class chefdao {
         System.out.println(chefid);
         PreparedStatement st = this.conn.prepareStatement(quary);
         st.setInt(1, chefid);
-        st.setInt(2, orderid);
-        st.setString(3,timestamp);
+        st.setString(2,timestamp);
+        st.setInt(3, orderid);
+
         return st.executeUpdate();
     }
 
