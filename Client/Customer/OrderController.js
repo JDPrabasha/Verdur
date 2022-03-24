@@ -51,11 +51,13 @@ $(window).on("load", function () {
 
     switch (status) {
       case "Pending":
-        new Order(deserializedOrder).showPendingOrder();
+        updateProgressBar(document.getElementById("myProgressBar"), 0);
+        $("#orderInfo").html("PLease wait while we process your order");
         break;
 
       case "Accepted":
-        new Order(deserializedOrder).showAcceptedOrder();
+        updateProgressBar(document.getElementById("myProgressBar"), 33);
+        getTotalTime();
         break;
 
       case "Rejected":
@@ -63,17 +65,26 @@ $(window).on("load", function () {
         break;
 
       case "Delivering":
-        new Order(deserializedOrder).showDeliveringOrder();
+        updateProgressBar(document.getElementById("myProgressBar"), 66);
+        getRiderDetails();
+
         break;
 
       case "Delivered":
-        new Order(deserializedOrder).showDeliveredOrder();
+        updateProgressBar(document.getElementById("myProgressBar"), 100);
+        getPaymentDetails();
         break;
 
       default:
         break;
     }
   });
+
+  function getTotalTime() {}
+
+  function getRiderDetails() {}
+
+  function getPaymentDetails() {}
 
   function checkDistance(distance) {
     for (i = 0; i < fees.length; i++) {
@@ -111,6 +122,29 @@ $(window).on("load", function () {
       }
     }
   }
+
+  function updateProgressBar(progressBar, value) {
+    const progressFill = progressBar.querySelector(".progress-fill");
+    const progressText = progressBar.querySelector(".progress-text");
+    const stages = progressText.dataset.stages
+      .split(",")
+      .map((stage) => stage.split(":"));
+
+    stages.sort((stageA, stageB) => {
+      return stageB[0] - stageA[0];
+    });
+
+    console.log(stages);
+
+    const activeStage = stages.find((stage) => {
+      return value >= stage[0];
+    });
+
+    progressFill.style.width = `${value}%`;
+    progressText.textContent = `${activeStage[1]}`;
+  }
+
+  updateProgressBar(document.getElementById("myProgressBar"), 100);
 
   function updateOrders() {
     $.ajax({

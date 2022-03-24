@@ -163,7 +163,7 @@ class Ingredient {
 
         var initialQuantity = parseInt($(this).siblings(".quantity").html());
         var defaultQuantity = parseInt($(this).attr("data-default"));
-        quantity =
+        var quantity =
           initialQuantity == $(this).attr("data-minimum")
             ? initialQuantity
             : initialQuantity - 1;
@@ -305,7 +305,7 @@ class Ingredient {
         e.preventDefault();
         var initialQuantity = parseInt($(this).siblings(".quantity").html());
         var defaultQuantity = parseInt($(this).attr("data-default"));
-        quantity =
+        var quantity =
           initialQuantity == $(this).attr("data-maximum")
             ? initialQuantity
             : initialQuantity + 1;

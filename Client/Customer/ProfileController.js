@@ -172,7 +172,7 @@ $(window).on("load", function () {
     console.log(avatarImage);
     console.log(address);
     console.log(contact);
-    updateInformation(avatar, contact, address);
+    updateInformation(avatarImage, contact, address);
   });
 
   $("#confirmPlanChange").click(function (e) {
@@ -324,6 +324,9 @@ $(window).on("load", function () {
   }
 
   function updateInformation(avatar, contact, address) {
+    console.log(avatar);
+    console.log(contact);
+    console.log(address);
     $.ajax({
       type: "PUT",
       url: "http://localhost:8080/Server_war_exploded/profile?id=" + customer,

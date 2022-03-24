@@ -1,3 +1,11 @@
+$(document).ready(function(){
+    window.localStorage.removeItem("jwt")
+    window.localStorage.removeItem("id")
+    window.localStorage.removeItem("avatar")
+    window.localStorage.removeItem("name")
+    window.localStorage.removeItem("rider")
+})
+
 function login() {
     name = document.getElementById('username').value;
     var password = document.getElementById('password').value;
@@ -70,19 +78,24 @@ function setDetails(role) {
             } else if (role == "Manager") {
                 // window.localStorage.setItem("userID", user.id);
                 window.location = "/Client/Manager/Manager-Home.html";
+                window.localStorage.setItem("id", user.id);
             } else if (role == "Kitchen Manager") {
                 // window.localStorage.setItem("userID", user.id);
                 window.location = "/Client/kitchenmanager/home.html"
+                window.localStorage.setItem("id", user.id);
                 //Km location
             } else if (role == "Supplier") {
                 //supplier location
                 window.location = "/Client/Supplier/SupplierOrders.html"
+                window.localStorage.setItem("id", user.id);
             } else if (role == "Cashier") {
                 //cashier
                 window.location = "/Client/Cashier/CashierHome.html"
+                window.localStorage.setItem("id", user.id);
             } else if (role == "Chef"){
                 //chef location
                 window.location = "/Client/chef/home.html"
+                window.localStorage.setItem("id", user.id);
             }
         });
     }

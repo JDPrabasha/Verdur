@@ -56,7 +56,8 @@ public class RestockRequestServlet extends HttpServlet {
     private void acceptRequest(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
         RestockRequest reorder = new Gson().fromJson(request.getReader(), RestockRequest.class);
-        restockRequestDAO.acceptRequest(reorder);
+        String supplierID = request.getParameter("supplierID");
+        restockRequestDAO.acceptRequest(reorder, Integer.parseInt(supplierID));
 
 
 

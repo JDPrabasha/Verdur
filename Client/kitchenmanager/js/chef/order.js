@@ -5,7 +5,7 @@ export class order{
     }
 
     printorder(){
-        var order = $(document.createElement('div')).html(`${this.orderid}`);
+        var order = $(document.createElement('div')).attr("class","fw-b").html(`Order ID:${this.orderid}`);
         return order;
     }
     
