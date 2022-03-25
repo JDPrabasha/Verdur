@@ -43,7 +43,7 @@ class inventory{
                             <div class="col-2">
                                 <img class="icon-8" src=${this.image}>
                             </div>
-                            <div class="col-6 text-grey text-bold text-1 mt-6" style="font-size: 1.4em;">
+                            <div class="col-6 text-grey text-bold text-1 mt-6" >
                                 <div class="row pb-8">
                                     <div class="col-4 "> <label for="form_max">Maximum Quantity:</label></div>
                                     <div class="col-4"> <input type="text" id="form_max" style="width: 30%; font-weight: bold; font-size: 1em;" value="${this.maxlevel} ${this.unit}" disabled></div>
@@ -57,11 +57,11 @@ class inventory{
                                     <div class="col-4"> <input type="text" id="form_min" value="${this.maxlevel} ${this.unit}" style="width: 30%; font-weight: bold; font-size: 1em;" disabled></div>
                                 </div>
                             </div>
-                            <div class="col-4 text-2  text-bold ">
+                            <div class="col-4  text-bold ">
     
                                   <div class="row pt-12">
-                                    <div class="col-3 text-grey"><label  for="form_min"> Quantity:(${this.unit})</label></div>
-                                    <div class="col-4"> <input type="text" id="stock" value="${this.quantity} " style="width: 40%;  font-size: 1em;" disabled ></div>
+                                    <div class="col-3 text-grey" style="font-size: 1.2em;"><label  for="form_min"> Quantity:(${this.unit})</label></div>
+                                    <div class="col-4"  style="font-size: 1.3em;"> <input class = " text-bold" type="text" id="stock" value="${this.quantity} " style="width: 40%;" disabled ></div>
                                     <div class="col-1">  <div id="editstock-${parseInt(this.ingid)}" class="btn tag-green">Edit</div></div>
                                     <div id="done-edit-${parseInt(this.ingid)}" style="display:none"><i class="material-icons" style="font-size:18px;cursor:pointer">done</i></div>
                                     <div id="cancel-edit-${parseInt(this.ingid)}" style="display:none"><i class="material-icons" style="font-size:18px;cursor:pointer">cancel</i></div>

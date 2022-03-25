@@ -38,7 +38,7 @@ export default class inventory{
                     <form class="form_reset">
                         <div class="row alignmiddle">
                             <div class="col-2">
-                                <img class="icon-2" src="${this.image}">   
+                                <img class="icon-5" src="${this.image}">   
                             </div>
                             <div class="col-6 text-grey text-bold text-1 mt-6 enable-num">
                                 <div class="row pb-8">

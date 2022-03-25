@@ -1,5 +1,7 @@
 package supplier.Stock;
 
+import User.ConnectionFactory.DB;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -39,7 +41,8 @@ public class StockDAO {
         Connection connection = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+//            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+            connection = DB.initializeDB();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

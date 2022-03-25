@@ -18,7 +18,7 @@ export class supplier{
         let table   = $("#supplier-tbody"),
             row1    = $(document.createElement('tr')).attr("id","rec-"+this.id),
                 // image   = $(document.createElement('td')).html(`<img class="icon-3 icon" src="${this.image}">`),
-                image   = $(document.createElement('td')).html(`<img class="icon-1 icon" src="${this.image}">`),
+                image   = $(document.createElement('td')).html(`<img class="icon-3 icon" src="${this.image}">`),
                 name    = $(document.createElement('td')).html(`
                             <p class="text-1-300">${this.name}</p>
                             <p class="text-grey ">${this.org}</p>`),

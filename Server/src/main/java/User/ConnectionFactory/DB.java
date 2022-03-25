@@ -5,11 +5,17 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DB {
+//    private static String dbDriver = "com.mysql.cj.jdbc.Driver";
+//    private static String dbUrl = "jdbc:mysql://verdur.mysql.database.azure.com/";
+//    private static String dbName = "verdur";
+//    private static String dbUname = "dulaj@verdur";
+//    private static String dbPass = "hojwe1-Tynxod-razveh";
+
     private static String dbDriver = "com.mysql.cj.jdbc.Driver";
-    private static String dbUrl = "jdbc:mysql://verdur.mysql.database.azure.com/";
+    private static String dbUrl = "jdbc:mysql://35.187.251.229/";
     private static String dbName = "verdur";
-    private static String dbUname = "dulaj@verdur";
-    private static String dbPass = "hojwe1-Tynxod-razveh";
+    private static String dbUname = "noobie";
+    private static String dbPass = "noobie";
 
     public static Connection initializeDB() throws ClassNotFoundException, SQLException {
 

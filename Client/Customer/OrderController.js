@@ -51,11 +51,13 @@ $(window).on("load", function () {
 
     switch (status) {
       case "Pending":
-        new Order(deserializedOrder).showPendingOrder();
+        updateProgressBar(document.getElementById("myProgressBar"), 0);
+        $("#orderInfo").html("PLease wait while we process your order");
         break;
 
       case "Accepted":
-        new Order(deserializedOrder).showAcceptedOrder();
+        updateProgressBar(document.getElementById("myProgressBar"), 33);
+        getTotalTime();
         break;
 
       case "Rejected":
@@ -63,17 +65,26 @@ $(window).on("load", function () {
         break;
 
       case "Delivering":
-        new Order(deserializedOrder).showDeliveringOrder();
+        updateProgressBar(document.getElementById("myProgressBar"), 66);
+        getRiderDetails();
+
         break;
 
       case "Delivered":
-        new Order(deserializedOrder).showDeliveredOrder();
+        updateProgressBar(document.getElementById("myProgressBar"), 100);
+        getPaymentDetails();
         break;
 
       default:
         break;
     }
   });
+
+  function getTotalTime() {}
+
+  function getRiderDetails() {}
+
+  function getPaymentDetails() {}
 
   function checkDistance(distance) {
     for (i = 0; i < fees.length; i++) {
@@ -111,6 +122,62 @@ $(window).on("load", function () {
       }
     }
   }
+
+  function validatePayment() {
+    if (payment != "") {
+      return true;
+    } else {
+      $("#methoderror").removeClass("hidden");
+      $("#methoderror").html("Please choose a payment method");
+    }
+  }
+
+  function validateLocation() {
+    var flag = $("#distance").attr("data-flag");
+    if (flag == "-1") {
+      $("#locationerror").removeClass("hidden");
+      $("#locationerror").html("Please choose a location");
+      return false;
+    } else if (flag == 0) {
+      $("#locationerror").removeClass("hidden");
+      $("#locationerror").html("Location out of range");
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  function validateCart(input) {
+    if (input > 0) {
+      return true;
+    } else {
+      $("#priceerror").removeClass("hidden");
+      $("#priceerror").html("Please add desired items to cart");
+    }
+  }
+
+  function updateProgressBar(progressBar, value) {
+    const progressFill = progressBar.querySelector(".progress-fill");
+    const progressText = progressBar.querySelector(".progress-text");
+    const stages = progressText.dataset.stages
+      .split(",")
+      .map((stage) => stage.split(":"));
+
+    stages.sort((stageA, stageB) => {
+      return stageB[0] - stageA[0];
+    });
+
+    console.log(stages);
+
+    const activeStage = stages.find((stage) => {
+      return value >= stage[0];
+    });
+
+    progressFill.style.width = `${value}%`;
+    progressText.textContent = `${activeStage[1]}`;
+  }
+
+  updateProgressBar(document.getElementById("myProgressBar"), 100);
 
   function updateOrders() {
     $.ajax({
@@ -273,91 +340,98 @@ $(window).on("load", function () {
 
       return;
     }
-    console.log("bdjbvc");
-    e.preventDefault();
-    if ($("#card").hasClass("selected")) {
-      $("#target").submit(function (event) {
-        event.preventDefault();
-        console.log("hu");
+
+    var distanceFlag = validateLocation();
+    var cartFlag = validateCart();
+    var methodFlag = validatePayment(parseInt($("#cartPrice").html()));
+
+    if (cartFlag && methodFlag && distanceFlag) {
+      console.log("bdjbvc");
+      e.preventDefault();
+      if ($("#card").hasClass("selected")) {
+        $("#target").submit(function (event) {
+          event.preventDefault();
+          console.log("hu");
+        });
+      }
+
+      var dishArray = [];
+      $.each($(".item"), function (index, value) {
+        var id = parseInt($(this).attr("data-id"));
+
+        var quantity = parseFloat(
+          $(this)
+            .children(".details")
+            .children(".text-upper")
+            .text()
+            .split(" ")[1]
+        );
+
+        var name = $(this).children(".details").children(".text-2").text();
+
+        names.push(name);
+
+        //   console.log(quantity);
+        dishArray.push({ id: id, quantity: quantity });
+        console.log(dishArray);
+      });
+
+      var longitude = parseFloat($("#longitude").val());
+      var latitude = parseFloat($("#latitude").val());
+
+      var distance = parseInt($("#distance").html().split(" ")[0]);
+      var price = parseInt($("#price").html().split(" ")[1]);
+      var timestamp = new Date().toISOString().slice(0, 19).replace("T", " ");
+
+      console.log({
+        latitude: latitude,
+        longitude: longitude,
+        customer: customer,
+        distance: distance,
+        payment: payment,
+        dishArray: dishArray,
+        price: price,
+        timestamp: timestamp,
+      });
+
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/Server_war_exploded/order",
+        headers: {
+          authorization: authHeader,
+        },
+
+        data: JSON.stringify({
+          customer: customer,
+          dishes: dishArray,
+          payment: payment,
+          timestamp: timestamp,
+          longitude: longitude,
+          latitude: latitude,
+          distance: distance,
+          price: price,
+        }),
+        contentType: "application/json; charset=utf-8",
+
+        success: function (response) {
+          console.log("successfull order");
+          console.log(response);
+          if (payment == "card") {
+            $("input[name='order_id']").html(response);
+
+            $("input[name='items']").val(names.toString());
+            var price = parseInt($("#price").html().split(" ")[1]);
+            console.log(price);
+            $("input[name='amount']").val(price);
+            $("#targetz").submit();
+          }
+
+          console.log(payment);
+        },
+        failure: function () {
+          alert("fail");
+        },
       });
     }
-
-    var dishArray = [];
-    $.each($(".item"), function (index, value) {
-      var id = parseInt($(this).attr("data-id"));
-
-      var quantity = parseFloat(
-        $(this)
-          .children(".details")
-          .children(".text-upper")
-          .text()
-          .split(" ")[1]
-      );
-
-      var name = $(this).children(".details").children(".text-2").text();
-
-      names.push(name);
-
-      //   console.log(quantity);
-      dishArray.push({ id: id, quantity: quantity });
-      console.log(dishArray);
-    });
-
-    var longitude = parseFloat($("#longitude").val());
-    var latitude = parseFloat($("#latitude").val());
-
-    var distance = parseInt($("#distance").html().split(" ")[0]);
-    var price = parseInt($("#price").html().split(" ")[1]);
-    var timestamp = new Date().toISOString().slice(0, 19).replace("T", " ");
-
-    console.log({
-      latitude: latitude,
-      longitude: longitude,
-      customer: customer,
-      distance: distance,
-      payment: payment,
-      dishArray: dishArray,
-      price: price,
-      timestamp: timestamp,
-    });
-
-    $.ajax({
-      type: "POST",
-      url: "http://localhost:8080/Server_war_exploded/order",
-      headers: {
-        authorization: authHeader,
-      },
-
-      data: JSON.stringify({
-        customer: customer,
-        dishes: dishArray,
-        payment: payment,
-        timestamp: timestamp,
-        longitude: longitude,
-        latitude: latitude,
-        distance: distance,
-        price: price,
-      }),
-      contentType: "application/json; charset=utf-8",
-
-      success: function (response) {
-        console.log("successfull order");
-        console.log(response);
-        if (payment == "card") {
-          $("input[name='order_id']").html(response);
-
-          $("input[name='items']").val(names.toString());
-          var price = parseInt($("#price").html().split(" ")[1]);
-          console.log(price);
-          $("input[name='amount']").val(price);
-          $("#targetz").submit();
-        }
-
-        console.log(payment);
-      },
-      failure: function () {
-        alert("fail");
-      },
-    });
   });
 });

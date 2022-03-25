@@ -2,8 +2,12 @@ package supplier.RestockRequest;
 
 
 
+import User.ConnectionFactory.DB;
+
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +27,16 @@ public class RestockRequestDAO {
     private static final String GET_ALL_ITEMS = "SELECT * FROM restockrequest r  INNER JOIN ingredient i WHERE r.ingID=i.ingID  and approvalStatus=\"managerApproved\" and (status=\"pending\" or status=\"\")and (r.supplierID=? or r.supplierID is NULL)";
     private static final String GET_REQUEST = " UPDATE `restockrequest` SET `status` = 'Delivering' WHERE `restockrequest`.`restockID` = ?";
     private static final String CREATE_NOTIFICATION = "insert into managernotifications (type,description,targetID) values (?,?,?)";
+
+    private String createRestockOrderQuery = "INSERT INTO restockorder(restockID,invoiceDate,supplierID,status) VALUES(?,?,?,?)";
+
+
     protected Connection getConnection() {
         Connection connection = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+//            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+            connection = DB.initializeDB();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -78,7 +87,7 @@ public class RestockRequestDAO {
         return items;
     }
 
-    public void acceptRequest(RestockRequest reorder) throws SQLException {
+    public void acceptRequest(RestockRequest reorder,int supplierID) throws SQLException {
         LocalDate time= LocalDate.now();
         String s=time.toString();
         System.out.println(java.time.LocalDate.now());
@@ -99,6 +108,21 @@ public class RestockRequestDAO {
             preparedStatement1.setString(2,"Restock Request Accepted By Supplier");
             preparedStatement1.setInt(3,reorder.getRestockID());
             preparedStatement1.executeUpdate();
+
+            PreparedStatement st2 = connection.prepareStatement(createRestockOrderQuery);
+//                private String createRestockOrderQuery = "INSERT INTO restockorder(restockID,invoiceDate,supplierID,status) VALUES(?,?,?,?)";
+            st2.setInt(1,reorder.getRestockID());
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDateTime now = LocalDateTime.now();
+            st2.setString(2,dtf.format(now));
+            st2.setInt(3,supplierID);
+            st2.setString(2,"pending");
+
+//            st2.setInt(4,38);
+//        st2.setInt(4,getsupplier);
+//            st2.setString(5,"Payment Due");
+//            st2.setString(6,dtf.format(now));
+            int r2 = st2.executeUpdate();
 
             connection.commit();
             connection.setAutoCommit(true);

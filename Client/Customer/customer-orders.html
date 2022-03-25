@@ -10,6 +10,7 @@
     />
     <link rel="stylesheet" href="/Client/styles/pastures.css" />
     <link rel="stylesheet" href="notifications.css" />
+    <link rel="stylesheet" href="progressbar.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
  
 
@@ -92,8 +93,8 @@
         <h2>Order Summary</h2>
         <div class="flex-space-between pl-5 pr-5 pt-3">
           <p>Price</p>
-          <p>Rs. <span class="total">0</span></p>
-          <div id="distance" class="hidden"></div>
+          <p>Rs. <span class="total" id="cartPrice">0</span></p>
+          <div id="distance" data-flag="-1" class="hidden"></div>
         </div>
         <div class="flex-space-between pl-5 pr-5 pt-3">
           <p>Delivery</p>
@@ -103,15 +104,30 @@
           <p class="fw-b">Total</p>
           <p><span id="price">---</span></p>
         </div>
+
+        <p
+        class=" mt-2 ml-5 text-red mb-3 hidden"
+        id="priceerror"
+        style="font-size: smaller"
+      >
+        random text
+      </p>
       </div>
 
-     
+
 
       <div class="form mt-6 ">
         <p class="mb-3">Location</p>
         <p class="hidden" id="longitude"></p>
         <p class="hidden" id="latitude"></p>
         <textarea class="mr-5" rows="4" cols="50" placeholder="Location" id="location" ></textarea>
+        <p
+        class="ml-2  mt-2 text-red mb-3 hidden"
+        id="locationerror"
+        style="font-size: smaller"
+      >
+        random text
+      </p>
         <p class="mt-6 mb-2 ">Payment Method</p>
         <f class="flex ml-3">
           <div class="mr-10 " id="cash">
@@ -127,6 +143,13 @@
             <label for="dewey text">Card</label>
           </div>
                 </div>
+                <p
+                class="ml-2 mt-2 text-red mb-3 hidden"
+                id="methoderror"
+                style="font-size: smaller"
+              >
+                random text
+              </p>
         </f>
 
       <div class="button btn mt-8 ml-35 bg-black" id="checkout"> 
@@ -150,9 +173,16 @@
   </div>
   <div class="modal hidden">
     <div class="modal-bg" id="orderInfo">
-      <div class="modal-body  p-5 round-2 width-6 height-5" >
-        <div class="width-9 ml-9 height-7 mt-8" id="modalContent"></div>
-
+      <div class="modal-body  p-5 round-2 width-5 height-5" >
+        <div class="width-9 height-7 mt-8 text-center" id="modalContent">
+         
+          <img id="gif" src="https://www.gifcen.com/wp-content/uploads/2021/07/ramen-gif-3.gif" class="icon-10 ml-15">
+          
+          <div class="progress text-center ml-20" id="myProgressBar">
+            <div class="progress-fill "></div>
+            <div class="progress-text text-upper fw-b " data-stages="0:Pending,33:Accepted,66:Delivering,100:Delivered!"></div>
+          </div>
+          <p class="text-center ml-10" id="order-info">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt alias voluptates nisi veritatis dolore aperiam inventore illo eius, ad assumenda nulla eveniet facilis laborum impedit aliquam! Hic veritatis nihil officia!</p>
           
           
         <span class="material-icons modal-close" id="close"> close </span>

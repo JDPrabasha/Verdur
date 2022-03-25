@@ -4,6 +4,8 @@ import User.ConnectionFactory.DB;
 import kitchenmanager.kitchenmanagerorder.orderkm;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,13 +62,21 @@ public class chefdao {
 
     public int assignchef(chef d) throws SQLException {
 //        String quary = "UPDATE dish SET enabled = ? WHERE ddishID = ?";
-        String quary = "UPDATE orders SET chefID = ? ,status=\"assigned\" WHERE orderID = ?";
+        String quary = "UPDATE orders SET chefID = ? ,status=\"assigned\", assignTimestamp = ?  WHERE orderID = ?";
         int orderid = d.getOrderid();
         int chefid = d.getChefid();
+//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String timestamp = dtf.format(now);
+
+
         System.out.println(chefid);
         PreparedStatement st = this.conn.prepareStatement(quary);
         st.setInt(1, chefid);
-        st.setInt(2, orderid);
+        st.setString(2,timestamp);
+        st.setInt(3, orderid);
+
         return st.executeUpdate();
     }
 

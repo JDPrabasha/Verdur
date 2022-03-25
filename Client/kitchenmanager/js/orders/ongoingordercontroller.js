@@ -5,7 +5,7 @@ import { test } from "./test.js";
 
 $(document).ready(function(){
     var authHeader = "Bearer " + window.localStorage.getItem("jwt");
-    console.log(authHeader);
+    // console.log(authHeader);
     $.ajax({
         url:"http://localhost:8080/Server_war_exploded/KitchenManager/orderkm?type",
         beforeSend: function(xhr) {
@@ -16,7 +16,7 @@ $(document).ready(function(){
          var array = $.parseJSON(JSON.stringify(data));
          console.log(array);
          const deserializeddata = array.map(i=>orderkmserializer.doserializer(i));
-        // console.log(deserializeddata);
+        console.log(deserializeddata);
          deserializeddata.map(params=>new orderkm(params).printongoingorders());
      })
 
