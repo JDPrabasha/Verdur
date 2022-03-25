@@ -1,6 +1,7 @@
 class Dish {
   constructor(params) {
     this.id = params.id;
+    this.cid = params.cid;
     this.name = params.name;
     this.image = params.image;
     this.quantity = params.quantity;
@@ -24,7 +25,7 @@ class Dish {
   // <hr />
 
   addCartItem() {
-    console.log(this.id);
+    console.log(this.cid);
     var cartItems = $("#cart-items");
 
     var item = $(document.createElement("div"))

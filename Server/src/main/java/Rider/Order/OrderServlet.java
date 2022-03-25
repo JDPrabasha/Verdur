@@ -87,7 +87,7 @@ public class OrderServlet extends HttpServlet {
         String customer = requestUrl.substring("/Server_war_exploded/order/".length());
         Order order = orderDAO.selectActiveOrders(Integer.parseInt(customer));
         String json = new Gson().toJson(order);
-        System.out.println("im in menu");
+        System.out.println("im in menue");
 //        System.out.println(json);
 
         response.getOutputStream().println(json);

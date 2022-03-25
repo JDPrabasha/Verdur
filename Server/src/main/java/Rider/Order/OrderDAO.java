@@ -19,7 +19,7 @@ public class OrderDAO {
     private static final String SELECT_ACTIVE_ORDER = " select p.orderID, status,amount,type from orders o join payment p on o.orderID=p.orderID where custID =?  and status != \"completed\" ";
     private static final String SELECT_RECENT_ORDERS = " select o.orderID,amount,o.timestamp from orders o join payment p on o.orderID = p.orderID where custID =? and completed = 1 ";
     private static final String SELECT_TOTAL_NUTRIENTS = " select  sum(c2.quantity * i.carbsphg * w.weight) as carbs,sum(c2.quantity * i.proteinphg * w.weight) as protein,sum(c2.quantity * i.calphg * w.weight) as calories,sum(c2.quantity * i.fatsphg * w.weight) as fats from orders o join hasdish h2 on o.orderID = h2.orderID join customizeddish c on c.cdishID =h2.cdishID join dish d on c.cdishID =d.dishID join hasingredient h on c.dishID = h.dishID join ingredient i on h.ingID = i.ingID join customization c2 on c2.ingID = h.ingID join ingredientweight w on w.unit = h.unit and w.ingID=i.ingID where o.orderID =?";
-    private static final String SELECT_ORDER_DISHES = " select c.quantity, d.name, d.estTime ,c.cdishID, o.orderID,d.image,c.price,r.rating,d.dishID from orders o  join hasdish h on o.orderId = h.orderID join customizeddish c on h.cdishID = c.cdishID join dish d on c.dishID = d.dishID  join rating r on r.dishID =d.dishID  where o.orderID=?";
+    private static final String SELECT_ORDER_DISHES = " select c.quantity, d.name, d.estTime ,c.cdishID, o.orderID,d.image,c.price,d.dishID from orders o  join hasdish h on o.orderId = h.orderID join customizeddish c on h.cdishID = c.cdishID join dish d on c.dishID = d.dishID   where o.orderID=?";
 
     public int addOrder(Order order) throws SQLException {
         Integer gid = 0;
@@ -66,6 +66,8 @@ public class OrderDAO {
             }
             secondStatement.executeBatch();
 
+            System.out.println("done");
+
             PreparedStatement thirdStatement = connection.prepareStatement(ADD_PAYMENT);
             thirdStatement.setInt(1, gid);
             thirdStatement.setString(2, order.getPayment());
@@ -100,10 +102,10 @@ public class OrderDAO {
             // Step 4: Process the ResultSet object.
             if (rs.next()) {
                 List<Dish> dishes = new ArrayList<>();
-                id = rs.getInt("orderID");
+                int currentOrder = rs.getInt("orderID");
                 String status = rs.getString("status");
                 PreparedStatement secondStatement = connection.prepareStatement(SELECT_ORDER_DISHES);
-                secondStatement.setInt(1, id);
+                secondStatement.setInt(1, currentOrder);
                 ResultSet secondSet = secondStatement.executeQuery();
                 System.out.println(secondStatement);
                 while (secondSet.next()) {

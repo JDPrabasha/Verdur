@@ -125,6 +125,7 @@ $(window).on("load", function () {
 
   function validatePayment() {
     if (payment != "") {
+      console.log("issokay meth");
       return true;
     } else {
       $("#methoderror").removeClass("hidden");
@@ -143,12 +144,14 @@ $(window).on("load", function () {
       $("#locationerror").html("Location out of range");
       return false;
     } else {
+      console.log("issokay loc");
       return true;
     }
   }
 
   function validateCart(input) {
     if (input > 0) {
+      console.log("issokay count");
       return true;
     } else {
       $("#priceerror").removeClass("hidden");
@@ -342,10 +345,10 @@ $(window).on("load", function () {
     }
 
     var distanceFlag = validateLocation();
-    var cartFlag = validateCart();
-    var methodFlag = validatePayment(parseInt($("#cartPrice").html()));
+    var cartFlag = validateCart(parseInt($("#cartPrice").html()));
+    var methodFlag = validatePayment();
 
-    if (cartFlag && methodFlag && distanceFlag) {
+    if (cartFlag && methodFlag) {
       console.log("bdjbvc");
       e.preventDefault();
       if ($("#card").hasClass("selected")) {
