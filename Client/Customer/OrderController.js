@@ -43,7 +43,7 @@ $(window).on("load", function () {
     e.preventDefault();
     console.log("jbjb");
     $("#orderInfo").toggleClass("modal-active ");
-    $(".modal").show();
+    $(".modal.order").show();
     console.log($("#active-status").html());
     var status = $("#active-status").html();
     var content = $("#modalContent");
@@ -297,7 +297,7 @@ $(window).on("load", function () {
     e.preventDefault();
     $("#map").load("maps.html");
     $("#vtf").toggleClass("modal-active ");
-    $(".modal").show();
+    $(".modal.map").show();
   });
 
   $("#ratingContent").on("click", "#complain", function () {
