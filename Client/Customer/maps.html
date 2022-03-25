@@ -23,12 +23,12 @@
         const options = { zoom: 15, scaleControl: true, center: center };
         map = new google.maps.Map(document.getElementById("map"), options);
         // Locations of landmarks
-        const dakota = { lat: 7.132867048686624, lng: 80.07732645397466 };
-        const frick = { lat: 7.156772949430187, lng: 80.11561990662352 };
-        // The markers for The Dakota and The Frick Collection
-        var mk1 = new google.maps.Marker({ position: dakota, map: map });
+        const source = { lat: 7.132867048686624, lng: 80.07732645397466 };
+        const destination = { lat: 7.156772949430187, lng: 80.11561990662352 };
+        // The markers for The source and The destination Collection
+        var mk1 = new google.maps.Marker({ position: source, map: map });
         var mk2 = new google.maps.Marker({
-          position: frick,
+          position: destination,
           map: map,
           draggable: true,
           title: "Drag me!",
@@ -39,7 +39,7 @@
         directionsRenderer.setMap(map); // Existing map object displays directions
         // Create route from existing points used for markers
         const route = {
-          origin: dakota,
+          origin: source,
           destination: mk2.getPosition(),
           travelMode: "DRIVING",
         };
@@ -59,14 +59,23 @@
               window.alert("Directions request failed");
               return;
             } else {
-              document.getElementById("distance").innerHTML =
-                directionsData.distance.text;
-              document.getElementById("msg").innerHTML +=
-                " Driving distance is " +
-                directionsData.distance.text +
-                " (" +
-                directionsData.duration.text +
-                ").";
+              if (
+                parseFloat(directionsData.distance.text) <= 10 &&
+                $("#distance").attr("data-flag") == 0
+              ) {
+                $("#distance").html(directionsData.distance.text);
+                $("#distance").attr("data-flag", 1);
+                console.log(" hi");
+              } else {
+                $("#distance").html(directionsData.distance.text);
+                $("#distance").attr("data-flag", 0);
+              }
+              // document.getElementById("msg").innerHTML +=
+              //   " Driving distance is " +
+              //   directionsData.distance.text +
+              //   " (" +
+              //   directionsData.duration.text +
+              //   ").";
             }
           }
         }
@@ -83,8 +92,10 @@
             if (status == google.maps.GeocoderStatus.OK) {
               console.log(results);
               var address = results[0].formatted_address;
+
               console.log(address);
               $("#location").val(address);
+              $("#distance").attr("data-flag", 0);
               $("#longitude").val(lat);
 
               $("#latitude").val(lng);
@@ -97,6 +108,7 @@
           //   alert(ll.lat() + " " + ll.lng()); // always the same LatLng-Object...
           route.destination = mk2.getPosition();
           console.log($("#distance").html());
+
           directionsService.route(route, f1);
           getReverseGeocodingData(
             mk2.getPosition().lat(),
