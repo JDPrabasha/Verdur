@@ -77,7 +77,9 @@
             <p id="active-status" class="fw-b tag tag-green round-3 pt-1 pb-1 pl-3 pr-3 ">None</p>
             <!-- <span class="material-icons-outlined" id="next"> navigate_next </span> -->
           </div>
+          <hr class="mt-8">
         </div>
+      
         <div class="cart" id="cart">
           <h2 class="text-2 mt-12 mb-3">Shopping Cart</h2>
           <div id="cart-items">
@@ -205,6 +207,20 @@
       </div> 
 
   </div> 
+
+  <div class="modal hidden">
+    <div class="modal-bg" id="alertOngoing">
+      <div class="modal-body  p-5 round-2 width-4 height-1" >
+      
+
+          <p class="text-center mt-3">Your have an ongoing order. Please wait till it is completed to place a new order.</p>
+          
+        <span class="material-icons modal-close" id="close"> close </span>
+      </div> 
+
+  </div> 
+  </div>
+
   </div>
 
   <form method="post" action="https://sandbox.payhere.lk/pay/checkout" id="targetz">

@@ -22,9 +22,17 @@ $(window).on("load", function () {
       deSerializedData.map((params) => new Dish(params).addCartItem());
     } else {
       var text = $(document.createElement("p"))
-        .addClass("text-4 fw-b text-center mt-50")
-        .html("---Cart is Empty---");
+        .addClass(" fw-b text-center ")
+        .html(
+          "Looks like your cart is empty at the moment. How about taking a look around our menu?"
+        );
+
+      var image = $(document.createElement("img"))
+        .attr("src", "../images/emptyCart.png")
+        .attr("width", "40%")
+        .addClass("ml-70");
       $("#cart").empty();
+      $("#cart").append(image);
       $("#cart").append(text);
     }
   });
