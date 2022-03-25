@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class OrderDAO {
 
@@ -20,6 +21,8 @@ public class OrderDAO {
     private static final String SELECT_RECENT_ORDERS = " select o.orderID,amount,o.timestamp from orders o join payment p on o.orderID = p.orderID where custID =? and completed = 1 ";
     private static final String SELECT_TOTAL_NUTRIENTS = " select  sum(c2.quantity * i.carbsphg * w.weight) as carbs,sum(c2.quantity * i.proteinphg * w.weight) as protein,sum(c2.quantity * i.calphg * w.weight) as calories,sum(c2.quantity * i.fatsphg * w.weight) as fats from orders o join hasdish h2 on o.orderID = h2.orderID join customizeddish c on c.cdishID =h2.cdishID join dish d on c.cdishID =d.dishID join hasingredient h on c.dishID = h.dishID join ingredient i on h.ingID = i.ingID join customization c2 on c2.ingID = h.ingID join ingredientweight w on w.unit = h.unit and w.ingID=i.ingID where o.orderID =?";
     private static final String SELECT_ORDER_DISHES = " select c.quantity, d.name, d.estTime ,c.cdishID, o.orderID,d.image,c.price,d.dishID from orders o  join hasdish h on o.orderId = h.orderID join customizeddish c on h.cdishID = c.cdishID join dish d on c.dishID = d.dishID   where o.orderID=?";
+    private static final String GET_ACCEPTED_TIME = "select timestamp from orders o where o.status=\"accepted\" and o.custID = ? ";
+    private static final String GET_DELIVERED_PAYMENT = "select type,amount from orders o join payment p on o.orderID = p.orderID where o.status=\"delivered\" and o.custID = ?";
 
     public int addOrder(Order order) throws SQLException {
         Integer gid = 0;
@@ -81,6 +84,66 @@ public class OrderDAO {
         return gid;
     }
 
+
+    public String getGetAcceptedTime(int id) {
+        String remTime = "";
+
+        // Step 1: Establishing a Connection
+        try (Connection connection = DB.initializeDB();
+
+             // Step 2:Create a statement using connection object
+        ) {
+            PreparedStatement preparedStatement = connection.prepareStatement(GET_ACCEPTED_TIME);
+            preparedStatement.setInt(1, id);
+
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.
+            if (rs.next()) {
+
+                remTime = rs.getString("timestamp");
+
+
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            printSQLException((SQLException) e);
+        }
+        return remTime;
+    }
+
+    public int getDeliveryPayment(int id) {
+        int due = 0;
+
+        // Step 1: Establishing a Connection
+        try (Connection connection = DB.initializeDB();
+
+             // Step 2:Create a statement using connection object
+        ) {
+            PreparedStatement preparedStatement = connection.prepareStatement(GET_DELIVERED_PAYMENT);
+            preparedStatement.setInt(1, id);
+
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.
+            if (rs.next()) {
+
+                String type = rs.getString("type");
+                System.out.println(type);
+                if (Objects.equals(type, "cash")) {
+                    due = rs.getInt("amount");
+                }
+
+
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            printSQLException((SQLException) e);
+        }
+        return due;
+    }
 
     public Order selectActiveOrders(int id) {
 

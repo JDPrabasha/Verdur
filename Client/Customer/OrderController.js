@@ -52,12 +52,12 @@ $(window).on("load", function () {
     switch (status) {
       case "Pending":
         updateProgressBar(document.getElementById("myProgressBar"), 0);
-        $("#orderInfo").html("PLease wait while we process your order");
+        $("#order-info").html("Please wait while we process your order");
         break;
 
       case "Accepted":
         updateProgressBar(document.getElementById("myProgressBar"), 33);
-        getTotalTime();
+        getOrderData("accepted");
         break;
 
       case "Rejected":
@@ -66,13 +66,13 @@ $(window).on("load", function () {
 
       case "Delivering":
         updateProgressBar(document.getElementById("myProgressBar"), 66);
-        getRiderDetails();
-
+        getOrderData("delivering");
         break;
 
       case "Delivered":
         updateProgressBar(document.getElementById("myProgressBar"), 100);
-        getPaymentDetails();
+        console.log("dxhg");
+        getOrderData("delivered");
         break;
 
       default:
@@ -80,11 +80,57 @@ $(window).on("load", function () {
     }
   });
 
-  function getTotalTime() {}
+  function getOrderData(status) {
+    $.ajax({
+      url:
+        "http://localhost:8080/Server_war_exploded/order/details?status=" +
+        status +
+        "&customer=" +
+        customer,
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader("authorization", authHeader);
+      },
+    }).then(function (data) {
+      switch (status) {
+        case "accepted":
+          $("#order-info").html(
+            "Yay! Your order has been accepted. Please hold on until we finishing preparing your order."
+          );
+          break;
 
-  function getRiderDetails() {}
+        case "delivering":
+          var riderObject = $.parseJSON(data);
+          $("#order-info").html(
+            "Your delivery is on it's way. Please don't hesitate to call your rider " +
+              riderObject.name.split(" ")[0] +
+              " on his mobile " +
+              riderObject.contact +
+              " to make any inquiries"
+          );
 
-  function getPaymentDetails() {}
+          break;
+
+        case "delivered":
+          if (data) {
+            $("#order-info").html(
+              "Your order has arrived. Please make a payment of Rs. " +
+                data +
+                " to your rider."
+            );
+          } else {
+            $("#order-info").html(
+              "Your order has arrived. Please collect it from your rider at the delivery location."
+            );
+          }
+
+          break;
+
+        default:
+          console.log("non");
+          break;
+      }
+    });
+  }
 
   function checkDistance(distance) {
     for (i = 0; i < fees.length; i++) {
@@ -130,6 +176,19 @@ $(window).on("load", function () {
     } else {
       $("#methoderror").removeClass("hidden");
       $("#methoderror").html("Please choose a payment method");
+    }
+  }
+
+  function validateOngoing() {
+    if (
+      $("#active-status").html() == "None" ||
+      $("#active-status").html() == "Rejected"
+    ) {
+      return true;
+    } else {
+      $("#alertOngoing").toggleClass("modal-active ");
+      $(".modal").show();
+      return false;
     }
   }
 
@@ -205,37 +264,6 @@ $(window).on("load", function () {
   window.setInterval(function () {
     updateOrders;
   }, 1000);
-
-  function getOrderData(status) {
-    $.ajax({
-      url:
-        "http://localhost:8080/Server_war_exploded/order/details/status=" +
-        status +
-        "&customer=" +
-        customer,
-      beforeSend: function (xhr) {
-        xhr.setRequestHeader("authorization", authHeader);
-      },
-    }).then(function (data) {
-      newarray = $.parseJSON(data);
-      console.log(array);
-      switch (status) {
-        case "Accepted":
-          console.log("Oranges are $0.59 a pound.");
-          break;
-        case "Delivering":
-          console.log("Oranges are $0.59 a pound.");
-          break;
-        case "Completed":
-          console.log("Mangoes and papayas are $2.79 a pound.");
-
-          break;
-        default:
-          console.log(`Sorry, we are out of ${expr}.`);
-          break;
-      }
-    });
-  }
 
   $(".modal-close").click(function (e) {
     e.preventDefault();
@@ -347,8 +375,9 @@ $(window).on("load", function () {
     var distanceFlag = validateLocation();
     var cartFlag = validateCart(parseInt($("#cartPrice").html()));
     var methodFlag = validatePayment();
+    var ongoingFlag = validateOngoing();
 
-    if (cartFlag && methodFlag) {
+    if (cartFlag && methodFlag && validateOngoing) {
       console.log("bdjbvc");
       e.preventDefault();
       if ($("#card").hasClass("selected")) {
