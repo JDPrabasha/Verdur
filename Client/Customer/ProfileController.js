@@ -86,26 +86,31 @@ $(window).on("load", function () {
     },
   });
 
-  $.ajax({
-    type: "GET",
-    url: "http://localhost:8080/Server_war_exploded/mealplan/" + customer,
+  function getMealPlan() {
+    $.ajax({
+      type: "GET",
+      url: "http://localhost:8080/Server_war_exploded/mealplan/" + customer,
 
-    headers: {
-      authorization: authHeader,
-    },
+      headers: {
+        authorization: authHeader,
+      },
 
-    dataType: "json",
+      dataType: "json",
 
-    success: function (data) {
-      console.log("pass");
-      console.log(data);
-      const deSerializedData = MealPlanSerializer.deSerialize(data);
-      new MealPlan(deSerializedData).setMeals();
-    },
-    failure: function () {
-      alert("fail");
-    },
-  });
+      success: function (data) {
+        console.log("pass");
+        console.log(data);
+        const deSerializedData = MealPlanSerializer.deSerialize(data);
+        new MealPlan(deSerializedData).setMeals();
+      },
+      failure: function () {
+        alert("fail");
+      },
+    });
+  }
+
+  getMealPlan();
+
   // $.ajax({
   //   url:
   //     "http://localhost:8080/Server_war_exploded/dish/recents?customer=" +
@@ -267,6 +272,7 @@ $(window).on("load", function () {
 
       success: function () {
         console.log("pass");
+        getMealPlan();
       },
       failure: function () {
         alert("fail");
@@ -289,6 +295,7 @@ $(window).on("load", function () {
 
       success: function () {
         console.log("pass");
+        getMealPlan();
       },
       failure: function () {
         alert("fail");
@@ -393,6 +400,7 @@ $(window).on("load", function () {
 
       success: function () {
         console.log("pass");
+        getMealPlan();
       },
       failure: function () {
         alert("fail");
