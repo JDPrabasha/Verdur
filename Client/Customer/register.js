@@ -7,26 +7,34 @@ $(document).ready(function () {
     var password = $("#newpassword").val();
     console.log(password);
 
-    $.ajax({
-      type: "POST",
-      url: "http://localhost:8080/Server_war_exploded/register",
+    var nameFlag = validateName(name);
+    var contactFlag = validateContact(contact);
+    var emailFlag = validateEmail(email);
+    var passwordFlag = validatePassword(password);
 
-      data: JSON.stringify({
-        name: name,
-        contact: contact,
-        username: email,
-        password: password,
-      }),
-      contentType: "application/json; charset=utf-8",
-      dataType: "json",
+    if (nameFlag && contactFlag && emailFlag && passwordFlag) {
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/Server_war_exploded/register",
 
-      success: function (response) {
-        window.location = "customer-landing.html";
-      },
-      failure: function (response) {
-        alert("fail");
-      },
-    });
+        data: JSON.stringify({
+          name: name,
+          contact: contact,
+          username: email,
+          password: password,
+        }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+
+        success: function (response) {
+          window.location = "customer-landing.html";
+        },
+        failure: function (response) {
+          alert("fail");
+        },
+      });
+    }
+
     // validateEmail(email);
     // validateContact(contact);
 
@@ -73,12 +81,12 @@ $(document).ready(function () {
   }
 
   function validateContact(inputtxt) {
-    var phoneno = /^\d{10}$/;
+    var phoneno = /^07\d{10}$/;
     if (inputtxt.match(phoneno)) {
       return true;
     } else {
       $("#contacterror").removeClass("hidden");
-      $("#contacterror").html("Invalid email format");
+      $("#contacterror").html("Invalid contact");
       return false;
     }
   }
@@ -91,6 +99,16 @@ $(document).ready(function () {
     } else {
       $("#emailerror").removeClass("hidden");
       $("#emailerror").html("Invalid email format");
+      return false;
+    }
+  }
+
+  function validatePassword(input) {
+    if (input.length >= 8) {
+      return true;
+    } else {
+      $("#passworderror").removeClass("hidden");
+      $("#passworderror").html("Password must be at least 8 characters");
       return false;
     }
   }
