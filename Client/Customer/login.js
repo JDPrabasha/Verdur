@@ -40,6 +40,10 @@ function login() {
         // } else {
         setDetails(login.role);
         // }
+      } else {
+        console.log("error");
+        $("#loginerror").removeClass("hidden");
+        $("#loginerror").html("Incorrect username or password");
       }
     }
   };
