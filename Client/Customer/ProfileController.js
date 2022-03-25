@@ -274,6 +274,28 @@ $(window).on("load", function () {
     });
   }
 
+  $("#resetMeals").click(function (e) {
+    e.preventDefault();
+    $.ajax({
+      type: "PUT",
+      url:
+        "http://localhost:8080/Server_war_exploded/mealplan/reset?customer=" +
+        customer,
+      headers: {
+        authorization: authHeader,
+      },
+
+      contentType: "application/json; charset=utf-8",
+
+      success: function () {
+        console.log("pass");
+      },
+      failure: function () {
+        alert("fail");
+      },
+    });
+  });
+
   // function editProfile() {
   //   $.ajax({
   //     type: "PUT",

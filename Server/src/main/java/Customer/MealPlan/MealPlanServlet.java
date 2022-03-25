@@ -35,6 +35,9 @@ public class MealPlanServlet extends HttpServlet {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        } else if (Objects.equals(action, "/reset")) {
+
+            resetPlan(request, response);
         } else {
             try {
                 updatePlan(request, response);
@@ -43,6 +46,15 @@ public class MealPlanServlet extends HttpServlet {
             }
         }
 
+    }
+
+    private void resetPlan(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("alho");
+        String id = request.getParameter("customer");
+  
+        System.out.println(id);
+        mealPlanDAO.resetProgress(Integer.parseInt(id));
+        System.out.println("hih");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

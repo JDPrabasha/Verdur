@@ -11,6 +11,7 @@ public class MealPlanDAO {
     private static final String SELECT_MEAL_PLAN = " select * from mealplan where custID = ? ";
     private static final String SELECT_MEAL_PLAN_PROGRESS = " select * from mealprogress where custID = ?  ";
     private static final String UPDATE_PLAN_PROGRESS = "update mealprogress set calorieProgress=?,proteinProgress = ?, carbProgress = ?, fatProgress = ? where custID = ?";
+    private static final String RESET_PLAN_PROGRESS = "update mealprogress set calorieProgress=0,proteinProgress = 0, carbProgress = 0, fatProgress = 0 where custID = ?";
     private static final String UPDATE_PLAN = "update mealplan set calorieGoal=?, proteinGoal = ?, carbGoal = ?, fatGoal = ? where custID = ?";
 
 
@@ -40,6 +41,27 @@ public class MealPlanDAO {
                 System.out.println(secondStatement);
                 secondStatement.executeUpdate();
             }
+
+            // Step 4: Process the ResultSet object.
+
+
+        } catch (SQLException | ClassNotFoundException e) {
+            printSQLException((SQLException) e);
+        }
+    }
+
+    public void resetProgress(int customer) {
+        try (Connection connection = DB.initializeDB();
+
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(RESET_PLAN_PROGRESS);) {
+
+            preparedStatement.setInt(1, customer);
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            preparedStatement.executeUpdate();
+            System.out.println("exec");
+
 
             // Step 4: Process the ResultSet object.
 
