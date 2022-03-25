@@ -83,9 +83,13 @@ public class CashierOrdersDAO {
             String status = rs.getString("status");
             String name = rs.getString("firstName") + " " + rs.getString("lastName");
             String contact = rs.getString("contact");
-            String address = rs.getString("address");
+//            String address = rs.getString("address");
             int custID = rs.getInt("custID");
             int amount = rs.getInt("amount");
+
+            String latitude = rs.getString("latitude");
+            String longitude = rs.getString("longitude");
+
 
 
             String query2 = "SELECT * FROM orders JOIN hasdish on orders.orderID=hasdish.orderID JOIN customizeddish ON customizeddish.cdishID=hasdish.cdishID JOIN dish on customizeddish.dishID=dish.dishID WHERE orders.orderID=?";
@@ -104,7 +108,7 @@ public class CashierOrdersDAO {
 
             }
 
-            orderitem.add(new CashierOrders(orderid, status, name, contact, address, dishitem,amount));
+            orderitem.add(new CashierOrders(orderid, status, name, contact, dishitem,amount,longitude,latitude));
 
 
         }
@@ -114,7 +118,8 @@ public class CashierOrdersDAO {
 
     public List<CashierOrders> readcookedorders() throws SQLException {
         List<CashierOrders> orderitem = new ArrayList<>();
-        String query = "SELECT o.orderID,SUM(quantity) AS quantity, u.firstName,u.lastName,u.contact,c.address,p.amount FROM orders o JOIN hasdish h on o.orderID=h.orderID JOIN customizeddish cd ON cd.cdishID=h.cdishID JOIN dish d on cd.dishID=d.dishID JOIN customer c ON o.custID=c.custID JOIN user u ON u.userID=c.userID join payment p on p.orderID = o.orderID WHERE o.status=\"cooked\" GROUP BY o.orderID";
+
+        String query = "SELECT o.orderID,SUM(quantity) AS quantity, u.firstName,u.lastName,u.contact,c.address,p.amount, o.longitude, o.latitude FROM orders o JOIN hasdish h on o.orderID=h.orderID JOIN customizedDish cd ON cd.cdishID=h.cdishID JOIN dish d on cd.dishID=d.dishID JOIN customer c ON o.custID=c.custID JOIN user u ON u.userID=c.userID join payment p on p.orderID = o.orderID WHERE o.status=\"cooked\" GROUP BY o.orderID";
 
 //        String query = "SELECT o.orderID,SUM(quantity) AS quantity, u.firstName,u.lastName,u.contact,c.address FROM orders o JOIN hasdish h on o.orderID=h.orderID JOIN customizeddish cd ON cd.cdishID=h.cdishID JOIN dish d on cd.dishID=d.dishID JOIN customer c ON o.custID=c.custID JOIN user u ON u.userID=c.userID WHERE o.status=\"cooked\" GROUP BY o.orderID";
 
@@ -129,9 +134,11 @@ public class CashierOrdersDAO {
             int totalQuantity = rs.getInt("quantity");
             String name = rs.getString("firstName") + " " + rs.getString("lastName");
             String contact = rs.getString("contact");
-            String address = rs.getString("address");
+//            String address = rs.getString("address");
             int amount = rs.getInt("amount");
-            orderitem.add(new CashierOrders(orderid,amount, totalQuantity, name, contact, address));
+            String longitude = rs.getString("longitude");
+            String latitude = rs.getString("latitude");
+            orderitem.add(new CashierOrders(orderid,amount, totalQuantity, name, contact,longitude,latitude ));
 
 
         }

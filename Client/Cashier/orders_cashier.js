@@ -10,10 +10,12 @@ export class orders_cashier{
         this.dishitem = params.dishitem;
         this.name = params.name;
         this.contact = params.contact;
-        this.address = params.address;
+        // this.address = params.address;
         this.totalQuantity = params.totalQuantity;
         this.paymentMethod = params.paymentMethod;
         this.date = params.date
+        this.longitude = params.longitude
+        this.latitude = params.latitude
      
 
         
@@ -152,6 +154,8 @@ printriderorders(){
     $("#riderOrderName").attr("orderid",this.orderID)
     $("#customerContact").html(": " + this.contact)
     $("#riderOrderaddress").html(": " + this.address)
+    console.log(this.longitude)
+    console.log(this.latitude)
 
      
 }

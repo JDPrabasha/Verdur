@@ -50,12 +50,12 @@ public class riderdao {
                 int orderid = rs2.getInt("orderID");
                 int deliveryid = rs2.getInt("deliveryID");
 //                String address = rs2.getString("address");
-                Double longitude = rs2.getDouble("longitude");
-                Double latitude = rs2.getDouble("latitude");
+                String longitude = rs2.getString("longitude");
+                String latitude = rs2.getString("latitude");
                 int Quantity = rs2.getInt("quantity");
 
 
-                order.add(new CashierOrders(orderid, deliveryid, "asd", longitude, latitude, Quantity));
+                order.add(new CashierOrders(orderid, deliveryid, longitude, latitude, Quantity));
 
             }
 
