@@ -384,7 +384,7 @@ $(window).on("load", function () {
     $.ajax({
       type: "PUT",
       url:
-        "http://localhost:8080/Server_war_exploded/mealplan/add?customer=" +
+        "http://35.220.182.159:8080/JavaEE-1.0-SNAPSHOT/mealplan/add?customer=" +
         customer,
       headers: {
         authorization: authHeader,
@@ -400,7 +400,9 @@ $(window).on("load", function () {
 
       success: function () {
         console.log("pass");
+
         getMealPlan();
+        $("#mealModal").hide();
       },
       failure: function () {
         alert("fail");
