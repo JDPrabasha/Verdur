@@ -28,8 +28,10 @@ public class RestockServlet extends HttpServlet {
         String type = req.getParameter("type");
         try{
             if(type==null){
+                restock.timeOutRequests();
                 restocks = restock.listRestockRequests();
             }else{
+//                restock.timeOutRequests();
                 restocks = restock.listDeliveryPendingRequests();
             }
         } catch (SQLException throwables) {
