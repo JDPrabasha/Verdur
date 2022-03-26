@@ -69,7 +69,7 @@
           </div>
        
           <div class="flex-space-between mr-38 mt-6 transparent" id="orders">
-            <img src="../images/blueberry.jpg" class="icon-4 mt-3" alt="" id="active-image" />
+            <img  class="icon-4 mt-3 skeleton" alt="" id="active-image" />
             <div class="order-specs">
               <p class="text-2">Order <span id="active-order">2212</span></p>
               <p id="active-quantity"></p>
@@ -77,7 +77,9 @@
             <p id="active-status" class="fw-b tag tag-green round-3 pt-1 pb-1 pl-3 pr-3 ">None</p>
             <!-- <span class="material-icons-outlined" id="next"> navigate_next </span> -->
           </div>
+          <hr class="mt-8">
         </div>
+      
         <div class="cart" id="cart">
           <h2 class="text-2 mt-12 mb-3">Shopping Cart</h2>
           <div id="cart-items">
@@ -93,8 +95,8 @@
         <h2>Order Summary</h2>
         <div class="flex-space-between pl-5 pr-5 pt-3">
           <p>Price</p>
-          <p>Rs. <span class="total">0</span></p>
-          <div id="distance" class="hidden"></div>
+          <p>Rs. <span class="total" id="cartPrice">0</span></p>
+          <div id="distance" data-flag="-1" class="hidden"></div>
         </div>
         <div class="flex-space-between pl-5 pr-5 pt-3">
           <p>Delivery</p>
@@ -104,15 +106,30 @@
           <p class="fw-b">Total</p>
           <p><span id="price">---</span></p>
         </div>
+
+        <p
+        class=" mt-2 ml-5 text-red mb-3 hidden"
+        id="priceerror"
+        style="font-size: smaller"
+      >
+        random text
+      </p>
       </div>
 
-     
+
 
       <div class="form mt-6 ">
         <p class="mb-3">Location</p>
         <p class="hidden" id="longitude"></p>
         <p class="hidden" id="latitude"></p>
         <textarea class="mr-5" rows="4" cols="50" placeholder="Location" id="location" ></textarea>
+        <p
+        class="ml-2  mt-2 text-red mb-3 hidden"
+        id="locationerror"
+        style="font-size: smaller"
+      >
+        random text
+      </p>
         <p class="mt-6 mb-2 ">Payment Method</p>
         <f class="flex ml-3">
           <div class="mr-10 " id="cash">
@@ -128,6 +145,13 @@
             <label for="dewey text">Card</label>
           </div>
                 </div>
+                <p
+                class="ml-2 mt-2 text-red mb-3 hidden"
+                id="methoderror"
+                style="font-size: smaller"
+              >
+                random text
+              </p>
         </f>
 
       <div class="button btn mt-8 ml-35 bg-black" id="checkout"> 
@@ -137,7 +161,7 @@
       </div>
     </div>
   </div>
-  <div class="modal hidden">
+  <div class="modal map hidden">
     <div class="modal-bg" id="vtf">
       <div class="modal-body  p-5 round-2 width-6 height-8" >
         <div class="width-9 ml-9 height-7 mt-8" id="map"></div>
@@ -149,7 +173,7 @@
 
   </div> 
   </div>
-  <div class="modal hidden">
+  <div class="modal order hidden">
     <div class="modal-bg" id="orderInfo">
       <div class="modal-body  p-5 round-2 width-5 height-5" >
         <div class="width-9 height-7 mt-8 text-center" id="modalContent">
@@ -183,6 +207,20 @@
       </div> 
 
   </div> 
+
+  <div class="modal error hidden">
+    <div class="modal-bg" id="alertOngoing">
+      <div class="modal-body  p-5 round-2 width-4 height-1" >
+      
+
+          <p class="text-center mt-3">Your have an ongoing order. Please wait till it is completed to place a new order.</p>
+          
+        <span class="material-icons modal-close" id="close"> close </span>
+      </div> 
+
+  </div> 
+  </div>
+
   </div>
 
   <form method="post" action="https://sandbox.payhere.lk/pay/checkout" id="targetz">

@@ -43,7 +43,7 @@ $(window).on("load", function () {
     e.preventDefault();
     console.log("jbjb");
     $("#orderInfo").toggleClass("modal-active ");
-    $(".modal").show();
+    $(".modal.order").show();
     console.log($("#active-status").html());
     var status = $("#active-status").html();
     var content = $("#modalContent");
@@ -52,12 +52,12 @@ $(window).on("load", function () {
     switch (status) {
       case "Pending":
         updateProgressBar(document.getElementById("myProgressBar"), 0);
-        $("#orderInfo").html("PLease wait while we process your order");
+        $("#order-info").html("Please wait while we process your order");
         break;
 
       case "Accepted":
         updateProgressBar(document.getElementById("myProgressBar"), 33);
-        getTotalTime();
+        getOrderData("accepted");
         break;
 
       case "Rejected":
@@ -66,13 +66,13 @@ $(window).on("load", function () {
 
       case "Delivering":
         updateProgressBar(document.getElementById("myProgressBar"), 66);
-        getRiderDetails();
-
+        getOrderData("delivering");
         break;
 
       case "Delivered":
         updateProgressBar(document.getElementById("myProgressBar"), 100);
-        getPaymentDetails();
+        console.log("dxhg");
+        getOrderData("delivered");
         break;
 
       default:
@@ -80,11 +80,57 @@ $(window).on("load", function () {
     }
   });
 
-  function getTotalTime() {}
+  function getOrderData(status) {
+    $.ajax({
+      url:
+        "http://localhost:8080/Server_war_exploded/order/details?status=" +
+        status +
+        "&customer=" +
+        customer,
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader("authorization", authHeader);
+      },
+    }).then(function (data) {
+      switch (status) {
+        case "accepted":
+          $("#order-info").html(
+            "Yay! Your order has been accepted. Please hold on until we finishing preparing your order."
+          );
+          break;
 
-  function getRiderDetails() {}
+        case "delivering":
+          var riderObject = $.parseJSON(data);
+          $("#order-info").html(
+            "Your delivery is on it's way. Please don't hesitate to call your rider " +
+              riderObject.name.split(" ")[0] +
+              " on his mobile " +
+              riderObject.contact +
+              " to make any inquiries"
+          );
 
-  function getPaymentDetails() {}
+          break;
+
+        case "delivered":
+          if (data) {
+            $("#order-info").html(
+              "Your order has arrived. Please make a payment of Rs. " +
+                data +
+                " to your rider."
+            );
+          } else {
+            $("#order-info").html(
+              "Your order has arrived. Please collect it from your rider at the delivery location."
+            );
+          }
+
+          break;
+
+        default:
+          console.log("non");
+          break;
+      }
+    });
+  }
 
   function checkDistance(distance) {
     for (i = 0; i < fees.length; i++) {
@@ -120,6 +166,55 @@ $(window).on("load", function () {
       if (distance == fees[i].distance) {
         return fees[i].fee;
       }
+    }
+  }
+
+  function validatePayment() {
+    if (payment != "") {
+      console.log("issokay meth");
+      return true;
+    } else {
+      $("#methoderror").removeClass("hidden");
+      $("#methoderror").html("Please choose a payment method");
+    }
+  }
+
+  function validateOngoing() {
+    if (
+      $("#active-status").html() == "None" ||
+      $("#active-status").html() == "Rejected"
+    ) {
+      return true;
+    } else {
+      $("#alertOngoing").toggleClass("modal-active ");
+      $(".modal").show();
+      return false;
+    }
+  }
+
+  function validateLocation() {
+    var flag = $("#distance").attr("data-flag");
+    if (flag == "-1") {
+      $("#locationerror").removeClass("hidden");
+      $("#locationerror").html("Please choose a location");
+      return false;
+    } else if (flag == 0) {
+      $("#locationerror").removeClass("hidden");
+      $("#locationerror").html("Location out of range");
+      return false;
+    } else {
+      console.log("issokay loc");
+      return true;
+    }
+  }
+
+  function validateCart(input) {
+    if (input > 0) {
+      console.log("issokay count");
+      return true;
+    } else {
+      $("#priceerror").removeClass("hidden");
+      $("#priceerror").html("Please add desired items to cart");
     }
   }
 
@@ -170,37 +265,6 @@ $(window).on("load", function () {
     updateOrders;
   }, 1000);
 
-  function getOrderData(status) {
-    $.ajax({
-      url:
-        "http://localhost:8080/Server_war_exploded/order/details/status=" +
-        status +
-        "&customer=" +
-        customer,
-      beforeSend: function (xhr) {
-        xhr.setRequestHeader("authorization", authHeader);
-      },
-    }).then(function (data) {
-      newarray = $.parseJSON(data);
-      console.log(array);
-      switch (status) {
-        case "Accepted":
-          console.log("Oranges are $0.59 a pound.");
-          break;
-        case "Delivering":
-          console.log("Oranges are $0.59 a pound.");
-          break;
-        case "Completed":
-          console.log("Mangoes and papayas are $2.79 a pound.");
-
-          break;
-        default:
-          console.log(`Sorry, we are out of ${expr}.`);
-          break;
-      }
-    });
-  }
-
   $(".modal-close").click(function (e) {
     e.preventDefault();
     $("#vtf").removeClass("modal-active ");
@@ -233,7 +297,7 @@ $(window).on("load", function () {
     e.preventDefault();
     $("#map").load("maps.html");
     $("#vtf").toggleClass("modal-active ");
-    $(".modal").show();
+    $(".modal.map").show();
   });
 
   $("#ratingContent").on("click", "#complain", function () {
@@ -307,91 +371,99 @@ $(window).on("load", function () {
 
       return;
     }
-    console.log("bdjbvc");
-    e.preventDefault();
-    if ($("#card").hasClass("selected")) {
-      $("#target").submit(function (event) {
-        event.preventDefault();
-        console.log("hu");
+
+    var distanceFlag = validateLocation();
+    var cartFlag = validateCart(parseInt($("#cartPrice").html()));
+    var methodFlag = validatePayment();
+    var ongoingFlag = validateOngoing();
+
+    if (cartFlag && methodFlag && validateOngoing) {
+      console.log("bdjbvc");
+      e.preventDefault();
+      if ($("#card").hasClass("selected")) {
+        $("#target").submit(function (event) {
+          event.preventDefault();
+          console.log("hu");
+        });
+      }
+
+      var dishArray = [];
+      $.each($(".item"), function (index, value) {
+        var id = parseInt($(this).attr("data-id"));
+
+        var quantity = parseFloat(
+          $(this)
+            .children(".details")
+            .children(".text-upper")
+            .text()
+            .split(" ")[1]
+        );
+
+        var name = $(this).children(".details").children(".text-2").text();
+
+        names.push(name);
+
+        //   console.log(quantity);
+        dishArray.push({ id: id, quantity: quantity });
+        console.log(dishArray);
+      });
+
+      var longitude = parseFloat($("#longitude").val());
+      var latitude = parseFloat($("#latitude").val());
+
+      var distance = parseInt($("#distance").html().split(" ")[0]);
+      var price = parseInt($("#price").html().split(" ")[1]);
+      var timestamp = new Date().toISOString().slice(0, 19).replace("T", " ");
+
+      console.log({
+        latitude: latitude,
+        longitude: longitude,
+        customer: customer,
+        distance: distance,
+        payment: payment,
+        dishArray: dishArray,
+        price: price,
+        timestamp: timestamp,
+      });
+
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/Server_war_exploded/order",
+        headers: {
+          authorization: authHeader,
+        },
+
+        data: JSON.stringify({
+          customer: customer,
+          dishes: dishArray,
+          payment: payment,
+          timestamp: timestamp,
+          longitude: longitude,
+          latitude: latitude,
+          distance: distance,
+          price: price,
+        }),
+        contentType: "application/json; charset=utf-8",
+
+        success: function (response) {
+          console.log("successfull order");
+          console.log(response);
+          if (payment == "card") {
+            $("input[name='order_id']").html(response);
+
+            $("input[name='items']").val(names.toString());
+            var price = parseInt($("#price").html().split(" ")[1]);
+            console.log(price);
+            $("input[name='amount']").val(price);
+            $("#targetz").submit();
+          }
+
+          console.log(payment);
+        },
+        failure: function () {
+          alert("fail");
+        },
       });
     }
-
-    var dishArray = [];
-    $.each($(".item"), function (index, value) {
-      var id = parseInt($(this).attr("data-id"));
-
-      var quantity = parseFloat(
-        $(this)
-          .children(".details")
-          .children(".text-upper")
-          .text()
-          .split(" ")[1]
-      );
-
-      var name = $(this).children(".details").children(".text-2").text();
-
-      names.push(name);
-
-      //   console.log(quantity);
-      dishArray.push({ id: id, quantity: quantity });
-      console.log(dishArray);
-    });
-
-    var longitude = parseFloat($("#longitude").val());
-    var latitude = parseFloat($("#latitude").val());
-
-    var distance = parseInt($("#distance").html().split(" ")[0]);
-    var price = parseInt($("#price").html().split(" ")[1]);
-    var timestamp = new Date().toISOString().slice(0, 19).replace("T", " ");
-
-    console.log({
-      latitude: latitude,
-      longitude: longitude,
-      customer: customer,
-      distance: distance,
-      payment: payment,
-      dishArray: dishArray,
-      price: price,
-      timestamp: timestamp,
-    });
-
-    $.ajax({
-      type: "POST",
-      url: "http://localhost:8080/Server_war_exploded/order",
-      headers: {
-        authorization: authHeader,
-      },
-
-      data: JSON.stringify({
-        customer: customer,
-        dishes: dishArray,
-        payment: payment,
-        timestamp: timestamp,
-        longitude: longitude,
-        latitude: latitude,
-        distance: distance,
-        price: price,
-      }),
-      contentType: "application/json; charset=utf-8",
-
-      success: function (response) {
-        console.log("successfull order");
-        console.log(response);
-        if (payment == "card") {
-          $("input[name='order_id']").html(response);
-
-          $("input[name='items']").val(names.toString());
-          var price = parseInt($("#price").html().split(" ")[1]);
-          console.log(price);
-          $("input[name='amount']").val(price);
-          $("#targetz").submit();
-        }
-
-        console.log(payment);
-      },
-      failure: function () {
-        alert("fail");
-      },
-    });
   });
 });

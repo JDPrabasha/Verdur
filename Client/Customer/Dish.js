@@ -200,12 +200,12 @@ class Dish {
   }
 
   addCartItem() {
-    console.log(this.id);
+    console.log(this.cid);
     var cartItems = $("#cart-items");
 
     var item = $(document.createElement("div"))
       .addClass("flex-space-between mr-12 mb-3 item")
-      .attr("data-id", this.id);
+      .attr("data-id", this.cid);
 
     $(".total").html(parseFloat($(".total").html()) + this.price);
 

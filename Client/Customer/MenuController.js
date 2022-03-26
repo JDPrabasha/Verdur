@@ -114,6 +114,7 @@ $(document).ready(function () {
       xhr.setRequestHeader("authorization", authHeader);
     },
   }).then(function (data) {
+    $("div").remove(".skeleton-card");
     var array = $.parseJSON(data);
     console.log(array);
     const deSerializedData = array.map(MenuSerializer.deSerialize);

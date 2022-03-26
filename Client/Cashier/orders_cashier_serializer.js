@@ -12,7 +12,10 @@ export class orders_cashier_serializer{
             address:data.address,
             totalQuantity:data.totalQuantity,
             paymentMethod: data.paymentMethod,
-            date: data.date
+            date: data.date,
+            longitude: data.longitude,
+            latitude: data.latitude
+
 
             
         }

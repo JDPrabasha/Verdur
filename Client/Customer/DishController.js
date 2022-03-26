@@ -50,6 +50,8 @@ $(document).ready(function () {
     },
   }).then(function (data) {
     console.log(data);
+    $("div").remove(".skeleton-text , .skeleton-text-small");
+    $("p").removeClass("transparent");
 
     var dish = $.parseJSON(data);
     const deSerializedData = DishSerializer.deSerialize(dish);

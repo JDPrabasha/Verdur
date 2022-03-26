@@ -9,6 +9,7 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="DishController.js"></script>
     <script src="DishSerializer.js"></script>
@@ -39,28 +40,34 @@
     <div>
       <div class="row mt-2">
         <div class="col-6 p-5 ml-6">
+          <div class="skeleton skeleton-text"></div>
+          <div class="skeleton skeleton-text mt-4"></div>
+          <div class="skeleton skeleton-text-small mt-10"></div>
+          <div class="skeleton skeleton-text-small"></div>
+          <div class="skeleton skeleton-text-small"></div>
           <h1 id="name" class="display-3"></h1>
+
           <p class="text-1 p-5" id="description"></p>
           <hr />
           <div class="flex-column text-center">
-            <p class="display-2"><span id="time"></span> min</p>
+            <p class="display-2 transparent"><span id="time"></span> min</p>
             <p class="">Total Time</p>
           </div>
 
           <hr />
           <div class="details">
             <h3 class="m-1 p-5">Ingredients</h3>
-            <div class="ingredients ml-8 mr-25" id="ingredients"></div>
+
+            <div class="ingredients ml-8 mr-25" id="ingredients">
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text"></div>
+            </div>
           </div>
         </div>
 
         <div class="col-6 ml-12 mr-12 text-center">
-          <img
-            id="image"
-            class="round-1 image-6 mt-6"
-            src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2008/11/24/0/IG1C11_Roast-Turkey.jpg.rend.hgtvcom.826.620.suffix/1382538696807.jpeg"
-            alt="Hot air balloons"
-          />
+          <img id="image" class="round-1 image-6 mt-6 skeleton" />
 
           <a
             class="btn fw-b m-4 mt-8"
@@ -75,7 +82,7 @@
     <div class="footer bg-gray-4 p-12 mt-12">
       <div class="text-center flex-space-between">
         <div class="flex-column">
-          <img src="images/Asset 304x.png" width="10%" alt="" />
+          <img src="../images/Asset 304x.png" width="10%" alt="" />
           <p class="ml-12">Verdur 2021. All Rights Reserved.</p>
         </div>
       </div>

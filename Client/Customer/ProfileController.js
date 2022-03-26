@@ -86,26 +86,31 @@ $(window).on("load", function () {
     },
   });
 
-  $.ajax({
-    type: "GET",
-    url: "http://localhost:8080/Server_war_exploded/mealplan/" + customer,
+  function getMealPlan() {
+    $.ajax({
+      type: "GET",
+      url: "http://localhost:8080/Server_war_exploded/mealplan/" + customer,
 
-    headers: {
-      authorization: authHeader,
-    },
+      headers: {
+        authorization: authHeader,
+      },
 
-    dataType: "json",
+      dataType: "json",
 
-    success: function (data) {
-      console.log("pass");
-      console.log(data);
-      const deSerializedData = MealPlanSerializer.deSerialize(data);
-      new MealPlan(deSerializedData).setMeals();
-    },
-    failure: function () {
-      alert("fail");
-    },
-  });
+      success: function (data) {
+        console.log("pass");
+        console.log(data);
+        const deSerializedData = MealPlanSerializer.deSerialize(data);
+        new MealPlan(deSerializedData).setMeals();
+      },
+      failure: function () {
+        alert("fail");
+      },
+    });
+  }
+
+  getMealPlan();
+
   // $.ajax({
   //   url:
   //     "http://localhost:8080/Server_war_exploded/dish/recents?customer=" +
@@ -267,12 +272,36 @@ $(window).on("load", function () {
 
       success: function () {
         console.log("pass");
+        getMealPlan();
       },
       failure: function () {
         alert("fail");
       },
     });
   }
+
+  $("#resetMeals").click(function (e) {
+    e.preventDefault();
+    $.ajax({
+      type: "PUT",
+      url:
+        "http://localhost:8080/Server_war_exploded/mealplan/reset?customer=" +
+        customer,
+      headers: {
+        authorization: authHeader,
+      },
+
+      contentType: "application/json; charset=utf-8",
+
+      success: function () {
+        console.log("pass");
+        getMealPlan();
+      },
+      failure: function () {
+        alert("fail");
+      },
+    });
+  });
 
   // function editProfile() {
   //   $.ajax({
@@ -355,7 +384,7 @@ $(window).on("load", function () {
     $.ajax({
       type: "PUT",
       url:
-        "http://localhost:8080/Server_war_exploded/mealplan/add?customer=" +
+        "http://35.220.182.159:8080/JavaEE-1.0-SNAPSHOT/mealplan/add?customer=" +
         customer,
       headers: {
         authorization: authHeader,
@@ -371,6 +400,9 @@ $(window).on("load", function () {
 
       success: function () {
         console.log("pass");
+
+        getMealPlan();
+        $("#mealModal").hide();
       },
       failure: function () {
         alert("fail");

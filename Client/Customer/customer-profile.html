@@ -72,10 +72,12 @@
             <h2 class="text">Today's Progress <span class="material-icons-outlined icon rotate-center" id="addMeal">
                 add
                 </span>
-                
+                <span class="material-icons-outlined icon rotate-center" id="resetMeals">
+                  restart_alt
+                  </span>
                 </h2>
            
-          <div class="flex-space-between mr-7 mt-4">
+          <div class="flex-space-between mr-7 mt-4" id="mealPlan">
             <div class="card ml-4">
                 <p class="fw-b mt-2">Fats</p>
               <p><span class="display-2" id="fats">0</span>/<span id="fatGoal">0</span>g</p>
@@ -121,7 +123,7 @@
             <label
             >Carbs
             <input
-              type="text"
+            type="number" min="0" oninput="validity.valid||(value='')""
               class="width-4"
               placeholder="Enter amount in grams"
               id="carbintake"
@@ -136,7 +138,8 @@
             <label
             >Protein
             <input
-              type="text"
+            type="number"  min="0" oninput="validity.valid||(value='')""
+             
               class="width-4"
               placeholder="Enter amount in grams"
               id="proteinintake"
@@ -151,7 +154,7 @@
             <label
             >Calories
             <input
-              type="text"
+            type="number"  min="0" oninput="validity.valid||(value='')""
               class="width-4"
               placeholder="Enter amount in calories"
               id="calorieintake"
@@ -166,7 +169,7 @@
             <label
             >Fats
             <input
-              type="text"
+            type="number"  min="0" oninput="validity.valid||(value='')""
               class="width-4"
               placeholder="Enter amount in grams"
               id="fatintake"
@@ -191,7 +194,7 @@
             <label
             >Carbs
             <input
-              type="text"
+            type="number" min="0" oninput="validity.valid||(value='')""
               class="width-4"
               placeholder="Enter Goal in grams"
               id="newcarbgoal"
@@ -206,7 +209,7 @@
             <label
             >Protein
             <input
-              type="text"
+            type="number" min="0" oninput="validity.valid||(value='')""
               class="width-4"
               placeholder="Enter Goal in grams"
               id="newproteingoal"
@@ -221,7 +224,7 @@
             <label
             >Calories
             <input
-              type="text"
+            type="number" min="0" oninput="validity.valid||(value='')""
               class="width-4"
               placeholder="Enter Goal in calories"
               id="newcaloriegoal"
@@ -236,7 +239,7 @@
             <label
             >Fats
             <input
-              type="text"
+            type="number" min="0" oninput="validity.valid||(value='')""
               class="width-4"
               placeholder="Enter Goal in grams"
               id="newfatgoal"
