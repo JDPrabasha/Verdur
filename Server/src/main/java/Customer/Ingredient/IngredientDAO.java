@@ -13,7 +13,6 @@ public class IngredientDAO {
     private static final String SELECT_INGREDIENTS = "select i.ingID,i.name, h.defaultValue as quantity, i.image, h.unit, i.expandable, i.image,h.min,h.max from dish d join hasingredient h on d.dishID = h.dishID join ingredient i on h.ingID = i.ingID join ingredientweight w on w.unit = h.unit and w.ingID=i.ingID where d.dishID=?";
     private static final String SELECT_CUSTOMIZABLE_INGREDIENTS = "select i.ingID,i.name, h.min, h.max, h.ppq,h.type,i.proteinphg, i.carbsphg, i.calphg, i.fatsphg,w.weight, h.defaultValue as quantity, i.image, i.unit, i.expandable, i.image from dish d join hasingredient h on d.dishID = h.dishID join ingredient i on h.ingID = i.ingID join ingredientweight w on w.unit = h.unit and w.ingID=i.ingID where d.dishID =? and h.type!=?";
     private static final String SELECT_INGREDIENT_DETAILS = "select i.description, n.description as benefit, i.ingID, i.name, i.image from ingredient i join nutritionbenefits n on n.ingID=i.ingID where i.ingID = ? ";
-    private static final String SELECT_TOTAL_NUTRIENTS = " select  sum(c2.quantity * i.carbsphg * w.weight) as carbs,sum(c2.quantity * i.proteinphg * w.weight) as protein,sum(c2.quantity * i.calphg * w.weight) as calories,sum(c2.quantity * i.fatsphg * w.weight) as fats from orders o join hasdish h2 on o.orderID = h2.orderID join customizeddish c on c.cdishID =h2.cdishID join dish d on c.cdishID =d.dishID join hasingredient h on c.dishID = h.dishID join ingredient i on h.ingID = i.ingID join customization c2 on c2.ingID = h.ingID join ingredientweight w on w.unit = h.unit and w.ingID=i.ingID where o.orderID =?";
 
     public List<Ingredient> selectAllIngredients(int id) {
         System.out.println("im in ing");
@@ -129,23 +128,6 @@ public class IngredientDAO {
         }
         return ingredient;
     }
-
-//    public void addIngredientCustomization(Ingredient ingredient, int dishID, int cdishID) throws SQLException {
-//        System.out.println(ADD_CUSTOMIZED_INGREDIENT);
-//        // try-with-resource statement will auto close the connection.
-//        try (
-//                Connection connection = DB.initializeDB();
-//             PreparedStatement preparedStatement = connection.prepareStatement(ADD_CUSTOMIZED_INGREDIENT)) {
-//            preparedStatement.setInt(1,ingredient.);
-//            preparedStatement.setInt(2, );
-//            preparedStatement.setInt(3,);
-//            preparedStatement.setInt(4,);
-//            System.out.println(preparedStatement);
-//            preparedStatement.executeUpdate();
-//        } catch (SQLException e) {
-//            printSQLException(e);
-//        }
-//    }
 
 
     private void printSQLException(SQLException e) {

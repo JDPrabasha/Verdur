@@ -33,7 +33,9 @@ class Ingredient {
       .attr("src", this.image)
       .addClass("round-1 icon-3");
 
-    var name = $(document.createElement("p")).html(this.name);
+    var name = $(document.createElement("p"))
+      .html(this.name)
+      .addClass("flex-grow-2 ml-40");
 
     var quantity = $(document.createElement("p"))
       .html(
@@ -41,7 +43,8 @@ class Ingredient {
           ? this.quantity + " " + this.unit
           : this.quantity + " " + this.unit + "s"
       )
-      .addClass("ml-1");
+      .addClass("ml-40")
+      .addClass("flex-grow-3");
 
     ingredient.append(image);
     ingredient.append(name);

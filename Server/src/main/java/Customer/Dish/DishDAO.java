@@ -18,23 +18,12 @@ public class DishDAO {
     private static final String FILTER_DISHES_BY_NAME = "select * from dish where name like ?";
     private static final String FILTER_DISHES_BY_MEAL = "select * from dish d join hastag h on h.dishID = d.dishID join tag t on t.tagID =h.tagID where t.name = ? and d.enabled =1";
     private static final String FILTER_DISHES_BY_INGREDIENT = "select * from dish where dishID in (select h.dishID from ingredient i join hasingredient h on h.ingID = i.ingID where i.name in (?,?,?,?,?,?,?,?,?,?,?,?,?,?))";
-    //    private static final String FILTER_DISHES_BY_FILTERS = "select * from dish where time<=? AND price<=? AND dishID in (?,?,?,?,?,?,?)";
     private static final String FILTER_DISHES_BY_FILTERS = "select d.dishID,d.name,d.image,d.price from dish d join hastag h on d.dishID =h.dishID join tag t on h.tagID =t.tagID where d.estTime<=? AND d.price<=? AND  t.name in (?,?,?,?,?,?,?,?,?,?) group by d.dishID having count(*)=?";
-    //    private static final String FILTER_DISHES_BY_FILTERS = "select * from dish d join hastag h on d.dishID =h.dishID join tag t on h.tagID =t.tagID where d.time<=? AND d.price<=? AND  t.name in (?,?,?,?,?,?,?)";
-    //    select d.dishID from dish d join hastag h on d.dishID =h.dishID join tag t on h.tagID =t.tagID where t.name in (?,?,?)
     private static final String SELECT_CART_DISHES = "select c.cdishID, c.dishID, c.quantity, c.price, d.image, d.name from dish d join customizeddish c on d.dishID = c.dishID where c.custID =? and inCart=1";
     private static final String SELECT_ALL_DISHES = "select * from dish where enabled=1";
     private static final String SELECT_LATEST_DISHES = "select * from dish where enabled=1 limit 8";
-    private static final String SELECT_DISHES_BY_TIME = "select * from dish where enabled=1";
     private static final String SELECT_RECENT_DISHES = "select d.name,d.image,d.price,d.dishID from dish d join customizeddish c on c.dishId =d.dishID join hasdish h on c.cdishID = h.cdishID join orders o on h.orderID = o.orderID  where o.custID = ? and status = ? order by o.timestamp limit 4";
     private static final String RATE_DISH = "update rating set rating=? where dishID=? and custID=?";
-
-
-    private static final String INSERT_DISH = "INSERT INTO customizedDish VALUES " +
-            " (?, ?, ?, ?);";
-
-    private static final String INSERT_CUSTOMIZATION = "INSERT INTO customization VALUES " +
-            " (?, ?, ?, ?);";
 
 
     public List<Dish> selectAllDishes() {

@@ -14,7 +14,6 @@ import java.util.Objects;
 public class NotificationDAO {
     private static final String GET_CUSTOMER_NOTIFICATIONS = " select * from customernotification where custID = ?";
     private static final String GET_RIDER_NOTIFICATIONS = " select * from ridernotification where riderID = ?";
-    private static final String DELETE_NOTIFICATIONS = "select count(*) as total from orders o join delivery d on d.deliveryID =o.deliveryID where o.`timestamp` between '2010-01-01' and LAST_DAY('2030-01-01') and d.riderID =?";
 
     public List<Notification> getNotifications(int id, String role) {
         List<Notification> notifications = new ArrayList<>();

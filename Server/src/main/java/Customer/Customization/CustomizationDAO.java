@@ -17,7 +17,6 @@ public class CustomizationDAO {
     private static final String REMOVE_ITEM_FROM_CART = "delete from customizeddish where cdishID =?";
 
     private static final String GET_DISH_CUSTOMIZATION_DATA = " select * from customizeddish c where cdishID=?";
-    private static final String GET_NGREDIENT_CUSTOMIZATION_DATA = " select * from customization where cdishID=?";
 
     public void addCustomizeddish(Customization customDish) throws SQLException {
         Integer x = 0;
@@ -97,24 +96,5 @@ public class CustomizationDAO {
 
     }
 
-    public Customization getCustomizationnDetails(int id) {
-        Customization customization = null;
-        try (Connection connection = DB.initializeDB(); PreparedStatement preparedStatement = connection.prepareStatement(GET_DISH_CUSTOMIZATION_DATA)) {
 
-
-            preparedStatement.setInt(1, id);
-
-            System.out.println(preparedStatement);
-            ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()) {
-
-                id = rs.getInt("id");
-            }
-
-
-        } catch (SQLException | ClassNotFoundException e) {
-            printSQLException((SQLException) e);
-        }
-        return customization;
-    }
 }
