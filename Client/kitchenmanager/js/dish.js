@@ -74,17 +74,20 @@ export class dish{
         var buttonname;
         var buttoncolor;
         var functionname;
-        var bgcolor
+        var bgcolor;
+        var id;
         if(this.enable == 1){
             buttonname = "Disable";
             buttoncolor = "tag-red";
             functionname = `disable(${this.dishid})`;
+            id=`${this.dishid}`;
         }
         else{
             buttonname = "Enable";
             buttoncolor = "tag-green";
             functionname = `enable(${this.dishid})`;
-            bgcolor = "disabled-row";
+            functionname = `enable(${this.dishid})`;
+            id=`${this.dishid}`;
 
         }
 
@@ -109,7 +112,7 @@ export class dish{
         <td>${this.name}</td>
         <td>${this.ingredienttype}</td>
         <td>${this.defaultquantity} ${this.unit}</td>
-        <td><div ><button onclick="${functionname}" class=" ${buttoncolor} " style="width: 100px;">${buttonname}</button></div></td>
+        <td>  <button onclick="${functionname}" class=" btn ${buttoncolor} " id=${id} style="width: 100px;">${buttonname}</button></td>
         `)
         dishbyingredients.append(dishtable);
 

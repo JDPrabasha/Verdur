@@ -30,17 +30,27 @@ export class restock{
         if(this.status == "managerApproved"){
             statusm = "Manager Approved"
         }
+        else if(this.status == "managerDecline"){
+            statusm = "Manager Decline"
+
+        }
+        else if(this.status == "pending")
+        {
+            statusm = "Pending"
+
+
+        }
         else{
             statusm = this.status
         }
-        // if(this.status == "managerdecline")
+        
         
         var restock = $("#restocktable");
-            var restocktable = $(document.createElement('tr')).attr( "class","re ").attr("styles","fontsize:10cm;").html(`
+            var restocktable = $(document.createElement('tr')).attr( "class","re").html(`
            
             <td>${this.ingname}</td>
             <td>${this.issuedate.split(" ")[0]}</td>
-            <td><div class=status-${statusStyle}>${statusm}</div></td>
+            <td><div class="flex-center "><div class="p-1  status-${statusStyle}" style="width:fit-content;hight:4cm">${statusm}</div></div></td>
             <td>${this.timecountdown}</td>`);
             
         restock.append(restocktable);
