@@ -5,29 +5,42 @@ $(window).on("load", function () {
   var customer = window.localStorage.getItem("customer");
 
   //for cart
-  $.ajax({
-    type: "GET",
-    url: "http://localhost:8080/Server_war_exploded/cart/" + customer,
-    headers: {
-      authorization: authHeader,
-    },
-  }).then(function (data) {
-    console.log(data);
-    var array = $.parseJSON(data);
-    console.log(array);
-    if (array.length) {
-      const deSerializedData = array.map(DishSerializer.deSerialize);
-      console.log(deSerializedData);
-      console.log("hyu");
-      deSerializedData.map((params) => new Dish(params).addCartItem());
-    } else {
-      var text = $(document.createElement("p"))
-        .addClass("text-4 fw-b text-center mt-50")
-        .html("---Cart is Empty---");
-      $("#cart").empty();
-      $("#cart").append(text);
-    }
-  });
+
+  function getCartItems() {
+    $.ajax({
+      type: "GET",
+      url: "http://localhost:8080/Server_war_exploded/cart/" + customer,
+      headers: {
+        authorization: authHeader,
+      },
+    }).then(function (data) {
+      console.log(data);
+      var array = $.parseJSON(data);
+      console.log(array);
+      if (array.length) {
+        const deSerializedData = array.map(DishSerializer.deSerialize);
+        console.log(deSerializedData);
+        console.log("hyu");
+        deSerializedData.map((params) => new Dish(params).addCartItem());
+      } else {
+        var text = $(document.createElement("p"))
+          .addClass(" fw-b text-center ")
+          .html(
+            "Looks like your cart is empty at the moment. How about taking a look around our menu?"
+          );
+
+        var image = $(document.createElement("img"))
+          .attr("src", "../images/emptyCart.png")
+          .attr("width", "40%")
+          .addClass("ml-70");
+        $("#cart").empty();
+        $("#cart").append(image);
+        $("#cart").append(text);
+      }
+    });
+  }
+
+  getCartItems();
 
   $("#cart-items").on("click", ".remove", function () {
     id = $(this).attr("data-id");
@@ -40,6 +53,7 @@ $(window).on("load", function () {
 
       success: function () {
         console.log("yatta");
+        getCartItems();
       },
       failure: function () {
         console.log("fail");

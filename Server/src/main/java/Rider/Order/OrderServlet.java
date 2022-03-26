@@ -1,6 +1,8 @@
 package Rider.Order;
 
 import Customer.Dish.Dish;
+import Rider.Rider;
+import Rider.RiderDAO;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -18,10 +20,13 @@ import javax.servlet.http.HttpServletResponse;
 
 public class OrderServlet extends HttpServlet {
 
+
     private OrderDAO orderDAO;
+    private RiderDAO riderDAO;
 
     public void init() {
         orderDAO = new OrderDAO();
+        riderDAO = new RiderDAO();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -58,7 +63,7 @@ public class OrderServlet extends HttpServlet {
             }
 
         } else if (Objects.equals(action, "/details")) {
-            getRiderInformation(request, response);
+            getOrderInformation(request, response);
         } else {
 
             try {
@@ -71,12 +76,24 @@ public class OrderServlet extends HttpServlet {
 
     }
 
-    private void getRiderInformation(HttpServletRequest request, HttpServletResponse response) {
+    private void getOrderInformation(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String customer = request.getParameter("customer");
         String status = request.getParameter("status");
-        Order order = orderDAO.selectActiveOrders(Integer.parseInt(customer));
-        String json = new Gson().toJson(order);
-        System.out.println("im in menu");
+        System.out.println(status);
+        if (Objects.equals(status, "accepted")) {
+            String remTime = orderDAO.getGetAcceptedTime(Integer.parseInt(customer));
+            response.getOutputStream().println(remTime);
+        } else if (Objects.equals(status, "delivering")) {
+            System.out.println("got here");
+            Rider rider = riderDAO.getDeliveringRider(Integer.parseInt(customer));
+            String json = new Gson().toJson(rider);
+            System.out.println(json);
+            response.getOutputStream().println(json);
+        } else if (Objects.equals(status, "delivered")) {
+            int payment = orderDAO.getDeliveryPayment(Integer.parseInt(customer));
+            response.getOutputStream().println(payment);
+        }
+
     }
 
 
@@ -87,7 +104,7 @@ public class OrderServlet extends HttpServlet {
         String customer = requestUrl.substring("/Server_war_exploded/order/".length());
         Order order = orderDAO.selectActiveOrders(Integer.parseInt(customer));
         String json = new Gson().toJson(order);
-        System.out.println("im in menu");
+        System.out.println("im in menue");
 //        System.out.println(json);
 
         response.getOutputStream().println(json);

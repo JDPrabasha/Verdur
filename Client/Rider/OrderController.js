@@ -127,37 +127,6 @@ $(window).on("load", function () {
     updateOrders;
   }, 1000);
 
-  function getOrderData(status) {
-    $.ajax({
-      url:
-        "http://localhost:8080/Server_war_exploded/order/details/status=" +
-        status +
-        "&customer=" +
-        customer,
-      beforeSend: function (xhr) {
-        xhr.setRequestHeader("authorization", authHeader);
-      },
-    }).then(function (data) {
-      newarray = $.parseJSON(data);
-      console.log(array);
-      switch (status) {
-        case "Accepted":
-          console.log("Oranges are $0.59 a pound.");
-          break;
-        case "Delivering":
-          console.log("Oranges are $0.59 a pound.");
-          break;
-        case "Completed":
-          console.log("Mangoes and papayas are $2.79 a pound.");
-
-          break;
-        default:
-          console.log(`Sorry, we are out of ${expr}.`);
-          break;
-      }
-    });
-  }
-
   $(".modal-close").click(function (e) {
     e.preventDefault();
     $("#vtf").removeClass("modal-active ");

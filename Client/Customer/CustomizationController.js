@@ -44,6 +44,7 @@ $(document).ready(function () {
         authorization: authHeader,
       },
     }).then(function (data) {
+      $("div").remove(".skeleton-text , .skeleton-text-small");
       console.log(data);
 
       var dish = $.parseJSON(data);
