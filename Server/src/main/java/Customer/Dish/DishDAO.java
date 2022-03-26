@@ -24,23 +24,28 @@ public class DishDAO {
     private static final String SELECT_LATEST_DISHES = "select * from dish where enabled=1 limit 8";
     private static final String SELECT_RECENT_DISHES = "select d.name,d.image,d.price,d.dishID from dish d join customizeddish c on c.dishId =d.dishID join hasdish h on c.cdishID = h.cdishID join orders o on h.orderID = o.orderID  where o.custID = ? and status = ? order by o.timestamp limit 4";
     private static final String RATE_DISH = "update rating set rating=? where dishID=? and custID=?";
+    private Connection conn;
 
+    public DishDAO() {
+        try {
+            this.conn = DB.initializeDB();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     public List<Dish> selectAllDishes() {
 
-        // using try-with-resources to avoid closing resources (boiler plate code)
         List<Dish> dishes = new ArrayList<>();
-        // Step 1: Establishing a Connection
-        try (Connection connection = DB.initializeDB();
+        try (
 
-             // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_DISHES);) {
+                PreparedStatement preparedStatement = this.conn.prepareStatement(SELECT_ALL_DISHES);) {
 
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
-            // Step 4: Process the ResultSet object.
             while (rs.next()) {
 
                 String name = rs.getString("name");
@@ -50,7 +55,7 @@ public class DishDAO {
 
                 dishes.add(new Dish(name, image, id, price));
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
         return dishes;
@@ -58,20 +63,15 @@ public class DishDAO {
 
     public List<Dish> selectRecentDishes(Integer id) {
 
-        // using try-with-resources to avoid closing resources (boiler plate code)
         List<Dish> dishes = new ArrayList<>();
-        // Step 1: Establishing a Connection
-        try (Connection connection = DB.initializeDB();
+        try (
 
-             // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_RECENT_DISHES);) {
+                PreparedStatement preparedStatement = this.conn.prepareStatement(SELECT_RECENT_DISHES);) {
             preparedStatement.setInt(1, id);
             preparedStatement.setString(2, "pending");
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
-            // Step 4: Process the ResultSet object.
             while (rs.next()) {
 
                 String name = rs.getString("name");
@@ -81,7 +81,7 @@ public class DishDAO {
 
                 dishes.add(new Dish(name, image, did, price));
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
         return dishes;
@@ -89,19 +89,14 @@ public class DishDAO {
 
     public List<Dish> filterDishesByName(String query) {
 
-        // using try-with-resources to avoid closing resources (boiler plate code)
         List<Dish> dishes = new ArrayList<>();
-        // Step 1: Establishing a Connection
-        try (Connection connection = DB.initializeDB();
+        try (
 
-             // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(FILTER_DISHES_BY_NAME);) {
+                PreparedStatement preparedStatement = this.conn.prepareStatement(FILTER_DISHES_BY_NAME);) {
             preparedStatement.setString(1, "%" + query + "%");
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
-            // Step 4: Process the ResultSet object.
             while (rs.next()) {
 
                 String name = rs.getString("name");
@@ -111,7 +106,7 @@ public class DishDAO {
 
                 dishes.add(new Dish(name, image, id, price));
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
         return dishes;
@@ -119,13 +114,10 @@ public class DishDAO {
 
     public List<Dish> filterDishesByIngredients(String[] ingredients) {
 
-        // using try-with-resources to avoid closing resources (boiler plate code)
         List<Dish> dishes = new ArrayList<>();
-        // Step 1: Establishing a Connection
-        try (Connection connection = DB.initializeDB();
+        try (
 
-             // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(FILTER_DISHES_BY_INGREDIENT);) {
+                PreparedStatement preparedStatement = this.conn.prepareStatement(FILTER_DISHES_BY_INGREDIENT);) {
             for (int i = 0; i < 14; i++) {
                 preparedStatement.setString(i + 1, null);
             }
@@ -134,10 +126,8 @@ public class DishDAO {
             }
 
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
-            // Step 4: Process the ResultSet object.
             while (rs.next()) {
 
                 String name = rs.getString("name");
@@ -147,7 +137,7 @@ public class DishDAO {
 
                 dishes.add(new Dish(name, image, id, price));
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
         return dishes;
@@ -156,13 +146,10 @@ public class DishDAO {
 
     public List<Dish> filterDishesByFilters(int budget, int time, String[] tags) {
 
-        // using try-with-resources to avoid closing resources (boiler plate code)
         List<Dish> dishes = new ArrayList<>();
-        // Step 1: Establishing a Connection
-        try (Connection connection = DB.initializeDB();
+        try (
 
-             // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(FILTER_DISHES_BY_FILTERS);) {
+                PreparedStatement preparedStatement = this.conn.prepareStatement(FILTER_DISHES_BY_FILTERS);) {
             preparedStatement.setInt(1, time);
             preparedStatement.setInt(2, budget);
             for (int i = 0; i < 10; i++) {
@@ -175,10 +162,8 @@ public class DishDAO {
             preparedStatement.setInt(13, tags.length);
 
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
-            // Step 4: Process the ResultSet object.
             while (rs.next()) {
 
                 String name = rs.getString("name");
@@ -188,7 +173,7 @@ public class DishDAO {
 
                 dishes.add(new Dish(name, image, id, price));
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
         return dishes;
@@ -196,19 +181,14 @@ public class DishDAO {
 
     public List<Dish> selectCartDishes(int id) {
 
-        // using try-with-resources to avoid closing resources (boiler plate code)
         List<Dish> dishes = new ArrayList<>();
-        // Step 1: Establishing a Connection
-        try (Connection connection = DB.initializeDB();
+        try (
 
-             // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CART_DISHES);) {
+                PreparedStatement preparedStatement = this.conn.prepareStatement(SELECT_CART_DISHES);) {
             preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
-            // Step 4: Process the ResultSet object.
             while (rs.next()) {
 
                 String name = rs.getString("name");
@@ -220,14 +200,14 @@ public class DishDAO {
 
                 dishes.add(new Dish(id, customID, name, image, price, quantity));
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
         return dishes;
     }
 
     public void rateDish(Dish dish, String customer) {
-        try (Connection connection = DB.initializeDB(); PreparedStatement preparedStatement = connection.prepareStatement(RATE_DISH)) {
+        try (PreparedStatement preparedStatement = this.conn.prepareStatement(RATE_DISH)) {
 
 
             preparedStatement.setInt(1, dish.getRating());
@@ -238,7 +218,7 @@ public class DishDAO {
             preparedStatement.executeUpdate();
 
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
 
@@ -247,20 +227,15 @@ public class DishDAO {
 
     public Dish selectDish(int id) {
 
-        // using try-with-resources to avoid closing resources (boiler plate code)
         Dish dish = null;
-        // Step 1: Establishing a Connection
-        try (Connection connection = DB.initializeDB();
+        try (
 
-             // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_DISH);) {
+                PreparedStatement preparedStatement = this.conn.prepareStatement(SELECT_DISH);) {
             preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
 
-            // Step 4: Process the ResultSet object.
             while (rs.next()) {
 
                 String name = rs.getString("name");
@@ -275,7 +250,7 @@ public class DishDAO {
 
                 dish = new Dish(id, name, image, description, time, price);
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
         return dish;
@@ -299,19 +274,14 @@ public class DishDAO {
     }
 
     public List<Dish> selectNewDishes() {
-        // using try-with-resources to avoid closing resources (boiler plate code)
         List<Dish> dishes = new ArrayList<>();
-        // Step 1: Establishing a Connection
-        try (Connection connection = DB.initializeDB();
+        try (
 
-             // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_LATEST_DISHES);) {
+                PreparedStatement preparedStatement = this.conn.prepareStatement(SELECT_LATEST_DISHES);) {
 
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
-            // Step 4: Process the ResultSet object.
             while (rs.next()) {
 
                 String name = rs.getString("name");
@@ -321,26 +291,21 @@ public class DishDAO {
 
                 dishes.add(new Dish(name, image, id, price));
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
         return dishes;
     }
 
     public List<Dish> filterDishesByMeal(String query) {
-        // using try-with-resources to avoid closing resources (boiler plate code)
         List<Dish> dishes = new ArrayList<>();
-        // Step 1: Establishing a Connection
-        try (Connection connection = DB.initializeDB();
+        try (
 
-             // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(FILTER_DISHES_BY_MEAL);) {
+                PreparedStatement preparedStatement = this.conn.prepareStatement(FILTER_DISHES_BY_MEAL);) {
             preparedStatement.setString(1, query);
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
-            // Step 4: Process the ResultSet object.
             while (rs.next()) {
 
                 String name = rs.getString("name");
@@ -350,7 +315,7 @@ public class DishDAO {
 
                 dishes.add(new Dish(name, image, id, price));
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
         return dishes;

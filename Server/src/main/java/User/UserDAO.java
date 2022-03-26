@@ -26,15 +26,24 @@ public class UserDAO {
     private static final String UPDATE_CUSTOMER_DETAILS = "update customer c join user u on c.userID = u.userID set contact =?,address=?,avatar=(select avatarID from avatar where image = ?) where c.custID =? ";
 
 
+    private Connection conn;
+
     public UserDAO() {
+        try {
+            this.conn = DB.initializeDB();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 
     public User findUser(String username, String password) throws SQLException {
         System.out.println(FIND_USER);
-        // try-with-resource statement will auto close the connection.
+        // try-with-resource statement will auto close the this.conn.
         User user = null;
-        try (Connection connection = DB.initializeDB(); PreparedStatement preparedStatement = connection.prepareStatement(FIND_USER)) {
+        try (PreparedStatement preparedStatement = this.conn.prepareStatement(FIND_USER)) {
             preparedStatement.setString(1, username);
             String hashPassword = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
             preparedStatement.setString(2, hashPassword);
@@ -48,7 +57,7 @@ public class UserDAO {
                 Integer id = rs.getInt("userID");
                 user = new User(id, username, password, verified);
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
         return user;
@@ -56,9 +65,9 @@ public class UserDAO {
 
     public User checkUserCode(String username, String code) throws SQLException {
         System.out.println(CHECK_USER_CODE);
-        // try-with-resource statement will auto close the connection.
+        // try-with-resource statement will auto close the this.conn.
         User user = null;
-        try (Connection connection = DB.initializeDB(); PreparedStatement preparedStatement = connection.prepareStatement(CHECK_USER_CODE)) {
+        try (PreparedStatement preparedStatement = this.conn.prepareStatement(CHECK_USER_CODE)) {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, code);
             System.out.println(preparedStatement);
@@ -76,7 +85,7 @@ public class UserDAO {
 
                 user = new User(username, password);
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
         return user;
@@ -85,9 +94,9 @@ public class UserDAO {
 
     public User getUserDetails(int userID) throws SQLException {
 
-        // try-with-resource statement will auto close the connection.
+        // try-with-resource statement will auto close the this.conn.
         User user = null;
-        try (Connection connection = DB.initializeDB(); PreparedStatement preparedStatement = connection.prepareStatement(GET_NAVBAR_DETAILS)) {
+        try (PreparedStatement preparedStatement = this.conn.prepareStatement(GET_NAVBAR_DETAILS)) {
             preparedStatement.setInt(1, userID);
 
             System.out.println(preparedStatement);
@@ -106,7 +115,7 @@ public class UserDAO {
 
                 user = new User(id, avatar, name);
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
         return user;
@@ -114,9 +123,9 @@ public class UserDAO {
 
     public User getCustomerDetails(int custID) throws SQLException {
 
-        // try-with-resource statement will auto close the connection.
+        // try-with-resource statement will auto close the this.conn.
         User user = null;
-        try (Connection connection = DB.initializeDB(); PreparedStatement preparedStatement = connection.prepareStatement(GET_CUSTOMER_DETAILS)) {
+        try (PreparedStatement preparedStatement = this.conn.prepareStatement(GET_CUSTOMER_DETAILS)) {
             preparedStatement.setInt(1, custID);
 
             System.out.println(preparedStatement);
@@ -134,7 +143,7 @@ public class UserDAO {
                 user = new User.UserBuilder().setContact(contact).setAddress(address).build();
 
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
         return user;
@@ -142,9 +151,9 @@ public class UserDAO {
 
     public void updateCustomerDetails(int custID, User u) throws SQLException {
 
-        // try-with-resource statement will auto close the connection.
+        // try-with-resource statement will auto close the this.conn.
         User user = null;
-        try (Connection connection = DB.initializeDB(); PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_CUSTOMER_DETAILS)) {
+        try (PreparedStatement preparedStatement = this.conn.prepareStatement(UPDATE_CUSTOMER_DETAILS)) {
             preparedStatement.setString(1, user.getContact());
             preparedStatement.setString(2, user.getAddress());
             preparedStatement.setString(3, user.getAvatar());
@@ -156,7 +165,7 @@ public class UserDAO {
 
             // Step 4: Process the ResultSet object.
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
 
@@ -164,7 +173,7 @@ public class UserDAO {
 
     public User getEmployeeDetails(int userID, boolean supplier) throws SQLException {
 
-        // try-with-resource statement will auto close the connection.
+        // try-with-resource statement will auto close the this.conn.
         User user = null;
         String QueryString;
         if (supplier) {
@@ -172,7 +181,7 @@ public class UserDAO {
         } else {
             QueryString = GET_EMPLOYEE_DETAILS;
         }
-        try (Connection connection = DB.initializeDB(); PreparedStatement preparedStatement = connection.prepareStatement(QueryString)) {
+        try (PreparedStatement preparedStatement = this.conn.prepareStatement(QueryString)) {
             preparedStatement.setInt(1, userID);
 
             System.out.println(preparedStatement);
@@ -191,7 +200,7 @@ public class UserDAO {
 
                 user = new User(id, avatar, name);
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
         return user;
@@ -199,9 +208,9 @@ public class UserDAO {
 
     public void addUser(User user, int code) throws SQLException {
         System.out.println(INSERT_USER);
-        // try-with-resource statement will auto close the connection.
-        try (Connection connection = DB.initializeDB();
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS)) {
+        // try-with-resource statement will auto close the this.conn.
+        try (
+                PreparedStatement preparedStatement = this.conn.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS)) {
             String firstName = user.getName().split(" ")[0];
             String lastName = user.getName().split(" ")[1];
             preparedStatement.setString(1, firstName);
@@ -219,7 +228,7 @@ public class UserDAO {
                 gid = gkeys.getInt(1);
                 System.out.println(gid);
             }
-            PreparedStatement secondStatement = connection.prepareStatement(ADD_LOGIN);
+            PreparedStatement secondStatement = this.conn.prepareStatement(ADD_LOGIN);
             secondStatement.setInt(1, gid);
             secondStatement.setString(2, user.getUsername());
             String hashPassword = org.apache.commons.codec.digest.DigestUtils.sha256Hex(user.getPassword());
@@ -229,20 +238,20 @@ public class UserDAO {
             System.out.println(secondStatement);
             secondStatement.executeUpdate();
 
-            PreparedStatement thirdStatement = connection.prepareStatement(INSERT_CUSTOMER);
+            PreparedStatement thirdStatement = this.conn.prepareStatement(INSERT_CUSTOMER);
             secondStatement.setInt(1, gid);
             System.out.println(thirdStatement);
             thirdStatement.executeUpdate();
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
     }
 
     public String getRole(int userID) throws SQLException {
 
-        // try-with-resource statement will auto close the connection.
+        // try-with-resource statement will auto close the this.conn.
         String role = null;
-        try (Connection connection = DB.initializeDB(); PreparedStatement preparedStatement = connection.prepareStatement(GET_ROLE)) {
+        try (PreparedStatement preparedStatement = this.conn.prepareStatement(GET_ROLE)) {
             preparedStatement.setInt(1, userID);
 
             System.out.println(preparedStatement);
@@ -257,7 +266,7 @@ public class UserDAO {
 
 
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
         return role;
@@ -265,18 +274,18 @@ public class UserDAO {
 
     public void verifyUser(User user) throws SQLException {
         System.out.println(VERIFY_USER);
-        // try-with-resource statement will auto close the connection.
-        try (Connection connection = DB.initializeDB(); PreparedStatement preparedStatement = connection.prepareStatement(VERIFY_USER)) {
+        // try-with-resource statement will auto close the this.conn.
+        try (PreparedStatement preparedStatement = this.conn.prepareStatement(VERIFY_USER)) {
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setInt(2, user.getCode());
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
-            PreparedStatement secondStatement = connection.prepareStatement(VERIFY_USER);
+            PreparedStatement secondStatement = this.conn.prepareStatement(VERIFY_USER);
             preparedStatement.setInt(1, 123456);
             preparedStatement.setString(2, user.getUsername());
             System.out.println(secondStatement);
             secondStatement.executeUpdate();
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
     }

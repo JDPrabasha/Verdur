@@ -12,14 +12,25 @@ import java.util.List;
 public class GoalDAO {
     private static final String GET_GOALS = " select * from goal";
 
+    private Connection conn;
+
+    public GoalDAO() {
+        try {
+            this.conn = DB.initializeDB();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     public List<Goal> getGoals() {
         List<Goal> goals = new ArrayList<>();
-        // Step 1: Establishing a Connection
-        try (Connection connection = DB.initializeDB();
+        // Step 1: Establishing a this.conn
+        try (
 
-             // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(GET_GOALS);) {
+                // Step 2:Create a statement using this.conn object
+                PreparedStatement preparedStatement = this.conn.prepareStatement(GET_GOALS);) {
 
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
@@ -36,7 +47,7 @@ public class GoalDAO {
                 goals.add(new Goal(checkpoint, raise, orders));
             }
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
 

@@ -11,17 +11,29 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CustomizationDAO {
+
+    private Connection conn;
     private static final String ADD_CUSTOMIZED_DISH = " insert into customizeddish(dishID, price, quantity,custID) values (?,?,?,?) ";
     private static final String ADD_INGREDIENT = " insert into customization values (?,?,?) ";
     private static final String ADD_BACK_TO_CART = "update customizeddish set inCart=1 where orderID in (select orderID from orders o join hasdish h on o.orderID = h.orderID where o.orderID = ?)";
     private static final String REMOVE_ITEM_FROM_CART = "delete from customizeddish where cdishID =?";
-
     private static final String GET_DISH_CUSTOMIZATION_DATA = " select * from customizeddish c where cdishID=?";
+
+    public CustomizationDAO() {
+        try {
+            this.conn = DB.initializeDB();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void addCustomizeddish(Customization customDish) throws SQLException {
         Integer x = 0;
-        // try-with-resource statement will auto close the connection.
-        try (Connection connection = DB.initializeDB(); PreparedStatement preparedStatement = connection.prepareStatement(ADD_CUSTOMIZED_DISH)) {
+        // try-with-resource statement will auto close the this.conn.
+        try {
+            PreparedStatement preparedStatement = this.conn.prepareStatement(ADD_CUSTOMIZED_DISH);
             System.out.println("i am adding the dish");
             System.out.println(customDish.getPrice() + " cust" + customDish.getCustomer() + " id" + customDish.getId() + " q" + customDish.getQuantity());
             preparedStatement.setInt(1, customDish.getId());
@@ -30,7 +42,7 @@ public class CustomizationDAO {
             preparedStatement.setInt(4, customDish.getCustomer());
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
-            PreparedStatement secondStatement = connection.prepareStatement("SELECT LAST_INSERT_ID() as last");
+            PreparedStatement secondStatement = this.conn.prepareStatement("SELECT LAST_INSERT_ID() as last");
             ResultSet rs = secondStatement.executeQuery();
             while (rs.next()) {
 
@@ -39,7 +51,7 @@ public class CustomizationDAO {
 
             List<Ingredient> ingredients = customDish.getIngredients();
 
-            PreparedStatement thirdStatement = connection.prepareStatement(ADD_INGREDIENT);
+            PreparedStatement thirdStatement = this.conn.prepareStatement(ADD_INGREDIENT);
 
             for (Ingredient i : ingredients) {
                 thirdStatement.setInt(1, x);
@@ -51,7 +63,7 @@ public class CustomizationDAO {
             System.out.println("i am adding the ingrdients");
             thirdStatement.executeBatch();
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
 
@@ -62,17 +74,17 @@ public class CustomizationDAO {
 
     public void addDishesToCart(String id) throws SQLException {
 
-        // try-with-resource statement will auto close the connection.
-        try (Connection connection = DB.initializeDB(); PreparedStatement preparedStatement = connection.prepareStatement(ADD_BACK_TO_CART)) {
+        // try-with-resource statement will auto close the this.conn.
+        try {
 
-
+            PreparedStatement preparedStatement = this.conn.prepareStatement(ADD_BACK_TO_CART);
             preparedStatement.setString(1, id);
 
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
 
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
 
@@ -80,17 +92,17 @@ public class CustomizationDAO {
 
     public void removeFromCart(int id) throws SQLException {
 
-        // try-with-resource statement will auto close the connection.
-        try (Connection connection = DB.initializeDB(); PreparedStatement preparedStatement = connection.prepareStatement(REMOVE_ITEM_FROM_CART)) {
+        // try-with-resource statement will auto close the this.conn.
+        try {
 
-
+            PreparedStatement preparedStatement = this.conn.prepareStatement(REMOVE_ITEM_FROM_CART);
             preparedStatement.setInt(1, id);
 
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
 
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
 

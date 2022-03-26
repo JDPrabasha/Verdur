@@ -24,13 +24,25 @@ public class OrderDAO {
     private static final String GET_ACCEPTED_TIME = "select timestamp from orders o where o.status=\"accepted\" and o.custID = ? ";
     private static final String GET_DELIVERED_PAYMENT = "select type,amount from orders o join payment p on o.orderID = p.orderID where o.status=\"delivered\" and o.custID = ?";
 
+    private Connection conn;
+
+    public OrderDAO() {
+        try {
+            this.conn = DB.initializeDB();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public int addOrder(Order order) throws SQLException {
         Integer gid = 0;
-        // try-with-resource statement will auto close the connection.
-        try (Connection connection = DB.initializeDB()) {
+        // try-with-resource statement will auto close the this.conn.
+        try {
             System.out.println("hello");
-//            connection.setAutoCommit(false);
-            PreparedStatement preparedStatement = connection.prepareStatement(ADD_ORDER, Statement.RETURN_GENERATED_KEYS);
+//            this.conn.setAutoCommit(false);
+            PreparedStatement preparedStatement = this.conn.prepareStatement(ADD_ORDER, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, order.getCustomer());
             preparedStatement.setFloat(2, order.getDistance());
             preparedStatement.setString(3, order.getLongitude());
@@ -47,12 +59,12 @@ public class OrderDAO {
                 System.out.println(gid);
             }
 
-            PreparedStatement fourthStatement = connection.prepareStatement(EMPTY_DISHES_FROM_CART);
+            PreparedStatement fourthStatement = this.conn.prepareStatement(EMPTY_DISHES_FROM_CART);
             System.out.println(fourthStatement);
             fourthStatement.setInt(1, order.getCustomer());
             fourthStatement.executeUpdate();
 
-            PreparedStatement secondStatement = connection.prepareStatement(ADD_ORDER_DISHES);
+            PreparedStatement secondStatement = this.conn.prepareStatement(ADD_ORDER_DISHES);
 
 
             List<Dish> dishes = order.getDishes();
@@ -71,14 +83,14 @@ public class OrderDAO {
 
             System.out.println("done");
 
-            PreparedStatement thirdStatement = connection.prepareStatement(ADD_PAYMENT);
+            PreparedStatement thirdStatement = this.conn.prepareStatement(ADD_PAYMENT);
             thirdStatement.setInt(1, gid);
             thirdStatement.setString(2, order.getPayment());
             thirdStatement.setInt(3, order.getPrice());
             System.out.println(thirdStatement);
             thirdStatement.executeUpdate();
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
         return gid;
@@ -88,12 +100,9 @@ public class OrderDAO {
     public String getGetAcceptedTime(int id) {
         String remTime = "";
 
-        // Step 1: Establishing a Connection
-        try (Connection connection = DB.initializeDB();
-
-             // Step 2:Create a statement using connection object
-        ) {
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_ACCEPTED_TIME);
+        // Step 1: Establishing a this.conn
+        try {
+            PreparedStatement preparedStatement = this.conn.prepareStatement(GET_ACCEPTED_TIME);
             preparedStatement.setInt(1, id);
 
             System.out.println(preparedStatement);
@@ -107,7 +116,7 @@ public class OrderDAO {
 
 
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
         return remTime;
@@ -116,12 +125,9 @@ public class OrderDAO {
     public int getDeliveryPayment(int id) {
         int due = 0;
 
-        // Step 1: Establishing a Connection
-        try (Connection connection = DB.initializeDB();
-
-             // Step 2:Create a statement using connection object
-        ) {
-            PreparedStatement preparedStatement = connection.prepareStatement(GET_DELIVERED_PAYMENT);
+        // Step 1: Establishing a this.conn
+        try {
+            PreparedStatement preparedStatement = this.conn.prepareStatement(GET_DELIVERED_PAYMENT);
             preparedStatement.setInt(1, id);
 
             System.out.println(preparedStatement);
@@ -139,7 +145,7 @@ public class OrderDAO {
 
 
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
         return due;
@@ -150,12 +156,9 @@ public class OrderDAO {
         // using try-with-resources to avoid closing resources (boiler plate code)
         Order order = null;
 
-        // Step 1: Establishing a Connection
-        try (Connection connection = DB.initializeDB();
-
-             // Step 2:Create a statement using connection object
-        ) {
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ACTIVE_ORDER);
+        // Step 1: Establishing a this.conn
+        try {
+            PreparedStatement preparedStatement = this.conn.prepareStatement(SELECT_ACTIVE_ORDER);
             preparedStatement.setInt(1, id);
 
             System.out.println(preparedStatement);
@@ -167,7 +170,7 @@ public class OrderDAO {
                 List<Dish> dishes = new ArrayList<>();
                 int currentOrder = rs.getInt("orderID");
                 String status = rs.getString("status");
-                PreparedStatement secondStatement = connection.prepareStatement(SELECT_ORDER_DISHES);
+                PreparedStatement secondStatement = this.conn.prepareStatement(SELECT_ORDER_DISHES);
                 secondStatement.setInt(1, currentOrder);
                 ResultSet secondSet = secondStatement.executeQuery();
                 System.out.println(secondStatement);
@@ -185,7 +188,7 @@ public class OrderDAO {
 
 
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
         return order;
@@ -196,10 +199,9 @@ public class OrderDAO {
         // using try-with-resources to avoid closing resources (boiler plate code)
         List<Order> orders = new ArrayList<>();
 
-        // Step 1: Establishing a Connection
-        try (Connection connection = DB.initializeDB();
-        ) {
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_RECENT_ORDERS);
+        // Step 1: Establishing a this.conn
+        try {
+            PreparedStatement preparedStatement = this.conn.prepareStatement(SELECT_RECENT_ORDERS);
             preparedStatement.setInt(1, id);
 
             System.out.println(preparedStatement);
@@ -216,7 +218,7 @@ public class OrderDAO {
                 id = rs.getInt("orderID");
                 int amount = rs.getInt("amount");
                 String timestamp = rs.getString("timestamp");
-                PreparedStatement thirdStatement = connection.prepareStatement(SELECT_TOTAL_NUTRIENTS);
+                PreparedStatement thirdStatement = this.conn.prepareStatement(SELECT_TOTAL_NUTRIENTS);
                 thirdStatement.setInt(1, id);
                 ResultSet thirdSet = thirdStatement.executeQuery();
                 if (thirdSet.next()) {
@@ -225,7 +227,7 @@ public class OrderDAO {
                     calories = thirdSet.getInt("calories");
                     fats = thirdSet.getInt("fats");
                 }
-                PreparedStatement secondStatement = connection.prepareStatement(SELECT_ORDER_DISHES);
+                PreparedStatement secondStatement = this.conn.prepareStatement(SELECT_ORDER_DISHES);
                 secondStatement.setInt(1, id);
                 ResultSet secondSet = secondStatement.executeQuery();
                 System.out.println(secondStatement);
@@ -242,7 +244,7 @@ public class OrderDAO {
 
 
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
         return orders;
@@ -250,11 +252,11 @@ public class OrderDAO {
 
     public void addComplaint(Order order) {
 
-        // try-with-resource statement will auto close the connection.
-        try (Connection connection = DB.initializeDB()) {
+        // try-with-resource statement will auto close the this.conn.
+        try {
             System.out.println("hello");
-//            connection.setAutoCommit(false);
-            PreparedStatement preparedStatement = connection.prepareStatement(ADD_COMPLAINT);
+//            this.conn.setAutoCommit(false);
+            PreparedStatement preparedStatement = this.conn.prepareStatement(ADD_COMPLAINT);
             preparedStatement.setInt(1, order.getCustomer());
             preparedStatement.setInt(3, order.getId());
 
@@ -269,7 +271,7 @@ public class OrderDAO {
             preparedStatement.executeUpdate();
 
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
 

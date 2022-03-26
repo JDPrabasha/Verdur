@@ -17,13 +17,25 @@ public class RiderDAO {
 
     private static final String SELECT_COMPLETED_ORDERS = " select count(*) as total from orders o join delivery d on o.deliveryID = d.deliveryID where d.riderID = ? and o.completed = 1 and o.timestamp >= ? ";
 
+    private Connection conn;
+
+    public RiderDAO() {
+        try {
+            this.conn = DB.initializeDB();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Rider getRiderDetails(int id) {
         Rider rider = null;
-        // Step 1: Establishing a Connection
-        try (Connection connection = DB.initializeDB();
+        // Step 1: Establishing a this.conn
+        try (
 
-             // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(GET_RIDER_DETAILS);) {
+                // Step 2:Create a statement using this.conn object
+                PreparedStatement preparedStatement = this.conn.prepareStatement(GET_RIDER_DETAILS);) {
             preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
@@ -37,7 +49,7 @@ public class RiderDAO {
 
             }
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
 
@@ -46,11 +58,11 @@ public class RiderDAO {
 
     public Rider getDeliveringRider(int id) {
         Rider rider = null;
-        // Step 1: Establishing a Connection
-        try (Connection connection = DB.initializeDB();
+        // Step 1: Establishing a this.conn
+        try (
 
-             // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(GET_RIDER_FOR_ORDER);) {
+                // Step 2:Create a statement using this.conn object
+                PreparedStatement preparedStatement = this.conn.prepareStatement(GET_RIDER_FOR_ORDER);) {
             System.out.println(preparedStatement);
             preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
@@ -65,7 +77,7 @@ public class RiderDAO {
 
             }
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
 
@@ -76,11 +88,11 @@ public class RiderDAO {
     public int getOderCount(int id) {
         Rider rider = null;
         int total = 0;
-        // Step 1: Establishing a Connection
-        try (Connection connection = DB.initializeDB();
+        // Step 1: Establishing a this.conn
+        try (
 
-             // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(GET_MONTHLY_ORDERS);) {
+                // Step 2:Create a statement using this.conn object
+                PreparedStatement preparedStatement = this.conn.prepareStatement(GET_MONTHLY_ORDERS);) {
             preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
@@ -93,7 +105,7 @@ public class RiderDAO {
 
             }
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
 
@@ -106,11 +118,8 @@ public class RiderDAO {
     public int getCheckpointCount(int id) {
         int orderCount = 0;
         LocalDate monthBegin = LocalDate.now().withDayOfMonth(1);
-        try (Connection connection = DB.initializeDB();
-
-             // Step 2:Create a statement using connection object
-        ) {
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_COMPLETED_ORDERS);
+        try {
+            PreparedStatement preparedStatement = this.conn.prepareStatement(SELECT_COMPLETED_ORDERS);
             preparedStatement.setInt(1, id);
             preparedStatement.setString(2, String.valueOf(monthBegin));
 
@@ -125,7 +134,7 @@ public class RiderDAO {
 
 
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
         return orderCount;
@@ -134,11 +143,11 @@ public class RiderDAO {
 
     public void toggleAvailibility(int id) {
         String status = "";
-        // Step 1: Establishing a Connection
-        try (Connection connection = DB.initializeDB();
+        // Step 1: Establishing a this.conn
+        try (
 
-             // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(GET_RIDER_DETAILS);) {
+                // Step 2:Create a statement using this.conn object
+                PreparedStatement preparedStatement = this.conn.prepareStatement(GET_RIDER_DETAILS);) {
             preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
@@ -149,7 +158,7 @@ public class RiderDAO {
 
 
             }
-            PreparedStatement secondStatement = connection.prepareStatement(TOGGLE_AVAILIBILE);
+            PreparedStatement secondStatement = this.conn.prepareStatement(TOGGLE_AVAILIBILE);
 
 
             if (Objects.equals(status, "available")) {
@@ -163,7 +172,7 @@ public class RiderDAO {
             secondStatement.executeUpdate();
 
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
     }
