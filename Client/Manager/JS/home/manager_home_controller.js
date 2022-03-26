@@ -19,9 +19,17 @@ $(document).ready(function reload() {
         headers: {
             "authorization": jwt
         },
-        error:function(){
-            reload();
-        }
+        // error:function(){
+        //     // reload();
+        // }
+         }).fail(function (jqXHR, textStatus, errorThrown) {
+        console.log(jqXHR)
+        console.log(textStatus)
+        console.log(errorThrown)
+        window.location.href = "/Client/Manager/Invalid Token.html"
+        // Request failed. Show error message to user. 
+        // errorThrown has error message.
+    // })
     }).then(function(data){
         monthlist=['Month'];
         
