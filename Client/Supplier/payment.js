@@ -20,14 +20,14 @@ export class payment{
             var requestedDate = $(document.createElement('td')).html(this.requestedDate);
             var deliveryDate = $(document.createElement('td')).html(this.deliveryDate);
             console.log("here"+this.status);
-            if(this.status==`Payed`)
-            {
-                var status = $(document.createElement('td')).html( `<button class="mybutton3 tag-green">Completed</button>`);   
-            }
-            else{
-                var status = $(document.createElement('td')).html( `<button class="mybutton2-1">Pending</button>`);
+            // if(this.status==`Payed`)
+            // {
+            //     var status = $(document.createElement('td')).html( `<button class="mybutton3 tag-green">Completed</button>`);   
+            // }
+            // else{
+            //     var status = $(document.createElement('td')).html( `<button class="mybutton2-1">Pending</button>`);
 
-            }
+            // }
            
                
         row.append(invoiceID);
@@ -35,7 +35,7 @@ export class payment{
         row.append(totalAmount);
         row.append(requestedDate);
         row.append(deliveryDate);
-        row.append(status);
+        // row.append(status);
 
 
         view.append(row);
@@ -59,9 +59,11 @@ printallpayment(){
     //     var status = $(document.createElement('td')).html( `<button class="btn text-1 bg-clr-paid fw-b text-center">Completed</button>`);   
     //     row.append(status);
     // }
-    if(this.status==`Payed`)
+    if(this.status==`completed`)
             {
-                var status = $(document.createElement('td')).html( `<button class="mybutton3 tag-green">Completed</button>`);   
+                console.log("completed");
+                var status = $(document.createElement('td')).html( `<button class="mybutton3 tag-blue">Completed</button>`);   
+
             }
             else{
                 var status = $(document.createElement('td')).html( `<button class="mybutton2-1">Pending</button>`);
@@ -97,7 +99,7 @@ printcompletedpayment(){
     console.log("here"+this.status);
     if(this.status==`Payed`)
     {
-        var status = $(document.createElement('td')).html( `<button class="btn text-1 bg-clr-paid fw-b text-center">Completed</button>`); 
+        var status = $(document.createElement('td')).html( `<button class="btn text-1 bg-clr-paid fw-b text-center"></button>`); 
         row.append(status);  
     }
    

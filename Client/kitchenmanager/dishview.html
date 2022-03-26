@@ -1,156 +1,56 @@
-                 
-<!DOCTYPE html>                                    
-</html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <link rel="stylesheet" href="style.css">
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
 
-    <!--    <title>Title</title>-->
-
-</head> 
-<body>
-<div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="home.html">Home</a><br>
-    <a href="inventory.html">Inventory</a><br>
-    <a href="ongoingorders.html">Orders</a><br>
-    <a href="dish.html">Dishes</a>
-
-</div>
-
-
-<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;Verdur</span>
-
-<script>
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "18%";
-        document.getElementById("sectionfull").style.width = "82%";
-        document.getElementById("sectionfull").style.paddingLeft = "18%";
-       
-    }
-
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("sectionfull").style.width = "100%";
-        document.getElementById("sectionfull").style.paddingLeft = "2%";
-       
-    }
-</script>
-<div class="sectionfull" id="sectinfull">
-    <div class="topic"> <h2>View Dish </h2></div>
-    <table class="table1">
-   
-        <tr>
-            <td><input type="image" src="burger.png"  width="50" height="50"></td>
-            
-           
-        </tr>
-        <tr>
-            <td>Dish Name</td>
-            <td id="dishname"></td>
-            
-        </tr>
-       
+    <!-- <link rel="stylesheet" href="/Client/styles/pastures_new.css" /> -->
+    <link rel="stylesheet" href="/Client/styles/pastures.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="/Client/Manager/JS/login.js"></script>
     
-        <tr>
-            <td>Approximate Time</td>
-            <td id="approximatetime"> Mins</td>
-            
-        </tr>
-        <tr>
-            <td>Default Price(Rs)</td>
-            <td id="defaultprice"> Mins</td>
-            
-        </tr>
-    
-       
-       
-    
-        <tr>
-            <td>Ingredient 1</td>
-            <td>2g</td>
-            <td> <input type="range" min="1" max="100" value="50" ></td>
-           
-        </tr>
-        
-        <tr>
-            <td>Ingredient 2</td>
-            <td>2g</td>
-            <td> <input type="range" min="1" max="100" value="50" ></td>
-           
-        </tr>
-        
-        <tr>
-            <td>Ingredient 3</td>
-            <td>2g</td>
-            <td> <input type="range" min="1" max="100" value="50" ></td>
-           
-        </tr>
-        
-        <tr>
-            <td>Ingredient 4</td>
-            <td>2g</td>
-            <td> <input type="range" min="1" max="100" value="50" ></td>
-           
-        </tr>
-       
+  </head>
+  <body style="overflow: hidden">
+    <div class="row">
+      <div class="col-6 pl-30 mt-15 hidden" id="register">
+        <img src="/Client/images/Asset 304x.png" width="18%" alt="" />
       
-    </table>
-    <!-- <div class="topic"> <h2>Create Dish </h2></div>
-        <label >Dish Name:</label>
-        <input type="text"><br><br>
-        <label >Approximate Time:</label>
-        <input type="text"><br><br>
-        <label >Image:</label><br>
-        <input type="image" src="img_submit.gif"  width="50" height="50"><button>Add Image</button>
-        <div>
-            <table>
-                <tr>
-                    <td>
-                        Add Item
-                    </td>
-                    <td>
-                        <a href="addingredient"><button>Add Item</button></a>
-                    </td>
-                    <tr>
-                    <td>
-                        <input type="text"><br>
-                        <input type="text"><br>
-                        <input type="text"><br>
 
-                    </td>
-                    </tr>
-                </tr>
-            </table>
+     
+     
+        <div class="mb-10" style="bottom: 0; position: fixed">
+          <span class="material-icons icon"> copyright </span>
+          <p class="text">2021 Verdur. All Rights Reserved</p>
         </div>
+      </div>
+      <div class="col-6 pl-30 mt-15" id="login">
+        <img src="/Client/images/Asset 304x.png" width="18%" alt="" />
+        <h5 class="mt-15 mb-4 pt-6">Oops...</h5>
 
-</div> -->
+      
+        <!-- <p class="text-red mb-3" style="font-size: smaller">random text</p> -->
 
-<script>
-    window.$_GET = new URLSearchParams(location.search);
-    var value1 = $_GET.get('id');
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://localhost:8080/kitchenmanager_war_exploded/dish?id="+value1);
-    xhr.onload = function(){
-        let
-            dishname = document.getElementById("dishname"),
-            approximatetime = document.getElementById("approximatetime"),
-            defaultprice = document.getElementById("defaultprice"),
-            search = JSON.parse(this.response);
-
-        if (search !== null) { for (let s of search) {
-            dishname.innerHTML = `${s.dishname}`;
-            approximatetime.innerHTML = `${s.approximatetime}`;
-            defaultprice.innerHTML = `${s.defaultprice}`;
-           
-            
-        }
-        }
-    };
-    xhr.send();
-</script>
-
-</body>
+      
+        <!-- <p class="text-red mb-3" style="font-size: smaller">random text</p> -->
+        <p class="mt-4 mb-4 text-green text-2 pt-6">Token expired....</p>
+        <a class="btn width-2 text-center mb-6 pt-6">Login</a>
+        <a class="btn width-2 text-center mb-6 tag-red pt-6">Retry</a>
+       
+        <div class="mb-10" style="bottom: 0; position: fixed">
+          <span class="material-icons icon"> copyright </span>
+          <p class="text">2021 Verdur. All Rights Reserved</p>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="bg-gray" style="height: 100vh">
+          <img class="pl-6 pt-8" src="https://media.istockphoto.com/vectors/envelope-with-sheet-vector-id824800974?k=20&m=824800974&s=612x612&w=0&h=4PpmpxVwa_zy59HrwVPwBK3cJUplAtlAVA4eYxaPYnc=" style="width:75%; height: 75%;"alt="" />
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
-            
