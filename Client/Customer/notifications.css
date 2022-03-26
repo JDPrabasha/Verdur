@@ -1,23 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
-*{
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: 'Montserrat', sans-serif;
-}
 
-body{
-	background: #ececec;
-}
 
 .wrapper{
 	
 }
 
 .notification_wrap{
-	width: 500px;
-	margin: 120px auto 0;
+	width: 300px;
+	/* margin: 120px auto 0; */
 }
 
 .notification_wrap .notification_icon{
@@ -35,7 +26,7 @@ body{
 }
 
 .notification_wrap .dropdown{
-	width: 350px;
+	width: 250px;
 	height: auto;
 	background: #fff;
 	border-radius: 5px;
@@ -90,7 +81,7 @@ body{
 	display: block;
     position: fixed;
 	top: 75px;
-	left: 72%;
+	right: 5%;
 	transform: translateX(-50%);
 	border: 15px solid;
 	border-color: transparent transparent #fff transparent;

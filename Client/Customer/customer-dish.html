@@ -16,11 +16,15 @@
     <script src="Dish.js"></script>
     <script src="Ingredient.js"></script>
     <script src="IngredientSerializer.js"></script>
+    <script src="Notification.js"></script>
+    <script src="NotificationSerializer.js"></script>
+    <script src="NotificationController.js"></script>
+    <link rel="stylesheet" href="notifications.css" />
     <title>Document</title>
   </head>
   <body>
     <nav>
-      <div class="flex-space-between ml-8 mr-8 mt-8">
+      <div class="flex-space-between m-8">
         <a href="customer-landing.html" class="width-1"
           ><img src="../images/Asset 304x.png" width="100%" alt=""
         /></a>
@@ -28,12 +32,15 @@
           <li class="pl-5"><a id="menu" href="customer-menu.html">Menu</a></li>
           <li class="pl-5">
             <a href="customer-orders.html"
-              ><span class="material-icons">local_mall</span></a
+              ><span class="material-icons pr-3">local_mall</span></a
             >
           </li>
         </ul>
       </div>
     </nav>
+    <div class="notification_wrap">
+      <div class="dropdown" id="dropdown"></div>
+    </div>
     <!-- <p class="ml-30 mb-8">
       Menu > Avacado Smoothie > <span class="fw-b">Avocado</span>
     </p> -->
