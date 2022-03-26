@@ -41,17 +41,14 @@ public class UserDAO {
 
     public User findUser(String username, String password) throws SQLException {
         System.out.println(FIND_USER);
-        // try-with-resource statement will auto close the this.conn.
         User user = null;
         try (PreparedStatement preparedStatement = this.conn.prepareStatement(FIND_USER)) {
             preparedStatement.setString(1, username);
             String hashPassword = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
             preparedStatement.setString(2, hashPassword);
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
-            // Step 4: Process the ResultSet object.
             while (rs.next()) {
                 boolean verified = rs.getBoolean("verified");
                 Integer id = rs.getInt("userID");
@@ -65,23 +62,18 @@ public class UserDAO {
 
     public User checkUserCode(String username, String code) throws SQLException {
         System.out.println(CHECK_USER_CODE);
-        // try-with-resource statement will auto close the this.conn.
         User user = null;
         try (PreparedStatement preparedStatement = this.conn.prepareStatement(CHECK_USER_CODE)) {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, code);
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
-            // Step 4: Process the ResultSet object.
             while (rs.next()) {
 
 
                 String password = rs.getString("password");
 
-//                String sha256hex = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
-//                System.out.println("hey im " + sha256hex);
 
                 user = new User(username, password);
             }
@@ -94,24 +86,20 @@ public class UserDAO {
 
     public User getUserDetails(int userID) throws SQLException {
 
-        // try-with-resource statement will auto close the this.conn.
         User user = null;
         try (PreparedStatement preparedStatement = this.conn.prepareStatement(GET_NAVBAR_DETAILS)) {
             preparedStatement.setInt(1, userID);
 
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
-            // Step 4: Process the ResultSet object.
             while (rs.next()) {
 
 
                 String name = rs.getString("firstName") + " " + rs.getString(("lastName"));
                 String avatar = rs.getString("image");
                 Integer id = rs.getInt("custID");
-//                String sha256hex = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
-//                System.out.println("hey im " + sha256hex);
+
 
                 user = new User(id, avatar, name);
             }
@@ -123,16 +111,13 @@ public class UserDAO {
 
     public User getCustomerDetails(int custID) throws SQLException {
 
-        // try-with-resource statement will auto close the this.conn.
         User user = null;
         try (PreparedStatement preparedStatement = this.conn.prepareStatement(GET_CUSTOMER_DETAILS)) {
             preparedStatement.setInt(1, custID);
 
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
-            // Step 4: Process the ResultSet object.
             while (rs.next()) {
 
 
@@ -151,7 +136,6 @@ public class UserDAO {
 
     public void updateCustomerDetails(int custID, User u) throws SQLException {
 
-        // try-with-resource statement will auto close the this.conn.
         User user = null;
         try (PreparedStatement preparedStatement = this.conn.prepareStatement(UPDATE_CUSTOMER_DETAILS)) {
             preparedStatement.setString(1, user.getContact());
@@ -160,10 +144,8 @@ public class UserDAO {
             preparedStatement.setInt(4, custID);
 
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             preparedStatement.executeUpdate();
 
-            // Step 4: Process the ResultSet object.
 
         } catch (SQLException e) {
             printSQLException((SQLException) e);
@@ -173,7 +155,6 @@ public class UserDAO {
 
     public User getEmployeeDetails(int userID, boolean supplier) throws SQLException {
 
-        // try-with-resource statement will auto close the this.conn.
         User user = null;
         String QueryString;
         if (supplier) {
@@ -185,18 +166,14 @@ public class UserDAO {
             preparedStatement.setInt(1, userID);
 
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
-            // Step 4: Process the ResultSet object.
             while (rs.next()) {
 
 
                 String name = rs.getString("firstName") + " " + rs.getString(("lastName"));
                 String avatar = rs.getString("photo");
                 Integer id = rs.getInt("empID");
-//                String sha256hex = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
-//                System.out.println("hey im " + sha256hex);
 
                 user = new User(id, avatar, name);
             }
@@ -208,7 +185,6 @@ public class UserDAO {
 
     public void addUser(User user, int code) throws SQLException {
         System.out.println(INSERT_USER);
-        // try-with-resource statement will auto close the this.conn.
         try (
                 PreparedStatement preparedStatement = this.conn.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS)) {
             String firstName = user.getName().split(" ")[0];
@@ -249,7 +225,6 @@ public class UserDAO {
 
     public String getRole(int userID) throws SQLException {
 
-        // try-with-resource statement will auto close the this.conn.
         String role = null;
         try (PreparedStatement preparedStatement = this.conn.prepareStatement(GET_ROLE)) {
             preparedStatement.setInt(1, userID);
@@ -258,7 +233,6 @@ public class UserDAO {
             // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
-            // Step 4: Process the ResultSet object.
             while (rs.next()) {
 
 
@@ -274,7 +248,6 @@ public class UserDAO {
 
     public void verifyUser(User user) throws SQLException {
         System.out.println(VERIFY_USER);
-        // try-with-resource statement will auto close the this.conn.
         try (PreparedStatement preparedStatement = this.conn.prepareStatement(VERIFY_USER)) {
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setInt(2, user.getCode());

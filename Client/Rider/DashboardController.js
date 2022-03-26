@@ -25,25 +25,6 @@ $(window).on("load", function () {
     }
   });
 
-  var badge = $(document.createElement("span"))
-    .addClass("icon-button__badge notificationCount")
-    .html(2);
-  var bell = $(document.createElement("span"))
-    .addClass("material-icons")
-    .html("notifications");
-
-  var notification = $(document.createElement("button")).addClass(
-    "icon-button ml-50"
-  );
-
-  var container = $("#links");
-
-  notification.append(bell);
-  notification.append(badge);
-  container.append(notification);
-
-  // getNotifications();
-
   function toggleAvailibility() {
     $.ajax({
       type: "PUT",
@@ -61,20 +42,6 @@ $(window).on("load", function () {
       failure: function () {
         alert("fail");
       },
-    });
-  }
-
-  function getNotifications() {
-    $.ajax({
-      url:
-        "http://localhost:8080/Server_war_exploded/notification?role=rider&id=" +
-        rider,
-      beforeSend: function (xhr) {
-        xhr.setRequestHeader("authorization", authHeader);
-      },
-    }).then(function (data) {
-      newarray = $.parseJSON(data);
-      badge.html(newarray.length);
     });
   }
 
