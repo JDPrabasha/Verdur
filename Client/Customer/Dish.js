@@ -77,7 +77,10 @@ class Dish {
       .html("RATE")
       .addClass("fw-b")
       .attr("id", "rate");
-    var skip = $(document.createElement("p")).html("SKIP").addClass("fw-b");
+    var skip = $(document.createElement("p"))
+      .html("SKIP")
+      .addClass("fw-b")
+      .attr("id", "skip");
 
     // var label = $(document.createElement("label"))
     //   .attr("for", "quantity")

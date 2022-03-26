@@ -11,7 +11,7 @@ import java.util.List;
 
 public class IngredientDAO {
     private static final String SELECT_INGREDIENTS = "select i.ingID,i.name, h.defaultValue as quantity, i.image, h.unit, i.expandable, i.image,h.min,h.max from dish d join hasingredient h on d.dishID = h.dishID join ingredient i on h.ingID = i.ingID join ingredientweight w on w.unit = h.unit and w.ingID=i.ingID where d.dishID=?";
-    private static final String SELECT_CUSTOMIZABLE_INGREDIENTS = "select i.ingID,i.name, h.min, h.max, h.ppq,h.type,i.proteinphg, i.carbsphg, i.calphg, i.fatsphg,w.weight, h.defaultValue as quantity, i.image, i.unit, i.expandable, i.image from dish d join hasingredient h on d.dishID = h.dishID join ingredient i on h.ingID = i.ingID join ingredientweight w on w.unit = h.unit and w.ingID=i.ingID where d.dishID =? and h.type!=?";
+    private static final String SELECT_CUSTOMIZABLE_INGREDIENTS = "select i.ingID,i.name, h.min, h.max, h.ppq,h.type,i.proteinphg, i.carbsphg, i.calphg, i.fatsphg,w.weight, h.defaultValue as quantity, i.image, h.unit, i.expandable, i.image from dish d join hasingredient h on d.dishID = h.dishID join ingredient i on h.ingID = i.ingID join ingredientweight w on w.unit = h.unit and w.ingID=i.ingID where d.dishID =? and h.type!=?";
     private static final String SELECT_INGREDIENT_DETAILS = "select i.description, n.description as benefit, i.ingID, i.name, i.image from ingredient i join nutritionbenefits n on n.ingID=i.ingID where i.ingID = ? ";
     private Connection conn;
 

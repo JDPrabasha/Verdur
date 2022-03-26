@@ -18,7 +18,7 @@ public class DeliveryDAO {
     private Connection conn;
 
     private static final String SELECT_ORDERS = "select o.orderID,o.custID,o.latitude,o.longitude,p.amount,p.type from delivery d join orders o on d.deliveryID = o.deliveryID join payment p on o.orderID = p.orderID where o.status=\"delivering\" and d.riderID=?";
-    private static final String SELECT_CUSTOMER = "SELECT firstName, lastName, c.custID,u.contact from customer c join user u on c.userID=u.userID where c.custID=?";
+    private static final String SELECT_CUSTOMER = "SELECT firstName, lastName, c.custID,u.contact from customer c join user u on c.userID=u.userID join orders o on o.custID = c.custID where o.orderID=?";
     private static final String SELECT_ORDER_DISHES = " select c.quantity, d.name, c.cdishID, o.orderID,d.image,c.price from orders o  join hasdish h on o.orderId = h.orderID join customizeddish c on h.cdishID = c.cdishID join dish d on c.dishID = d.dishID where o.orderID=?";
     private static final String SELECT_DELIVERY_FEES = " select * from deliveryfee";
     private static final String CONFIRM_CASH_ORDER = " update orders set status=? where orderid=?";

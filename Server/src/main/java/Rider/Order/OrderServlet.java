@@ -1,6 +1,5 @@
 package Rider.Order;
 
-import Customer.Dish.Dish;
 import Rider.Rider;
 import Rider.RiderDAO;
 import com.google.gson.Gson;
@@ -27,6 +26,11 @@ public class OrderServlet extends HttpServlet {
     public void init() {
         orderDAO = new OrderDAO();
         riderDAO = new RiderDAO();
+    }
+
+    protected void doPut(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        finishReview(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -75,6 +79,7 @@ public class OrderServlet extends HttpServlet {
         }
 
     }
+
 
     private void getOrderInformation(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String customer = request.getParameter("customer");
@@ -154,5 +159,16 @@ public class OrderServlet extends HttpServlet {
         System.out.println("got here");
         orderDAO.addComplaint(complaintOrder);
         System.out.println("done");
+    }
+
+    private void finishReview(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("i try");
+        String requestUrl = request.getRequestURI();
+
+        String customer = request.getParameter("customer");
+        orderDAO.finishReview(customer);
+
+
+        System.out.println("im in done");
     }
 }

@@ -3,6 +3,7 @@ $(window).on("load", function () {
   var customer = parseInt(window.localStorage.getItem("customer"));
   $("#avatar").attr("src", window.localStorage.getItem("avatar"));
   $("#customer").html(window.localStorage.getItem("name"));
+  var reviewOrder = {};
   var fees = [];
   var payment = "";
   var array = [];
@@ -10,22 +11,49 @@ $(window).on("load", function () {
   var order = {};
   var deserializedOrder = {};
 
-  $.ajax({
-    url: "http://localhost:8080/Server_war_exploded/order/" + customer,
-    beforeSend: function (xhr) {
-      xhr.setRequestHeader("authorization", authHeader);
-    },
-  }).then(function (data) {
-    order = $.parseJSON(data);
-    console.log(order);
+  function getActiveOrder() {
+    $.ajax({
+      url: "http://localhost:8080/Server_war_exploded/order/" + customer,
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader("authorization", authHeader);
+      },
+    }).then(function (data) {
+      order = $.parseJSON(data);
+      console.log(order);
+      reviewOrder = order;
 
-    deserializedOrder = OrderSerializer.deSerialize(order);
-    new Order(deserializedOrder).addOrder();
+      deserializedOrder = OrderSerializer.deSerialize(order);
+      new Order(deserializedOrder).addOrder();
 
-    if (order) {
-      $("#orders").removeClass("transparent");
-    }
-  });
+      if (order) {
+        $("#orders").removeClass("transparent");
+      }
+    });
+  }
+
+  getActiveOrder();
+
+  function finishReview() {
+    $.ajax({
+      type: "PUT",
+      url:
+        "http://localhost:8080/Server_war_exploded/order/review?customer=" +
+        customer,
+      headers: {
+        authorization: authHeader,
+      },
+
+      contentType: "application/json; charset=utf-8",
+
+      success: function (response) {
+        console.log("pass");
+        getActiveOrder();
+      },
+      failure: function () {
+        console.log("fail");
+      },
+    });
+  }
 
   $.ajax({
     type: "GET",
@@ -321,6 +349,7 @@ $(window).on("load", function () {
 
       success: function (response) {
         console.log("pass");
+        finishReview();
       },
       failure: function () {
         console.log("fail");
@@ -357,6 +386,20 @@ $(window).on("load", function () {
         console.log("fail");
       },
     });
+  });
+
+  $("#ratingContent").on("click", "#skipReview", function () {
+    console.log("skippy");
+    finishReview();
+  });
+
+  $("#ratingContent").on("click", "#skip", function () {
+    console.log("attem");
+    const deSerializedData = OrderSerializer.deSerialize(order);
+    var orderIndex = parseInt($("#ratingContent").attr("data-index"));
+    console.log(orderIndex);
+    console.log(orderIndex);
+    new Order(deSerializedData).reviewOrder(orderIndex);
   });
 
   $("#checkout").click(function (e) {

@@ -6886,6 +6886,10 @@
           flex-grow: 10;
 }
 
+.ml-auto {
+  margin-left: auto;
+}
+
 .bg-dark-grey {
   background-color: #313131;
 }
