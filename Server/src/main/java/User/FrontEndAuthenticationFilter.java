@@ -14,6 +14,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import static Manager.Output.outputResponse.sendresponse;
+
 
 @WebFilter("/*")
 public class FrontEndAuthenticationFilter implements Filter {
@@ -39,60 +41,67 @@ public class FrontEndAuthenticationFilter implements Filter {
 
             String btk = req.getHeader("authorization");
 //            System.out.println(btk);
-            String ea = btk.substring(btk.indexOf(' ') + 1);
+            if(btk!=null) {
+                String ea = btk.substring(btk.indexOf(' ') + 1);
 
-//            System.out.println(path);
-//
-//            System.out.println(btk);
+                //            System.out.println(path);
+                //
+                //            System.out.println(btk);
 
-            JWebToken incomingToken = null;
+                JWebToken incomingToken = null;
 
-            try {
-//                btk = req.getHeader("authorization");
-
-
-//                System.out.println("im here now");
-                incomingToken = new JWebToken(ea);
-//                System.out.println(incomingToken);
-            } catch (NoSuchAlgorithmException e) {
-//                System.out.println("im in catch");
-                e.printStackTrace();
-            }
-            if (incomingToken.isValid()) {
-//                System.out.println("i came here");
-                List<String> aud = incomingToken.getAudience();
-
-                if (customerPaths.contains(path) && aud.contains("Customer")) {
-
-                    chain.doFilter(request, response);
-                } else if (path.contains("/Manager/") && aud.contains("Manager")) {
-                    chain.doFilter(request, response);
-                } else if (path.contains("/KitchenManager/") && aud.contains("Kitchen Manager")) {
-                    chain.doFilter(request, response);
-                } else if (path.contains("/Supplier/") && aud.contains("Supplier")) {
-                    chain.doFilter(request, response);
-                } else if (path.contains("/profile")) {
-                    chain.doFilter(request, response);
+                try {
+                    //                btk = req.getHeader("authorization");
 
 
-                } else if (path.contains("/profile")) {
-                    chain.doFilter(request, response);
-                } else if (path.contains("/Cashier/") && aud.contains("Cashier")) {
-                    chain.doFilter(request, response);
-
-                } else if (path.contains("/Chef/") && aud.contains("Chef")) {
-                    chain.doFilter(request, response);
+                    //                System.out.println("im here now");
+                    incomingToken = new JWebToken(ea);
+                    //                System.out.println(incomingToken);
+                } catch (NoSuchAlgorithmException e) {
+                    //                System.out.println("im in catch");
+                    e.printStackTrace();
                 }
-//                add customer paths here
-//                else if(path.contains("/customer")){
-//                    chain.doFilter(request, response);
-//                }
+                if (incomingToken.isValid()) {
+                    //                System.out.println("i came here");
+                    List<String> aud = incomingToken.getAudience();
+
+                    if (customerPaths.contains(path) && aud.contains("Customer")) {
+
+                        chain.doFilter(request, response);
+                    } else if (path.contains("/Manager/") && aud.contains("Manager")) {
+                        chain.doFilter(request, response);
+                    } else if (path.contains("/KitchenManager/") && aud.contains("Kitchen Manager")) {
+                        chain.doFilter(request, response);
+                    } else if (path.contains("/Supplier/") && aud.contains("Supplier")) {
+                        chain.doFilter(request, response);
+                    } else if (path.contains("/profile")) {
+                        chain.doFilter(request, response);
 
 
-            } else {
-//                System.out.println("hello");
+                    } else if (path.contains("/profile")) {
+                        chain.doFilter(request, response);
+                    } else if (path.contains("/Cashier/") && aud.contains("Cashier")) {
+                        chain.doFilter(request, response);
 
-                res.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                    } else if (path.contains("/Chef/") && aud.contains("Chef")) {
+                        chain.doFilter(request, response);
+                    }else {
+                        res.setStatus(401);
+                    }
+                    //                add customer paths here
+                    //                else if(path.contains("/customer")){
+                    //                    chain.doFilter(request, response);
+                    //                }
+
+
+                } else {
+                    //                System.out.println("hello");
+                    res.setStatus(401);
+                    res.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                }
+            }else{
+//                sendresponse((HttpServletResponse) response,"{message:done}",404);
+                res.setStatus(401);
             }
 
 

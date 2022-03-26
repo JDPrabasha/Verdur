@@ -1,6 +1,8 @@
 import { complaints } from "./complaints.js";
 import { Complaints_Serializer } from "./complaints_serializer.js";
 
+
+
 $(document).ready(function complaints() {
     $("#notificationbox").load("/Client/Manager/Manager-Header.html #notification",function(){
         $.getScript("/Client/Manager/JS/functionalities/profile.js");
@@ -98,15 +100,43 @@ function updateComplaintsPopUp(data){
     $("#payment").html(data.payment)
     $("#orderItems").html("")
     $("#description").html(data.description)
+    // getReverseGeocodingData(data.location.split(" ")[0],data.location.split(" ")[1])
     try{
         data.orderItems.map(i => addOrderItems(i))
     }catch{
         console.log("orderItems is empty")
     }
+    console.log(data.location.split(" ")[0])
+    getReverseGeocodingData(data.location.split(" ")[0],data.location.split(" ")[1])
+    // getReverseGeocodingData(7,80.11707902832764)
+    
     $("#form_frame").trigger("updated")
 }
 
 function addOrderItems(itemName){
     let item = $(document.createElement('div')).html(itemName)
     $("#orderItems").append(item)
+}
+
+function getReverseGeocodingData(lat, lng) {
+    var latlng = new google.maps.LatLng(lat, lng);
+    console.log("y")
+    // This is making the Geocode request
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ latLng: latlng }, function (results, status) {
+      if (status !== google.maps.GeocoderStatus.OK) {
+        alert(status);
+      }
+      // This is checking to see if the Geoeode Status is OK before proceeding
+      if (status == google.maps.GeocoderStatus.OK) {
+        let address = results[0].formatted_address;
+        console.log(address);
+        $("#address").html(address);
+        $("#address").attr(
+          "href",
+          "https://www.google.com/maps/search/?api=1&query=" + lat + "," + lng
+        );
+      }
+      return 0;
+    });
 }

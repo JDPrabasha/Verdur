@@ -47,18 +47,18 @@ export class orderkm{
     }, initialValue)
 
     console.log(sum) // logs 6
-    var countDownTime = new Date(sum).getTime()
+    // var countDownTime = new Date(sum).getTime()
     // console.log(countDownTime)
-    var now = new Date().getTime();
+    // var now = new Date().getTime();
     // //  console.log(now)
-    var distance = countDownTime - now;
-    var distance = now - countDownTime;
+    // var distance = countDownTime - now;
+    // var distance = now - countDownTime;
 
-    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    // var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    // var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    var time = minutes + ":" + seconds 
+    // var time = minutes + ":" + seconds 
     
 
     //  var starttime= new Date(this.timestamp).getTime();
@@ -70,9 +70,9 @@ export class orderkm{
     // var newDateObj = new Date(this.timestamp.getTime() + sum*60000);
     var newDateObj = moment(this.timestamp).add(sum, 'm').toDate();
     console.log(newDateObj);
-    // var time=getTimeRemaining(newDateObj);
-    // var total = new Date(totaltime).getTime();
-
+    console.log(this.getTimeRemaining(newDateObj))
+    var time = this.getTimeRemaining(newDateObj)
+    
 
         var order = $(document.createElement('div')).attr("class","card ongoing_dashcard mb-4").attr("style","width:fit-content").html(`<div class="row py-3 pl-2 pr-12">
         <div class="circle flex-space-evenly col-2">
