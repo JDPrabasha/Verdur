@@ -107,6 +107,7 @@ class restockrequest {
 
 function hiderow(rc) {
     let ric = "#" + rc;
+    let supplierID = window.localStorage.getItem("id")
 
     $(ric).css("display", "none")
     console.log(rc)
@@ -116,7 +117,7 @@ function hiderow(rc) {
     };
     $.ajax({
         type: 'PUT',
-        url: 'http://localhost:8080/Server_war_exploded/Supplier/RestockRequestServlet',
+        url: 'http://localhost:8080/Server_war_exploded/Supplier/RestockRequestServlet?supplierID='+supplierID,
         headers: {
             "authorization": jwt
         },

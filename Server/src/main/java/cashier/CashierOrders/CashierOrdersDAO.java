@@ -16,6 +16,11 @@ public class CashierOrdersDAO {
 
     static String getCustomizedQuantityQ = "select c2.ingID ,c.quantity as dishQuantity, c2.quantity as ingQuantity,c.dishID from orders o join hasdish h on o.orderID =h.orderID join customizeddish c on c.cdishID =h.cdishID join customization c2 on c.cdishID =c2.cdishID WHERE o.orderID =?";
     static String getIngredientWeight = "SELECT weight from hasingredient h join ingredientweight i on h.ingID =i.ingID and h.unit=i.unit where h.ingID =? and dishID =? and unit=?";
+    static String getIngredientUnitRatioQ = "SELECT weight from ingredient i join ingredientweight i2 on i.unit =i2.unit and i.ingID =i2.ingID where i.ingID =? ";
+    static String getStockQ = "SELECT quantity  from stock s where ingID = ?";
+    static String upateStockQ = "Update stock set quantity = ? where ingID = ?";
+
+    static String getFixedQuantitiesQ = "select h2.ingID ,c.quantity as dishQuantity ,h2.defaultValue as ingQuantity,c.dishID  from orders o join hasdish h on o.orderID =h.orderID join customizeddish c on c.cdishID =h.cdishID join hasingredient h2 on c.dishID =h2.dishID and h2.`type` ='fixed' WHERE o.orderID =?";
 
     public CashierOrdersDAO() {
         try {
@@ -406,7 +411,66 @@ public class CashierOrdersDAO {
                     weight = getCustomizedQuantityR.getDouble("weight");
                 }
                 Double reducedQuantity = 1.0*dishQuantity*ingQuantity*weight;
+                PreparedStatement getIngredientUnitRatioSt = this.conn.prepareStatement(getIngredientUnitRatioQ);
+                getIngredientUnitRatioSt.setInt(1,ingID);
+                ResultSet unitRatioR = getIngredientUnitRatioSt.executeQuery();
+                Double unitRatio = null;
+                if(unitRatioR.next()){
+                    unitRatio = unitRatioR.getDouble("weight");
+                }
+                PreparedStatement getIngredientStockSt = this.conn.prepareStatement(getStockQ);
+                getIngredientStockSt.setInt(1,ingID);
+                ResultSet getStockR = getIngredientStockSt.executeQuery();
+                Double CurrentStock = 0.0;
+                if(getStockR.next()){
+                    CurrentStock = getStockR.getDouble("weight");
+                }
+                Double newStock = CurrentStock - (reducedQuantity/unitRatio);
 
+                PreparedStatement reduceStockSt = this.conn.prepareStatement(upateStockQ);
+                reduceStockSt.setDouble(1,newStock);
+                reduceStockSt.setInt(2,ingID);
+                reduceStockSt.executeUpdate();
+            }
+
+            PreparedStatement getFixedQuantitiesSt = this.conn.prepareStatement(getFixedQuantitiesQ);
+            getFixedQuantitiesSt.setInt(1,orderID);
+            ResultSet fixedR = getFixedQuantitiesSt.executeQuery();
+            while(fixedR.next()){
+                int ingID = getCustomizedQuantityR.getInt("ingID");
+                int dishQuantity = getCustomizedQuantityR.getInt("dishQuantity");
+                int ingQuantity = getCustomizedQuantityR.getInt("ingQuantity");
+                int dishID = getCustomizedQuantityR.getInt("dishID");
+
+                PreparedStatement getQuantityRatioSt = this.conn.prepareStatement(getIngredientWeight);
+                getQuantityRatioSt.setInt(1,ingID);
+                getQuantityRatioSt.setInt(2,dishID);
+                ResultSet getQuantityRatioR = getQuantityRatioSt.executeQuery();
+                Double weight = 0.0;
+                if(getCustomizedQuantityR.next()){
+                    weight = getCustomizedQuantityR.getDouble("weight");
+                }
+                Double reducedQuantity = 1.0*dishQuantity*ingQuantity*weight;
+                PreparedStatement getIngredientUnitRatioSt = this.conn.prepareStatement(getIngredientUnitRatioQ);
+                getIngredientUnitRatioSt.setInt(1,ingID);
+                ResultSet unitRatioR = getIngredientUnitRatioSt.executeQuery();
+                Double unitRatio = null;
+                if(unitRatioR.next()){
+                    unitRatio = unitRatioR.getDouble("weight");
+                }
+                PreparedStatement getIngredientStockSt = this.conn.prepareStatement(getStockQ);
+                getIngredientStockSt.setInt(1,ingID);
+                ResultSet getStockR = getIngredientStockSt.executeQuery();
+                Double CurrentStock = 0.0;
+                if(getStockR.next()){
+                    CurrentStock = getStockR.getDouble("weight");
+                }
+                Double newStock = CurrentStock - (reducedQuantity/unitRatio);
+
+                PreparedStatement reduceStockSt = this.conn.prepareStatement(upateStockQ);
+                reduceStockSt.setDouble(1,newStock);
+                reduceStockSt.setInt(2,ingID);
+                reduceStockSt.executeUpdate();
             }
         } catch (SQLException e) {
             e.printStackTrace();

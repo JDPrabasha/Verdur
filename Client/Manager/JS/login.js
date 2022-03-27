@@ -86,7 +86,7 @@ function setDetails(role) {
                 //Km location
             } else if (role == "Supplier") {
                 //supplier location
-                window.location = "/Client/Supplier/SupplierOrders.html"
+                window.location = "/Client/Supplier/RestockRequests.html"
                 window.localStorage.setItem("id", user.id);
             } else if (role == "Cashier") {
                 //cashier
