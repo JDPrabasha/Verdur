@@ -139,8 +139,11 @@ $(document).ready(function () {
       }).then(function (data) {
         console.log(data);
         var array = $.parseJSON(data);
+        $("#dishes").empty();
         $("#breakfast").empty();
         $("#new").empty();
+        $("#current").addClass("hidden");
+        $("#recent").addClass("hidden");
         $("#trending").html(
           array.length > 1
             ? array.length + " results"
@@ -304,6 +307,8 @@ $(document).ready(function () {
       $("#dishes").empty();
       $("#breakfast").empty();
       $("#new").empty();
+      $("#current").addClass("hidden");
+      $("#recent").addClass("hidden");
       $("#trending").html(
         array.length > 1 ? array.length + " results" : array.length + " result"
       );

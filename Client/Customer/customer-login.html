@@ -30,7 +30,7 @@
           />
         </label>
         <p
-          class="text-red mb-3 hidden error"
+          class="text-red mb-3 hidden"
           id="nameerror"
           style="font-size: smaller"
         >
@@ -45,7 +45,7 @@
             id="newemail"
           />
           <p
-            class="text-red mb-3 hidden error"
+            class="text-red mb-3 hidden"
             id="emailerror"
             style="font-size: smaller"
           >
@@ -61,7 +61,7 @@
             id="newcontact"
           />
           <p
-            class="text-red mb-3 hidden error"
+            class="text-red mb-3 hidden"
             id="contacterror"
             style="font-size: smaller"
           >
@@ -78,7 +78,7 @@
           />
 
           <p
-            class="text-red mb-3 hidden error"
+            class="text-red mb-3 hidden"
             id="passworderror"
             style="font-size: smaller"
           >
@@ -113,7 +113,7 @@
           />
         </label>
         <p
-          class="text-red mb-3 hidden error"
+          class="text-red mb-3 hidden"
           id="loginerror"
           style="font-size: smaller"
         >
@@ -132,7 +132,7 @@
         </label>
 
         <!-- <p class="text-red mb-3" style="font-size: smaller">random text</p> -->
-        <p class="mt-4 mb-4 text-green">Forgot password?</p>
+        <p id="forgot" class="mt-4 mb-4 text-green">Forgot password?</p>
         <a onclick="login()" class="btn width-4 text-center mb-6">Login</a>
         <p class="mb-8">
           Not registered yet?<span class="text-info" id="createAccount">
@@ -151,10 +151,10 @@
       </div>
     </div>
     <div class="modal error hidden">
-      <div class="modal-bg" id="alertOngoing">
-        <div class="modal-body p-5 round-2 width-4 height-1">
+      <div class="modal-bg" id="alertReset">
+        <div class="modal-body p-5 round-2 width-2 height-1">
           <p class="text-center mt-3">
-            A password reset link has been sent to your email.
+            A link to reset your password has been sent to your email.
           </p>
           <span class="material-icons modal-close" id="close"> close </span>
         </div>

@@ -21,7 +21,7 @@ import org.json.JSONObject;
 
 public class JWebToken {
 
-    private static final String SECRET_KEY = "FREE_MASON"; //@TODO Add Signature here
+    private static final String SECRET_KEY = "FREE_MASON";
     private static final char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
     private static final String ISSUER = "mason.metamug.net";
     private static final String JWT_HEADER = "{\"alg\":\"HS256\",\"typ\":\"JWT\"}";
@@ -48,12 +48,6 @@ public class JWebToken {
         signature = hmacSha256(encodedHeader + "." + encode(payload), SECRET_KEY);
     }
 
-    //    /**
-//     * For verification
-//     *
-//     * @param token
-//     * @throws java.security.NoSuchAlgorithmException
-//     */
     public JWebToken(String token) throws NoSuchAlgorithmException {
         this();
         String[] parts = token.split("\\.");
@@ -111,13 +105,7 @@ public class JWebToken {
         return new String(Base64.getUrlDecoder().decode(encodedString));
     }
 
-    //    /**
-//     * Sign with HMAC SHA256 (HS256)
-//     *
-//     * @param data
-//     * @return
-//     * @throws Exception
-//     */
+
     private String hmacSha256(String data, String secret) {
         try {
 

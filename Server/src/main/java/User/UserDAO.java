@@ -12,12 +12,14 @@ public class UserDAO {
 
 
     private static final String FIND_USER = "select * from login where email =? and password=?";
+    private static final String CHECK_MAIL = "select * from login where email =?";
     private static final String GET_ROLE = "select role from user where userID = ?";
     private static final String CHECK_USER_CODE = "select * from users where username =? and code=?";
     private static final String INSERT_USER = "INSERT INTO user (firstName,lastName,contact, dateAdded, role) VALUES (?, ?, ?, ?, ?)";
     private static final String INSERT_CUSTOMER = "INSERT INTO customer (userID) VALUES (?)";
     private static final String ADD_LOGIN = "INSERT INTO login (userID, email, password, code) VALUES (?, ?, ?, ?)";
     private static final String VERIFY_USER = "UPDATE users SET verified=1 WHERE username=? AND code=?";
+    private static final String INVALIDATE_USER = "UPDATE users SET verified=0,code=? WHERE username=?";
     private static final String RESET_CODE = "UPDATE users SET code=? WHERE username=?";
     private static final String GET_NAVBAR_DETAILS = "SELECT firstName, lastName, image, c.custID from customer c join user u on c.userID=u.userID join avatar a on c.avatarID = a.avatarID where c.userID=?";
     private static final String GET_EMPLOYEE_DETAILS = "SELECT firstName, lastName, photo, e.empID from user u join employee e on e.userID=u.userID where e.userID=?";
@@ -262,9 +264,9 @@ public class UserDAO {
             preparedStatement.setInt(2, user.getCode());
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
-            PreparedStatement secondStatement = this.conn.prepareStatement(VERIFY_USER);
-            preparedStatement.setInt(1, 123456);
-            preparedStatement.setString(2, user.getUsername());
+            PreparedStatement secondStatement = this.conn.prepareStatement(RESET_CODE);
+            secondStatement.setInt(1, 123456);
+            secondStatement.setString(2, user.getUsername());
             System.out.println(secondStatement);
             secondStatement.executeUpdate();
             conn.commit();
@@ -289,6 +291,41 @@ public class UserDAO {
                 }
             }
         }
+    }
+
+    public boolean checkEmail(String username) {
+
+
+        try (PreparedStatement preparedStatement = this.conn.prepareStatement(CHECK_MAIL)) {
+            preparedStatement.setString(1, username);
+
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+
+
+                return true;
+
+
+            }
+        } catch (SQLException e) {
+            printSQLException((SQLException) e);
+        }
+
+        return false;
+    }
+
+    public void deactivateAccount(String username, int code) throws SQLException {
+        conn.setAutoCommit(false);
+        PreparedStatement secondStatement = this.conn.prepareStatement(RESET_CODE);
+        secondStatement.setInt(1, code);
+        secondStatement.setString(2, username);
+        System.out.println(secondStatement);
+        secondStatement.executeUpdate();
+        conn.commit();
+        conn.setAutoCommit(true);
+
     }
 }
 
