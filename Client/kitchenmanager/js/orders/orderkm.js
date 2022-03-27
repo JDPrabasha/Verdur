@@ -46,13 +46,13 @@ export class orderkm{
     return previousValue + currentValue.estimatedtime
     }, initialValue)
 
-    console.log(sum) // logs 6
+    console.log("total order time = "+sum) // logs 6
     
-    console.log(this.timestamp);
+    console.log("timestamp = "+this.timestamp);
   
     var newDateObj = moment(this.timestamp).add(sum, 'm').toDate();
-    console.log(newDateObj);
-    console.log(this.getTimeRemaining(newDateObj))
+    console.log("timestamp + total order time ="+newDateObj);
+    console.log("answer = "+this.getTimeRemaining(newDateObj))
     var time = this.getTimeRemaining(newDateObj)
     
 
@@ -64,7 +64,7 @@ export class orderkm{
            <div class="row">
                
                <div class="col-3 text-2"> ID : ${this.orderID}</div>
-               <div class="col-5 text-2 ">${time}</div>
+               <div class="col-5 text-2 " id="orderTime-${this.orderID}" time ="${newDateObj}">${time}</div>
                <div class="col-3"><img class="icon-5"style="width:2cm; height:2cm;" src="${this.chefimage}" alt=""></div>
                <div class="col-1 text-bold">${this.chefname}</div>
                
@@ -80,6 +80,8 @@ export class orderkm{
         // console.log(new Date(x))
         // let difference = new Date(new Date(x) - new Date() - new Date("1970-01-01 11:00:00"))
         let difference = new Date(new Date(x) - new Date() + new Date().getTimezoneOffset() * 60 * 1000)
+        console.log("difference = "+difference);
+        
     
     
     

@@ -5,7 +5,7 @@ function doSubmit()
     var ingid = url.searchParams.get("id");
 
     quantity = document.getElementById("quantity").value,
-    supplier = document.getElementById("supplierdetails").options[0].id,
+    supplier = document.getElementById("supplierdetails").value,
     dueBy = document.getElementById("dueby").value,
     expired = document.getElementById("expired").value;
 
@@ -37,9 +37,9 @@ function doSubmit()
         "supplierid" : parseInt(supplier) 
     })
     console.log(data);
-    // xhr.send(data);
+    xhr.send(data);
     
-    // window.location.href="createrestockmenu.html";
+    window.location.href="/Client//kitchenmanager/inventory.html";
 
 
 
