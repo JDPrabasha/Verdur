@@ -14,6 +14,8 @@ import java.util.List;
 public class CashierOrdersDAO {
     private Connection conn;
 
+    static String getCustomizedQuantityQ = "select c2.ingID ,c.quantity as dishQuantity, c2.quantity as ingQuantity,c.dishID from orders o join hasdish h on o.orderID =h.orderID join customizeddish c on c.cdishID =h.cdishID join customization c2 on c.cdishID =c2.cdishID WHERE o.orderID =?";
+    static String getIngredientWeight = "SELECT weight from hasingredient h join ingredientweight i on h.ingID =i.ingID and h.unit=i.unit where h.ingID =? and dishID =? and unit=?";
 
     public CashierOrdersDAO() {
         try {
@@ -381,6 +383,35 @@ public class CashierOrdersDAO {
         return riderlist;
 
 
+    }
+
+
+    public Integer reduceCustomizedDish(int orderID){
+        try {
+            PreparedStatement getCustomizedQuantitySt = this.conn.prepareStatement(getCustomizedQuantityQ);
+            getCustomizedQuantitySt.setInt(1,orderID);
+            ResultSet getCustomizedQuantityR = getCustomizedQuantitySt.executeQuery();
+            while(getCustomizedQuantityR.next()){
+                int ingID = getCustomizedQuantityR.getInt("ingID");
+                int dishQuantity = getCustomizedQuantityR.getInt("dishQuantity");
+                int ingQuantity = getCustomizedQuantityR.getInt("ingQuantity");
+                int dishID = getCustomizedQuantityR.getInt("dishID");
+
+                PreparedStatement getQuantityRatioSt = this.conn.prepareStatement(getIngredientWeight);
+                getQuantityRatioSt.setInt(1,ingID);
+                getQuantityRatioSt.setInt(2,dishID);
+                ResultSet getQuantityRatioR = getQuantityRatioSt.executeQuery();
+                Double weight = 0.0;
+                if(getCustomizedQuantityR.next()){
+                    weight = getCustomizedQuantityR.getDouble("weight");
+                }
+                Double reducedQuantity = 1.0*dishQuantity*ingQuantity*weight;
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
