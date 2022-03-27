@@ -5,11 +5,13 @@ import { orderserializer } from "./orderserializer.js";
 
 $(document).ready(function(){
     var authHeader = "Bearer " + window.localStorage.getItem("jwt");
+    var chefID = window.localStorage.getItem("id")
+    console.log(chefID)
     // console.log(authHeader);
     let chefid = localStorage.getItem("id")
     $.ajax({
-        // url:"http://localhost:8080/Server_war_exploded/KitchenManager/order?chefID="+chefid,
-        url:"http://localhost:8080/Server_war_exploded/Chef/order?chefID="+1,
+        url:"http://localhost:8080/Server_war_exploded/Chef/order?chefID="+chefid,
+        // url:"http://localhost:8080/Server_war_exploded/Chef/order?chefID="+1,
         beforeSend: function(xhr) {
             xhr.setRequestHeader("authorization", authHeader);
           },

@@ -7,6 +7,10 @@ $(document).ready(function(){
        
     //     <a href="dish.html"><i class="material-icons">lunch_dining</i></a>
     //     <a href="restockrequestorders.html"><i class="material-icons">autorenew</i></a>`);
-    $("#notification").load("/Client/kitchenmanager/headerkm.html #notification")
+    $("#notification").load("/Client/kitchenmanager/headerkm.html #notification",function(){
+        $("#header_name").html(window.localStorage.getItem("name"))
+        $("#header_image").attr("src",window.localStorage.getItem("photo"))
+        // console.log(window.localStorage.getItem("photo"))
+    })
   
 })
