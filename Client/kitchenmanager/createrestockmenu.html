@@ -57,8 +57,8 @@
                             
                            
                              
-                            <label>Set Quantity(<div id="restockunit"></div>)</label>
-                            <input type="estimatedtime" id="quantity">
+                            <label>Set Quantity (<span style="display:inline-block" id="restockunit"></span>)</label>
+                            <input type="estimatedtime" min="0" oninput="validity.valid||(value='')" id="quantity">
                            
                             <div class="row">
                                
@@ -80,7 +80,7 @@
                             <label for="Due date"> Restock Date:</label>
                          <input type="date" id="dueby" style="width: 50%;">
                          <form action="/action_page.php">
-                            <label for="birthdaytime">expiry Date:</label>
+                            <label for="birthdaytime">Expiry Date:</label>
                             <input type="datetime-local" id="expired" name="birthdaytime">
                           </form>
                      

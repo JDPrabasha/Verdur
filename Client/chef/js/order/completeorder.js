@@ -9,7 +9,7 @@ function completeorder(rc) {
     };
     $.ajax({
         type:'PUT',
-        url :'http://localhost:8080/Server_war_exploded/KitchenManager/order',
+        url :'http://localhost:8080/Server_war_exploded/Chef/order',
         headers: {
             "authorization":jwt
         },

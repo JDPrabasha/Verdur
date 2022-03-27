@@ -80,7 +80,7 @@ public class orderdao {
             int quantity = rs.getInt("quantity");
             List<hasIngredient> ingredient = new ArrayList<>();
 
-            String query2 = "SELECT * FROM customizeddish JOIN customization ON customizeddish.cdishID=customization.cdishID JOIN dish ON dish.dishID=customizeddish.dishID JOIN ingredient ON ingredient.ingID=customization.ingID WHERE customizeddish.cdishID=?";
+            String query2 = "SELECT * from customizeddish c join customization c2 on c.cdishID =c2.cdishID join hasingredient h on h.dishID = c.dishID and h.ingID = c2.ingID join ingredient i on i.ingID =c2.ingID WHERE c.cdishID =?";
             PreparedStatement st2 = this.conn.prepareStatement(query2);
             st2.setInt(1, dishid);
             ResultSet rs2 = st2.executeQuery();
@@ -88,10 +88,10 @@ public class orderdao {
 
             while (rs2.next()) {
                 int ingid = rs2.getInt("ingID");
-                String ingname = rs2.getString("ingredient.name");
-                String ingimage = rs2.getString("ingredient.image");
-                int ingquantity = rs2.getInt("quantity");
-                String unit = rs2.getString("unit");
+                String ingname = rs2.getString("i.name");
+                String ingimage = rs2.getString("i.image");
+                int ingquantity = rs2.getInt("c.quantity");
+                String unit = rs2.getString("h.unit");
 
                 ingredient.add(new hasIngredient(ingid, ingname, ingimage, ingquantity, unit));
 

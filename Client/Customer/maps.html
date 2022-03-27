@@ -59,17 +59,18 @@
               window.alert("Directions request failed");
               return;
             } else {
-              if (
-                parseFloat(directionsData.distance.text) <= 10 &&
-                $("#distance").attr("data-flag") == 0
-              ) {
-                $("#distance").html(directionsData.distance.text);
-                $("#distance").attr("data-flag", 1);
-                console.log(" hi");
-              } else {
-                $("#distance").html(directionsData.distance.text);
-                $("#distance").attr("data-flag", 0);
-              }
+              console.log("success");
+              // if (
+              //   parseFloat(directionsData.distance.text) <= 10 &&
+              //   $("#distance").attr("data-flag") == 0
+              // ) {
+              $("#distance").html(directionsData.distance.text);
+              //   $("#distance").attr("data-flag", 1);
+              //   console.log(" hi");
+              // } else {
+              //   $("#distance").html(directionsData.distance.text);
+              //   $("#distance").attr("data-flag", 0);
+              // }
               // document.getElementById("msg").innerHTML +=
               //   " Driving distance is " +
               //   directionsData.distance.text +
@@ -95,7 +96,7 @@
 
               console.log(address);
               $("#location").val(address);
-              $("#distance").attr("data-flag", 0);
+
               $("#longitude").val(lat);
 
               $("#latitude").val(lng);
@@ -107,7 +108,17 @@
         google.maps.event.addListener(mk2, "dragend", function (ev) {
           //   alert(ll.lat() + " " + ll.lng()); // always the same LatLng-Object...
           route.destination = mk2.getPosition();
+          console.log("check");
           console.log($("#distance").html());
+          console.log("check");
+          if (parseInt($("#distance").html().split(" ")[0]) <= 10) {
+            $("#distance").attr("data-flag", 1);
+            console.log("range okay");
+          } else {
+            console.log(parseInt($("#distance").html().split(" ")[0]));
+            $("#distance").attr("data-flag", 0);
+            console.log("range bad");
+          }
 
           directionsService.route(route, f1);
           getReverseGeocodingData(
