@@ -11,6 +11,7 @@ public class chef {
     private String status;
     private List<orderkm> order;
     private int orderid;
+    private String timestamp;
 
     public chef(int chefid, String chefname, String chefimage, String status) {
         this.chefid = chefid;
@@ -78,6 +79,14 @@ public class chef {
 
     public void setOrderid(int orderid) {
         this.orderid = orderid;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 }
 
