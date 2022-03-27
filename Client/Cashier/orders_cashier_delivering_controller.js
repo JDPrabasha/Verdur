@@ -21,7 +21,6 @@ $(document).ready(function () {
         deserializeddata.map(params => new orders_cashier(params).printneworderdelivering());
 
         console.log(deserializeddata);
-
-
+        $("#loading").trigger("loaded")
     })
 });

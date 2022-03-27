@@ -21,6 +21,7 @@ $(document).ready(function(){
         //  console.log(deserializeddata);
          deserializeddata.map(params=>new orderkm(params).printneworder());
          readAssignChefButton();
+         $("#loading").trigger("loaded")
      })
 
      function readAssignChefButton() {

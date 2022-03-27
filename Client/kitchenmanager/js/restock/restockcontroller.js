@@ -20,5 +20,7 @@ $(document).ready(function restocklist(){
          console.log(deserializeddata);
          deserializeddata.map(params=>new restock(params).printrestock());
          console.log("hi")
+         $("#loading").trigger("loaded")
+
      })
 });

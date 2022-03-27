@@ -1,3 +1,4 @@
+let flag = 0;
 $(document).ready(function restockrequestlist(){
     var authHeader = "Bearer " + window.localStorage.getItem("jwt");
     let id = window.localStorage.getItem("id")
@@ -14,12 +15,16 @@ $(document).ready(function restockrequestlist(){
          console.log(array);
          const deserializeddata = array.map(i=>restockrequestserializer.doserializer(i));
          deserializeddata.map(params=>new restockrequest(params).printrestockrequest());
+         $("#loading").trigger("loaded")
          $('[id^=timeTillExp-').each(function(){
              console.log(this)
              let time = $(this).attr("time"),
              timecont = $(this)
              setInterval(function(){
                  timecont.html(getTimeRemaining(time))
+                 if(flag!=0){
+                    timecont.attr("style","color:red;")
+                }
              }, 1000);
          })
      })
@@ -29,9 +34,16 @@ $(document).ready(function restockrequestlist(){
 function getTimeRemaining(x) {
     // console.log(new Date(x))
     // let difference = new Date(new Date(x) - new Date() - new Date("1970-01-01 11:00:00"))
-    let difference = new Date(new Date(x) - new Date() + new Date().getTimezoneOffset() * 60 * 1000)
-
-
+    let difference;
+    if(new Date(x) > new Date()) {
+        difference = new Date(new Date(x) - new Date() + new Date().getTimezoneOffset() * 60 * 1000)
+        flag = 0;
+    }
+    else{
+        difference = new Date(new Date() - new Date(x) + (new Date().getTimezoneOffset() * 60 * 1000))
+        // console.log("difference = " + difference);
+        flag = 1;
+    }
 
     let months = difference.getMonth(), 
     days = difference.getDate(),
@@ -51,5 +63,4 @@ function getTimeRemaining(x) {
         timeremain =   secs +" secs"  
     }
     return timeremain;
-
 }

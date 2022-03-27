@@ -22,6 +22,7 @@ $(document).ready(function(){
          const deserializeddata = array.map(i=>orderserializer.doserializer(i));
         //  console.log(deserializeddata);
          deserializeddata.map(params=>new order(params).printneworder());
+        $("#loading").trigger("loaded")
      })
 });
 

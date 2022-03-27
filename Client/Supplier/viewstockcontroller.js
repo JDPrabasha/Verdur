@@ -13,6 +13,8 @@ $(document).ready(function dishlist(){
          console.log(array);
          const deserializeddata = array.map(i=>dishserializer.doserializer(i));
          deserializeddata.map(params=>new dish(params).printdish());
+        $("#loading").trigger("loaded")
+
      })
 
      

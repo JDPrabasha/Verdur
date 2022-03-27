@@ -19,5 +19,7 @@ $(document).ready(function ongoingorderslist(){
          const deserializeddata = array.map(i => orders_cashier_serializer.doserializer(i));
 
          deserializeddata.map(params => new orders_cashier(params).printongoingorders());
+        $("#loading").trigger("loaded")
+
      })
 });

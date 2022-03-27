@@ -194,6 +194,8 @@ $(document).ready(function inventorylist(){
                 $("#typeView").html("Others");
             })
 
+            $("#loading").trigger("loaded")
+
      })
 
      function updateView() {

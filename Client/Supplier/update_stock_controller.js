@@ -21,6 +21,8 @@ $(document).ready(function restockrequestlist() {
         $("#itemType").val(data[0]['itemType'])
         $("#quantity").val(data[0]['quantity'] + " " + data[0]['unit'])
         $("#price").val(data[0]['price'])
+        $("#loading").trigger("loaded")
+
 
         $("#confirm_button").click(function () {
             var supplierID = window.localStorage.getItem("id"),

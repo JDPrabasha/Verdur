@@ -21,6 +21,8 @@ $(document).ready(function () {
         deserializeddata.map(params => new orders_cashier(params).printnewordercooked());
 
         console.log(deserializeddata);
+        $("#loading").trigger("loaded")
+
 
 
     })

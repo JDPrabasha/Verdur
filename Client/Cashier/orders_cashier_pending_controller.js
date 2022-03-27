@@ -19,6 +19,7 @@ $(document).ready(function () {
         // console.log(pending);
         const deserializeddata = pending.map(i => orders_cashier_serializer.doserializer(i));
         deserializeddata.map(params => new orders_cashier(params).printneworder());
+        $("#loading").trigger("loaded")
 
         // console.log(deserializeddata);
 
