@@ -200,8 +200,8 @@ public class StockDAO {
         // try-with-resource statement will auto close the connection.
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(REMOVE_ITEM_SQL)) {
             System.out.println(preparedStatement);
-            preparedStatement.setInt(1, item.getSupplierID());
-            preparedStatement.setInt(2, item.getItemID());
+            preparedStatement.setInt(2, item.getSupplierID());
+            preparedStatement.setInt(1, item.getItemID());
             // preparedStatement.setDouble(3, item.getQuantity());
             //preparedStatement.setDouble(4, item.getPrice());
             //preparedStatement.setString(5, s);

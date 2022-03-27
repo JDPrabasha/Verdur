@@ -11,7 +11,12 @@ public class Stock {
     private double price;
     private String dateAdded;
 
-    public Stock(int itemID, String itemName, String itemType, double quantity, double price, String dateAdded,String unit) {
+    public Stock(int supplierID, int itemID) {
+        this.supplierID = supplierID;
+        this.itemID = itemID;
+    }
+
+    public Stock(int itemID, String itemName, String itemType, double quantity, double price, String dateAdded, String unit) {
         this.itemID = itemID;
         this.itemName = itemName;
         this.itemType = itemType;

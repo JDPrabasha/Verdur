@@ -34,6 +34,11 @@ public class RestockDAO {
     private String getRestockQuantity = "select quantity from restockrequest where restockID =?";
     private String getIngID = "select ingID restockrequest where restockID = ?";
 
+    private String timeoutExpiredRestockRequests = "update restockrequest r set r.expired = 1 WHERE r.deadline <=CURRENT_TIMESTAMP() and r.status in ('','pending') and r.approvalStatus != 'managerDecline'";
+    private String notifyKmExpiredRequets = "insert into kitchenmanagernotifications (type, targetID, description, seen) values (?,?,?,?)";
+    private String getAllExpiredRequests = "SELECT ingID from restockrequest r WHERE r.deadline <=CURRENT_TIMESTAMP() and r.status in ('','pending') and r.approvalStatus != 'managerDecline' and expired = 0";
+    private String getIngName = "select name from ingredient where ingID = ?";
+
     public RestockDAO(){
         try{
             this.conn = DB.initializeDB();
@@ -253,6 +258,59 @@ public class RestockDAO {
             ResultSet ingIDR = ingIDSt.executeQuery();
             if(ingIDR.next()){
                 return ingIDR.getInt("ingID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public int timeOutRequests(){
+        try {
+//            this.conn.setAutoCommit(false);
+            PreparedStatement getExpiredQ = this.conn.prepareStatement(getAllExpiredRequests);
+            ResultSet expiredR = getExpiredQ.executeQuery();
+
+            this.conn.setAutoCommit(false);
+            PreparedStatement notifyKmSt = this.conn.prepareStatement(notifyKmExpiredRequets);
+            while (expiredR.next()){
+                notifyKmSt.setString(1,"Restock");
+                notifyKmSt.setInt(2,expiredR.getInt("ingID"));
+                notifyKmSt.setString(3,"Restock Expired on "+getIngName(expiredR.getInt("ingID")));
+                notifyKmSt.setInt(4,0);
+                notifyKmSt.addBatch();
+            }
+            this.conn.setAutoCommit(false);
+            notifyKmSt.executeBatch();
+            PreparedStatement timeOutRequests = this.conn.prepareStatement(timeoutExpiredRestockRequests);
+            timeOutRequests.executeUpdate();
+//            this.conn.setAutoCommit(false);
+            this.conn.commit();
+            this.conn.setAutoCommit(true);
+            return 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            if(this.conn!=null) {
+                try {
+                    System.err.print("Transaction is being rolled back");
+                    this.conn.rollback();
+                    this.conn.setAutoCommit(true);
+                } catch (SQLException sqlException) {
+                    sqlException.printStackTrace();
+                }
+            }
+            return 0;
+        }
+
+    }
+
+    private String getIngName(int ingID) {
+        try {
+            PreparedStatement getNameQ = this.conn.prepareStatement(getIngName);
+            getNameQ.setInt(1,ingID);
+            ResultSet getNameR = getNameQ.executeQuery();
+            if(getNameR.next()){
+                return getNameR.getString("name");
             }
         } catch (SQLException e) {
             e.printStackTrace();

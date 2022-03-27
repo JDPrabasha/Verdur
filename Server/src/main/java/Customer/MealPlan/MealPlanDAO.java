@@ -14,13 +14,23 @@ public class MealPlanDAO {
     private static final String RESET_PLAN_PROGRESS = "update mealprogress set calorieProgress=0,proteinProgress = 0, carbProgress = 0, fatProgress = 0 where custID = ?";
     private static final String UPDATE_PLAN = "update mealplan set calorieGoal=?, proteinGoal = ?, carbGoal = ?, fatGoal = ? where custID = ?";
 
+    private Connection conn;
+
+    public MealPlanDAO() {
+        try {
+            this.conn = DB.initializeDB();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void addMeal(MealPlan m, int customer) {
-        try (Connection connection = DB.initializeDB();
+        try {
 
-             // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_MEAL_PLAN_PROGRESS);) {
-
+            PreparedStatement preparedStatement = this.conn.prepareStatement(SELECT_MEAL_PLAN_PROGRESS);
+            conn.setAutoCommit(false);
             preparedStatement.setInt(1, customer);
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
@@ -32,7 +42,7 @@ public class MealPlanDAO {
                 int fats = rs.getInt("fatProgress");
                 int carbs = rs.getInt("carbProgress");
                 System.out.println("got here");
-                PreparedStatement secondStatement = connection.prepareStatement(UPDATE_PLAN_PROGRESS);
+                PreparedStatement secondStatement = this.conn.prepareStatement(UPDATE_PLAN_PROGRESS);
                 secondStatement.setInt(1, (int) (calories + m.getCalories()));
                 secondStatement.setInt(2, (int) (protein + m.getProtein()));
                 secondStatement.setInt(3, (int) (carbs + m.getCarbs()));
@@ -40,53 +50,49 @@ public class MealPlanDAO {
                 secondStatement.setInt(5, customer);
                 System.out.println(secondStatement);
                 secondStatement.executeUpdate();
+                conn.commit();
+                conn.setAutoCommit(true);
             }
 
-            // Step 4: Process the ResultSet object.
 
-
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
     }
 
     public void resetProgress(int customer) {
-        try (Connection connection = DB.initializeDB();
-
-             // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(RESET_PLAN_PROGRESS);) {
-
+        try {
+            PreparedStatement preparedStatement = this.conn.prepareStatement(RESET_PLAN_PROGRESS);
+            conn.setAutoCommit(false);
             preparedStatement.setInt(1, customer);
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             preparedStatement.executeUpdate();
             System.out.println("exec");
+            conn.commit();
+            conn.setAutoCommit(true);
 
 
-            // Step 4: Process the ResultSet object.
-
-
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
     }
 
     public void updatePlan(MealPlan m, int customer) {
-        try (Connection connection = DB.initializeDB();
-
-             // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PLAN);) {
+        try {
+            PreparedStatement preparedStatement = this.conn.prepareStatement(UPDATE_PLAN);
+            conn.setAutoCommit(false);
             preparedStatement.setInt(1, (int) m.getCaloriesgoal());
             preparedStatement.setInt(2, (int) m.getProteingoal());
             preparedStatement.setInt(3, (int) m.getCarbgoal());
             preparedStatement.setInt(4, (int) m.getFatgoal());
             preparedStatement.setInt(5, customer);
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             preparedStatement.executeUpdate();
+            conn.commit();
+            conn.setAutoCommit(true);
 
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
     }
@@ -101,21 +107,17 @@ public class MealPlanDAO {
         Integer pprotein = 0;
         Integer pcalorie = 0;
         Integer pcarb = 0;
-        // Step 1: Establishing a Connection
-        try (Connection connection = DB.initializeDB();
 
-             // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_MEAL_PLAN);) {
+        try {
+            PreparedStatement preparedStatement = this.conn.prepareStatement(SELECT_MEAL_PLAN);
             preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
-            PreparedStatement secondStatement = connection.prepareStatement(SELECT_MEAL_PLAN_PROGRESS);
+            PreparedStatement secondStatement = this.conn.prepareStatement(SELECT_MEAL_PLAN_PROGRESS);
             secondStatement.setInt(1, id);
             System.out.println(secondStatement);
             ResultSet rs2 = secondStatement.executeQuery();
-            // Step 4: Process the ResultSet object.
             if (rs.next() && rs2.next()) {
 
                 gfat = rs.getInt("fatGoal");
@@ -135,7 +137,7 @@ public class MealPlanDAO {
             }
 
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
         return mealPlan;

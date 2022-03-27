@@ -7,7 +7,7 @@
 }
 
 .notification_wrap{
-	width: 300px;
+	width: 200px;
 	/* margin: 120px auto 0; */
 }
 
@@ -80,8 +80,8 @@
 .notification_wrap .dropdown.active{
 	display: block;
     position: fixed;
-	top: 75px;
-	right: 5%;
+	top: 300px;
+	left: 50%;
 	transform: translateX(-50%);
 	border: 15px solid;
 	border-color: transparent transparent #fff transparent;

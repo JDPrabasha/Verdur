@@ -51,6 +51,7 @@ $(window).on("load", function () {
       e.preventDefault();
       notification.children(".notificationCount").remove();
       $(".dropdown").toggleClass("active");
+      window.localStorage.setItem("notifications", parseInt(badge.html()));
     });
     // getNotifications();
     // getInformation();
@@ -63,6 +64,7 @@ $(window).on("load", function () {
   }
 
   function getNotifications() {
+    var notifCount = window.localStorage.getItem("notifications");
     $.ajax({
       url:
         "http://localhost:8080/Server_war_exploded/notification?role=customer&id=" +
@@ -79,7 +81,9 @@ $(window).on("load", function () {
         new Notification(params).addNotification()
       );
       badge.html(newarray.length);
-      newarray.length > 0 ? notification.append(badge) : null;
+      newarray.length > 0 && newarray.length > notifCount
+        ? notification.append(badge)
+        : null;
     });
   }
 

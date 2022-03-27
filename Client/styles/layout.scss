@@ -215,3 +215,13 @@ $columns: 12;
     height: 10vh * $i;
   }
 }
+
+@for $i from 1 through 10 {
+  .flex-grow-#{$i} {
+    flex-grow: $i;
+  }
+}
+
+.ml-auto {
+  margin-left: auto;
+}

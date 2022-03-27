@@ -58,7 +58,18 @@ class orders{
         var deliveryDate = $(document.createElement('td')).html(this.deliveryDate);
         // var timeTillDeadline = $(document.createElement('td')).html(this.timeTillDeadline);
         // var invoiceDate = $(document.createElement('td')).html(this.invoiceDate);
-        var status = $(document.createElement('td')).html(this.status);
+        // var status = $(document.createElement('td')).html(this.status);
+
+        if(this.status==`pending`)
+        {
+            console.log("pending");
+            var status = $(document.createElement('td')).html( `<button class="mybutton2-1 tag-yellow">Pending</button>`);   
+
+        }
+        else{
+            var status = $(document.createElement('td')).html( `<button class="mybutton3" tag-blue>Completed</button>`);
+
+        }
         
         
 

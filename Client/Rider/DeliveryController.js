@@ -32,6 +32,7 @@ $(window).on("load", function () {
       } else {
         const deSerializedData = array.map(DeliverySerializer.deSerialize);
         console.log(deSerializedData);
+        console.log(deSerializedData[current].customer);
         curobj = deSerializedData;
         const deserializedCustomer = ProfileSerializer.deSerialize(
           deSerializedData[current].customer
@@ -39,15 +40,10 @@ $(window).on("load", function () {
         const deserializedOrder = OrderSerializer.deSerialize(
           deSerializedData[current].order
         );
-
         new Order(deserializedOrder).addRiderOrder();
-
         getReverseGeocodingData(deserializedOrder.lat, deserializedOrder.lang);
-
         console.log(deserializedCustomer);
-
         new Profile(deserializedCustomer).addCustomerDetails();
-
         var myArray = $(".dish");
         $(myArray[0]).addClass("selected");
         $("#main").attr("src", $(myArray[0]).attr("src"));

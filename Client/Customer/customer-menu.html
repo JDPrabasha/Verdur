@@ -9,11 +9,16 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons-Outlined"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/Client/styles/pastures.css" />
+    <link rel="stylesheet" href="../styles/pastures.css" />
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="Notification.js"></script>
+    <script src="NotificationSerializer.js"></script>
+    <script src="NotificationController.js"></script>
+    <link rel="stylesheet" href="notifications.css" />
     <script src="./MenuController.js"></script>
     <script src="./MenuSerializer.js"></script>
     <script src="./Menu.js"></script>
+
     <!-- <script src="try.js"></script> -->
     <title>Document</title>
   </head>
@@ -33,6 +38,9 @@
         </ul>
       </div>
     </nav>
+    <div class="notification_wrap">
+      <div class="dropdown" id="dropdown"></div>
+    </div>
 
     <div class="top-row p-8">
       <div class="row">

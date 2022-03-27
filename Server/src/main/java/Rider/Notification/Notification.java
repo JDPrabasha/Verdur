@@ -6,6 +6,7 @@ public class Notification {
     private int order;
     private int id;
 
+
     public int getCustomer() {
         return customer;
     }

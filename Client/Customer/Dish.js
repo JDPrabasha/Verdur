@@ -77,7 +77,10 @@ class Dish {
       .html("RATE")
       .addClass("fw-b")
       .attr("id", "rate");
-    var skip = $(document.createElement("p")).html("SKIP").addClass("fw-b");
+    var skip = $(document.createElement("p"))
+      .html("SKIP")
+      .addClass("fw-b")
+      .attr("id", "skip");
 
     // var label = $(document.createElement("label"))
     //   .attr("for", "quantity")
@@ -159,7 +162,7 @@ class Dish {
       .html("remove");
 
     buttons.append(view);
-    buttons.append(edit);
+    // buttons.append(edit);
     buttons.append(remove);
 
     var price = $(document.createElement("p"))
@@ -251,7 +254,7 @@ class Dish {
       .attr("data-id", this.cid);
 
     buttons.append(view);
-    buttons.append(edit);
+    // buttons.append(edit);
     buttons.append(remove);
 
     item.append(buttons);
