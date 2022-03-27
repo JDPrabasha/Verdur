@@ -33,13 +33,10 @@ public class NotificationDAO {
         String query = "";
         if (Objects.equals(role, "customer")) {
             query = GET_CUSTOMER_NOTIFICATIONS;
-            try (
-
-                    // Step 2:Create a statement using this.conn object
-                    PreparedStatement preparedStatement = this.conn.prepareStatement(query);) {
+            try {
+                PreparedStatement preparedStatement = this.conn.prepareStatement(query);
                 preparedStatement.setInt(1, id);
                 System.out.println(preparedStatement);
-                // Step 3: Execute the query or update query
                 ResultSet rs = preparedStatement.executeQuery();
 
 
@@ -58,11 +55,9 @@ public class NotificationDAO {
             query = GET_RIDER_NOTIFICATIONS;
             try (
 
-                    // Step 2:Create a statement using this.conn object
                     PreparedStatement preparedStatement = this.conn.prepareStatement(query);) {
                 preparedStatement.setInt(1, id);
                 System.out.println(preparedStatement);
-                // Step 3: Execute the query or update query
                 ResultSet rs = preparedStatement.executeQuery();
 
 

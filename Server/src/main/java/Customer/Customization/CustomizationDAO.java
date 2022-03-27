@@ -33,6 +33,7 @@ public class CustomizationDAO {
         Integer x = 0;
         // try-with-resource statement will auto close the this.conn.
         try {
+            conn.setAutoCommit(false);
             PreparedStatement preparedStatement = this.conn.prepareStatement(ADD_CUSTOMIZED_DISH);
             System.out.println("i am adding the dish");
             System.out.println(customDish.getPrice() + " cust" + customDish.getCustomer() + " id" + customDish.getId() + " q" + customDish.getQuantity());
@@ -62,6 +63,8 @@ public class CustomizationDAO {
             }
             System.out.println("i am adding the ingrdients");
             thirdStatement.executeBatch();
+            conn.commit();
+            conn.setAutoCommit(true);
 
         } catch (SQLException e) {
             printSQLException((SQLException) e);
@@ -74,14 +77,17 @@ public class CustomizationDAO {
 
     public void addDishesToCart(String id) throws SQLException {
 
-        // try-with-resource statement will auto close the this.conn.
+
         try {
 
+            conn.setAutoCommit(false);
             PreparedStatement preparedStatement = this.conn.prepareStatement(ADD_BACK_TO_CART);
             preparedStatement.setString(1, id);
 
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
+            conn.commit();
+            conn.setAutoCommit(true);
 
 
         } catch (SQLException e) {
@@ -94,13 +100,14 @@ public class CustomizationDAO {
 
         // try-with-resource statement will auto close the this.conn.
         try {
-
+            conn.setAutoCommit(false);
             PreparedStatement preparedStatement = this.conn.prepareStatement(REMOVE_ITEM_FROM_CART);
             preparedStatement.setInt(1, id);
 
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
-
+            conn.commit();
+            conn.setAutoCommit(true);
 
         } catch (SQLException e) {
             printSQLException((SQLException) e);

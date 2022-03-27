@@ -27,11 +27,10 @@ public class MealPlanDAO {
     }
 
     public void addMeal(MealPlan m, int customer) {
-        try (
+        try {
 
-                // Step 2:Create a statement using this.conn object
-                PreparedStatement preparedStatement = this.conn.prepareStatement(SELECT_MEAL_PLAN_PROGRESS);) {
-
+            PreparedStatement preparedStatement = this.conn.prepareStatement(SELECT_MEAL_PLAN_PROGRESS);
+            conn.setAutoCommit(false);
             preparedStatement.setInt(1, customer);
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
@@ -51,9 +50,9 @@ public class MealPlanDAO {
                 secondStatement.setInt(5, customer);
                 System.out.println(secondStatement);
                 secondStatement.executeUpdate();
+                conn.commit();
+                conn.setAutoCommit(true);
             }
-
-            // Step 4: Process the ResultSet object.
 
 
         } catch (SQLException e) {
@@ -62,19 +61,15 @@ public class MealPlanDAO {
     }
 
     public void resetProgress(int customer) {
-        try (
-
-                // Step 2:Create a statement using this.conn object
-                PreparedStatement preparedStatement = this.conn.prepareStatement(RESET_PLAN_PROGRESS);) {
-
+        try {
+            PreparedStatement preparedStatement = this.conn.prepareStatement(RESET_PLAN_PROGRESS);
+            conn.setAutoCommit(false);
             preparedStatement.setInt(1, customer);
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             preparedStatement.executeUpdate();
             System.out.println("exec");
-
-
-            // Step 4: Process the ResultSet object.
+            conn.commit();
+            conn.setAutoCommit(true);
 
 
         } catch (SQLException e) {
@@ -83,18 +78,18 @@ public class MealPlanDAO {
     }
 
     public void updatePlan(MealPlan m, int customer) {
-        try (
-
-                // Step 2:Create a statement using this.conn object
-                PreparedStatement preparedStatement = this.conn.prepareStatement(UPDATE_PLAN);) {
+        try {
+            PreparedStatement preparedStatement = this.conn.prepareStatement(UPDATE_PLAN);
+            conn.setAutoCommit(false);
             preparedStatement.setInt(1, (int) m.getCaloriesgoal());
             preparedStatement.setInt(2, (int) m.getProteingoal());
             preparedStatement.setInt(3, (int) m.getCarbgoal());
             preparedStatement.setInt(4, (int) m.getFatgoal());
             preparedStatement.setInt(5, customer);
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             preparedStatement.executeUpdate();
+            conn.commit();
+            conn.setAutoCommit(true);
 
 
         } catch (SQLException e) {
@@ -112,21 +107,17 @@ public class MealPlanDAO {
         Integer pprotein = 0;
         Integer pcalorie = 0;
         Integer pcarb = 0;
-        // Step 1: Establishing a this.conn
-        try (
 
-                // Step 2:Create a statement using this.conn object
-                PreparedStatement preparedStatement = this.conn.prepareStatement(SELECT_MEAL_PLAN);) {
+        try {
+            PreparedStatement preparedStatement = this.conn.prepareStatement(SELECT_MEAL_PLAN);
             preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
             PreparedStatement secondStatement = this.conn.prepareStatement(SELECT_MEAL_PLAN_PROGRESS);
             secondStatement.setInt(1, id);
             System.out.println(secondStatement);
             ResultSet rs2 = secondStatement.executeQuery();
-            // Step 4: Process the ResultSet object.
             if (rs.next() && rs2.next()) {
 
                 gfat = rs.getInt("fatGoal");

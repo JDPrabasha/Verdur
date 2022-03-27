@@ -138,6 +138,7 @@ public class UserDAO {
 
         User user = null;
         try (PreparedStatement preparedStatement = this.conn.prepareStatement(UPDATE_CUSTOMER_DETAILS)) {
+            conn.setAutoCommit(false);
             preparedStatement.setString(1, user.getContact());
             preparedStatement.setString(2, user.getAddress());
             preparedStatement.setString(3, user.getAvatar());
@@ -145,6 +146,8 @@ public class UserDAO {
 
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
+            conn.commit();
+            conn.setAutoCommit(true);
 
 
         } catch (SQLException e) {
@@ -187,6 +190,7 @@ public class UserDAO {
         System.out.println(INSERT_USER);
         try (
                 PreparedStatement preparedStatement = this.conn.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS)) {
+            conn.setAutoCommit(false);
             String firstName = user.getName().split(" ")[0];
             String lastName = user.getName().split(" ")[1];
             preparedStatement.setString(1, firstName);
@@ -218,6 +222,8 @@ public class UserDAO {
             secondStatement.setInt(1, gid);
             System.out.println(thirdStatement);
             thirdStatement.executeUpdate();
+            conn.commit();
+            conn.setAutoCommit(true);
         } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
@@ -230,7 +236,6 @@ public class UserDAO {
             preparedStatement.setInt(1, userID);
 
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
@@ -249,6 +254,7 @@ public class UserDAO {
     public void verifyUser(User user) throws SQLException {
         System.out.println(VERIFY_USER);
         try (PreparedStatement preparedStatement = this.conn.prepareStatement(VERIFY_USER)) {
+            conn.setAutoCommit(false);
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setInt(2, user.getCode());
             System.out.println(preparedStatement);
@@ -258,6 +264,8 @@ public class UserDAO {
             preparedStatement.setString(2, user.getUsername());
             System.out.println(secondStatement);
             secondStatement.executeUpdate();
+            conn.commit();
+            conn.setAutoCommit(true);
         } catch (SQLException e) {
             printSQLException((SQLException) e);
         }

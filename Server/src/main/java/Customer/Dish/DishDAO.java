@@ -208,7 +208,7 @@ public class DishDAO {
 
     public void rateDish(Dish dish, String customer) {
         try (PreparedStatement preparedStatement = this.conn.prepareStatement(RATE_DISH)) {
-
+            conn.setAutoCommit(false);
 
             preparedStatement.setInt(1, dish.getRating());
             preparedStatement.setInt(2, dish.getId());
@@ -216,7 +216,8 @@ public class DishDAO {
 
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
-
+            conn.commit();
+            conn.setAutoCommit(true);
 
         } catch (SQLException e) {
             printSQLException((SQLException) e);

@@ -128,8 +128,8 @@ public class DeliveryDAO {
             System.out.println(preparedStatement);
 
             preparedStatement.executeUpdate();
-            this.conn.commit();
-            this.conn.setAutoCommit(true);
+            conn.commit();
+            conn.setAutoCommit(true);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -147,8 +147,8 @@ public class DeliveryDAO {
 
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
-            this.conn.commit();
-            this.conn.setAutoCommit(true);
+            conn.commit();
+            conn.setAutoCommit(true);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

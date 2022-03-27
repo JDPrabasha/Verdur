@@ -39,10 +39,9 @@ public class OrderDAO {
 
     public int addOrder(Order order) throws SQLException {
         Integer gid = 0;
-        // try-with-resource statement will auto close the this.conn.
         try {
+            conn.setAutoCommit(false);
             System.out.println("hello");
-//            this.conn.setAutoCommit(false);
             PreparedStatement preparedStatement = this.conn.prepareStatement(ADD_ORDER, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, order.getCustomer());
             preparedStatement.setFloat(2, order.getDistance());
@@ -50,7 +49,6 @@ public class OrderDAO {
             preparedStatement.setString(4, order.getLatitude());
             preparedStatement.setString(5, order.getTimestamp());
             System.out.println(preparedStatement);
-//            System.out.println("succsss");
 
             preparedStatement.executeUpdate();
             System.out.println("succsss");
@@ -91,6 +89,9 @@ public class OrderDAO {
             System.out.println(thirdStatement);
             thirdStatement.executeUpdate();
 
+            conn.commit();
+            conn.setAutoCommit(true);
+
         } catch (SQLException e) {
             printSQLException((SQLException) e);
         }
@@ -101,16 +102,13 @@ public class OrderDAO {
     public String getGetAcceptedTime(int id) {
         String remTime = "";
 
-        // Step 1: Establishing a this.conn
         try {
             PreparedStatement preparedStatement = this.conn.prepareStatement(GET_ACCEPTED_TIME);
             preparedStatement.setInt(1, id);
 
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
-            // Step 4: Process the ResultSet object.
             if (rs.next()) {
 
                 remTime = rs.getString("timestamp");
@@ -126,16 +124,13 @@ public class OrderDAO {
     public int getDeliveryPayment(int id) {
         int due = 0;
 
-        // Step 1: Establishing a this.conn
         try {
             PreparedStatement preparedStatement = this.conn.prepareStatement(GET_DELIVERED_PAYMENT);
             preparedStatement.setInt(1, id);
 
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
-            // Step 4: Process the ResultSet object.
             if (rs.next()) {
 
                 String type = rs.getString("type");
@@ -154,19 +149,15 @@ public class OrderDAO {
 
     public Order selectActiveOrders(int id) {
 
-        // using try-with-resources to avoid closing resources (boiler plate code)
         Order order = null;
 
-        // Step 1: Establishing a this.conn
         try {
             PreparedStatement preparedStatement = this.conn.prepareStatement(SELECT_ACTIVE_ORDER);
             preparedStatement.setInt(1, id);
 
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
-            // Step 4: Process the ResultSet object.
             if (rs.next()) {
                 List<Dish> dishes = new ArrayList<>();
                 int currentOrder = rs.getInt("orderID");
@@ -197,19 +188,15 @@ public class OrderDAO {
 
     public List<Order> selectRecentOrders(int id) {
 
-        // using try-with-resources to avoid closing resources (boiler plate code)
         List<Order> orders = new ArrayList<>();
 
-        // Step 1: Establishing a this.conn
         try {
             PreparedStatement preparedStatement = this.conn.prepareStatement(SELECT_RECENT_ORDERS);
             preparedStatement.setInt(1, id);
 
             System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
-            // Step 4: Process the ResultSet object.
             while (rs.next()) {
                 List<Dish> dishes = new ArrayList<>();
                 int calories = 0;
@@ -253,10 +240,9 @@ public class OrderDAO {
 
     public void addComplaint(Order order) {
 
-        // try-with-resource statement will auto close the this.conn.
         try {
+            conn.setAutoCommit(false);
             System.out.println("hello");
-//            this.conn.setAutoCommit(false);
             PreparedStatement preparedStatement = this.conn.prepareStatement(ADD_COMPLAINT);
             preparedStatement.setInt(1, order.getCustomer());
             preparedStatement.setInt(3, order.getId());
@@ -267,10 +253,11 @@ public class OrderDAO {
 
             preparedStatement.setString(4, s);
             System.out.println(preparedStatement);
-//            System.out.println("succsss");
 
             preparedStatement.executeUpdate();
 
+            conn.commit();
+            conn.setAutoCommit(true);
 
         } catch (SQLException e) {
             printSQLException((SQLException) e);
@@ -280,18 +267,19 @@ public class OrderDAO {
 
     public void finishReview(String id) {
 
-        // try-with-resource statement will auto close the this.conn.
         try {
+            conn.setAutoCommit(false);
             System.out.println("hello");
-//            this.conn.setAutoCommit(false);
             PreparedStatement preparedStatement = this.conn.prepareStatement(FINISH_REVIEW);
             preparedStatement.setString(1, id);
 
 
             System.out.println(preparedStatement);
-//            System.out.println("succsss");
 
             preparedStatement.executeUpdate();
+
+            conn.commit();
+            conn.setAutoCommit(true);
 
 
         } catch (SQLException e) {
