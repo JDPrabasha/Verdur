@@ -40,7 +40,7 @@ $(document).ready(function () {
         // let difference = new Date(new Date(x) - new Date() - new Date("1970-01-01 11:00:00"))
         if (new Date(x) > new Date()) {
             let difference = new Date(new Date(x) - new Date() + new Date().getTimezoneOffset() * 60 * 1000)
-            console.log("difference = " + difference);
+            // console.log("difference = " + difference);
 
 
 
@@ -66,7 +66,7 @@ $(document).ready(function () {
             return timeremain;
         }else{
             let difference = new Date(new Date() - new Date(x) + (new Date().getTimezoneOffset() * 60 * 1000))
-            console.log("difference = " + difference);
+            // console.log("difference = " + difference);
 
 
             flag = 1;
