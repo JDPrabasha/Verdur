@@ -97,7 +97,7 @@ printcompletedpayment(){
     var requestedDate = $(document.createElement('td')).html(this.requestedDate);
     var deliveryDate = $(document.createElement('td')).html(this.deliveryDate);
     console.log("here"+this.status);
-    if(this.status==`Payed`)
+    if(this.status==`Completed`)
     {
         var status = $(document.createElement('td')).html( `<button class="btn text-1 bg-clr-paid fw-b text-center"></button>`); 
         row.append(status);  
