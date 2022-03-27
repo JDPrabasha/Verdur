@@ -9,7 +9,9 @@ $(document).ready(function orderslist(){
             xhr.setRequestHeader("authorization", authHeader);
         }
         
-     },).then(function(data){
+     },).fail(function (jqXHR, textStatus, errorThrown) {
+      window.location.href = "/Client/Manager/Invalid Token.html"
+  }).then(function(data){
         
          var array = $.parseJSON(data);
          if($("#output2").length!=0){

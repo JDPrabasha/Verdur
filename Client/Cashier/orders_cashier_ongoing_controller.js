@@ -12,7 +12,9 @@ $(document).ready(function ongoingorderslist(){
             xhr.setRequestHeader("authorization", authHeader);
         }
         
-     },).then(function(data){
+     },).fail(function (jqXHR, textStatus, errorThrown) {
+        window.location.href = "/Client/Manager/Invalid Token.html"
+    }).then(function(data){
         var array = $.parseJSON(JSON.stringify(data));
         //  var array = $.parseJSON(data);
          console.log(data);

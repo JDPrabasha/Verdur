@@ -14,6 +14,8 @@ $(document).ready(function restockrequestlist() {
             xhr.setRequestHeader("authorization", authHeader);
         }
 
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        window.location.href = "/Client/Manager/Invalid Token.html"
     }).then(function (data) {
         console.log(data)
         console.log(data[0])
