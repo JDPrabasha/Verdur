@@ -94,6 +94,10 @@ public class OrderServlet extends HttpServlet {
             String json = new Gson().toJson(rider);
             System.out.println(json);
             response.getOutputStream().println(json);
+
+        } else if (Objects.equals(status, "rejected")) {
+            String reason = orderDAO.getRejectionReason(Integer.parseInt(customer));
+            response.getOutputStream().println(reason);
         } else if (Objects.equals(status, "delivered")) {
             int payment = orderDAO.getDeliveryPayment(Integer.parseInt(customer));
             response.getOutputStream().println(payment);

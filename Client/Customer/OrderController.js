@@ -89,7 +89,8 @@ $(window).on("load", function () {
         break;
 
       case "Rejected":
-        new Order(deserializedOrder).showRejectedOrder();
+        updateProgressBar(document.getElementById("myProgressBar"), 33);
+        getOrderData("rejected");
         break;
 
       case "Delivering":
@@ -135,6 +136,12 @@ $(window).on("load", function () {
               riderObject.contact +
               " to make any inquiries"
           );
+
+          break;
+
+        case "rejected":
+          var reason = data;
+          $("#order-info").html(reason);
 
           break;
 

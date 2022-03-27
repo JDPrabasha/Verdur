@@ -28,6 +28,7 @@ $(document).ready(function () {
 
         success: function (response) {
           window.location = "customer-landing.html";
+          // console.log(response);
         },
         failure: function (response) {
           alert("fail");
@@ -81,7 +82,7 @@ $(document).ready(function () {
   }
 
   function validateContact(inputtxt) {
-    var phoneno = /^07\d{10}$/;
+    var phoneno = /^07\d{8}$/;
     if (inputtxt.match(phoneno)) {
       return true;
     } else {

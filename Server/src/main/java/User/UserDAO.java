@@ -188,8 +188,8 @@ public class UserDAO {
 
     public void addUser(User user, int code) throws SQLException {
         System.out.println(INSERT_USER);
-        try (
-                PreparedStatement preparedStatement = this.conn.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS)) {
+        try {
+            PreparedStatement preparedStatement = this.conn.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS);
             conn.setAutoCommit(false);
             String firstName = user.getName().split(" ")[0];
             String lastName = user.getName().split(" ")[1];
