@@ -22,12 +22,7 @@ $(document).ready(function(){
          deserializeddata.map(params=>new order(params).printneworder());
      })
 });
-// readdish(function(){
-//     var authHeader = "Bearer " + window.localStorage.getItem("jwt");
-//     var url = new URL(window.location.href);
-//     var dishid = url.searchParams.get("id");
-//     console.log(dishid);
-// })
+
 
 
 

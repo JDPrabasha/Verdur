@@ -37,9 +37,9 @@ function doSubmit()
         "supplierid" : parseInt(supplier) 
     })
     console.log(data);
-    // xhr.send(data);
+    xhr.send(data);
     
-    // window.location.href="createrestockmenu.html";
+    window.location.href="/Client//kitchenmanager/inventory.html";
 
 
 

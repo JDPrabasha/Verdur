@@ -20,6 +20,7 @@ function completeorder(rc) {
         $("#caustomization").html("");
         var text = $(document.createElement('h2')).attr("class","ml-2").html(`Select An Order`);
         $("#caustomization").append(text);
+        window.location.reload();
         
 
     })
