@@ -117,12 +117,12 @@ export class orders_cashier{
             {
                 var status = $(document.createElement('td')).html( `<button class="mybutton3 tag-yellow">Pending</button>`);   
             }else if(this.status==`delivering`){
-                var status = $(document.createElement('td')).html( `<button class="mybutton3 tag-green">Delivering</button>`); 
+                var status = $(document.createElement('td')).html( `<button class="mybutton3 tag-blue">Delivering</button>`); 
 
             }
 
             else{
-                var status = $(document.createElement('td')).html( `<button class="mybutton3 tag-blue">Cooked</button>`);
+                var status = $(document.createElement('td')).html( `<button class="mybutton3 tag-green">Cooked</button>`);
 
             }
         var paymentMethod = $(document.createElement('td')).html(this.paymentMethod);
@@ -153,15 +153,42 @@ printriderorders(){
     $("#riderOrderName").html(": " + this.name)
     $("#riderOrderName").attr("orderid",this.orderID)
     $("#customerContact").html(": " + this.contact)
-    $("#riderOrderaddress").html(": " + this.address)
-    console.log(this.longitude)
+    // let 
+    // $("#riderOrderaddress").html(":" + this.getReverseGeocodingData(this.latitude,this.longitude))
+    this.getReverseGeocodingData(this.latitude,this.longitude,$("#riderOrderaddress"))
+
     console.log(this.latitude)
 
      
 }
 
+getReverseGeocodingData(lat, lng,item) {
+    var latlng = new google.maps.LatLng(lat, lng);
+    // This is making the Geocode request
+    var geocoder = new google.maps.Geocoder();
+    var address;
+    geocoder.geocode({ latLng: latlng }, function (results, status) {
+      if (status !== google.maps.GeocoderStatus.OK) {
+        alert(status);
+      }
+      // This is checking to see if the Geoeode Status is OK before proceeding
+      if (status == google.maps.GeocoderStatus.OK) {
+        address = results[0].formatted_address;
+        console.log(address);
+        item.html(address);
+        item.attr(
+          "href",
+          "https://www.google.com/maps/search/?api=1&query=" + lat + "," + lng
+        );
+      }
+      console.log(address)
+      return address;
+    });
+  }
+
 
 printriderorderslist(){
+    console.log(this.address)
     var neworder = $("#riderorderslist");
     var container = $(document.createElement('div'));
     var order = $(document.createElement('div')).attr("class","flex-space-evenly").html(`<div class="row">
@@ -170,7 +197,7 @@ printriderorderslist(){
         <p>Items :${this.totalQuantity} </p>
         <p>${this.name}</p>
         <p>${this.contact}</p>
-        <p>${this.address}</p>
+        <a id= "assignRider-${this.orderID}" target="_blank">${this.address}</a>
     </div>
 
     <div style="flex-direction: column;">
@@ -186,6 +213,7 @@ container.append(order,hr)
 
 
 neworder.append(container);
+this.getReverseGeocodingData(this.latitude,this.longitude,$("#assignRider-"+this.orderID))
 
 
 }

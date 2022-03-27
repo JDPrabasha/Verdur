@@ -73,8 +73,11 @@ function assignriderButton() {
                     "orderID" : orderID,
                     "riderID" : riderID
                 })
-            }).then(
+            }).then(function(){
                 console.log("done")
+                // $("#myModal").attr("style","display:none")
+                window.location.reload();
+            }
             )
         }
 
