@@ -70,6 +70,7 @@ function login() {
         window.localStorage.setItem("photo", user.avatar);
         window.localStorage.setItem("rider", user.id);
         window.localStorage.setItem("name", user.name);
+        window.localStorage.setItem("notifications", 0);
         console.log(window.localStorage.getItem("name"));
 
         window.location = "/Client/Rider/rider-home.html";
@@ -89,6 +90,7 @@ function login() {
         window.localStorage.setItem("avatar", user.avatar);
         window.localStorage.setItem("customer", user.id);
         window.localStorage.setItem("name", user.name);
+        window.localStorage.setItem("notifications", 0);
         console.log(window.localStorage.getItem("name"));
 
         window.location = "/Client/Customer/customer-menu.html";

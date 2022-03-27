@@ -69,7 +69,7 @@ class Dish {
       .attr("data-id", this.id);
 
     buttons.append(view);
-    buttons.append(edit);
+    // buttons.append(edit);
     buttons.append(remove);
 
     item.append(buttons);
