@@ -47,27 +47,9 @@ export class orderkm{
     }, initialValue)
 
     console.log(sum) // logs 6
-    // var countDownTime = new Date(sum).getTime()
-    // console.log(countDownTime)
-    // var now = new Date().getTime();
-    // //  console.log(now)
-    // var distance = countDownTime - now;
-    // var distance = now - countDownTime;
-
-    // var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    // var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    // var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    // var time = minutes + ":" + seconds 
     
-
-    //  var starttime= new Date(this.timestamp).getTime();
     console.log(this.timestamp);
-    // var tt = new Date(this.timestamp).getTime();
-    // console.log(starttime);
-    // var totaltime =this.timestamp+sum*60;
-    // console.log(totaltime);
-    // var newDateObj = new Date(this.timestamp.getTime() + sum*60000);
+  
     var newDateObj = moment(this.timestamp).add(sum, 'm').toDate();
     console.log(newDateObj);
     console.log(this.getTimeRemaining(newDateObj))
@@ -75,16 +57,16 @@ export class orderkm{
     
 
         var order = $(document.createElement('div')).attr("class","card ongoing_dashcard mb-4").attr("style","width:fit-content").html(`<div class="row py-3 pl-2 pr-12">
-        <div class="circle flex-space-evenly col-2">
+        <div class="circle flex-space-evenly col-1">
             <i class="material-icons">lunch_dining</i>
         </div>
-        <div class="col-9 flex-col pl-3">
+        <div class="col-10 flex-col pl-3">
            <div class="row">
                
-               <div class="col-4 text-2 text-bold"> ID : ${this.orderID}</div>
-               <div class="col-3 text-2 text-bold">${time}</div>
+               <div class="col-3 text-2"> ID : ${this.orderID}</div>
+               <div class="col-5 text-2 ">${time}</div>
                <div class="col-3"><img class="icon-5"style="width:2cm; height:2cm;" src="${this.chefimage}" alt=""></div>
-               <div class="col-2 text-bold">${this.chefname}</div>
+               <div class="col-1 text-bold">${this.chefname}</div>
                
            </div>
         </div>
@@ -108,15 +90,15 @@ export class orderkm{
         secs = difference.getSeconds(),
         timeremain;
         if(months!=0){
-            timeremain = months+"  "+" Months "+days+" Days " + hours +" hours "+ mins + " mins " + secs +" secs"  
+            timeremain = hours +":"+ mins + ":" + secs  
         }else if(days!=0){
-            timeremain = days+" Days " + hours +" hours "+ mins + " mins " + secs +" secs"  
+            timeremain = hours +" :"+ mins + " :" + secs  
         }else if(hours!=0){
-            timeremain =  hours +" hours "+ mins + " mins " + secs +" secs"  
+            timeremain =  hours +":"+ mins + ":" + secs  
         }else if(mins!=0){
-            timeremain = mins + " mins " + secs +" secs"  
+            timeremain = "00:"+mins + ":" + secs 
         }else{
-            timeremain =   secs +" secs"  
+            timeremain =   "00:00:"+secs 
         }
         return timeremain;
     

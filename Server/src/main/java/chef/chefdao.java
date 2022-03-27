@@ -70,7 +70,6 @@ public class chefdao {
         LocalDateTime now = LocalDateTime.now();
         String timestamp = dtf.format(now);
 
-
         System.out.println(chefid);
         PreparedStatement st = this.conn.prepareStatement(quary);
         st.setInt(1, chefid);
