@@ -23,8 +23,6 @@ $(window).on("load", function () {
     $(".dropdown").toggleClass("active");
     window.localStorage.setItem("notifications", parseInt(badge.html()));
   });
-  // getNotifications();
-  // getInformation();
 
   var container = $("#links");
 

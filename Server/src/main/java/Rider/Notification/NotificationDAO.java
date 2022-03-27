@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class NotificationDAO {
-    private static final String GET_CUSTOMER_NOTIFICATIONS = " select * from customernotification where custID = ?";
-    private static final String GET_RIDER_NOTIFICATIONS = " select * from ridernotification where riderID = ?";
+    private static final String GET_CUSTOMER_NOTIFICATIONS = " select * from customernotification where custID = ? order by timestamp desc";
+    private static final String GET_RIDER_NOTIFICATIONS = " select * from ridernotification where riderID = ? order by timestamp desc";
 
     private Connection conn;
 

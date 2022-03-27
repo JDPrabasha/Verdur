@@ -15,10 +15,10 @@ public class DishDAO {
 
 
     private static final String SELECT_DISH = "select * from dish where dishID =?";
-    private static final String FILTER_DISHES_BY_NAME = "select * from dish where name like ?";
+    private static final String FILTER_DISHES_BY_NAME = "select * from dish where name like ? and enabled =1";
     private static final String FILTER_DISHES_BY_MEAL = "select * from dish d join hastag h on h.dishID = d.dishID join tag t on t.tagID =h.tagID where t.name = ? and d.enabled =1";
-    private static final String FILTER_DISHES_BY_INGREDIENT = "select * from dish where dishID in (select h.dishID from ingredient i join hasingredient h on h.ingID = i.ingID where i.name in (?,?,?,?,?,?,?,?,?,?,?,?,?,?))";
-    private static final String FILTER_DISHES_BY_FILTERS = "select d.dishID,d.name,d.image,d.price from dish d join hastag h on d.dishID =h.dishID join tag t on h.tagID =t.tagID where d.estTime<=? AND d.price<=? AND  t.name in (?,?,?,?,?,?,?,?,?,?) group by d.dishID having count(*)=?";
+    private static final String FILTER_DISHES_BY_INGREDIENT = "select * from dish where dishID in (select h.dishID from ingredient i join hasingredient h on h.ingID = i.ingID where i.name in (?,?,?,?,?,?,?,?,?,?,?,?,?,?)) and enabled =1";
+    private static final String FILTER_DISHES_BY_FILTERS = "select d.dishID,d.name,d.image,d.price from dish d join hastag h on d.dishID =h.dishID join tag t on h.tagID =t.tagID where d.estTime<=? AND d.price<=? AND  t.name in (?,?,?,?,?,?,?,?,?,?) and d.enabled =1 group by d.dishID having count(*)=?";
     private static final String SELECT_CART_DISHES = "select c.cdishID, c.dishID, c.quantity, c.price, d.image, d.name from dish d join customizeddish c on d.dishID = c.dishID where c.custID =? and inCart=1";
     private static final String SELECT_ALL_DISHES = "select * from dish where enabled=1";
     private static final String SELECT_LATEST_DISHES = "select * from dish where enabled=1 limit 8";

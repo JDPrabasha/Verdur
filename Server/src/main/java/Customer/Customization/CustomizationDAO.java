@@ -17,7 +17,6 @@ public class CustomizationDAO {
     private static final String ADD_INGREDIENT = " insert into customization values (?,?,?) ";
     private static final String ADD_BACK_TO_CART = "update customizeddish set inCart=1 where orderID in (select orderID from orders o join hasdish h on o.orderID = h.orderID where o.orderID = ?)";
     private static final String REMOVE_ITEM_FROM_CART = "delete from customizeddish where cdishID =?";
-    private static final String GET_DISH_CUSTOMIZATION_DATA = " select * from customizeddish c where cdishID=?";
 
     public CustomizationDAO() {
         try {
@@ -98,7 +97,6 @@ public class CustomizationDAO {
 
     public void removeFromCart(int id) throws SQLException {
 
-        // try-with-resource statement will auto close the this.conn.
         try {
             conn.setAutoCommit(false);
             PreparedStatement preparedStatement = this.conn.prepareStatement(REMOVE_ITEM_FROM_CART);

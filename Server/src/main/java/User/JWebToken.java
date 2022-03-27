@@ -18,9 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * @author user
- */
+
 public class JWebToken {
 
     private static final String SECRET_KEY = "FREE_MASON"; //@TODO Add Signature here
@@ -50,12 +48,12 @@ public class JWebToken {
         signature = hmacSha256(encodedHeader + "." + encode(payload), SECRET_KEY);
     }
 
-    /**
-     * For verification
-     *
-     * @param token
-     * @throws java.security.NoSuchAlgorithmException
-     */
+    //    /**
+//     * For verification
+//     *
+//     * @param token
+//     * @throws java.security.NoSuchAlgorithmException
+//     */
     public JWebToken(String token) throws NoSuchAlgorithmException {
         this();
         String[] parts = token.split("\\.");
@@ -113,13 +111,13 @@ public class JWebToken {
         return new String(Base64.getUrlDecoder().decode(encodedString));
     }
 
-    /**
-     * Sign with HMAC SHA256 (HS256)
-     *
-     * @param data
-     * @return
-     * @throws Exception
-     */
+    //    /**
+//     * Sign with HMAC SHA256 (HS256)
+//     *
+//     * @param data
+//     * @return
+//     * @throws Exception
+//     */
     private String hmacSha256(String data, String secret) {
         try {
 

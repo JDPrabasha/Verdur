@@ -162,7 +162,7 @@ class Dish {
       .html("remove");
 
     buttons.append(view);
-    buttons.append(edit);
+    // buttons.append(edit);
     buttons.append(remove);
 
     var price = $(document.createElement("p"))
@@ -254,7 +254,7 @@ class Dish {
       .attr("data-id", this.cid);
 
     buttons.append(view);
-    buttons.append(edit);
+    // buttons.append(edit);
     buttons.append(remove);
 
     item.append(buttons);
