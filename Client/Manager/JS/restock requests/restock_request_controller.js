@@ -2,6 +2,7 @@ import { approval_pending_list } from "./approval_pending_list.js";
 import { delivery_pending_list } from "./delivery_pending_list.js";
 import { restockRequest } from "./restockRequest.js";
 
+let flag = 0;
 $(document).ready(function reload() {
     $("#notificationbox").load("/Client/Manager/Manager-Header.html #notification",function(){
         $.getScript("/Client/Manager/JS/functionalities/profile.js");
@@ -31,6 +32,10 @@ $(document).ready(function reload() {
             timecont = $(this)
             setInterval(function () {
                 timecont.html(getTimeRemaining(time))
+                console.log(flag)
+                if(flag!=0){
+                    timecont.attr("style","color:red;")
+                }
             }, 1000);
         }
         )
@@ -45,6 +50,8 @@ $(document).ready(function reload() {
         beforeSend: function (xhr) {
             xhr.setRequestHeader("authorization", authHeader);
         },
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        window.location.href = "/Client/Manager/Invalid Token.html"
     }).then(function (data) {
         $("#deliveryPendingList").html('');
         console.log(data)
@@ -59,6 +66,9 @@ $(document).ready(function reload() {
             if(time!=null){
                 setInterval(function () {
                     timecont.html(getTimeRemaining(time))
+                    if(flag!=0){
+                        timecont.attr("style","color:red;")
+                    }
                 }, 1000);
             }
         }
@@ -145,9 +155,16 @@ function updateButtons() {
 function getTimeRemaining(x) {
     // console.log(new Date(x))
     // let difference = new Date(new Date(x) - new Date() - new Date("1970-01-01 11:00:00"))
-    let difference = new Date(new Date(x) - new Date() + new Date().getTimezoneOffset() * 60 * 1000)
-
-
+    let difference;
+    if(new Date(x) > new Date()) {
+        difference = new Date(new Date(x) - new Date() + new Date().getTimezoneOffset() * 60 * 1000)
+        flag = 0;
+    }
+    else{
+        difference = new Date(new Date() - new Date(x) + (new Date().getTimezoneOffset() * 60 * 1000))
+        // console.log("difference = " + difference);
+        flag = 1;
+    }
 
     let months = difference.getMonth(), 
     days = difference.getDate(),
@@ -167,5 +184,4 @@ function getTimeRemaining(x) {
         timeremain =   secs +" secs"  
     }
     return timeremain;
-
 }

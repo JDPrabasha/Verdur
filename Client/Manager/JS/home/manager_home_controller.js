@@ -79,7 +79,7 @@ function printDishList(x) {
     let table = $("#dishlist"),
         row = $(document.createElement('tr')).attr("id", x.dishID),
             image = $(document.createElement('td')).html(`<img class="icon-1" src="${x.dishImage}" alt="">`),
-            name = $(document.createElement('td')).html(x.dishName),
+            name = $(document.createElement('td')).html(x.dishName).css("width","33%"),
             units = $(document.createElement('td')).html(x.units + " units"),
             price = $(document.createElement('td')).html("Rs. " + x.price),
             // stars = $(document.createElement('td')).html(x.stars)

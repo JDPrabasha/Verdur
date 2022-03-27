@@ -25,7 +25,7 @@ $(document).ready(function () {
                 time = timecont.attr("time")
             setInterval(function () {
                 timecont.html(getTimeRemaining(time))
-                    console.log(flag)
+                    // console.log(flag)
                     if(flag!=0){
                         timecont.attr("style","color:red;")
                     }
@@ -65,7 +65,7 @@ $(document).ready(function () {
             flag=0;
             return timeremain;
         }else{
-            let difference = new Date(new Date() - new Date(x) - new Date().getTimezoneOffset() * 60 * 1000)
+            let difference = new Date(new Date() - new Date(x) + (new Date().getTimezoneOffset() * 60 * 1000))
             console.log("difference = " + difference);
 
 
