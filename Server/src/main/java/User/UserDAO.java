@@ -186,7 +186,7 @@ public class UserDAO {
         return user;
     }
 
-    public void addUser(User user, int code) throws SQLException {
+    public boolean addUser(User user, int code) throws SQLException {
         System.out.println(INSERT_USER);
         try {
             PreparedStatement preparedStatement = this.conn.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS);
@@ -224,9 +224,12 @@ public class UserDAO {
             thirdStatement.executeUpdate();
             conn.commit();
             conn.setAutoCommit(true);
+            return true;
         } catch (SQLException e) {
+
             printSQLException((SQLException) e);
         }
+        return false;
     }
 
     public String getRole(int userID) throws SQLException {

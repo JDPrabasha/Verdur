@@ -55,9 +55,14 @@ public class RegisterServlet extends HttpServlet {
             throws SQLException, IOException {
         int code = getRandom();
         User user = new Gson().fromJson(request.getReader(), User.class);
-        newUser.addUser(user, code);
-        SendMail mailer = new SendMail(user.getUsername(), code);
-        mailer.sendActivationLink();
+        boolean added = newUser.addUser(user, code);
+        if (added) {
+            SendMail mailer = new SendMail(user.getUsername(), code);
+            mailer.sendActivationLink();
+        } else {
+            response.sendError(400, "Length too long");
+            System.out.println("noo");
+        }
 
 
     }

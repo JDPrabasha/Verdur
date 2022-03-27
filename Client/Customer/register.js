@@ -1,5 +1,6 @@
 $(document).ready(function () {
   $("#registerBtn").click(function () {
+    $(".error").addClass("hidden");
     var name = $("#newname").val();
     var email = $("#newemail").val();
     console.log(email);
@@ -31,7 +32,13 @@ $(document).ready(function () {
           // console.log(response);
         },
         failure: function (response) {
-          alert("fail");
+          // console.log(response.);
+        },
+        error: function (request, status, error) {
+          $("#emailerror").removeClass("hidden");
+          $("#emailerror").html(
+            "Email is already in use. PLease try again from a different email"
+          );
         },
       });
     }
