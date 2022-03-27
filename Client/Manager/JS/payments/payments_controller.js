@@ -14,6 +14,8 @@ $(document).ready(function reload(){
         error:function(){
             reload();
         }
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        window.location.href = "/Client/Manager/Invalid Token.html"
     }).then(function (data) {
         updateView(data);
         $("#loading").trigger("loaded")

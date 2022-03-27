@@ -2,6 +2,7 @@ $(document).ready(function () {
   window.localStorage.removeItem("jwt");
   window.localStorage.removeItem("id");
   window.localStorage.removeItem("avatar");
+  window.localStorage.removeItem("photo");
   window.localStorage.removeItem("name");
   window.localStorage.removeItem("rider");
   window.localStorage.removeItem("customer");
@@ -75,7 +76,7 @@ function setDetails(role) {
             console.log(window.localStorage.getItem("name"));
             if (role == "Rider") {
                 window.localStorage.setItem("rider", user.id);
-                window.location = "/Client/rider-home.html";
+                window.location = "/Client/Rider/rider-home.html";
             } else if (role == "Manager") {
                 // window.localStorage.setItem("userID", user.id);
                 window.location = "/Client/Manager/Manager-Home.html";

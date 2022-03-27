@@ -19,6 +19,8 @@ $(document).ready(function reload() {
         error:function(){
             reload();
         }
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        window.location.href = "/Client/Manager/Invalid Token.html"
     }).then(function (data) {
         $("#approvalList").html('');
         data.map(i => new restockRequest(i).printApprovalPending());

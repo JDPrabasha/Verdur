@@ -37,6 +37,8 @@ $.getScript("/Client/Manager/JS/side_menu.js",
             error: function () {
                 reload();
             }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            window.location.href = "/Client/Manager/Invalid Token.html"
         }).then(function (data) {
             // console.log(data.filter(i => i.type=="Fruits"));
             // console.log(data)

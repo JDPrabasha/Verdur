@@ -32,6 +32,8 @@ $.getScript("/Client/Manager/JS/side_menu.js",
             error:function(){
                 reload();
             }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            window.location.href = "/Client/Manager/Invalid Token.html"
         }).then(function (data) {
             updateView(data);
             empData = data;

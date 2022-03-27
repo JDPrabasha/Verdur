@@ -8,6 +8,8 @@ $(document).ready(function reload(){
         error:function(){
             reload();
         }
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        window.location.href = "/Client/Manager/Invalid Token.html"
     }).then(function(data){
         var array = $.parseJSON(JSON.stringify(data));
         const deSerializedData = array.map(i=>Manager_dish_serializer.doSerialize(i));
