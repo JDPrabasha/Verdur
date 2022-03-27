@@ -420,7 +420,7 @@ $(window).on("load", function () {
     var methodFlag = validatePayment();
     var ongoingFlag = validateOngoing();
 
-    if (cartFlag && methodFlag && validateOngoing) {
+    if (cartFlag && methodFlag && ongoingFlag && distanceFlag) {
       console.log("bdjbvc");
       e.preventDefault();
       if ($("#card").hasClass("selected")) {
