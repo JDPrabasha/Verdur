@@ -10,6 +10,7 @@ $('#output').on('click','.remove_button',function() {
                 "itemID": parseInt($(this).attr("data-id"))
                
             }
+            console.log(JSON.stringify(json))
     
             $.ajax({
                 url : "http://localhost:8080/Server_war_exploded/Supplier/RemoveStockServlet",
@@ -18,6 +19,8 @@ $('#output').on('click','.remove_button',function() {
                     xhr.setRequestHeader("authorization",authHeader)
                 },
                 data:JSON.stringify(json)
+            }),done(function(){
+                window.location.reload();
             })
          
     

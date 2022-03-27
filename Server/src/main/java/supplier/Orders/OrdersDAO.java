@@ -22,7 +22,7 @@ public class OrdersDAO {
 
 
 //    private static final String GET_ALL_ORDERS = "SELECT * FROM ingredient JOIN restockrequest ON ingredient.ingID=restockrequest.ingID JOIN supplierpayment ON supplierpayment.restockID = restockrequest.restockID JOIN restockorder ON restockorder.invoiceNo=supplierpayment.invoiceNo";
-    private static final String GET_ALL_ORDERS = "SELECT * FROM restockrequest r JOIN ingredient i on r.ingID = i.ingID JOIN restockorder ro on r.restockID = ro.restockID WHERE NOT r.status=\"pending\" and r.supplierID = 1";
+    private static final String GET_ALL_ORDERS = "SELECT * FROM restockrequest r JOIN ingredient i on r.ingID = i.ingID JOIN restockorder ro on r.restockID = ro.restockID WHERE r.status=\"delivered\" OR r.status =\"pending\" and r.supplierID=1";
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -70,12 +70,12 @@ public class OrdersDAO {
 //                String invoiceDate = rs.getString("invoiceDate");//restockorder >>>>and this one
                 String invoiceDate = rs.getString("invoiceDate");//restockrequest
                 String status = rs.getString("status");//restockorder
-                if(status=="Delivered"){
-                    System.out.println("bla bla");
-                    //query and get values from restock order table of completed orders
-                    //SELECT * FROM `restockorder` WHERE `reorderID`= 1    <<< here 1 must be replaced by reorderid
-
-                }
+//                if(status=="Delivered"){
+//                    System.out.println("bla bla");
+//                    //query and get values from restock order table of completed orders
+//                    //SELECT * FROM `restockorder` WHERE `reorderID`= 1    <<< here 1 must be replaced by reorderid
+//
+//                }
 
 
 
