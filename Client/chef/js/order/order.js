@@ -25,7 +25,7 @@ export class order{
         var hr = $(document.createElement('hr')).attr("class","mb-2 mt-2")
         var dishes = this.dish.map(i => new dish(i).printdish());
         
-        var button = $(document.createElement('div')).attr("class","flex-space-evenly mt-2 mb-6").html(` <div> <a class="btn tag-other text-bold" href="" onclick="completeorder(${this.orderID})" >Complete Order</a>
+        var button = $(document.createElement('div')).attr("class","flex-space-evenly mt-2 mb-6").html(` <div> <div class="btn tag-other text-bold"  onclick="completeorder(${this.orderID})" >Complete Order</div>
         </div>`);
         
 

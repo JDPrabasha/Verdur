@@ -167,8 +167,6 @@ public class dishdao {
         ResultSet rs = st.executeQuery(query);
         List<dish> dishes = new ArrayList<>();
         while (rs.next()) {
-
-
             int dishid = rs.getInt("dishID");
             String dishname = rs.getString("name");
             String dishcode = rs.getString("dishCode");

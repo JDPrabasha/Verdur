@@ -79,15 +79,7 @@ public class dishservlet extends HttpServlet {
             }
 
         }
-//        else if(type.contains("enableall")){
-//            try {
-//
-//                dish.enableall(Integer.parseInt(ingid));
-//            } catch (SQLException throwables) {
-//                throwables.printStackTrace();
-//            }
-//
-//        }
+
         else if (type.contains("disableall")) {
             try {
                 System.out.println("disablealldish");

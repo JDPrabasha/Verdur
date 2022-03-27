@@ -7,7 +7,7 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="/Client/styles.css">
         <link rel="stylesheet" href="/Client/styles/employee.css">
-        <link rel="stylesheet" href="/Client/styles/add-employee.css">
+        
         <link rel="stylesheet" href="/Client/styles/myedition.css">
         <script src="/Client/kitchenmanager/js/hedder.js"></script>
         <!-- <link rel="stylesheet" href="/Client/styles/ongoing.css"> -->
@@ -20,6 +20,7 @@
         <script src="/Client//kitchenmanager/js/ingredient_list_controller.js"></script>
         <script src="/Client/kitchenmanager/js/fotterKM.js"></script>
         <script src="/Client/kitchenmanager/js/hedder.js"></script>
+        <link rel="stylesheet" href="/Client/styles/add-employee.css">
         
         <script>
             function enabletext(){
@@ -169,13 +170,13 @@
                 </select>
                 <div id="form_min_wrap">
                     <label>Minimum Quantity</label>
-                    <input type="number"  style="width: 4cm;" id="form_min">
+                    <input type="number"  min="0" oninput="validity.valid||(value='')" style="width: 4cm;" id="form_min">
                 </div>
                 <label>Default Quantity</label>
-                <input type="number" style="width: 4cm;" id="form_default">
+                <input type="number"  min="0" oninput="validity.valid||(value='')" style="width: 4cm;" id="form_default">
                 <div id="form_max_wrap">
                     <label>Maximum Quantity</label>
-                    <input type="number"  style="width: 4cm;" id="form_max">
+                    <input type="number"  min="0" oninput="validity.valid||(value='')"  style="width: 4cm;" id="form_max">
                 </div>
                 <button class="btn mt-9 tag-yellow" style="width:100%" onclick="resetForm()" id="right-reset">Reset</button>
             </div>

@@ -7,6 +7,7 @@ function completeorder(rc) {
     var accept = {
         "orderID": parseInt(rc)
     };
+    console.log("clicked this shit")
     $.ajax({
         type:'PUT',
         url :'http://localhost:8080/Server_war_exploded/Chef/order',
@@ -20,6 +21,8 @@ function completeorder(rc) {
         $("#caustomization").html("");
         var text = $(document.createElement('h2')).attr("class","ml-2").html(`Select An Order`);
         $("#caustomization").append(text);
+        console.log("123")
+        window.location.href = "/Client/chef/home.html";
         
 
     })

@@ -70,7 +70,7 @@ export class restock{
         
 
         $("#ingredientdetails").html(this.inventory.map(i => new inventory(i).printingredientdetails()));
-        $("#supplierdetails").html(`<option id="0">All</option>`)
+        $("#supplierdetails").html(`<option value="0">All</option>`)
         $("#supplierdetails").append(this.supplier.map(i => new supplier(i).printsupplier()))
         $("#restockunit").html(this.inventory.map(i => new inventory(i).sendunit()));
         // $("[id='supplierdetails']:eq(1)").html(this.supplier.map(i => new supplier(i).printsupplier()))

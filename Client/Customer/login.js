@@ -12,6 +12,24 @@ $(document).ready(function () {
     $(signupSection).addClass("hidden");
     $(loginSection).removeClass("hidden");
   });
+
+  $("#forgot").click(function () {
+    var name = document.getElementById("username").value;
+    if (name == "") {
+      console.log("heyy");
+      $("#loginerror").removeClass("hidden");
+      $("#loginerror").html("Please enter your email");
+    } else {
+      $("#loginerror").addClass("hidden");
+      $("#alertReset").toggleClass("modal-active ");
+      $(".modal").show();
+    }
+  });
+  $(".modal-close").click(function (e) {
+    e.preventDefault();
+    $("#vtf").removeClass("modal-active ");
+    $(".modal").hide();
+  });
 });
 
 function login() {
