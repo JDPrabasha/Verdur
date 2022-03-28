@@ -56,6 +56,7 @@ public class RegisterServlet extends HttpServlet {
         int code = getRandom();
         User user = new Gson().fromJson(request.getReader(), User.class);
         boolean added = newUser.addUser(user, code);
+        System.out.println(added);
         if (added) {
             SendMail mailer = new SendMail(user.getUsername(), code);
             mailer.sendActivationLink();

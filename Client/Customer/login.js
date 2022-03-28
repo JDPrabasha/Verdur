@@ -22,6 +22,7 @@ $(document).ready(function () {
     } else {
       $("#loginerror").addClass("hidden");
       $("#alertReset").toggleClass("modal-active ");
+      resetAccount(name);
       $(".modal").show();
     }
   });
@@ -31,6 +32,27 @@ $(document).ready(function () {
     $(".modal").hide();
   });
 });
+
+function resetAccount(name) {
+  $.ajax({
+    type: "GET",
+    url: "http://localhost:8080/Server_war_exploded/reset?username=" + name,
+
+    contentType: "application/json; charset=utf-8",
+    success: function (response) {
+      console.log("success");
+      // console.log(response);
+    },
+    failure: function (response) {
+      // console.log(response.);
+    },
+    error: function (request, status, error) {
+      console.log(error);
+      console.log(request);
+      console.log(status);
+    },
+  });
+}
 
 function login() {
   name = document.getElementById("username").value;

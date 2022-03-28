@@ -25,7 +25,6 @@ $(document).ready(function () {
           password: password,
         }),
         contentType: "application/json; charset=utf-8",
-        dataType: "json",
 
         success: function (response) {
           window.location = "customer-landing.html";
@@ -35,43 +34,17 @@ $(document).ready(function () {
           // console.log(response.);
         },
         error: function (request, status, error) {
+          console.log(error);
+          console.log(request);
+          console.log(status);
           $("#emailerror").removeClass("hidden");
           $("#emailerror").html(
-            "Email is already in use. PLease try again from a different email"
+            "Email is already in use. Please try again from a different email"
           );
         },
       });
     }
-
-    // validateEmail(email);
-    // validateContact(contact);
-
-    // document.getElementById("password").value = "";
-
-    // // $.ajax({
-    //     type: "POST",
-    //     url: "http://localhost:8080/Server_war_exploded/register",
-    //     data: JSON.stringify({ "username": name, "password" : password}),
-    //         contentType: "application/json; charset=utf-8",
-    //         dataType: "json",
-
-    //         success: function (response) {
-    //            if (response.d == true) {
-    //                 alert("You will now be redirected.");
-    //                 window.location = "//www.aspsnippets.com/";
-    //             }
-    //         },
-    //         failure: function (response) {
-    //             alert(response.d);
-    //         }
-    //     });
   });
-
-  //   function timer() {
-  //     $("#newname").val($("#newname").val() + "a");
-  //   }
-
-  //   window.setInterval(timer, 1000);
 
   function validateName(input) {
     var regName = /^[a-zA-Z]+ [a-zA-Z]+$/;

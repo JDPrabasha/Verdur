@@ -3,18 +3,13 @@ $(document).ready(function () {
   let url = new URL(url_str);
   let search_params = url.searchParams;
   var authHeader = "Bearer " + window.localStorage.getItem("jwt");
-  let edit = search_params.get("edit");
+
   let id = search_params.get("id");
   let cid = search_params.get("customID");
-  if (edit == "true") {
-    console.log("jk");
-    // getCustomizationDetails();
-    getDishDetails();
-  } else {
-    getDishDetails();
 
-    console.log(id);
-  }
+  getDishDetails();
+
+  $("#dish").html(window.localStorage.getItem("currentDish"));
 
   function getCustomizationDetails() {
     $.ajax({

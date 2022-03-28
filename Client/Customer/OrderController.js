@@ -109,6 +109,11 @@ $(window).on("load", function () {
     }
   });
 
+  window.setInterval(function () {
+    var status = $("#active-status").html();
+    getOrderData();
+  }, 1000);
+
   function getOrderData(status) {
     $.ajax({
       url:
@@ -300,7 +305,7 @@ $(window).on("load", function () {
     updateOrders;
   }, 1000);
 
-  $(".modal-close").click(function (e) {
+  $(".modal-close.map").click(function (e) {
     e.preventDefault();
     $("#vtf").removeClass("modal-active ");
     $(".modal").hide();
@@ -398,6 +403,7 @@ $(window).on("load", function () {
   $("#ratingContent").on("click", "#skipReview", function () {
     console.log("skippy");
     finishReview();
+    getActiveOrder();
   });
 
   $("#ratingContent").on("click", "#skip", function () {
@@ -509,6 +515,7 @@ $(window).on("load", function () {
           }
 
           console.log(payment);
+          getActiveOrder();
         },
         failure: function () {
           alert("fail");
