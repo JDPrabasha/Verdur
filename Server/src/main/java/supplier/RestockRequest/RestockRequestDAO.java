@@ -24,7 +24,7 @@ public class RestockRequestDAO {
 
 
 //    private static final String GET_ALL_ITEMS = "SELECT * FROM restockrequest ";
-    private static final String GET_ALL_ITEMS = "SELECT * FROM restockrequest r  INNER JOIN ingredient i WHERE r.ingID=i.ingID  and approvalStatus=\"managerApproved\" and (status=\"pending\" or status=\"\")and (r.supplierID=? or r.supplierID is NULL)";
+    private static final String GET_ALL_ITEMS = "SELECT * FROM restockrequest r  INNER JOIN ingredient i WHERE r.ingID=i.ingID  and approvalStatus=\"managerApproved\" and (status=\"pending\" or status=\"\")and (r.supplierID=? or r.supplierID is NULL) and expired=0";
     private static final String GET_REQUEST = " UPDATE `restockrequest` SET `status` = 'Delivering' WHERE `restockrequest`.`restockID` = ?";
     private static final String CREATE_NOTIFICATION = "insert into managernotifications (type,description,targetID) values (?,?,?)";
 
