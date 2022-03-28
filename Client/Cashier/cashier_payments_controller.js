@@ -33,13 +33,17 @@ function uiLoad(today,datepass){
             xhr.setRequestHeader("authorization", authHeader);
         }
         
-     },).then(function(data){
+     },).fail(function (jqXHR, textStatus, errorThrown) {
+        window.location.href = "/Client/Manager/Invalid Token.html"
+    }).then(function(data){
         
          var array = $.parseJSON(data);
         //  console.log(array);
          const deserializeddata = array.map(i=>cashierpaymentsserializer.doserializer(i));
          deserializeddata.map(params=>new cashierpayments(params).printcashierpayments());
          initializeConfirmButton();
+        $("#loading").trigger("loaded")
+
          console.log(array)
         //  console.log(array[0]['type']);
 var cashtotal=0;

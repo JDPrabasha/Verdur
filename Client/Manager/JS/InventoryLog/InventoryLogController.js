@@ -13,6 +13,8 @@ $(document).ready(function reload(){
         headers: {
             "authorization": authHeader
         }
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        window.location.href = "/Client/Manager/Invalid Token.html"
     }).then(function(data){
         console.log(data)
         let desirialized = data.map(i => InventoryLogSerializer.doserialize(i))

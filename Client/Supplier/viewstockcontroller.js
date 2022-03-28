@@ -7,12 +7,16 @@ $(document).ready(function dishlist(){
             xhr.setRequestHeader("authorization", authHeader);
         }
         
-     },).then(function(data){
+     },).fail(function (jqXHR, textStatus, errorThrown) {
+        window.location.href = "/Client/Manager/Invalid Token.html"
+    }).then(function(data){
         
          var array = $.parseJSON(data);
          console.log(array);
          const deserializeddata = array.map(i=>dishserializer.doserializer(i));
          deserializeddata.map(params=>new dish(params).printdish());
+        $("#loading").trigger("loaded")
+
      })
 
      

@@ -2,6 +2,7 @@ $(document).ready(function () {
   window.localStorage.removeItem("jwt");
   window.localStorage.removeItem("id");
   window.localStorage.removeItem("avatar");
+  window.localStorage.removeItem("photo");
   window.localStorage.removeItem("name");
   window.localStorage.removeItem("rider");
   window.localStorage.removeItem("customer");
@@ -37,67 +38,67 @@ function login() {
 }
 
 function setDetails(role) {
-  authHeader = "Bearer " + window.localStorage.getItem("jwt");
-  if (role == "Customer") {
-    $.ajax({
-      type: "GET",
-      url:
-        "http://localhost:8080/Server_war_exploded/profile?role=customer&id=" +
-        window.localStorage.getItem("id"),
-      headers: {
-        authorization: authHeader,
-      },
-    }).then(function (data) {
-      var user = $.parseJSON(data);
-      // console.log(user);
-      window.localStorage.setItem("avatar", user.avatar);
-      window.localStorage.setItem("customer", user.id);
-      window.localStorage.setItem("name", user.name);
-      console.log(window.localStorage.getItem("name"));
+    authHeader = "Bearer " + window.localStorage.getItem("jwt");
+    if (role == "Customer") {
+        $.ajax({
+            type: "GET",
+            url:
+                "http://localhost:8080/Server_war_exploded/profile?role=customer&id=" +
+                window.localStorage.getItem("id"),
+            headers: {
+                authorization: authHeader,
+            },
+        }).then(function (data) {
+            var user = $.parseJSON(data);
+            // console.log(user);
+            window.localStorage.setItem("avatar", user.avatar);
+            window.localStorage.setItem("customer", user.id);
+            window.localStorage.setItem("name", user.name);
+            console.log(window.localStorage.getItem("name"));
 
-      window.location = "/Client/Customer/customer-menu.html";
-    });
-  } else {
-    $.ajax({
-      type: "GET",
-      url:
-        `http://localhost:8080/Server_war_exploded/profile?role=${role}&id=` +
-        window.localStorage.getItem("id"),
-      headers: {
-        authorization: authHeader,
-      },
-    }).then(function (data) {
-      // console.log(role)
-      var user = $.parseJSON(data);
-      // console.log(user);
-      window.localStorage.setItem("photo", user.avatar);
-      window.localStorage.setItem("name", user.name);
-      console.log(window.localStorage.getItem("name"));
-      if (role == "Rider") {
-        window.localStorage.setItem("rider", user.id);
-        window.location = "/Client/rider-home.html";
-      } else if (role == "Manager") {
-        // window.localStorage.setItem("userID", user.id);
-        window.location = "/Client/Manager/Manager-Home.html";
-        window.localStorage.setItem("id", user.id);
-      } else if (role == "Kitchen Manager") {
-        // window.localStorage.setItem("userID", user.id);
-        window.location = "/Client/kitchenmanager/home.html";
-        window.localStorage.setItem("id", user.id);
-        //Km location
-      } else if (role == "Supplier") {
-        //supplier location
-        window.location = "/Client/Supplier/SupplierOrders.html";
-        window.localStorage.setItem("id", user.id);
-      } else if (role == "Cashier") {
-        //cashier
-        window.location = "/Client/Cashier/CashierHome.html";
-        window.localStorage.setItem("id", user.id);
-      } else if (role == "Chef") {
-        //chef location
-        window.location = "/Client/chef/home.html";
-        window.localStorage.setItem("id", user.id);
-      }
-    });
+            window.location = "/Client/Customer/customer-menu.html";
+        });
+    } else {
+        $.ajax({
+            type: "GET",
+            url:
+                `http://localhost:8080/Server_war_exploded/profile?role=${role}&id=` +
+                window.localStorage.getItem("id"),
+            headers: {
+                authorization: authHeader,
+            },
+        }).then(function (data) {
+            // console.log(role)
+            var user = $.parseJSON(data);
+            // console.log(user);
+            window.localStorage.setItem("photo", user.avatar);
+            window.localStorage.setItem("name", user.name);
+            console.log(window.localStorage.getItem("name"));
+            if (role == "Rider") {
+                window.localStorage.setItem("rider", user.id);
+                window.location = "/Client/Rider/rider-home.html";
+            } else if (role == "Manager") {
+                // window.localStorage.setItem("userID", user.id);
+                window.location = "/Client/Manager/Manager-Home.html";
+                window.localStorage.setItem("id", user.id);
+            } else if (role == "Kitchen Manager") {
+                // window.localStorage.setItem("userID", user.id);
+                window.location = "/Client/kitchenmanager/home.html"
+                window.localStorage.setItem("id", user.id);
+                //Km location
+            } else if (role == "Supplier") {
+                //supplier location
+                window.location = "/Client/Supplier/RestockRequests.html"
+                window.localStorage.setItem("id", user.id);
+            } else if (role == "Cashier") {
+                //cashier
+                window.location = "/Client/Cashier/CashierHome.html"
+                window.localStorage.setItem("id", user.id);
+            } else if (role == "Chef"){
+                //chef location
+                window.location = "/Client/chef/home.html"
+                window.localStorage.setItem("id", user.id);
+            }
+        });
+    }
   }
-}

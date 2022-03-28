@@ -1,15 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JWT token Invalid</title>
-    <link rel="stylesheet" href="/Client/styles/pastures.css">
-</head>
-<body>
-    <button class="btn" onclick="history.back()">Retry</button>
-    <button class = "btn" onclick="window.location.href='/Client/Manager/login_new.html'">Re-Login</button>
-    <div></div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <!-- <link rel="stylesheet" href="/Client/styles/pastures_new.css" /> -->
+    <link rel="stylesheet" href="/Client/styles/pastures.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    
+  </head>
+  <body style="overflow: hidden">
+    <div class="row">
+      <div class="col-6 pl-30 mt-15 hidden" id="register">
+        <img src="/Client/images/Asset 304x.png" width="18%" alt="" />
+      
+
+     
+     
+        <div class="mb-10" style="bottom: 0; position: fixed">
+          <span class="material-icons icon"> copyright </span>
+          <p class="text">2021 Verdur. All Rights Reserved</p>
+        </div>
+      </div>
+      <div class="col-6 pl-30 mt-15" id="login">
+        <img src="/Client/images/Asset 304x.png" width="18%" alt="" />
+        <h5 class="mt-15 mb-4 pt-6">Oops...</h5>
+
+      
+        <!-- <p class="text-red mb-3" style="font-size: smaller">random text</p> -->
+
+      
+        <!-- <p class="text-red mb-3" style="font-size: smaller">random text</p> -->
+        <p class="mt-4 mb-4 text-green text-2 pt-6">Token expired....</p>
+        <a class="btn width-2 text-center mb-6 pt-6" onclick="window.location.href='/Client/Manager/login_new.html'">Login</a>
+        <a class="btn width-2 text-center mb-6 tag-red pt-6" onclick="window.history.go(-2)">Retry</a>
+       
+        <div class="mb-10" style="bottom: 0; position: fixed">
+          <span class="material-icons icon"> copyright </span>
+          <p class="text">2021 Verdur. All Rights Reserved</p>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="bg-gray" style="height: 100vh">
+          <img class="pl-6 pt-8" src="https://media.istockphoto.com/vectors/envelope-with-sheet-vector-id824800974?k=20&m=824800974&s=612x612&w=0&h=4PpmpxVwa_zy59HrwVPwBK3cJUplAtlAVA4eYxaPYnc=" style="width:75%; height: 75%;"alt="" />
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

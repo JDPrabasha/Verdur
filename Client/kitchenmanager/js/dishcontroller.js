@@ -7,12 +7,16 @@ $(document).ready(function dishlist(){
         beforeSend: function(xhr) {
             xhr.setRequestHeader("authorization", authHeader);
           },
-     },).then(function(data){
+     },).fail(function (jqXHR, textStatus, errorThrown) {
+        window.location.href = "/Client/Manager/Invalid Token.html"
+    }).then(function(data){
         
          var array = $.parseJSON(JSON.stringify(data));
          console.log(array);
          const deserializeddata = array.map(i=>dishserializer.doserializer(i));
          deserializeddata.map(params=>new dish(params).printdish());
+         $("#loading").trigger("loaded")
+
      }),
 
      $("#searchQuerySubmit").click( function(){
@@ -22,13 +26,16 @@ $(document).ready(function dishlist(){
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("authorization", authHeader);
               },
-        },).then(function(data) {
+        },).fail(function (jqXHR, textStatus, errorThrown) {
+            window.location.href = "/Client/Manager/Invalid Token.html"
+        }).then(function(data) {
             // console.log(data['data']);
             $("#results").html('');
             var array = $.parseJSON(JSON.stringify(data));
             console.log(array);
             const deserializeddata = array.map(i=>dishserializer.doserializer(i));
             deserializeddata.map(params=>new dish(params).printdish());
+            $("#loading").trigger("loaded")
         })
 
     })

@@ -11,6 +11,8 @@ $(document).ready(function () {
         beforeSend: function (xhr) {
             xhr.setRequestHeader("authorization", authHeader);
         },
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        window.location.href = "/Client/Manager/Invalid Token.html"
     }).then(function (data) {
 
         var array = $.parseJSON(JSON.stringify(data));
@@ -21,7 +23,6 @@ $(document).ready(function () {
         deserializeddata.map(params => new orders_cashier(params).printneworderdelivering());
 
         console.log(deserializeddata);
-
-
+        $("#loading").trigger("loaded")
     })
 });

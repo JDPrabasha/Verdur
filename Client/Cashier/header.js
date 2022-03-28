@@ -8,7 +8,7 @@ $(document).ready(function(){
     //     <a href="dish.html"><i class="material-icons">lunch_dining</i></a>
     //     <a href="restockrequestorders.html"><i class="material-icons">autorenew</i></a>`);
     $("#notification").load("/Client/Cashier/header.html #notification",function(){
-        $("#header_image").attr("src",window.localStorage.getItem("avatar"))
+        $("#header_image").attr("src",window.localStorage.getItem("photo"))
         $("#header_name").html(window.localStorage.getItem("name"))
     })
   
