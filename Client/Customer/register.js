@@ -25,7 +25,6 @@ $(document).ready(function () {
           password: password,
         }),
         contentType: "application/json; charset=utf-8",
-        dataType: "json",
 
         success: function (response) {
           window.location = "customer-landing.html";
@@ -35,9 +34,12 @@ $(document).ready(function () {
           // console.log(response.);
         },
         error: function (request, status, error) {
+          console.log(error);
+          console.log(request);
+          console.log(status);
           $("#emailerror").removeClass("hidden");
           $("#emailerror").html(
-            "Email is already in use. PLease try again from a different email"
+            "Email is already in use. Please try again from a different email"
           );
         },
       });

@@ -221,7 +221,7 @@ public class UserDAO {
             secondStatement.executeUpdate();
 
             PreparedStatement thirdStatement = this.conn.prepareStatement(INSERT_CUSTOMER);
-            secondStatement.setInt(1, gid);
+            thirdStatement.setInt(1, gid);
             System.out.println(thirdStatement);
             thirdStatement.executeUpdate();
             conn.commit();

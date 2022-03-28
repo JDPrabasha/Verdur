@@ -75,12 +75,18 @@ $(window).on("load", function () {
     }).then(function (data) {
       newarray = $.parseJSON(data);
       console.log(newarray);
-      const deSerializedData = newarray.map(NotificationSerializer.deSerialize);
-      // console.log(deSerializedData);
-      deSerializedData.map((params) =>
-        new Notification(params).addNotification()
-      );
-      badge.html(newarray.length);
+      if (newarray.length > 0 && newarray.length > notificationCount) {
+        const deSerializedData = newarray.map(
+          NotificationSerializer.deSerialize
+        );
+        // console.log(deSerializedData);
+        deSerializedData.map((params) =>
+          new Notification(params).addNotification()
+        );
+        badge.html(newarray.length);
+        notificationCount = newarray.length;
+      }
+
       newarray.length > 0 && newarray.length > notifCount
         ? notification.append(badge)
         : null;
@@ -88,4 +94,8 @@ $(window).on("load", function () {
   }
 
   getNotifications();
+
+  window.setInterval(function () {
+    getNotifications();
+  }, 1000);
 });

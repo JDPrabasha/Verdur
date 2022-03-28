@@ -446,10 +446,14 @@ class Ingredient {
         "flex-column flex-2 text-center fw-b container"
       );
 
-      var min = $(document.createElement("p")).html(this.minimum + " tbsp");
-      var max = $(document.createElement("p")).html(this.maximum + " tbsp");
+      var min = $(document.createElement("p")).html(
+        this.minimum + " " + this.unit + "s"
+      );
+      var max = $(document.createElement("p")).html(
+        this.maximum + " " + this.unit + "s"
+      );
       var current = $(document.createElement("p"))
-        .html(this.quantity + " tbsp")
+        .html(this.quantity + " " + this.unit + "s")
         .addClass("ml-6 quantity");
       var minmax = $(document.createElement("div")).addClass(
         "flex-space-between"
@@ -461,13 +465,13 @@ class Ingredient {
           max: this.maximum,
           value: this.quantity,
           type: "range",
-          step: 5,
+          step: 0.5,
         })
         .attr("id", "oned");
 
       $(slider).on("propertychange input", function (e) {
         console.log(this.value);
-        current.html(this.value + " tbsp");
+        current.html(this.value + this.unit + "s");
       });
 
       minmax.append(min);

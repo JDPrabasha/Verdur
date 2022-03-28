@@ -12,6 +12,26 @@ $(window).on("load", function () {
   $("#firstName").html(name.split(" ")[0]);
   $("#riderId").html(rider);
 
+  function toggleAvailibility() {
+    $.ajax({
+      type: "PUT",
+      url:
+        "http://localhost:8080/Server_war_exploded/rider/toggle?rider=" + rider,
+      headers: {
+        authorization: authHeader,
+      },
+
+      success: function () {
+        console.log("pass");
+
+        console.log("payment");
+      },
+      failure: function () {
+        alert("fail");
+      },
+    });
+  }
+
   function getActiveOrders() {
     $.ajax({
       type: "GET",
@@ -29,6 +49,8 @@ $(window).on("load", function () {
         $("#content")
           .html("No deliveries assigned currently")
           .addClass("fw-b mt-60 mb-50");
+
+        toggleAvailibility();
       } else {
         const deSerializedData = array.map(DeliverySerializer.deSerialize);
         console.log(deSerializedData);
