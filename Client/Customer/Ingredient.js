@@ -464,6 +464,7 @@ class Ingredient {
           min: this.minimum,
           max: this.maximum,
           value: this.quantity,
+          unit: this.unit,
           type: "range",
           step: 0.5,
         })
@@ -471,7 +472,7 @@ class Ingredient {
 
       $(slider).on("propertychange input", function (e) {
         console.log(this.value);
-        current.html(this.value + this.unit + "s");
+        current.html(this.value + " " + $(this).attr("unit") + "s");
       });
 
       minmax.append(min);
