@@ -1,6 +1,7 @@
 package User;
 
 import Manager.employee.SendMail;
+import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,7 +43,7 @@ public class ResetPasswordServlet {
     }
 
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
 
 
         resetPassword(request, response);
@@ -50,8 +51,14 @@ public class ResetPasswordServlet {
 
     }
 
-    private void resetPassword(HttpServletRequest request, HttpServletResponse response) {
-
+    private void resetPassword(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+        String email = request.getParameter("key1");
+        String code = request.getParameter("key2");
+        User validUser = user.checkUserCode(email, code);
+        if (validUser != null) {
+            User resetUser = new Gson().fromJson(request.getReader(), User.class);
+            user.resetPassword(resetUser);
+        }
 
     }
 

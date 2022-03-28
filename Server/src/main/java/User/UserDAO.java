@@ -26,6 +26,7 @@ public class UserDAO {
     private static final String GET_SUPPLIER_DETAILS = "SELECT firstName, lastName, image as photo, s.supplierID as empID from user u join supplier s on s.userID=u.userID where s.userID=?";
     private static final String GET_CUSTOMER_DETAILS = "select address ,contact,email from customer c join user u on c.userID =u.userID join login l on u.userID =l.userID where c.custID =? ";
     private static final String UPDATE_CUSTOMER_DETAILS = "update customer c join user u on c.userID = u.userID set contact =?,address=?,avatar=(select avatarID from avatar where image = ?) where c.custID =? ";
+    private static final String RESET_PASSWORD = "update login set password = ? where username = ?";
 
 
     private Connection conn;
@@ -262,6 +263,26 @@ public class UserDAO {
             conn.setAutoCommit(false);
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setInt(2, user.getCode());
+            System.out.println(preparedStatement);
+            preparedStatement.executeUpdate();
+            PreparedStatement secondStatement = this.conn.prepareStatement(RESET_CODE);
+            secondStatement.setInt(1, 123456);
+            secondStatement.setString(2, user.getUsername());
+            System.out.println(secondStatement);
+            secondStatement.executeUpdate();
+            conn.commit();
+            conn.setAutoCommit(true);
+        } catch (SQLException e) {
+            printSQLException((SQLException) e);
+        }
+    }
+
+    public void resetPassword(User user) {
+        System.out.println(VERIFY_USER);
+        try (PreparedStatement preparedStatement = this.conn.prepareStatement(RESET_PASSWORD)) {
+            conn.setAutoCommit(false);
+            preparedStatement.setString(1, user.getPassword());
+            preparedStatement.setString(2, user.getUsername());
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
             PreparedStatement secondStatement = this.conn.prepareStatement(RESET_CODE);
