@@ -281,7 +281,8 @@ public class UserDAO {
         System.out.println(VERIFY_USER);
         try (PreparedStatement preparedStatement = this.conn.prepareStatement(RESET_PASSWORD)) {
             conn.setAutoCommit(false);
-            preparedStatement.setString(1, user.getPassword());
+            String hashPassword = org.apache.commons.codec.digest.DigestUtils.sha256Hex(user.getPassword());
+            preparedStatement.setString(1, hashPassword);
             preparedStatement.setString(2, user.getUsername());
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();

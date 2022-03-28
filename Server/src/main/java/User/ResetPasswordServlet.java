@@ -71,7 +71,7 @@ public class ResetPasswordServlet {
         if (exists) {
             user.deactivateAccount(username, code);
             SendMail mailer = new SendMail(username, code);
-            mailer.sendActivationLink();
+            mailer.sendResetLink();
         }
 
     }
