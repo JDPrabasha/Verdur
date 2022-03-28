@@ -123,7 +123,8 @@
         <span class="ml-6 fw-b underline" id="current">Breakfast Specials</span>
         <span class="text-1 ml-6 fw-b underline" id="recent">New Releases</span>
       </p>
-      <div class="cards flex-grid ml-10" id="dishes">
+      <div class="cards flex-grid ml-30" id="dishes">
+        <div class="card skeleton skeleton-card"></div>
         <div class="card skeleton skeleton-card"></div>
         <div class="card skeleton skeleton-card"></div>
         <div class="card skeleton skeleton-card"></div>
@@ -134,7 +135,7 @@
     <div class="section modals">
       <div class="diet-modal hidden">
         <div class="modal-bg" id="dietModal">
-          <div class="modal-body width-3 height-5 p-5 ml-6 round-1">
+          <div class="modal-body width-2 height-4 p-5 ml-6 round-1">
             <p class="mb-6 fw-b text-2">Diet</p>
             <p class="mb-3">Preferences</p>
 
@@ -217,7 +218,8 @@
               </p>
             </div>
 
-            <p class="btn ml-40 mt-8 mb-6" id="dietFilterBtn">Filter</p>
+            <!-- <p class="btn ml-40 mt-8 mb-6" id="dietFilterBtn">Filter</p> -->
+            <p class="btn" id="dietFilterBtn" style="position:absolute;bottom:20px;left:150px">Filter</p>
 
             <span class="material-icons modal-close" id="close"> close </span>
           </div>
@@ -225,7 +227,7 @@
       </div>
       <div class="filter-modal hidden">
         <div class="modal-bg" id="filterModal">
-          <div class="modal-body width-3 height-6 round-1 p-5 ml-6">
+          <div class="modal-body width-3 height-5 round-1 p-5 ml-6">
             <p class="mb-6 fw-b text-2">Filter</p>
             <p class="mb-3">Preparation Time</p>
             <p class="ml-85 fw-b">
@@ -306,14 +308,14 @@
               </p>
             </div>
             <p></p>
-            <p class="btn ml-40 mt-3 mt-8 mb-8" id="filterFilterBtn">Filter</p>
+            <p class="btn ml-60 mt-3 mt-8 mb-8" id="filterFilterBtn">Filter</p>
             <span class="material-icons modal-close" id="close"> close </span>
           </div>
         </div>
       </div>
       <div class="modal hidden">
         <div class="modal-bg" id="vtf">
-          <div class="modal-body width-5 height-4 round-1 p-5 ml-6">
+          <div class="modal-body width-4 height-4 round-1 p-5 ml-6">
             <div class="top mb-2"></div>
             <div class="flex-grid text-center ml-6">
               <div class="flex-column">
@@ -407,7 +409,7 @@
                 <h1 class="text-center">Chicken</h1>
               </div>
             </div>
-            <p class="btn ml-80 mt-4 mb-6" id="ingredientFilter">Filter</p>
+            <p class="btn ml-80 mt-15 mb-6" id="ingredientFilter">Filter</p>
             <span class="material-icons modal-close" id="close"> close </span>
           </div>
         </div>
