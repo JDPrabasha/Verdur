@@ -116,7 +116,7 @@ public class RestockRequestDAO {
             LocalDateTime now = LocalDateTime.now();
             st2.setString(2,dtf.format(now));
             st2.setInt(3,supplierID);
-            st2.setString(2,"pending");
+            st2.setString(4,"pending");
 
 //            st2.setInt(4,38);
 //        st2.setInt(4,getsupplier);

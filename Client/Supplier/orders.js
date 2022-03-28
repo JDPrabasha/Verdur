@@ -18,9 +18,9 @@ class orders{
             var item = $(document.createElement('td')).html(this.item);
             var quantity = $(document.createElement('td')).html(this.quantity);
             var totalPrice = $(document.createElement('td')).html(this.totalPrice);
-            var requestedDate = $(document.createElement('td')).html(this.requestedDate);
+            var requestedDate = $(document.createElement('td')).html(this.requestedDate.split(" ")[0]);
             var deliveryDate = $(document.createElement('td')).html(this.deliveryDate);
-            var timeTillDeadline = $(document.createElement('td')).html(this.timeTillDeadline);//dueBy-current time
+            var timeTillDeadline = $(document.createElement('td')).html(this.timeTillDeadline).attr("id",`dead-time-${this.reorderID}`).attr("time",this.timeTillDeadline);//dueBy-current time
             // var invoiceDate = $(document.createElement('td')).html(this.invoiceDate);
             // var status = $(document.createElement('td')).html(this.status);
             
@@ -54,7 +54,7 @@ class orders{
         var item = $(document.createElement('td')).html(this.item);
         var quantity = $(document.createElement('td')).html(this.quantity);
         var totalPrice = $(document.createElement('td')).html(this.totalPrice);
-        var requestedDate = $(document.createElement('td')).html(this.requestedDate);
+        var requestedDate = $(document.createElement('td')).html(this.requestedDate.split(" ")[0]);
         var deliveryDate = $(document.createElement('td')).html(this.deliveryDate);
         // var timeTillDeadline = $(document.createElement('td')).html(this.timeTillDeadline);
         // var invoiceDate = $(document.createElement('td')).html(this.invoiceDate);
@@ -100,7 +100,7 @@ printcompletedorders(){
     var item = $(document.createElement('td')).html(this.item);
     var quantity = $(document.createElement('td')).html(this.quantity);
     var totalPrice = $(document.createElement('td')).html(this.totalPrice);
-    var requestedDate = $(document.createElement('td')).html(this.requestedDate);
+    var requestedDate = $(document.createElement('td')).html(this.requestedDate.split(" ")[0]);
     var deliveryDate = $(document.createElement('td')).html(this.deliveryDate);
     // var timeTillDeadline = $(document.createElement('td')).html(this.timeTillDeadline);
     var invoiceDate = $(document.createElement('td')).html(this.invoiceDate);
