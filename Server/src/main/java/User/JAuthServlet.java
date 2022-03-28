@@ -29,21 +29,10 @@ public class JAuthServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-//        String authHeader = request.getHeader("authorization");
-//        String encodedAuth = authHeader.substring(authHeader.indexOf(' ')+1);
-//        String decodedAuth = new String(Base64.getDecoder().decode(encodedAuth));
-//        String username = decodedAuth.substring(0, decodedAuth.indexOf(':'));
-//        String password = decodedAuth.substring(decodedAuth.indexOf(':')+1);
-//        System.out.println(authHeader);
-//        User loggedInPerson = null;
-//        try {
-//            generateToken();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+
 
         String authHeader = request.getHeader("authorization");
-        final int EXPIRY_DAYS = 3600;
+        final int EXPIRY_DAYS = 1;
 
 
         String encodedAuth = authHeader.substring(authHeader.indexOf(' ') + 1);
@@ -52,10 +41,8 @@ public class JAuthServlet extends HttpServlet {
         String password = decodedAuth.substring(decodedAuth.indexOf(':') + 1);
 
         JSONObject jwtPayload = new JSONObject();
-//        jwtPayload.put("status", 0);
 
 
-//        String token = new User.JWebToken("John",audArray,ldt.toEpochSecond(ZoneOffset.UTC)).toString();
         User loggedInPerson = null;
         String role = null;
         try {
@@ -65,18 +52,12 @@ public class JAuthServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        //make sure user is in our data
         if (loggedInPerson == null) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
 
-        //make sure password is valid
-        //use hashed passwords in real life!
-//        if(!password.equalsIgnoreCase(loggedInPerson.getPassword())){
-//            response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-//            return;
-//        }
+
         int id = loggedInPerson.getId();
         try {
             role = userDAO.getRole(id);
@@ -87,7 +68,6 @@ public class JAuthServlet extends HttpServlet {
         }
 
         JSONArray audArray = new JSONArray();
-//        audArray.put("admin");
         audArray.put(role);
         jwtPayload.put("sub", username);
         jwtPayload.put("pass", password);
@@ -101,50 +81,7 @@ public class JAuthServlet extends HttpServlet {
         response.getOutputStream().print(json);
 
     }
-//    public String generateToken(String authHeader){
-//        final int EXPIRY_DAYS = 90;
-//
-//
-//        String encodedAuth = authHeader.substring(authHeader.indexOf(' ')+1);
-//        String decodedAuth = new String(Base64.getDecoder().decode(encodedAuth));
-//        String username = decodedAuth.substring(0, decodedAuth.indexOf(':'));
-//        String password = decodedAuth.substring(decodedAuth.indexOf(':')+1);
-//
-//        JSONObject jwtPayload = new JSONObject();
-////        jwtPayload.put("status", 0);
-//
-//        JSONArray audArray = new JSONArray();
-////        audArray.put("admin");
-//        jwtPayload.put("sub", username);
-//        jwtPayload.put("pass", password);
-////        jwtPayload.put("aud", audArray);
-//        LocalDateTime ldt = LocalDateTime.now().plusDays(EXPIRY_DAYS);
-//        jwtPayload.put("exp", ldt.toEpochSecond(ZoneOffset.UTC)); //this needs to be configured
-//
-//        String token = new User.JWebToken(jwtPayload).toString();
-////        String token = new User.JWebToken("John",audArray,ldt.toEpochSecond(ZoneOffset.UTC)).toString();
-//        User loggedInPerson = null;
-//        try {
-//            loggedInPerson = userDAO.findUser(username);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        //make sure user is in our data
-//        if(loggedInPerson == null){
-//            response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-//            return;
-//        }
-//
-//        //make sure password is valid
-//        //use hashed passwords in real life!
-//        if(!password.equalsIgnoreCase(loggedInPerson.getPassword())){
-//            response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-//            return;
-//        }
-//
-//        return token;
-//    }
+
 
     public boolean verifyToken(String bearerToken) throws NoSuchAlgorithmException {
         JWebToken incomingToken = new JWebToken(bearerToken);

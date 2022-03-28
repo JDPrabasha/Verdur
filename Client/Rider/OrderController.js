@@ -43,59 +43,9 @@ $(window).on("load", function () {
     var status = $("#active-status").html();
     var content = $("#modalContent");
     $("#modalContent").html("");
-
-    switch (status) {
-      case "Pending":
-        const deSerializedData = OrderSerializer.deSerialize(order);
-        new Order(deSerializedData).showPendingOrder();
-        break;
-      case "Delivering":
-        console.log("Oranges are $0.59 a pound.");
-
-        break;
-      case "Delivered":
-        console.log("Mangoes and papayas are $2.79 a pound.");
-        reviewOrder();
-
-        break;
-      default:
-        console.log(`Sorry, we are out of ${expr}.`);
-        break;
-    }
   });
 
   function checkDistance(distance) {
-    for (i = 0; i < fees.length; i++) {
-      if (distance == fees[i].distance) {
-        return fees[i].fee;
-      }
-    }
-  }
-
-  function getDeliveryData(distance) {
-    for (i = 0; i < fees.length; i++) {
-      if (distance == fees[i].distance) {
-        return fees[i].fee;
-      }
-    }
-  }
-
-  function getOrderSummary() {
-    for (i = 0; i < fees.length; i++) {
-      if (distance == fees[i].distance) {
-        return fees[i].fee;
-      }
-    }
-  }
-
-  function reviewOrder() {
-    // var order = $("#active-order").html();
-    // console.log(order);
-    const deSerializedData = OrderSerializer.deSerialize(order);
-    new Order(deSerializedData).showDeliveredOrder();
-  }
-
-  function confirmReview() {
     for (i = 0; i < fees.length; i++) {
       if (distance == fees[i].distance) {
         return fees[i].fee;

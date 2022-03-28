@@ -3,14 +3,14 @@
     <head>
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <link rel="stylesheet" href="/Client/styles/pastures.css">
-        <!-- <link rel="stylesheet" href="/Client/styles/employee.css"> -->
+        <link rel="stylesheet" href="/Client/styles/employee.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="/Client/styles.css">
         <link rel="stylesheet" href="/Client/styles/employee.css">
         
         <link rel="stylesheet" href="/Client/styles/myedition.css">
         <script src="/Client/kitchenmanager/js/hedder.js"></script>
-        <!-- <link rel="stylesheet" href="/Client/styles/ongoing.css"> -->
+        <link rel="stylesheet" href="/Client/styles/ongoing.css">
     
         <script src="/Client/kitchenmanager/js/kitchenmanagersidemenu.js"></script>
 
@@ -59,7 +59,7 @@
                             <img id="image-label" class="icon-10" src="http://cartercookbook.com/wp-content/themes/fairgame/assets/images/placeholder@2x.png"/>
                         </label>
                     
-                        <input id="file-input" type="file" onchange="update(this)">
+                        <input id="file-input" style="display: none;" type="file" onchange="update(this)">
                     </div>
                     
                 </div>
@@ -112,15 +112,15 @@
 
 
 
-    <div class="reg-frame" id="form_frame">
+    <div class="reg-frame add-emp-form" id="form_frame">
         <div class="reg-pop flex-center" id="form">
             <div>
                 <h2 class="mb-5">Add Ingredient</h2> 
                 <div class="image-upload mt-3 ">
-                    <label>Image</label><br>
-                    <!-- <label for="file-input"> -->
-                        <img id="ingredient-insert-image" class="icon-8" src=""/>
-                    <!-- </label> -->
+                    <!-- <label>Image</label><br> -->
+                    <label for="file-input">
+                        <img id="ingredient-insert-image" class="image-2" src=""/>
+                    </label>
                 
                     <!-- <input id="file-input" type="file"> -->
                 </div>

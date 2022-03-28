@@ -32,12 +32,15 @@ public class RestockDAO {
     private String stockUpdate = "update stock set quantity=? where ingID = ?";
     private String getStock = "select quatity from stock where ingID=?";
     private String getRestockQuantity = "select quantity from restockrequest where restockID =?";
-    private String getIngID = "select ingID restockrequest where restockID = ?";
+    private String getIngID = "select ingID from restockrequest where restockID = ?";
 
     private String timeoutExpiredRestockRequests = "update restockrequest r set r.expired = 1 WHERE r.deadline <=CURRENT_TIMESTAMP() and r.status in ('','pending') and r.approvalStatus != 'managerDecline'";
     private String notifyKmExpiredRequets = "insert into kitchenmanagernotifications (type, targetID, description, seen) values (?,?,?,?)";
     private String getAllExpiredRequests = "SELECT ingID from restockrequest r WHERE r.deadline <=CURRENT_TIMESTAMP() and r.status in ('','pending') and r.approvalStatus != 'managerDecline' and expired = 0";
     private String getIngName = "select name from ingredient where ingID = ?";
+
+    private String getSupplierIDQ = "select supplierID from restockrequest where restockID = ?";
+    private String getSupplierEmailQ = "SELECT l.email  from supplier s join login l on s.userID = l.userID where s.supplierID = ?";
 
     public RestockDAO(){
         try{
@@ -174,6 +177,14 @@ public class RestockDAO {
         PreparedStatement st = this.conn.prepareStatement(updateApprovalStatusQuery);
         st.setString(1,r.getApprovalstatus());
         st.setInt(2,restockid);
+
+        Integer supplierID = getSupplierID(restockid);
+        if(supplierID!=null){
+            String supplierEmail = getSupplierEmail(supplierID);
+            String ingredientName = getIngName(getIngID(restockid));
+            SendSupplierMail mail = new SendSupplierMail(supplierEmail,ingredientName);
+            mail.sendMail();
+        }
         return st.executeUpdate();
     }
 
@@ -311,6 +322,34 @@ public class RestockDAO {
             ResultSet getNameR = getNameQ.executeQuery();
             if(getNameR.next()){
                 return getNameR.getString("name");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private Integer getSupplierID(int restockID){
+        try {
+            PreparedStatement getSupplierIDSt = this.conn.prepareStatement(getSupplierIDQ);
+            getSupplierIDSt.setInt(1,restockID);
+            ResultSet getSupplierIDR = getSupplierIDSt.executeQuery();
+            if(getSupplierIDR.next()){
+                return getSupplierIDR.getInt("supplierID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private String getSupplierEmail(int supplierID){
+        try {
+            PreparedStatement getSupplierEmailSt = this.conn.prepareStatement(getSupplierEmailQ);
+            getSupplierEmailSt.setInt(1,supplierID);
+            ResultSet supplierRS = getSupplierEmailSt.executeQuery();
+            if(supplierRS.next()){
+                return supplierRS.getString("email");
             }
         } catch (SQLException e) {
             e.printStackTrace();

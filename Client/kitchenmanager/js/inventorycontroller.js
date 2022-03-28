@@ -13,7 +13,9 @@ $(document).ready(function inventorylist(){
         beforeSend: function(xhr) {
             xhr.setRequestHeader("authorization", authHeader);
           },
-     },).then(function(data){
+     },).fail(function (jqXHR, textStatus, errorThrown) {
+        window.location.href = "/Client/Manager/Invalid Token.html"
+    }).then(function(data){
          
         $("#inventorytable").on("update",function(){
             $("[id^=editstock-").each(function(){
@@ -193,6 +195,8 @@ $(document).ready(function inventorylist(){
                 updateView();
                 $("#typeView").html("Others");
             })
+
+            $("#loading").trigger("loaded")
 
      })
 

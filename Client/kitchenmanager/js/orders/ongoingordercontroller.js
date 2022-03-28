@@ -12,6 +12,8 @@ $(document).ready(function () {
         beforeSend: function (xhr) {
             xhr.setRequestHeader("authorization", authHeader);
         },
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        window.location.href = "/Client/Manager/Invalid Token.html"
     }).then(function (data) {
 
         var array = $.parseJSON(JSON.stringify(data));
@@ -25,7 +27,7 @@ $(document).ready(function () {
                 time = timecont.attr("time")
             setInterval(function () {
                 timecont.html(getTimeRemaining(time))
-                    console.log(flag)
+                    // console.log(flag)
                     if(flag!=0){
                         timecont.attr("style","color:red;")
                     }
@@ -40,7 +42,7 @@ $(document).ready(function () {
         // let difference = new Date(new Date(x) - new Date() - new Date("1970-01-01 11:00:00"))
         if (new Date(x) > new Date()) {
             let difference = new Date(new Date(x) - new Date() + new Date().getTimezoneOffset() * 60 * 1000)
-            console.log("difference = " + difference);
+            // console.log("difference = " + difference);
 
 
 
@@ -65,8 +67,8 @@ $(document).ready(function () {
             flag=0;
             return timeremain;
         }else{
-            let difference = new Date(new Date() - new Date(x) - new Date().getTimezoneOffset() * 60 * 1000)
-            console.log("difference = " + difference);
+            let difference = new Date(new Date() - new Date(x) + (new Date().getTimezoneOffset() * 60 * 1000))
+            // console.log("difference = " + difference);
 
 
             flag = 1;

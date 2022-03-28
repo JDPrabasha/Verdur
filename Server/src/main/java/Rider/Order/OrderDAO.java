@@ -23,6 +23,7 @@ public class OrderDAO {
     private static final String SELECT_ORDER_DISHES = " select c.quantity, d.name, d.estTime ,c.cdishID, o.orderID,d.image,c.price,d.dishID from orders o  join hasdish h on o.orderId = h.orderID join customizeddish c on h.cdishID = c.cdishID join dish d on c.dishID = d.dishID   where o.orderID=?";
     private static final String GET_ACCEPTED_TIME = "select timestamp from orders o where o.status=\"accepted\" and o.custID = ? ";
     private static final String GET_DELIVERED_PAYMENT = "select type,amount from orders o join payment p on o.orderID = p.orderID where o.status=\"delivered\" and o.custID = ?";
+    private static final String GET_REJECTION_REASON = "select reason from orders o join rejectorders r on r.orderID= o.orderID where o.custID = ?";
     private static final String FINISH_REVIEW = "update orders o set o.status=\"reviewed\" where o.custID = ? ";
 
     private Connection conn;
@@ -176,7 +177,7 @@ public class OrderDAO {
                     String image = secondSet.getString("image");
                     dishes.add(new Dish(dishID, customID, name, image, price, quantity));
                 }
-                order = new Order(id, status, dishes);
+                order = new Order(currentOrder, status, dishes);
 
 
             }
@@ -292,4 +293,24 @@ public class OrderDAO {
     }
 
 
+    public String getRejectionReason(int id) {
+        String reason = "";
+        try {
+            PreparedStatement preparedStatement = this.conn.prepareStatement(GET_REJECTION_REASON);
+            preparedStatement.setInt(1, id);
+
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+
+                reason = rs.getString("reason");
+
+
+            }
+        } catch (SQLException e) {
+            printSQLException((SQLException) e);
+        }
+        return reason;
+    }
 }

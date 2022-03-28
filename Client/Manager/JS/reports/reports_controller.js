@@ -30,6 +30,8 @@ $.getScript("/Client/Manager/JS/side_menu.js",
             eroor:function(){
                 reload();
             }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            window.location.href = "/Client/Manager/Invalid Token.html"
         }).then(function (data) {
             $("#topDishesReports").html('');
             let serializedDishList = data['topDish'].map(i => dish_serializer.doSerialize(i))

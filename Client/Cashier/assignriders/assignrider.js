@@ -21,6 +21,7 @@ function assignrider(rc) {
     }).done(function(){
         console.log("done");
         $(`#dishcard-${rc}`).attr("style","display:none")
+        // $("#myModal").attr("style","display:none")
     })
     
 }

@@ -14,6 +14,8 @@ $(document).ready(function restockrequestlist() {
             xhr.setRequestHeader("authorization", authHeader);
         }
 
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        window.location.href = "/Client/Manager/Invalid Token.html"
     }).then(function (data) {
         console.log(data)
         console.log(data[0])
@@ -21,6 +23,8 @@ $(document).ready(function restockrequestlist() {
         $("#itemType").val(data[0]['itemType'])
         $("#quantity").val(data[0]['quantity'] + " " + data[0]['unit'])
         $("#price").val(data[0]['price'])
+        $("#loading").trigger("loaded")
+
 
         $("#confirm_button").click(function () {
             var supplierID = window.localStorage.getItem("id"),

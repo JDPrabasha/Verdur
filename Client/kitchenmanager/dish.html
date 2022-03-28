@@ -41,6 +41,7 @@
     <link rel="stylesheet" href="/Client/styles/myedition.css">
     <link rel="stylesheet" href="/Client/styles/styles.css">
     <link rel="stylesheet" href="/Client/styles/add-employee.css">
+    <link rel="stylesheet" href="/Client/styles/employee.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta charset="UTF-8">
 
@@ -52,6 +53,7 @@
     <link rel="stylesheet" href="/Client/styles/layout.css">
     <script src="/Client/kitchenmanager/js/enable.js"></script>
     <script src="/Client/kitchenmanager/js/disable.js"></script>
+    <script src="/Client/Manager/JS/functionalities/loading_screen.js"></script>
 
 
     <script  type="module" src="/Client/kitchenmanager/js/dishcontroller.js"></script>
@@ -121,13 +123,14 @@
 
 </head>
 <body>
+    <div id="loading"></div>
     <div  class="notification" id="notification" style="background-color:  #f9fbff;"></div>
     <div class="sidenav " id="sidenavkm"></div>
 
     <div class="main" id="main">
         <div class="row">
             <div class="col-4 mt-24"> <h5>Dishes</h5></div>
-            <div class="col-6 mr-12 mt-24"> 
+            <div class="col-5 mr-12 mt-24"> 
                 <div class="searchBar">
                     <input id="searchQueryInput" type="text" name="searchQueryInput" placeholder="Search" value="" />
                     <button id="searchQuerySubmit" type="submit" name="searchQuerySubmit">
@@ -136,10 +139,10 @@
                     </button>
                 </div>
              </div>
-            <div class="col-2 ml-8 mt-30 mb-12"><a class="btn tag-other text-bold text-2 mr-4" href="/Client/kitchenmanager/test_form_mode.html"> + Add New Dish</a></div>
+            <div class="col-3 ml-8 mt-30 mb-12"><a class="btn tag-other text-bold text-2 mr-4" href="/Client/kitchenmanager/test_form_mode.html" style="position:absolute;right:0px;width:fit-content"> + Add New Dish</a></div>
         </div>
        
-<div class="cards" id="results">
+<div class="cards mt-3" id="results">
     
 
          

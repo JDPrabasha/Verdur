@@ -14,6 +14,8 @@ $(document).ready(function () {
         beforeSend: function (xhr) {
             xhr.setRequestHeader("authorization", authHeader);
         },
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        window.location.href = "/Client/Manager/Invalid Token.html"
     }).then(function (data) {
 
         var array = $.parseJSON(JSON.stringify(data));
@@ -73,8 +75,11 @@ function assignriderButton() {
                     "orderID" : orderID,
                     "riderID" : riderID
                 })
-            }).then(
+            }).then(function(){
                 console.log("done")
+                // $("#myModal").attr("style","display:none")
+                window.location.reload();
+            }
             )
         }
 

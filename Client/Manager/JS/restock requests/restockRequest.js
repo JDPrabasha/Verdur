@@ -35,11 +35,11 @@ export class restockRequest {
             restockID = $(document.createElement('td')).html(this.restockID),
             item = $(document.createElement('td')).html(this.item),
             supplier = $(document.createElement('td')).html(this.supplier),
-            issuedate = $(document.createElement('td')).html(this.issueddate),
+            issuedate = $(document.createElement('td')).html(this.issueddate.split(" ")[0]),
             status = $(document.createElement('td')).html(`<div class="status_${statuses}"></div><div class="status_${statuses}_text">${this.approvalstatus}</div>`).attr("style", "width:14%"),
-            timeremain = $(document.createElement('td')).html(this.timeremain).attr("time",this.oldtime).attr("id","time-cal-"+this.restockID),
+            timeremain = $(document.createElement('td')).html(this.timeremain).attr("time",this.oldtime).css("width", "18%").attr("id","time-cal-"+this.restockID),
             quantity = $(document.createElement('td')).html(this.quantity).css("text-align", "right"),
-            price = $(document.createElement('td')).html("Rs. " + this.price.toLocaleString()).css("width", "8%").css("text-align", "right"),
+            price = $(document.createElement('td')).html("Rs. " + this.price.toLocaleString()).css("width", "10%").css("text-align", "right"),
             action = $(document.createElement('td')).attr("style", "width:14.6%");
 
         if (this.approvalstatus == "Manager Pending") {
@@ -65,7 +65,7 @@ export class restockRequest {
             restockID = $(document.createElement('td')).html(this.restockID),
             item = $(document.createElement('td')).html(this.item),
             supplier = $(document.createElement('td')).html(this.supplier),
-            issueddate = $(document.createElement('td')).html(this.issueddate),
+            issueddate = $(document.createElement('td')).html(this.issueddate.split(" ")[0]),
             status = $(document.createElement('td')).html(`<div class="status_${this.status}"></div><div class="status_${this.status}_text">${this.status}</div>`).attr("style", "width:10%"),
             timeremain = $(document.createElement('td')).html(this.timeremain).attr("time",this.oldtime).attr("id","time-cal-"+this.restockID),
             quantity = $(document.createElement('td')).html(this.quantity).css("text-align", "right"),

@@ -1,5 +1,6 @@
 $(document).ready(function () {
   $("#registerBtn").click(function () {
+    $(".error").addClass("hidden");
     var name = $("#newname").val();
     var email = $("#newemail").val();
     console.log(email);
@@ -28,9 +29,16 @@ $(document).ready(function () {
 
         success: function (response) {
           window.location = "customer-landing.html";
+          // console.log(response);
         },
         failure: function (response) {
-          alert("fail");
+          // console.log(response.);
+        },
+        error: function (request, status, error) {
+          $("#emailerror").removeClass("hidden");
+          $("#emailerror").html(
+            "Email is already in use. PLease try again from a different email"
+          );
         },
       });
     }
@@ -81,7 +89,7 @@ $(document).ready(function () {
   }
 
   function validateContact(inputtxt) {
-    var phoneno = /^07\d{10}$/;
+    var phoneno = /^07\d{8}$/;
     if (inputtxt.match(phoneno)) {
       return true;
     } else {

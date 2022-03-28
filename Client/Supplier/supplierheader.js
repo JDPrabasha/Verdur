@@ -9,7 +9,7 @@ $(document).ready(function(){
     //     <a href="restockrequestorders.html"><i class="material-icons">autorenew</i></a>`);
     $("#notification").load("/Client/Supplier/supplierheader.html #notification",function(){
         $("#header_name").html(window.localStorage.getItem("name"))
-        $("#header_image").attr("src",window.localStorage.getItem("avatar"))
+        $("#header_image").attr("src",window.localStorage.getItem("photo"))
     })
     
   
