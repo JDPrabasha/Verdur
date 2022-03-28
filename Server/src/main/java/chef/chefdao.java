@@ -36,6 +36,8 @@ public class chefdao {
 
             int chefid = rs.getInt("empID");
             String chefname = rs.getString("firstName");
+            String cheflname = rs.getString("lastName");
+            String name = chefname +" " + cheflname;
             String chefimage = rs.getString("photo");
 
             List<orderkm> order = new ArrayList<>();
@@ -51,7 +53,7 @@ public class chefdao {
                 order.add(new orderkm(orderid));
 
             }
-            cheflist.add(new chef(chefid, chefname, chefimage, order));
+            cheflist.add(new chef(chefid, name, chefimage, order));
 //            cheflist.add(new chef(chefid,chefname,chefimage,status));
         }
 
