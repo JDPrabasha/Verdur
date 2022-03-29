@@ -50,7 +50,7 @@ $(document).ready(function(){
                     const deSerializedData = array.map(i => chefserializer.doserializer(i));
                     $("#chef").html('');
                     deSerializedData.map(params => new chef(params).printchelist());
-                     var button = $(document.createElement("button")).html('Assign').attr( "class","btn").attr("onclick","assignchef(document.querySelector('input[name=\"rGroup\"]:checked').value)");
+                     var button = $(document.createElement("button")).html('Assign').attr( "class","btn text-center ml-65").attr("onclick","assignchef(document.querySelector('input[name=\"rGroup\"]:checked').value)");
                      $("#chef").append(button).attr("value",orderid);
                     $("#cheflist").attr("style","display : block");
                     // $("#chef").html('');

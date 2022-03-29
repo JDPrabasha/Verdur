@@ -42,10 +42,10 @@ public class NotificationServlet extends HttpServlet {
             throws SQLException, IOException, ServletException {
         String requestUrl = request.getRequestURI();
 
-        String customer = request.getParameter("id");
+        String user = request.getParameter("id");
         String role = request.getParameter("role");
         System.out.println("i tried to notify firt");
-        List<Notification> notifications = notificationDAO.getNotifications(Integer.parseInt(customer), role);
+        List<Notification> notifications = notificationDAO.getNotifications(Integer.parseInt(user), role);
 //        request.setAttribute("listDish", listDish);
         String json = new Gson().toJson(notifications);
         System.out.println("i tried to notify");
