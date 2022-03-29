@@ -22,7 +22,7 @@ public class DishDAO {
     private static final String SELECT_CART_DISHES = "select c.cdishID, c.dishID, c.quantity, c.price, d.image, d.name from dish d join customizeddish c on d.dishID = c.dishID where c.custID =? and inCart=1";
     private static final String SELECT_ALL_DISHES = "select * from dish where enabled=1";
     private static final String SELECT_LATEST_DISHES = "select * from dish where enabled=1 limit 8";
-    private static final String SELECT_RECENT_DISHES = "select d.name,d.image,d.price,d.dishID from dish d join customizeddish c on c.dishId =d.dishID join hasdish h on c.cdishID = h.cdishID join orders o on h.orderID = o.orderID  where o.custID = ? and status = ? order by o.timestamp limit 4";
+    private static final String SELECT_RECENT_DISHES = "select d.name,d.image,d.price,d.dishID from dish d join customizeddish c on c.dishId =d.dishID join hasdish h on c.cdishID = h.cdishID join orders o on h.orderID = o.orderID  where o.custID = ? and status in (?,?) order by o.timestamp limit 4";
     private static final String RATE_DISH = "update rating set rating=? where dishID=? and custID=?";
     private Connection conn;
 
@@ -68,7 +68,8 @@ public class DishDAO {
 
                 PreparedStatement preparedStatement = this.conn.prepareStatement(SELECT_RECENT_DISHES);) {
             preparedStatement.setInt(1, id);
-            preparedStatement.setString(2, "pending");
+            preparedStatement.setString(2, "delivered");
+            preparedStatement.setString(3, "reviewed");
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
 

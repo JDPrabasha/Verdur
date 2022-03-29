@@ -10,6 +10,7 @@
     />
     <link rel="stylesheet" href="../styles/pastures.css" />
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="reset.js"></script>
 
     <title>Document</title>
   </head>
@@ -23,14 +24,14 @@
           >Enter new password*
           <input
             type="text"
-            id="username"
+            id="password"
             class="width-4"
             placeholder="dulaj@gmail.com"
           />
         </label>
         <p
           class="text-red mb-3 hidden"
-          id="loginerror"
+          id="passworderror"
           style="font-size: smaller"
         >
           random text
@@ -40,7 +41,7 @@
         <label
           >Confirm new password*
           <input
-            type="password"
+            type="repassword"
             id="password"
             class="width-4"
             placeholder="Min. 8 characters"
