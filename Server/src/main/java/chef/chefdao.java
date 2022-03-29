@@ -77,7 +77,6 @@ public class chefdao {
         st.setInt(1, chefid);
         st.setString(2,timestamp);
         st.setInt(3, orderid);
-
         return st.executeUpdate();
     }
 

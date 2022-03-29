@@ -14,6 +14,7 @@ import java.util.Objects;
 public class NotificationDAO {
     private static final String GET_CUSTOMER_NOTIFICATIONS = " select * from customernotification where custID = ? order by timestamp desc";
     private static final String GET_RIDER_NOTIFICATIONS = " select * from ridernotification where riderID = ? order by timestamp desc";
+    private static final String GET_KM_NOTIFICATIONS = " select * from kitchenmanagernotifications order by timestamp desc";
 
     private Connection conn;
 
@@ -51,7 +52,27 @@ public class NotificationDAO {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-        } else {
+        }else if (Objects.equals(role, "kitchenmanager")) {
+            query = GET_KM_NOTIFICATIONS;
+            try {
+                PreparedStatement preparedStatement = this.conn.prepareStatement(query);
+                System.out.println(preparedStatement);
+                ResultSet rs = preparedStatement.executeQuery();
+
+
+                while (rs.next()) {
+                    String timestamp = rs.getString("timestamp");
+                    String text = rs.getString("description");
+                    id = rs.getInt("notificationID");
+                    notifications.add(new Notification(id, text, timestamp));
+
+                }
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        else {
             query = GET_RIDER_NOTIFICATIONS;
             try (
 

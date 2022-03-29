@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     <link rel="stylesheet" href="/Client/styles/modder.css">
+    <link rel="stylesheet" href="notifications.css">
  
     <script src="/Client/kitchenmanager/js/kitchenmanagersidemenu.js"></script>
 
@@ -26,6 +27,9 @@
     <script src="/Client/kitchenmanager/js/slider.js"></script>
     <link rel="stylesheet" href="/Client/kitchenmanager/slider.css">
     <script src="https://momentjs.com/downloads/moment.js"></script>
+    <script src="/Client/kitchenmanager/Notification.js"></script>
+    <script src="/Client/kitchenmanager/NotificationSerializer.js"></script>
+    <script src ="/Client/kitchenmanager/NotificationController.js"></script>
 
     <!-- <script src="/Client/kitchenmanager/js/orders/orderkm.js"></script> -->
     <script type="module" src="/Client/kitchenmanager/js/orders/orderkmcontroller.js"></script>
@@ -46,7 +50,16 @@
 </head>
 <body>
     <div id="loading"></div>
-    <div  class="" id="notification"  ></div>
+    <div  class="" id="notification"  >
+        <div class="notification_wrap">
+            <div class="dropdown" id="dropdown"></div>
+          </div>
+          <!-- <p class="ml-30 mb-8">
+            Menu > Avacado Smoothie > <span class="fw-b">Avocado</span>
+          </p> -->
+        </div>
+    </div>
+    
     <!-- style="background-color: #f9fbff; -->
    
 
