@@ -71,10 +71,10 @@ public class RestockRequestServlet extends HttpServlet {
         String requestUrl = request.getRequestURI();
         String id = request.getParameter("id");
 //        ViewStock currentDish = viewStockDAO.selectItem(Integer.parseInt(id));
-        List<RestockRequest> currentDish = restockRequestDAO.selectAllItems(Integer.parseInt(id));
+        List<RestockRequest> restockRequestList = restockRequestDAO.selectAllItems(Integer.parseInt(id));
 //        RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
-        request.setAttribute("dish", currentDish);
-        String json = new Gson().toJson(currentDish);
+        request.setAttribute("dish", restockRequestList);
+        String json = new Gson().toJson(restockRequestList);
 
 //        System.out.println(json);
         response.getOutputStream().println(json);

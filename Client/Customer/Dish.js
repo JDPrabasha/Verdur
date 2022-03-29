@@ -128,6 +128,7 @@ class Dish {
       "href",
       "customer-customizedish.html?id=" + this.id
     );
+    window.localStorage.setItem("currentDish", this.name);
   }
 
   addDishToCart() {

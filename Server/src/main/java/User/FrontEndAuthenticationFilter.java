@@ -19,7 +19,7 @@ import static Manager.Output.outputResponse.sendresponse;
 
 @WebFilter("/*")
 public class FrontEndAuthenticationFilter implements Filter {
-    List<String> allowedPaths = Arrays.asList("/jauth", "/register", "/activate", "/dish", "/menu", "ingredient", "/Employee/Verification", "/Images", "/cart", "/order", "/notification", "/rider", "/goals", "/delivery");
+    List<String> allowedPaths = Arrays.asList("/jauth", "/register", "/activate", "/dish", "/menu", "ingredient", "/Employee/Verification", "/Images", "/cart", "/order", "/notification", "/rider", "/goals", "/delivery", "/reset");
     List<String> customerPaths = Arrays.asList("/customize", "/mealplan", "/profile");
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -41,7 +41,7 @@ public class FrontEndAuthenticationFilter implements Filter {
 
             String btk = req.getHeader("authorization");
 //            System.out.println(btk);
-            if(btk!=null) {
+            if (btk != null) {
                 String ea = btk.substring(btk.indexOf(' ') + 1);
 
                 //            System.out.println(path);
@@ -85,7 +85,7 @@ public class FrontEndAuthenticationFilter implements Filter {
 
                     } else if (path.contains("/Chef/") && aud.contains("Chef")) {
                         chain.doFilter(request, response);
-                    }else {
+                    } else {
                         res.setStatus(401);
                     }
                     //                add customer paths here
@@ -99,7 +99,7 @@ public class FrontEndAuthenticationFilter implements Filter {
                     res.setStatus(401);
                     res.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 }
-            }else{
+            } else {
 //                sendresponse((HttpServletResponse) response,"{message:done}",404);
                 res.setStatus(401);
             }
