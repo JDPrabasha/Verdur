@@ -15,7 +15,7 @@ export class chef{
         var input = $(document.createElement('input')).attr("type","radio").attr("name","rGroup").attr("id",`r${this.chefid}`).attr("value",`${this.chefid}`);
         var labal = $(document.createElement('label')).attr("class","radio").attr("for",`r${this.chefid}`);
         var orders = $(document.createElement('div')).html(this.order.map(i=> new order(i).printorder()));
-        var onechef = $(document.createElement('div')).attr("class","row").html(`  <div class="col-3"><img class="round-2" id="chefimage" src="${this.chefimage}" alt="" style="width:70px;height:70px;"></div>
+        var onechef = $(document.createElement('div')).attr("class","row").html(`  <div class="col-3"><img class=" icon-4" id="chefimage" src="${this.chefimage}" alt=""></div>
         <div class="col-3 mt-4">
             <h1 id="chefname">${this.chefname}</h1>
         </div>`);

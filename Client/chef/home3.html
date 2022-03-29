@@ -1,30 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="/Client/styles/pastures.css">
     <link rel="stylesheet" href="/Client/styles/myedition.css">
+    <!-- <link rel="stylesheet" href="/Client/styles/employee.css">
+        <link rel="stylesheet" href="/Client/styles/add-employee.css"> -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/Client/styles/colors.css">
+
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="/Client/kitchenmanager/js/kitchenmanagersidemenu.js"></script>
     <script src="/Client/chef/cheffhedder.js"></script>
     <script src="/Client/chef/cheffotter.js"></script>
+
+    <script type="module" src="/Client/chef/js/order/ordercontroller.js"></script>
+    <script type="module" src="/Client/chef/js/order/ingredientcontroller.js"></script>
+    <script src="/Client/chef/js/order/completeorder.js"></script>
+
+
 
     <!--    <title>Title</title>-->
 
 </head>
+
 <body>
-    <div  class="notification" id="notification"></div>
+    <div class="notification" id="notification"></div>
+    <div id="no_orders">
  
- <br><br><br>
- <br><br><br>
- <br><br><br>
- <br><br><br>
- <div class="row mt-12 pt-12"></div>
- <div class=" row mt-12 pt-12"></div>
-  <div class="row mt-12 pt-12">
-      <div class="col-4"></div>
-      <div class="col-6 mb-70"><h5>No Orders Yet...</h5></div>
-  </div>
-  <div id="cfotter"></div>
+        <br><br><br>
+        <br><br><br>
+        <br><br><br>
+        <br><br><br>
+        <div class="row mt-12 pt-12"></div>
+        <div class=" row mt-12 pt-12"></div>
+         <div class="row mt-12 pt-12">
+             <div class="col-4"></div>
+             <div class="col-6 mb-70"><h5>No dish Selected...</h5></div>
+         </div>
+         </div>
+    <div id="cfotter"></div>
 </body>
+
 </html>

@@ -21,6 +21,8 @@ $(document).ready(function () {
             const deserializeddata = array.map(i => orderserializer.doserializer(i));
             deserializeddata.map(params => new order(params).printdish());
         })
+    }else{
+        $("#caustomization").load("/Client/chef/home3.html #no_orders")
     }
     console.log(dishid);
     
