@@ -6,7 +6,10 @@ export default class dish_serializer{
             code    : data.dishCode,
             sold    : data.unitsSold,
             margin  : data.profitPercentage,
-            profit  : data.totalSales * data.profitPercentage/100
+            profit  : data.totalSales * data.profitPercentage/100,
+            totalSales : data.totalSales
+
+
         }
     }
 }

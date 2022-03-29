@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class EmployeeDAO {
     private Connection conn;
@@ -121,13 +122,25 @@ public class EmployeeDAO {
               st2.setInt(4,code);
               int rs2 = st2.executeUpdate();
               //        userID,address,photo,nic.dob
-              PreparedStatement st3 = this.conn.prepareStatement(employeequery);
+              PreparedStatement st3 = this.conn.prepareStatement(employeequery, Statement.RETURN_GENERATED_KEYS);
               st3.setInt(1, userID);
               st3.setString(2, e.getAddress());
               st3.setString(3, e.getImage());
               st3.setString(4, e.getIdno());
               st3.setString(5, e.getDob());
               rs3 = st3.executeUpdate();
+
+              int empID = 0;
+              ResultSet employeeOut = st3.getGeneratedKeys();
+              if(employeeOut.next()){
+                  empID = employeeOut.getInt(1);
+              }
+            System.out.println(e.getRole());
+            if(Objects.equals(e.getRole(), "Rider")){
+                  PreparedStatement addRiderSt = this.conn.prepareStatement("insert into rider(riderID) values(?)");
+                  addRiderSt.setInt(1,empID);
+                  addRiderSt.executeUpdate();
+              }
               this.conn.commit();
               this.conn.setAutoCommit(true);
           } catch (SQLException throwables) {
@@ -226,7 +239,8 @@ public class EmployeeDAO {
             PreparedStatement st1 = this.conn.prepareStatement(validatequery);
 //            st1.setString(1,NULL);
             st1.setInt(1,1);
-            st1.setString(2,e.getPassword());
+            String hashPassword = org.apache.commons.codec.digest.DigestUtils.sha256Hex(e.getPassword());
+            st1.setString(2,hashPassword);
             st1.setString(3,e.getEmail());
             out= st1.executeUpdate();
         } catch (SQLException throwables) {

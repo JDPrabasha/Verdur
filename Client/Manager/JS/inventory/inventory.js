@@ -25,7 +25,7 @@ export default class inventory{
                 <td>${this.itemcode}</td>
                 <td>${this.name}</td>
                 <td>${this.type}</td>
-                <td>${this.restockDate}</td>
+                <!--<td>${this.restockDate}</td>-->
                 <td>${this.quantity+" "+this.unit}</td>
                 <td> ${this.percentage}% <input type="range" value="${this.percentage}" disabled id="${this.id}"></td>
                 <td>
