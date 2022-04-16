@@ -35,8 +35,12 @@ $.getScript("/Client/Manager/JS/side_menu.js",
         }).then(function (data) {
             $("#topDishesReports").html('');
             let serializedDishList = data['topDish'].map(i => dish_serializer.doSerialize(i))
-            serializedDishList.map(i => new dish(i).printRowRecords());
+            serializedDishList.map(i => new dish(i).printRowRecords(data["totalDishSales"]));
             serializedDishList.map(i => new dish(i).getNameAndSoldList(dishChartData))
+            // console.log(data['lastRevenue'][0][0])
+            // console.log(data['lastRevenue'][1][0])
+            // console.log(data['lastRevenue'][2][0])
+            $("#months_reports").html("("+data['lastRevenue'][2][0]+", "+data['lastRevenue'][1][0]+", "+data['lastRevenue'][0][0]+")")
             calculateDishSum(data['topDish'])
             $("#dishTotal").html(formatNo(data['totalDishSales']))
             dishChartData.push(["Other", data['totalDishSales'] - topDishSum])

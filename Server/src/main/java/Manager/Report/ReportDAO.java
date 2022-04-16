@@ -23,7 +23,7 @@ public class ReportDAO {
     private static String getTotalSalesRangeQuery = "select sum(amount) as total from orders o join payment p on o.orderID =p.orderID where timestamp >= ? and timestamp <= ?";
     private static String getTotalExpensesRangeQuery = "select sum(price) as price from restockorder r join restockrequest r2 on r.restockID =r2.restockID where r2.status ='delivered' and deliveryDate >= ? and deliveryDate <= ?";
 
-    private static String dishCostQuery = "select sum(r.price*h.defaultValue) cost from hasingredient h join ingredient i on h.ingID =i.ingID join restockrequest r on r.ingID =i.ingID join restockorder r3  on r.restockID = r3.restockID where r3.deliveryDate =(select max(r2.deliveryDate) from restockorder r2 join restockrequest r4 where r4.ingID = r.ingID) and  h.dishID = ?";
+    private static String dishCostQuery = "select sum(r.price*h.defaultValue*i2.weight/i3.weight) cost from hasingredient h join ingredient i on h.ingID =i.ingID join restockrequest r on r.ingID =i.ingID join restockorder r3  on r.restockID = r3.restockID join ingredientweight i2 on (i2.ingID = i.ingID and i2.unit = h.unit ) JOIN ingredientweight i3 on(i2.ingID=i3.ingID and i.unit=i3.unit) where r3.deliveryDate =(select max(r2.deliveryDate) from restockorder r2 join restockrequest r4 on r2.restockID =r4.restockID where r4.ingID = r.ingID and r2.status='delivered') and  h.dishID = ?";
 
     private static String getTopSuppliersQuery = "select r.supplierID,u.firstName ,u.lastName,s.organization ,count(r.invoiceNo) as ordersDone ,sum(r2.price*r2.quantity) as amount from restockorder r join supplier s on r.supplierID = s.supplierID join `user` u on s.userID = u.userID join restockrequest r2 on r.restockID =r2.restockID where r.deliveryDate >= ? and r.status ='delivered' group by r.supplierID ";
     private static String getRejectedOrderCountQuery = "select count(restockID)as rejectedCount from restockrequest r where approvalStatus = 'managerApproved' and expired = 1 and supplierID = ? and requestedAt >=? " ;
@@ -216,8 +216,9 @@ public class ReportDAO {
                 getLastMonthExpenses.setString(1, startDate);
                 getLastMonthExpenses.setString(2, lastDate);
                 ResultSet rs2 = getLastMonthExpenses.executeQuery();
-                while (rs.next()) {
+                while (rs2.next()) {
                     expense = rs2.getInt("price");
+                    System.out.println(expense);
                 }
             } catch (SQLException throwables) {
                 throwables.printStackTrace();

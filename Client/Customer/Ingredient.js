@@ -35,7 +35,7 @@ class Ingredient {
 
     var name = $(document.createElement("p"))
       .html(this.name)
-      .addClass("flex-grow-2 ml-45");
+      .addClass("flex-grow-2 ml-75");
 
     var quantity = $(document.createElement("p"))
       .html(

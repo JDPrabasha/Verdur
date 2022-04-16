@@ -30,7 +30,7 @@ public class RestockDAO {
     private String createRestockOrderQuery = "UPDATE restockorder set  invoiceNo = ? ,status = ?, deliveryDate = ? where restockID = ?";
 
     private String stockUpdate = "update stock set quantity=? where ingID = ?";
-    private String getStock = "select quatity from stock where ingID=?";
+    private String getStock = "select quantity from stock where ingID=?";
     private String getRestockQuantity = "select quantity from restockrequest where restockID =?";
     private String getIngID = "select ingID from restockrequest where restockID = ?";
 
@@ -213,9 +213,18 @@ public class RestockDAO {
 //            int r2 = st2.executeUpdate();
 //        <<-------------------------------------------------------->>
 
+            PreparedStatement updateRestockOrderSt = this.conn.prepareStatement("update restockorder set deliveryDate =  ? ,status = ? where restockID = ?");
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDateTime now = LocalDateTime.now();
+            updateRestockOrderSt.setString(1,dtf.format(now));
+            updateRestockOrderSt.setString(2,"delivered");
+            updateRestockOrderSt.setInt(3,restockid);
+            updateRestockOrderSt.executeUpdate();
+
+
             PreparedStatement increaseStockSt = this.conn.prepareStatement(stockUpdate);
             int ingID = getIngID(restockid);
-            increaseStockSt.setDouble(1,getStock(restockid)+getStock(ingID));
+            increaseStockSt.setDouble(1,getRestockQuantity(restockid)+getStock(ingID));
             increaseStockSt.setInt(2,ingID);
             int r2 =increaseStockSt.executeUpdate();
 
